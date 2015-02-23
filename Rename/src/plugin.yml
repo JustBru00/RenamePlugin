@@ -1,7 +1,7 @@
 name: EpicRename
 main: justbru00.rename.Rename
 version: 1.0
-description: Renames your diamond pickaxe.
+description: Renames items.
 
 
 commands:
