@@ -14,8 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-//Test Edit
-
 //******************************************
 //DO NOT COPY WITHOUT PERMISSION.
 //EpicRename Plugin:
