@@ -47,6 +47,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Rename extends JavaPlugin {
 	// Console Messages
 	public final Logger logger = Logger.getLogger("Minecraft");
+	
+	public String toColor(String toColor) {
+		String colored = ChatColor.translateAlternateColorCodes('&', toColor);
+		return colored;
+	}
+	
 
 	// On Command
 	@Override
@@ -160,8 +166,12 @@ public class Rename extends JavaPlugin {
 					// types to many word like: /rename hi hi hello.
 					player.sendMessage(ChatColor.RED
 							+ "Please only put 1 word. Like this: &bT&6E&5S&1T or TEST");
-			} else
-				player.sendMessage(ChatColor.RED + "You don't have permission.");
+			} else {
+				String error1 = this.getConfig().getString("no_permission");
+				String msg1 = toColor(error1);
+				
+				player.sendMessage(msg1);
+			}
 		}
 		return false;
 
@@ -185,6 +195,9 @@ public class Rename extends JavaPlugin {
 				+ pdfFile.getVersion() + " Has Been Enabled.");
 
 		getServer().getPluginManager().addPermission(new Permissions().rename);
+		this.saveDefaultConfig();
+				
+		
 	}
 
 }
