@@ -1,3 +1,5 @@
 # EpicRename Configuration File
 # This is Color Code compatible (&)
-no_permission: &cYou don''t have permission!
+no_permission: &cYou don't have permission!
+
+not_enough_or_too_many_args: &cPlease put only one word. (Color Codes work with &)

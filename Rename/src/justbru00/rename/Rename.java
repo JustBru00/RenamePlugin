@@ -48,11 +48,7 @@ public class Rename extends JavaPlugin {
 	// Console Messages
 	public final Logger logger = Logger.getLogger("Minecraft");
 	
-	public String toColor(String toColor) {
-		String colored = ChatColor.translateAlternateColorCodes('&', toColor);
-		return colored;
-	}
-	
+		
 
 	// On Command
 	@Override
@@ -115,8 +111,10 @@ public class Rename extends JavaPlugin {
 					// types to many word like: /rename hi hi hello.
 					player.sendMessage(ChatColor.RED
 							+ "Please only put 1 word. Like this: &bT&6E&5S&1T or TEST");
-			} else
-				player.sendMessage(ChatColor.RED + "You don't have permission.");
+			} else {
+				String error1 = getConfig().getString("no_permission");
+			player.sendMessage(ChatColor.translateAlternateColorCodes('&', error1));
+			}
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
 			if (sender.hasPermission(new Permissions().renameany)) {
@@ -167,10 +165,10 @@ public class Rename extends JavaPlugin {
 					player.sendMessage(ChatColor.RED
 							+ "Please only put 1 word. Like this: &bT&6E&5S&1T or TEST");
 			} else {
-				String error1 = Rename.this.getConfig().getString("no_permission");
-				String msg1 = toColor(error1);
+				String error1 = getConfig().getString("no_permission");
+		
 				
-				player.sendMessage(msg1);
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', error1));
 			}
 		}
 		return false;
@@ -185,6 +183,8 @@ public class Rename extends JavaPlugin {
 
 		getServer().getPluginManager().removePermission(
 				new Permissions().rename);
+		getServer().getPluginManager().removePermission(
+				new Permissions().renameany);
 	}
 
 	// When console enables plugin
@@ -195,7 +195,9 @@ public class Rename extends JavaPlugin {
 				+ pdfFile.getVersion() + " Has Been Enabled.");
 
 		getServer().getPluginManager().addPermission(new Permissions().rename);
-		this.saveDefaultConfig();
+		getServer().getPluginManager().addPermission(new Permissions().renameany);
+		getConfig().options().copyDefaults(true);
+		saveConfig();
 				
 		
 	}
