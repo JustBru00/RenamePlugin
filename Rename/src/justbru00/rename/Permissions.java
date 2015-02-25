@@ -2,7 +2,7 @@ package justbru00.rename;
 
 import org.bukkit.permissions.Permission;
 
-/* 
+/**
  *******************************************
 *DO NOT COPY WITHOUT PERMISSION.
 *EpicRename Plugin:

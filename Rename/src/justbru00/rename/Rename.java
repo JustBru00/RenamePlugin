@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/* 
+/**
  *******************************************
 *DO NOT COPY WITHOUT PERMISSION.
 *EpicRename Plugin:
@@ -167,7 +167,7 @@ public class Rename extends JavaPlugin {
 					player.sendMessage(ChatColor.RED
 							+ "Please only put 1 word. Like this: &bT&6E&5S&1T or TEST");
 			} else {
-				String error1 = this.getConfig().getString("no_permission");
+				String error1 = Rename.this.getConfig().getString("no_permission");
 				String msg1 = toColor(error1);
 				
 				player.sendMessage(msg1);
