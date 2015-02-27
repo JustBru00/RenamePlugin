@@ -54,8 +54,7 @@ public class Rename extends JavaPlugin {
 		Player player = (Player) sender;
 		
 		
-		if (commandLabel.equalsIgnoreCase("rename")) {
-			if (getConfig().getInt("Config Verison") == 2) {
+		if (commandLabel.equalsIgnoreCase("rename")) {			
 			if (sender.hasPermission(new Permissions().rename)) {				
 				if (args.length == 1) {				
 					String nonColoredText = args[0];
@@ -92,8 +91,7 @@ public class Rename extends JavaPlugin {
 			} else {
 				String error1 = getConfig().getString("no permission");
 			player.sendMessage(ChatColor.translateAlternateColorCodes('&', error1));
-			}
-		} else this.logger.warning("EpicRename: Your config is out dated please delete it and restart the server!!!!!");
+			}		
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
 			if (sender.hasPermission(new Permissions().renameany)) {			
