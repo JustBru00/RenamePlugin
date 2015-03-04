@@ -32,5 +32,6 @@ public class Permissions {
 
 	public Permission rename = new Permission("rename.use");
 	public Permission renameany = new Permission("rename.any");
+	public Permission lore = new Permission("rename.lore");
 
 }

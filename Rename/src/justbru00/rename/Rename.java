@@ -1,5 +1,6 @@
 package justbru00.rename;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -143,8 +144,33 @@ public class Rename extends JavaPlugin {
 				//player.sendMessage(ChatColor.translateAlternateColorCodes('&',
 					//	error1));
 			}
+		}		
+		if (commandLabel.equalsIgnoreCase("lore")) {
+			if (player.hasPermission(new Permissions().lore)) {
+				if (player.getItemInHand().getType() != Material.AIR) {	
+					if (args.length > 0) {
+						int i = 0;
+						ArrayList<String> lore = new ArrayList<String>();
+						while (args.length > i) {						
+						lore.add(ChatColor.translateAlternateColorCodes('&', args[i]));
+						i++;
+						}
+						ItemStack is = player.getItemInHand();
+						ItemMeta im = is.getItemMeta();
+						im.setLore(lore);
+						is.setItemMeta(im);
+						player.setItemInHand(is);		
+						player.sendMessage(ChatColor.GREEN + "Item Relored");
+					} else {
+						player.sendMessage(ChatColor.RED + "Please put at least one word after /lore");
+					}
+				} else {
+					player.sendMessage(ChatColor.RED + "Item in hand is air.");
+				}
+			} else {
+				player.sendMessage(ChatColor.RED + "You don't have permission.");
+			}
 		}
-
 		return false;
 
 	}

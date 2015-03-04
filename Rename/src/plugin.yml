@@ -9,3 +9,5 @@ commands:
        description: Renames your diamond pickaxe.       
  renameany:
        description: Renames any item. 
+ lore:
+       description: Relores any item.      
