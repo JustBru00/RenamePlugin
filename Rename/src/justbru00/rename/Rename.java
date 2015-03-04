@@ -65,38 +65,44 @@ public class Rename extends JavaPlugin {
 							newitem.setItemMeta(im);
 							pi.removeItem(inHand);
 							pi.setItemInHand(newitem);
-							this.logger.info(player.getName()
-									+ ChatColor.translateAlternateColorCodes(
-											'&',
-											getConfig().getString("your msg"))
-									+ coloredText);
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes(
-											'&',
-											getConfig().getString(
-													"rename complete")));
+							this.logger.info(player.getName() + " renamed a(n) item to: " + coloredText);
+							//this.logger.info(player.getName()
+							//		+ ChatColor.translateAlternateColorCodes(
+							//				'&',
+							//				getConfig().getString("your msg"))
+							//		+ coloredText);
+							//player.sendMessage(ChatColor
+							//		.translateAlternateColorCodes(
+							//				'&',
+							//				getConfig().getString(
+							//						"rename complete")));
 						} else {
-							String error4 = getConfig().getString(
-									"item in hand is not a diamond pickaxe");
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes('&', error4));
+							player.sendMessage(ChatColor.RED + "Item in hand is not a diamond pickaxe!!!");
+							//String error4 = getConfig().getString(
+								//	"item in hand is not a diamond pickaxe");
+						//	player.sendMessage(ChatColor
+							//		.translateAlternateColorCodes('&', error4));
 						}
 					} else {
-						String error3 = getConfig().getString(
-								"item in hand is air");
-						player.sendMessage(ChatColor
-								.translateAlternateColorCodes('&', error3));
+						player.sendMessage(ChatColor.RED
+								+ "The Item in hand is air.");
+						//String error3 = getConfig().getString(
+						//		"item in hand is air");
+						//player.sendMessage(ChatColor
+						//		.translateAlternateColorCodes('&', error3));
 					}
 				} else {
-					String error2 = getConfig().getString(
-							"not enough or too many args");
-					player.sendMessage(ChatColor.translateAlternateColorCodes(
-							'&', error2));
+					player.sendMessage(ChatColor.RED + "Please put one only one word. Like this: /rename &b&lTest");
+					//String error2 = getConfig().getString(
+					//		"not enough or too many args");
+					//player.sendMessage(ChatColor.translateAlternateColorCodes(
+					//		'&', error2));
 				}
 			} else {
-				String error1 = getConfig().getString("no permission");
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						error1));
+				player.sendMessage(ChatColor.RED + "You don't have permission.");
+				//String error1 = getConfig().getString("no permission");
+				//player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+				//		error1));
 			}
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
@@ -123,17 +129,19 @@ public class Rename extends JavaPlugin {
 								+ "The Item in hand is air.");
 					}
 				} else {
-					String error2 = getConfig().getString(
-							"not_enough_or_too_many_args");
+					player.sendMessage(ChatColor.RED + "Please put one only one word. Like this: /renameany &b&lTest");
+					//String error2 = getConfig().getString(
+					//		"not_enough_or_too_many_args");
 
-					player.sendMessage(ChatColor.translateAlternateColorCodes(
-							'&', error2));
+					//player.sendMessage(ChatColor.translateAlternateColorCodes(
+					//		'&', error2));
 				}
 			} else {
-				String error1 = getConfig().getString("no_permission");
+				player.sendMessage(ChatColor.RED + "You don't have permission.");
+				//String error1 = getConfig().getString("no_permission");
 
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-						error1));
+				//player.sendMessage(ChatColor.translateAlternateColorCodes('&',
+					//	error1));
 			}
 		}
 
@@ -163,8 +171,9 @@ public class Rename extends JavaPlugin {
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(
 				new Permissions().renameany);
-		getConfig().options().copyDefaults(true);
-		saveConfig();
+		// Next Version
+		//getConfig().options().copyDefaults(true);
+		//saveConfig();
 
 	}
 
