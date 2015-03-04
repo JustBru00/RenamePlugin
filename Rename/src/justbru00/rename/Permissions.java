@@ -4,10 +4,6 @@ import org.bukkit.permissions.Permission;
 
 /**
  *******************************************
-*DO NOT COPY WITHOUT PERMISSION.
-*EpicRename Plugin:
-*This plugin renames the current held item.
-*Look at the comments.
 *Author: Justin Brubaker aka. JustBru00.
 *Date: 2/11/2015
 *

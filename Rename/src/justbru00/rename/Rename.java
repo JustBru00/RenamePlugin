@@ -16,9 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *******************************************
- * DO NOT COPY WITHOUT PERMISSION. EpicRename Plugin: This plugin renames the
- * current held item. Look at the comments. Author: Justin Brubaker aka.
- * JustBru00. Date: 2/11/2015
+ *Author: Justin Brubaker aka. JustBru00. Date: 2/11/2015
  *
  * Copyright (C) 2015 Justin Brubaker
  *
