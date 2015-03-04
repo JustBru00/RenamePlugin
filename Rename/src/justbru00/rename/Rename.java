@@ -185,6 +185,7 @@ public class Rename extends JavaPlugin {
 				new Permissions().rename);
 		getServer().getPluginManager().removePermission(
 				new Permissions().renameany);
+		getServer().getPluginManager().removePermission(new Permissions().lore);
 	}
 
 	// When console enables plugin
@@ -197,6 +198,7 @@ public class Rename extends JavaPlugin {
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(
 				new Permissions().renameany);
+		getServer().getPluginManager().addPermission(new Permissions().lore);
 		// Next Version
 		//getConfig().options().copyDefaults(true);
 		//saveConfig();
