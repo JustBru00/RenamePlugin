@@ -16,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *******************************************
- *Author: Justin Brubaker aka. JustBru00. Date: 2/11/2015
+ *Author: Justin Brubaker aka. JustBru00 
  *
  * Copyright (C) 2015 Justin Brubaker
  *
