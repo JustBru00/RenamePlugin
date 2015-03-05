@@ -39,13 +39,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Rename extends JavaPlugin {
 
-	public final Logger logger = Logger.getLogger("Minecraft");
-	
-	 public static String color(String uncoloredstring) {
-	 	String colored = uncoloredstring.replace('_', ' ');
-	 	colored = ChatColor.translateAlternateColorCodes('&', colored);		
-	 	return colored;
-	 }
+	 public final Logger logger = Logger.getLogger("Minecraft");
+	 
+	  public static String color(String uncoloredstring) {
+	  	String colored = uncoloredstring.replace('_', ' ');
+	  	colored = ChatColor.translateAlternateColorCodes('&', colored);		
+	  	return colored;
+	  }
  
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
