@@ -7,10 +7,10 @@ Config Version: 2
 #Edit Messages below
 #
 # When a player doesn't have permission.
-no permission: '&cYou don't have permission!'
+no permission: '&cYou don''t have permission!'
 #
 # When player puts too many or too little args. example: if a player types (/rename test good) or (/rename) without putting a name.
-not enough or too many args: '&cPlease put only one word after /rename or /renameany. (Color Codes work with &)'
+not enough or too many args: '&cPlease put only one word after /rename or /renameany.'
 #
 # When a player tries to rename air. (Not a good idea :D)
 item in hand is air: '&cItem in hand is air.'
