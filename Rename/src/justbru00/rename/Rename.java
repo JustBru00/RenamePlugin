@@ -40,6 +40,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Rename extends JavaPlugin {
 
 	public final Logger logger = Logger.getLogger("Minecraft");
+	
+	public static String color(String uncolored) {
+		String colored = uncolored.replace('_', ' ');
+		colored = ChatColor.translateAlternateColorCodes('&', colored);		
+		return colored;
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
@@ -48,10 +54,8 @@ public class Rename extends JavaPlugin {
 
 		if (commandLabel.equalsIgnoreCase("rename")) {
 			if (sender.hasPermission(new Permissions().rename)) {
-				if (args.length == 1) {
-					String nonColoredText = args[0];
-					String coloredText = ChatColor
-							.translateAlternateColorCodes('&', nonColoredText);
+				if (args.length == 1) {					
+					String coloredText = color(args[0]);			
 
 					PlayerInventory pi = player.getInventory();
 					ItemStack inHand = pi.getItemInHand();
@@ -84,10 +88,8 @@ public class Rename extends JavaPlugin {
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
 			if (sender.hasPermission(new Permissions().renameany)) {
-				if (args.length == 1) {
-					String nonColoredText2 = args[0];
-					String coloredText2 = ChatColor
-							.translateAlternateColorCodes('&', nonColoredText2);
+				if (args.length == 1) {					
+					String coloredText2 = color(args[0]);
 					PlayerInventory pi2 = player.getInventory();
 					ItemStack inHand2 = pi2.getItemInHand();
 					if (player.getItemInHand().getType() != Material.AIR) {
@@ -128,7 +130,7 @@ public class Rename extends JavaPlugin {
 						int i = 0;
 						ArrayList<String> lore = new ArrayList<String>();
 						while (args.length > i) {						
-						lore.add(ChatColor.translateAlternateColorCodes('&', args[i]));
+						lore.add(color(args[i]));
 						i++;
 						}
 						ItemStack is = player.getItemInHand();
