@@ -16,7 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *******************************************
- * @Author: Justin Brubaker
+ * @Author Justin Brubaker
+ * @Pluginname EpicRename
  *
  * Copyright (C) 2015 Justin Brubaker
  *

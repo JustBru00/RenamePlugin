@@ -7,19 +7,19 @@ Config Version: 2
 #Edit Messages below
 #
 # When a player doesn't have permission.
-no permission: &cYou don't have permission!
+no permission: '&cYou don't have permission!'
 #
 # When player puts too many or too little args. example: if a player types (/rename test good) or (/rename) without putting a name.
-not enough or too many args: &cPlease put only one word after /rename or /renameany. (Color Codes work with &)
+not enough or too many args: '&cPlease put only one word after /rename or /renameany. (Color Codes work with &)'
 #
 # When a player tries to rename air. (Not a good idea :D)
-item in hand is air: &cItem in hand is air.
+item in hand is air: '&cItem in hand is air.'
 #
 #For /rename only.
-item in hand is not a diamond pickaxe: &cItem in hand is not a diamond pickaxe.
+item in hand is not a diamond pickaxe: '&cItem in hand is not a diamond pickaxe.'
 #
 # What prints to console when item is renamed in /rename. example: playername (automatic) + your msg (below) + the renamed item name (automatic)
-your msg: renamed a(n) item to
+your msg: ' renamed a(n) item to '
 #
 #What gets sent to the player when a item is renamed.
-rename complete: &aItem renamed.
+rename complete: '&aItem renamed.'
