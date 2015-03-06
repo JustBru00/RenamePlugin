@@ -46,7 +46,7 @@ public class Rename extends JavaPlugin {
 	  	colored = ChatColor.translateAlternateColorCodes('&', colored);		
 	  	return colored;
 	  }
- 
+	  
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String commandLabel, String[] args) {
@@ -73,6 +73,7 @@ public class Rename extends JavaPlugin {
 							this.logger.info(player.getName() + ChatColor.translateAlternateColorCodes('&', getConfig().getString("your msg")) + coloredText);
 							
 							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));
+							//end of command.
 						} else {							
 							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is not a diamond pickaxe")));
 						}
@@ -99,28 +100,17 @@ public class Rename extends JavaPlugin {
 						newitem2.setItemMeta(im2);
 						pi2.removeItem(inHand2);
 						pi2.setItemInHand(newitem2);
-						this.logger.info(player.getName()
-								+ " renamed a(n) item to: " + coloredText2);
-						player.sendMessage(ChatColor.GREEN + "Item renamed.");
-
+						this.logger.info(player.getName() + ChatColor.translateAlternateColorCodes('&', getConfig().getString("your msg")) + coloredText2);
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));
+                        //end of command.
 					} else {
-						player.sendMessage(ChatColor.RED
-								+ "The Item in hand is air.");
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
 					}
 				} else {
-					player.sendMessage(ChatColor.RED + "Please put one only one word. Like this: /renameany &b&lTest");
-					//String error2 = getConfig().getString(
-					//		"not_enough_or_too_many_args");
-
-					//player.sendMessage(ChatColor.translateAlternateColorCodes(
-					//		'&', error2));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("not enough or too many args")));					
 				}
 			} else {
-				player.sendMessage(ChatColor.RED + "You don't have permission.");
-				//String error1 = getConfig().getString("no_permission");
-
-				//player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-					//	error1));
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 			}
 		}		
 		if (commandLabel.equalsIgnoreCase("lore")) {
@@ -143,10 +133,10 @@ public class Rename extends JavaPlugin {
 						player.sendMessage(ChatColor.RED + "Please put at least one word after /lore");
 					}
 				} else {
-					player.sendMessage(ChatColor.RED + "Item in hand is air.");
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
 				}
 			} else {
-				player.sendMessage(ChatColor.RED + "You don't have permission.");
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 			}
 		}
 		return false;
