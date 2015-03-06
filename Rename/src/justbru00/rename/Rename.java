@@ -16,8 +16,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  *******************************************
- * @Author Justin Brubaker
- * @Pluginname EpicRename
+ * @author Justin Brubaker
+ * Plugin name: EpicRename
  *
  *             Copyright (C) 2015 Justin Brubaker
  *
@@ -34,7 +34,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  *             You should have received a copy of the GNU General Public License
  *             along with this program; if not, write to the Free Software
  *             Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
- *             02110-1301 USA. *******************************************
+ *             02110-1301 USA. 
+ *             
+ *             You can contact the author @ justbru00@gmail.com
  */
 
 public class Rename extends JavaPlugin {
