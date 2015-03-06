@@ -128,9 +128,9 @@ public class Rename extends JavaPlugin {
 						im.setLore(lore);
 						is.setItemMeta(im);
 						player.setItemInHand(is);		
-						player.sendMessage(ChatColor.GREEN + "Item Relored");
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore complete")));
 					} else {
-						player.sendMessage(ChatColor.RED + "Please put at least one word after /lore");
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore usage")));
 					}
 				} else {
 					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
