@@ -49,10 +49,11 @@ public class Rename extends JavaPlugin {
 	  
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
-			String commandLabel, String[] args) {
-		Player player = (Player) sender;
-
+			String commandLabel, String[] args) {		
+			
 		if (commandLabel.equalsIgnoreCase("rename")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;		
 			if (sender.hasPermission(new Permissions().rename)) {
 				if (args.length == 1) {					
 					String coloredText = color(args[0]);			
@@ -86,8 +87,13 @@ public class Rename extends JavaPlugin {
 			} else {						
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 			}
+		} else {
+			this.logger.warning("You can't use that command from CONSOLE.");
+		}
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;			
 			if (sender.hasPermission(new Permissions().renameany)) {
 				if (args.length == 1) {					
 					String coloredText2 = color(args[0]);
@@ -111,9 +117,14 @@ public class Rename extends JavaPlugin {
 				}
 			} else {
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
-			}
-		}		
+			} 				
+		} else {
+			this.logger.warning("You can't use that command from CONSOLE.");
+		}
+		}
 		if (commandLabel.equalsIgnoreCase("lore")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;			
 			if (player.hasPermission(new Permissions().lore)) {
 				if (player.getItemInHand().getType() != Material.AIR) {	
 					if (args.length > 0) {
@@ -138,7 +149,11 @@ public class Rename extends JavaPlugin {
 			} else {
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 			}
+		} else {
+			this.logger.warning("You can't use that command from CONSOLE.");
 		}
+		} 
+		
 		return false;
 
 	}
