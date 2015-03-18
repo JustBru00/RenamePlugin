@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -42,6 +43,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Rename extends JavaPlugin {
 
 	public final Logger logger = Logger.getLogger("Minecraft");
+	ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 
 	public static String color(String uncoloredstring) {
 		String colored = uncoloredstring.replace('_', ' ');
@@ -73,8 +75,8 @@ public class Rename extends JavaPlugin {
 								pi.removeItem(inHand);
 								pi.setItemInHand(newitem);
 
-								this.logger.info(player.getName()
-										+ ChatColor
+								clogger.sendMessage(ChatColor.GOLD + player.getName()
+										 + ChatColor
 												.translateAlternateColorCodes(
 														'&',
 														getConfig().getString(
@@ -114,7 +116,7 @@ public class Rename extends JavaPlugin {
 							'&', getConfig().getString("no permission")));
 				}
 			} else {
-				this.logger.warning("You can't use that command from CONSOLE.");
+				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
@@ -132,16 +134,13 @@ public class Rename extends JavaPlugin {
 							newitem2.setItemMeta(im2);
 							pi2.removeItem(inHand2);
 							pi2.setItemInHand(newitem2);
-							this.logger.info(player.getName()
-									+ ChatColor.translateAlternateColorCodes(
-											'&',
-											getConfig().getString("your msg"))
+							clogger.sendMessage(ChatColor.GOLD + player.getName()
+									 + ChatColor
+											.translateAlternateColorCodes(
+													'&',
+													getConfig().getString(
+															"your msg"))
 									+ coloredText2);
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes(
-											'&',
-											getConfig().getString(
-													"rename complete")));
 							// end of command.
 						} else {
 							player.sendMessage(ChatColor
@@ -162,7 +161,7 @@ public class Rename extends JavaPlugin {
 							'&', getConfig().getString("no permission")));
 				}
 			} else {
-				this.logger.warning("You can't use that command from CONSOLE.");
+				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
 		if (commandLabel.equalsIgnoreCase("lore")) {
@@ -202,7 +201,7 @@ public class Rename extends JavaPlugin {
 							'&', getConfig().getString("no permission")));
 				}
 			} else {
-				this.logger.warning("You can't use that command from CONSOLE.");
+				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
 
@@ -214,7 +213,7 @@ public class Rename extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + " Has Been Disabled.");
+		clogger.sendMessage(ChatColor.RED + pdfFile.getName() + " Has Been Disabled.");
 
 		getServer().getPluginManager().removePermission(
 				new Permissions().rename);
@@ -227,9 +226,10 @@ public class Rename extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		this.logger.info(pdfFile.getName() + " Version: "
+		clogger.sendMessage(ChatColor.GREEN + "====================");
+		clogger.sendMessage(ChatColor.AQUA + pdfFile.getName() + " Version: "
 				+ pdfFile.getVersion() + " Has Been Enabled.");
-
+		clogger.sendMessage(ChatColor.GREEN + "====================");
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(
 				new Permissions().renameany);
