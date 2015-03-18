@@ -1,7 +1,8 @@
 name: EpicRename
 main: justbru00.rename.Rename
-version: 1.4
+version: 1.5
 description: Renames items.
+author: Justin Brubaker
 
 
 commands:
