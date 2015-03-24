@@ -45,6 +45,8 @@ public class Rename extends JavaPlugin {
 	public final Logger logger = Logger.getLogger("Minecraft");
 	ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 
+	public String Prefix = color("&8[&bEpic&fRename&8] ");
+	
 	public static String color(String uncoloredstring) {
 		String colored = uncoloredstring.replace('_', ' ');
 		colored = ChatColor.translateAlternateColorCodes('&', colored);
@@ -75,7 +77,7 @@ public class Rename extends JavaPlugin {
 								pi.removeItem(inHand);
 								pi.setItemInHand(newitem);
 
-								clogger.sendMessage(ChatColor.GOLD + player.getName()
+								clogger.sendMessage(Prefix + ChatColor.RED + player.getName()
 										 + ChatColor
 												.translateAlternateColorCodes(
 														'&',
@@ -116,7 +118,7 @@ public class Rename extends JavaPlugin {
 							'&', getConfig().getString("no permission")));
 				}
 			} else {
-				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
+				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
 		if (commandLabel.equalsIgnoreCase("renameany")) {
@@ -134,13 +136,14 @@ public class Rename extends JavaPlugin {
 							newitem2.setItemMeta(im2);
 							pi2.removeItem(inHand2);
 							pi2.setItemInHand(newitem2);
-							clogger.sendMessage(ChatColor.GOLD + player.getName()
+							clogger.sendMessage(Prefix + ChatColor.RED + player.getName()
 									 + ChatColor
 											.translateAlternateColorCodes(
 													'&',
 													getConfig().getString(
 															"your msg"))
 									+ coloredText2);
+								
 							// end of command.
 						} else {
 							player.sendMessage(ChatColor
@@ -201,7 +204,7 @@ public class Rename extends JavaPlugin {
 							'&', getConfig().getString("no permission")));
 				}
 			} else {
-				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
+				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
 
@@ -213,7 +216,7 @@ public class Rename extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		clogger.sendMessage(ChatColor.RED + pdfFile.getName() + " Has Been Disabled.");
+		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
 
 		getServer().getPluginManager().removePermission(
 				new Permissions().rename);
@@ -226,10 +229,10 @@ public class Rename extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		clogger.sendMessage(ChatColor.GREEN + "====================");
-		clogger.sendMessage(ChatColor.AQUA + pdfFile.getName() + " Version: "
+
+		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: "
 				+ pdfFile.getVersion() + " Has Been Enabled.");
-		clogger.sendMessage(ChatColor.GREEN + "====================");
+
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(
 				new Permissions().renameany);
