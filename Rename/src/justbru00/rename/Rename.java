@@ -43,10 +43,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Rename extends JavaPlugin {
 
 	public final Logger logger = Logger.getLogger("Minecraft");
-	ConsoleCommandSender clogger = this.getServer().getConsoleSender();
+	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
+
 
 	public String Prefix = color("&8[&bEpic&fRename&8] ");
 	
+	/** 
+	 * @param uncoloredstring String with & color codes.
+	 * @return Returns string with ChatColor.[colorhere] instead of &b ect.
+	 */
 	public static String color(String uncoloredstring) {
 		String colored = uncoloredstring.replace('_', ' ');
 		colored = ChatColor.translateAlternateColorCodes('&', colored);
@@ -215,7 +220,6 @@ public class Rename extends JavaPlugin {
 	// When console disables plugin
 	@Override
 	public void onDisable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
 		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
 
 		getServer().getPluginManager().removePermission(
@@ -228,18 +232,15 @@ public class Rename extends JavaPlugin {
 	// When console enables plugin
 	@Override
 	public void onEnable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
+		PluginDescriptionFile pdfFile = this.getDescription();		
+
+		getServer().getPluginManager().addPermission(new Permissions().rename);
+		getServer().getPluginManager().addPermission(new Permissions().renameany);
+		getServer().getPluginManager().addPermission(new Permissions().lore);
+		this.saveDefaultConfig();
 
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: "
 				+ pdfFile.getVersion() + " Has Been Enabled.");
-
-		getServer().getPluginManager().addPermission(new Permissions().rename);
-		getServer().getPluginManager().addPermission(
-				new Permissions().renameany);
-		getServer().getPluginManager().addPermission(new Permissions().lore);
-		getConfig().options().copyDefaults(true);
-		saveConfig();
-
 	}
 
 }
