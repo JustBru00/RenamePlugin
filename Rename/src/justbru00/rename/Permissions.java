@@ -3,8 +3,11 @@ package justbru00.rename;
 import org.bukkit.permissions.Permission;
 
 /**
+ *  @author Justin Brubaker
+ */
+
+/**
  *******************************************
- * @author Justin Brubaker
  * Plugin name: EpicRename
  *
  *             Copyright (C) 2015 Justin Brubaker

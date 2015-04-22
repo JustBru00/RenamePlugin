@@ -2,9 +2,7 @@
 # This is Color Code compatible (&)
 
 # Don't change This
-Config Version: 2
-
-#Edit Messages below
+Config Version: 3
 
 # When a player doesn't have permission.
 no permission: '&cYou don''t have permission!'
@@ -29,3 +27,10 @@ lore usage: '&cPlease put at least one word after /lore'
 
 # What gets said when a item is /lore successfully
 lore complete: '&aItem Relored'
+
+economy:
+   use: true
+   costs:
+      rename: 100
+      renameany: 100
+      lore: 100

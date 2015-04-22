@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
+import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -46,6 +47,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Rename extends JavaPlugin {
 
 	public static Economy econ = null;
+	public Boolean useEconomy = false;
 	public final Logger logger = Logger.getLogger("Minecraft");
 	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 
@@ -70,7 +72,15 @@ public class Rename extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().rename)) {
-					if (args.length == 1) {						
+					if (args.length == 1) {
+						if (useEconomy) {
+						EconomyResponse r = econ.bankWithdraw(player.getName(), getConfig().getInt("economy.costs.rename"));
+						if (r.transactionSuccess()) {
+							player.sendMessage(String.format("Withdrawed %s from your balance. Your current balance is now: %s", econ.format(r.amount), econ.format(r.balance)));
+						}else {
+							sender.sendMessage(String.format("An error occured: %s", r.errorMessage));
+						}
+						}
 						PlayerInventory pi = player.getInventory();
 						ItemStack inHand = pi.getItemInHand();
 						if (player.getItemInHand().getType() != Material.AIR) {
@@ -193,11 +203,14 @@ public class Rename extends JavaPlugin {
 		getServer().getPluginManager().addPermission(new Permissions().lore);
 		this.saveDefaultConfig();
 		
-		if (!setupEconomy() ) {
+		if (!setupEconomy()) {
             logger.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
+		if (getConfig().getBoolean("economy.use")) {
+			useEconomy = true;
+		}
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 	}
 
