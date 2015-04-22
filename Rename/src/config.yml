@@ -1,6 +1,14 @@
 # EpicRename Configuration File
 # This is Color Code compatible (&)
 
+
+# Economy Settings
+economy:
+   use: true
+   costs:
+      rename: 100
+      renameany: 100
+      lore: 100
 # Don't change This
 Config Version: 3
 
@@ -28,9 +36,3 @@ lore usage: '&cPlease put at least one word after /lore'
 # What gets said when a item is /lore successfully
 lore complete: '&aItem Relored'
 
-economy:
-   use: true
-   costs:
-      rename: 100
-      renameany: 100
-      lore: 100

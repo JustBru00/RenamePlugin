@@ -197,11 +197,11 @@ public class Rename extends JavaPlugin {
 	// When console enables plugin
 	@Override
 	public void onEnable() {
+		this.saveDefaultConfig();
 		PluginDescriptionFile pdfFile = this.getDescription();
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(new Permissions().renameany);
-		getServer().getPluginManager().addPermission(new Permissions().lore);
-		this.saveDefaultConfig();
+		getServer().getPluginManager().addPermission(new Permissions().lore);		
 		
 		if (!setupEconomy()) {
             logger.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
