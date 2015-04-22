@@ -3,6 +3,8 @@ package justbru00.rename;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -13,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -42,6 +45,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Rename extends JavaPlugin {
 
+	public static Economy econ = null;
 	public final Logger logger = Logger.getLogger("Minecraft");
 	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 
@@ -66,61 +70,30 @@ public class Rename extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().rename)) {
-					if (args.length == 1) {
-						String coloredText = color(args[0]);
-
+					if (args.length == 1) {						
 						PlayerInventory pi = player.getInventory();
 						ItemStack inHand = pi.getItemInHand();
-
 						if (player.getItemInHand().getType() != Material.AIR) {
 							if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
-
 								ItemStack newitem = new ItemStack(inHand);
 								ItemMeta im = inHand.getItemMeta();
-								im.setDisplayName(coloredText);
+								im.setDisplayName(color(args[0]));
 								newitem.setItemMeta(im);
 								pi.removeItem(inHand);
 								pi.setItemInHand(newitem);
-
-								clogger.sendMessage(Prefix + ChatColor.RED + player.getName()
-										 + ChatColor
-												.translateAlternateColorCodes(
-														'&',
-														getConfig().getString(
-																"your msg"))
-										+ coloredText);
-
-								player.sendMessage(ChatColor
-										.translateAlternateColorCodes(
-												'&',
-												getConfig().getString(
-														"rename complete")));
-								// end of command.
+								clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));								
 							} else {
-								player.sendMessage(ChatColor
-										.translateAlternateColorCodes(
-												'&',
-												getConfig()
-														.getString(
-																"item in hand is not a diamond pickaxe")));
+								player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is not a diamond pickaxe")));
 							}
 						} else {
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes(
-											'&',
-											getConfig().getString(
-													"item in hand is air")));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
 						}
 					} else {
-						player.sendMessage(ChatColor
-								.translateAlternateColorCodes(
-										'&',
-										getConfig().getString(
-												"not enough or too many args")));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("not enough or too many args")));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes(
-							'&', getConfig().getString("no permission")));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 				}
 			} else {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -130,43 +103,25 @@ public class Rename extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().renameany)) {
-					if (args.length == 1) {
-						String coloredText2 = color(args[0]);
+					if (args.length == 1) {						
 						PlayerInventory pi2 = player.getInventory();
 						ItemStack inHand2 = pi2.getItemInHand();
 						if (player.getItemInHand().getType() != Material.AIR) {
 							ItemStack newitem2 = new ItemStack(inHand2);
 							ItemMeta im2 = inHand2.getItemMeta();
-							im2.setDisplayName(coloredText2);
+							im2.setDisplayName(color(args[0]));
 							newitem2.setItemMeta(im2);
 							pi2.removeItem(inHand2);
 							pi2.setItemInHand(newitem2);
-							clogger.sendMessage(Prefix + ChatColor.RED + player.getName()
-									 + ChatColor
-											.translateAlternateColorCodes(
-													'&',
-													getConfig().getString(
-															"your msg"))
-									+ coloredText2);
-								
-							// end of command.
+							clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
 						} else {
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes(
-											'&',
-											getConfig().getString(
-													"item in hand is air")));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
 						}
 					} else {
-						player.sendMessage(ChatColor
-								.translateAlternateColorCodes(
-										'&',
-										getConfig().getString(
-												"not enough or too many args")));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("not enough or too many args")));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes(
-							'&', getConfig().getString("no permission")));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 				}
 			} else {
 				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -189,24 +144,15 @@ public class Rename extends JavaPlugin {
 							im.setLore(lore);
 							is.setItemMeta(im);
 							player.setItemInHand(is);
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes(
-											'&',
-											getConfig().getString(
-													"lore complete")));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore complete")));
 						} else {
-							player.sendMessage(ChatColor
-									.translateAlternateColorCodes('&',
-											getConfig().getString("lore usage")));
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore usage")));
 						}
 					} else {
-						player.sendMessage(ChatColor
-								.translateAlternateColorCodes('&', getConfig()
-										.getString("item in hand is air")));
+						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes(
-							'&', getConfig().getString("no permission")));
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
 				}
 			} else {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -216,31 +162,43 @@ public class Rename extends JavaPlugin {
 		return false;
 
 	}
+	
+	private boolean setupEconomy() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+        if (rsp == null) {
+            return false;
+        }
+        econ = rsp.getProvider();
+        return econ != null;
+    }
 
 	// When console disables plugin
 	@Override
-	public void onDisable() {
-		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
-
-		getServer().getPluginManager().removePermission(
-				new Permissions().rename);
-		getServer().getPluginManager().removePermission(
-				new Permissions().renameany);
+	public void onDisable() {		
+		getServer().getPluginManager().removePermission(new Permissions().rename);
+		getServer().getPluginManager().removePermission(new Permissions().renameany);
 		getServer().getPluginManager().removePermission(new Permissions().lore);
+		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
 	}
 
 	// When console enables plugin
 	@Override
 	public void onEnable() {
-		PluginDescriptionFile pdfFile = this.getDescription();		
-
+		PluginDescriptionFile pdfFile = this.getDescription();
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(new Permissions().renameany);
 		getServer().getPluginManager().addPermission(new Permissions().lore);
 		this.saveDefaultConfig();
-
-		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: "
-				+ pdfFile.getVersion() + " Has Been Enabled.");
+		
+		if (!setupEconomy() ) {
+            logger.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 	}
 
 }
