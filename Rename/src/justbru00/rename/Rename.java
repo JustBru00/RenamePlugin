@@ -50,10 +50,15 @@ public class Rename extends JavaPlugin {
 	public Boolean useEconomy = false;
 	public final Logger logger = Logger.getLogger("Minecraft");
 	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
-
-
-	public String Prefix = color("&8[&bEpic&fRename&8] ");
+	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
 	
+	/** 
+	 * @param player Player you want to msg
+	 * @param msg message.
+	 */
+	public static void msg(Player player, String msg) {
+		player.sendMessage(Prefix + color(msg));
+	}	
 	/** 
 	 * @param uncoloredstring String with & color codes.
 	 * @return Returns string with ChatColor.[colorhere] instead of &b ect.
@@ -72,19 +77,27 @@ public class Rename extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().rename)) {
-					if (args.length == 1) {
-						if (useEconomy) {
-						EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.rename"));
-						   if (r.transactionSuccess()) {
-							player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
-						   }else {
-							sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
-						   }
-						}
+					if (args.length == 1) {						
 						PlayerInventory pi = player.getInventory();
 						ItemStack inHand = pi.getItemInHand();
 						if (player.getItemInHand().getType() != Material.AIR) {
 							if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
+								if (useEconomy) {
+									EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.rename"));
+									   if (r.transactionSuccess()) {
+										player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+										ItemStack newitem = new ItemStack(inHand);
+										ItemMeta im = inHand.getItemMeta();
+										im.setDisplayName(color(args[0]));
+										newitem.setItemMeta(im);
+										pi.removeItem(inHand);
+										pi.setItemInHand(newitem);
+										clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
+										msg(player, getConfig().getString("rename complete"));										return true;
+									   }else {
+										sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+									   }
+									}
 								ItemStack newitem = new ItemStack(inHand);
 								ItemMeta im = inHand.getItemMeta();
 								im.setDisplayName(color(args[0]));
@@ -92,18 +105,19 @@ public class Rename extends JavaPlugin {
 								pi.removeItem(inHand);
 								pi.setItemInHand(newitem);
 								clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));								
+								msg(player, getConfig().getString("rename complete"));
+								return true;
 							} else {
-								player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is not a diamond pickaxe")));
+								msg(player, getConfig().getString("item in hand is not a diamond pickaxe"));
 							}
 						} else {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
+							msg(player, getConfig().getString("item in hand is air"));
 						}
 					} else {
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("not enough or too many args")));
+						msg(player, getConfig().getString("not enough or too many args"));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
+					msg(player, getConfig().getString("no permission"));
 				}
 			} else {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -114,32 +128,43 @@ public class Rename extends JavaPlugin {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().renameany)) {
 					if (args.length == 1) {
-						if (useEconomy) {
-							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.renameany"));
-							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
-							   }else {
-								sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
-							   }
-							}
 						PlayerInventory pi2 = player.getInventory();
-						ItemStack inHand2 = pi2.getItemInHand();
+						ItemStack inHand2 = pi2.getItemInHand();						
 						if (player.getItemInHand().getType() != Material.AIR) {
+							if (useEconomy) {
+								EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.renameany"));
+								   if (r.transactionSuccess()) {
+									player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+									ItemStack newitem2 = new ItemStack(inHand2);
+									ItemMeta im2 = inHand2.getItemMeta();
+									im2.setDisplayName(color(args[0]));
+									newitem2.setItemMeta(im2);
+									pi2.removeItem(inHand2);
+									pi2.setItemInHand(newitem2);
+									player.sendMessage(Prefix + ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));			
+									clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
+									return true;
+								   }else {
+									sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+								   }
+								}						
 							ItemStack newitem2 = new ItemStack(inHand2);
 							ItemMeta im2 = inHand2.getItemMeta();
 							im2.setDisplayName(color(args[0]));
 							newitem2.setItemMeta(im2);
 							pi2.removeItem(inHand2);
 							pi2.setItemInHand(newitem2);
+							player.sendMessage(Prefix + ChatColor.translateAlternateColorCodes('&', getConfig().getString("rename complete")));			
 							clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
+							return true;
 						} else {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
+							msg(player, getConfig().getString("item in hand is air"));
 						}
 					} else {
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("not enough or too many args")));
+						msg(player, getConfig().getString("not enough or too many args"));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
+					msg(player, getConfig().getString("no permission"));
 				}
 			} else {
 				clogger.sendMessage(ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -155,6 +180,19 @@ public class Rename extends JavaPlugin {
 								EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
 								   if (r.transactionSuccess()) {
 									player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+									int i = 0;
+									ArrayList<String> lore = new ArrayList<String>();
+									while (args.length > i) {
+										lore.add(color(args[i]));
+										i++;
+									}
+									ItemStack is = player.getItemInHand();
+									ItemMeta im = is.getItemMeta();
+									im.setLore(lore);
+									is.setItemMeta(im);
+									player.setItemInHand(is);
+									player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore complete")));
+									return true;
 								   }else {
 									sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
 								   }
@@ -170,15 +208,16 @@ public class Rename extends JavaPlugin {
 							im.setLore(lore);
 							is.setItemMeta(im);
 							player.setItemInHand(is);
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore complete")));
+							msg(player, getConfig().getString("lore complete"));
+							return true;
 						} else {
-							player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("lore usage")));
+							msg(player, getConfig().getString("lore usage"));
 						}
 					} else {
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("item in hand is air")));
+						msg(player, getConfig().getString("item in hand is air"));
 					}
 				} else {
-					player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("no permission")));
+					msg(player, getConfig().getString("no permission"));
 				}
 			} else {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
@@ -217,17 +256,17 @@ public class Rename extends JavaPlugin {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(new Permissions().renameany);
-		getServer().getPluginManager().addPermission(new Permissions().lore);		
+		getServer().getPluginManager().addPermission(new Permissions().lore);			
 		
+		if (getConfig().getBoolean("economy.use")) {			
+			useEconomy = true;
+			clogger.sendMessage(Prefix + ChatColor.GOLD + "Use economy in the config is true. Enabling Economy.");
+		}
 		if (!setupEconomy()) {
             clogger.sendMessage(Prefix + color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
             		+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
-            useEconomy = false;
-            return;
+            useEconomy = false;           
         }
-		if (getConfig().getBoolean("economy.use")) {
-			useEconomy = true;
-		}
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 	}
 
