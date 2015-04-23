@@ -1,7 +1,6 @@
 # EpicRename Configuration File
 # This is Color Code compatible (&)
 
-
 # Economy Settings
 economy:
    use: true

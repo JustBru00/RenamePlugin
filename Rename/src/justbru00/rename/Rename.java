@@ -74,12 +74,12 @@ public class Rename extends JavaPlugin {
 				if (sender.hasPermission(new Permissions().rename)) {
 					if (args.length == 1) {
 						if (useEconomy) {
-						EconomyResponse r = econ.bankWithdraw(player.getName(), getConfig().getInt("economy.costs.rename"));
-						if (r.transactionSuccess()) {
-							player.sendMessage(String.format("Withdrawed %s from your balance. Your current balance is now: %s", econ.format(r.amount), econ.format(r.balance)));
-						}else {
-							sender.sendMessage(String.format("An error occured: %s", r.errorMessage));
-						}
+						EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.rename"));
+						   if (r.transactionSuccess()) {
+							player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+						   }else {
+							sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+						   }
 						}
 						PlayerInventory pi = player.getInventory();
 						ItemStack inHand = pi.getItemInHand();
@@ -113,7 +113,15 @@ public class Rename extends JavaPlugin {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (sender.hasPermission(new Permissions().renameany)) {
-					if (args.length == 1) {						
+					if (args.length == 1) {
+						if (useEconomy) {
+							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.renameany"));
+							   if (r.transactionSuccess()) {
+								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+							   }else {
+								sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+							   }
+							}
 						PlayerInventory pi2 = player.getInventory();
 						ItemStack inHand2 = pi2.getItemInHand();
 						if (player.getItemInHand().getType() != Material.AIR) {
@@ -143,6 +151,14 @@ public class Rename extends JavaPlugin {
 				if (player.hasPermission(new Permissions().lore)) {
 					if (player.getItemInHand().getType() != Material.AIR) {
 						if (args.length > 0) {
+							if (useEconomy) {
+								EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
+								   if (r.transactionSuccess()) {
+									player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+								   }else {
+									sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+								   }
+								}
 							int i = 0;
 							ArrayList<String> lore = new ArrayList<String>();
 							while (args.length > i) {
@@ -204,8 +220,9 @@ public class Rename extends JavaPlugin {
 		getServer().getPluginManager().addPermission(new Permissions().lore);		
 		
 		if (!setupEconomy()) {
-            logger.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
-            getServer().getPluginManager().disablePlugin(this);
+            clogger.sendMessage(Prefix + color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
+            		+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
+            useEconomy = false;
             return;
         }
 		if (getConfig().getBoolean("economy.use")) {
