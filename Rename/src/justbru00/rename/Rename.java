@@ -257,7 +257,7 @@ public class Rename extends JavaPlugin {
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
-		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + "is Copyright (C) 2015 Justin Brubaker"));
+		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2015 Justin Brubaker"));
 		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt"));
 		this.saveDefaultConfig();
 		Prefix = color(getConfig().getString("prefix"));
