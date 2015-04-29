@@ -1,6 +1,9 @@
 # EpicRename Configuration File
 # This is Color Code compatible (&)
 
+# Prefix for all messages
+prefix: '&8[&bEpic&fRename&8] &f' 
+
 # Economy Settings
 economy:
    use: true

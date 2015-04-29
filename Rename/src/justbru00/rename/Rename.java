@@ -67,8 +67,7 @@ public class Rename extends JavaPlugin {
 		String colored = uncoloredstring.replace('_', ' ');
 		colored = ChatColor.translateAlternateColorCodes('&', colored);
 		return colored;
-	}
-
+	}		
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
 			String commandLabel, String[] args) {
@@ -93,9 +92,11 @@ public class Rename extends JavaPlugin {
 										pi.removeItem(inHand);
 										pi.setItemInHand(newitem);
 										clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&',	getConfig().getString("your msg")) + color(args[0]));
-										msg(player, getConfig().getString("rename complete"));										return true;
+										msg(player, getConfig().getString("rename complete"));					
+										return true;
 									   }else {
 										sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+										return true;
 									   }
 									}
 								ItemStack newitem = new ItemStack(inHand);
@@ -146,6 +147,7 @@ public class Rename extends JavaPlugin {
 									return true;
 								   }else {
 									sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+									return true;
 								   }
 								}						
 							ItemStack newitem2 = new ItemStack(inHand2);
@@ -195,6 +197,7 @@ public class Rename extends JavaPlugin {
 									return true;
 								   }else {
 									sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+									return true;
 								   }
 								}
 							int i = 0;
@@ -252,8 +255,13 @@ public class Rename extends JavaPlugin {
 	// When console enables plugin
 	@Override
 	public void onEnable() {
-		this.saveDefaultConfig();
 		PluginDescriptionFile pdfFile = this.getDescription();
+		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
+		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + "is Copyright (C) 2015 Justin Brubaker"));
+		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt"));
+		this.saveDefaultConfig();
+		Prefix = color(getConfig().getString("prefix"));
+		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
 		getServer().getPluginManager().addPermission(new Permissions().rename);
 		getServer().getPluginManager().addPermission(new Permissions().renameany);
 		getServer().getPluginManager().addPermission(new Permissions().lore);			
@@ -267,6 +275,7 @@ public class Rename extends JavaPlugin {
             		+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
             useEconomy = false;           
         }
+		
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 	}
 
