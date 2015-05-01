@@ -226,7 +226,31 @@ public class Rename extends JavaPlugin {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
+		
+		if (commandLabel.equalsIgnoreCase("renameentity")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;
+				if (args.length == 1) {
+					PlayerInventory pi = player.getInventory();
+					ItemStack is = new ItemStack(Material.NAME_TAG);
+					ItemMeta im = is.getItemMeta();
+					im.setDisplayName(color(args[0]));
+					ArrayList<String> lore = new ArrayList<String>();
+					lore.add(color("&bRight click me on an entity to rename it."));
+					im.setLore(lore);
+					is.setItemMeta(im);
+					pi.addItem(is);
+					msg(player, "&aGiven you a name tag. Use it :D");
+					return true;
+				} else {
+					msg(player, "&cPlease only put one word after /renameentity. You can use _ as spaces.");
+				}				
+			} else {
+				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
+			}
+		}
 
+		
 		return false;
 
 	}

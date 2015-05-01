@@ -11,4 +11,6 @@ commands:
  renameany:
        description: Renames any item. 
  lore:
-       description: Relores any item.      
+       description: Relores any item.   
+ renameentity:
+       description: Gives you a nametag that is named.     
