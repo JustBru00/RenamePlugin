@@ -259,6 +259,7 @@ public class Rename extends JavaPlugin {
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("license")) {
 					sender.sendMessage(Prefix + "See License Information at: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt");
+					return true;
 				}
 				if (args[0].equalsIgnoreCase("help")){ 
 					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");
