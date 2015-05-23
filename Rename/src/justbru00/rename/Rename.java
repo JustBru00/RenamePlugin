@@ -249,6 +249,32 @@ public class Rename extends JavaPlugin {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
 			}
 		}
+		
+		if (command.getName().equalsIgnoreCase("epicrename")) {			
+			if (args.length == 0) {
+				sender.sendMessage(Prefix + "Please type /epicrename help");
+				sender.sendMessage(Prefix + "Or type /epicrename license");
+				return true;
+			}
+			if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("license")) {
+					sender.sendMessage(Prefix + "See License Information at: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt");
+				}
+				if (args[0].equalsIgnoreCase("help")){ 
+					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");
+					sender.sendMessage(Prefix + "/rename - Usage: /rename &b&lTest");
+					sender.sendMessage(Prefix + "/renameany - Usage: /renamyany &b&lTest");
+					sender.sendMessage(Prefix + "/lore - Usage: /lore &bHello");
+					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");					
+					return true;
+				} else {
+					sender.sendMessage(Prefix + "Please type /epicrename help");
+				    return true;
+				}				
+							
+			}
+			
+		}
 
 		
 		return false;

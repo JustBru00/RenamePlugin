@@ -14,3 +14,5 @@ commands:
        description: Relores any item.   
  renameentity:
        description: Gives you a nametag that is named.     
+ epicrename:
+       description: Help and version command.      
