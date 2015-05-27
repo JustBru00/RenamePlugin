@@ -266,6 +266,7 @@ public class Rename extends JavaPlugin {
 					sender.sendMessage(Prefix + "/rename - Usage: /rename &b&lTest");
 					sender.sendMessage(Prefix + "/renameany - Usage: /renamyany &b&lTest");
 					sender.sendMessage(Prefix + "/lore - Usage: /lore &bHello");
+					sender.sendMessage(Prefix + "/renameentity - Usage: /renameentity &bTest");
 					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");					
 					return true;
 				} else {
