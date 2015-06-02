@@ -1,6 +1,6 @@
 name: EpicRename
 main: justbru00.rename.Rename
-version: 2.1 SNAPSHOT
+version: 2.1
 description: Renames items.
 author: Justin Brubaker
 softdepend: [Vault]

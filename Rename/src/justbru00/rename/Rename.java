@@ -240,10 +240,10 @@ public class Rename extends JavaPlugin {
 					im.setLore(lore);
 					is.setItemMeta(im);
 					pi.addItem(is);
-					msg(player, "&aGiven you a name tag. Use it :D");
+					msg(player, "&aI gave you a name tag. Use it :D");
 					return true;
 				} else {
-					msg(player, "&cPlease only put one word after /renameentity. You can use _ as spaces.");
+					msg(player, "&cPlease only put one word after /renameentity. You can use underscores as spaces.");
 				}				
 			} else {
 				clogger.sendMessage(Prefix + ChatColor.RED + "You can't use that command from CONSOLE.");
