@@ -1,0 +1,40 @@
+# EpicRename Configuration File
+# This is Color Code compatible (&)
+
+# Prefix for all messages
+prefix: '&8[&bEpic&fRename&8] &f' 
+
+# Economy Settings
+economy:
+   use: true
+   costs:
+      rename: 100
+      renameany: 100
+      lore: 100
+# Don't change This
+Config Version: 3
+
+# When a player doesn't have permission.
+no permission: '&cYou don''t have permission!'
+
+# When player puts too many or too little args. example: if a player types (/rename test good) or (/rename) without putting a name.
+not enough or too many args: '&cPlease put only one word after /rename or /renameany.'
+
+# When a player tries to rename air. (Not a good idea :D)
+item in hand is air: '&cItem in hand is air.'
+
+#For /rename only.
+item in hand is not a diamond pickaxe: '&cItem in hand is not a diamond pickaxe.'
+
+# What prints to console when item is renamed in /rename. example: playername (automatic) + your msg (below) + the renamed item name (automatic)
+your msg: ' renamed a(n) item to '
+
+#What gets sent to the player when a item is renamed.
+rename complete: '&aItem renamed.'
+
+#What gets said if player doesn't give at least one word after /lore
+lore usage: '&cPlease put at least one word after /lore'
+
+# What gets said when a item is /lore successfully
+lore complete: '&aItem Relored'
+
