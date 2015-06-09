@@ -1,5 +1,5 @@
 name: EpicRename
-main: com.gmail.justbru00.epic.rename.Main.RenameRewrite
+main: com.gmail.justbru00.epic.rename.main.RenameRewrite
 version: 2.2-SNAPSHOT
 description: Renames items.
 author: Justin Brubaker
