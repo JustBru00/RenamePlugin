@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -49,6 +50,7 @@ public class RenameRewrite extends JavaPlugin {
 	public final Logger logger = Logger.getLogger("Minecraft");
 	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
+	public final FileConfiguration config = getConfig();
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
@@ -63,12 +65,12 @@ public class RenameRewrite extends JavaPlugin {
 						if (inHand.getType() != Material.AIR) {
 							if (inHand.getType() == Material.DIAMOND_PICKAXE) {
 								if (useEconomy) {
-									EconomyResponse r = econ.withdrawPlayer(player,	getConfig().getInt("economy.costs.rename"));
+									EconomyResponse r = econ.withdrawPlayer(player,	config.getInt("economy.costs.rename"));
 									if (r.transactionSuccess()) {
 										player.sendMessage(String.format(Prefix	+ color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount),	econ.format(r.balance)));
 										player.setItemInHand(renameItemStack(player, args[0], inHand));
-										clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', getConfig()	.getString("your msg")) + color(args[0]));
-										msg(player,	getConfig().getString("rename complete"));
+										clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config	.getString("your msg")) + color(args[0]));
+										msg(player,	config.getString("rename complete"));
 										return true;
 									} else {
 										sender.sendMessage(String.format(Prefix	+ color("&6An error occured:&c %s"), r.errorMessage));
@@ -76,24 +78,69 @@ public class RenameRewrite extends JavaPlugin {
 									}
 								}
 								player.setItemInHand(renameItemStack(player, args[0], inHand));
-								msg(player,	getConfig()	.getString("rename complete"));
+								msg(player,	config.getString("rename complete"));
 								return true;
 							} else {
-								msg(player,	getConfig().getString("item in hand is not a diamond pickaxe"));
+								msg(player,	config.getString("item in hand is not a diamond pickaxe"));
 							}
 						} else {
-							msg(player,	getConfig().getString("item in hand is air"));
+							msg(player,	config.getString("item in hand is air"));
 							return true;
 						}
 					} else {
-						msg(player,	getConfig().getString("not enough or too many args"));
+						msg(player,	config.getString("not enough or too many args"));
 					}
 				} else {
-					msg(player, getConfig().getString("no permission"));
+					msg(player, config.getString("no permission"));
 					return true;
 				}
+			} else {
+				sender.sendMessage(Prefix + color("&4Sorry you can't use that command."));
+				return true;
 			}
-		}
+		} // End of Command Rename.
+		
+		if (command.getName().equalsIgnoreCase("renameany")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;
+				if (player.hasPermission("epicrename.renameany")) {
+					ItemStack inHand = player.getItemInHand();
+					if (args.length == 1) {
+						Material inHandMaterial = inHand.getType();
+						if (inHandMaterial != Material.AIR) {
+							if (useEconomy) {
+								EconomyResponse r = econ.withdrawPlayer(player,	config.getInt("economy.costs.renameany"));
+								if (r.transactionSuccess()) {
+									player.sendMessage(String.format(Prefix	+ color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount),	econ.format(r.balance)));
+									player.setItemInHand(renameItemStack(player, args[0], inHand));
+									clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config.getString("your msg")) + color(args[0]));
+									msg(player,	config.getString("rename complete"));
+									return true;
+								} else {
+									sender.sendMessage(String.format(Prefix	+ color("&6An error occured:&c %s"), r.errorMessage));
+									return true;
+								}
+							}
+								player.setItemInHand(renameItemStack(player, args[0], inHand));
+								clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config.getString("your msg")) + color(args[0]));
+								msg(player,	config.getString("rename complete"));
+							
+							} else {
+								msg(player, config.getString("item in hand is air"));
+							}
+						} else {
+							msg(player, config.getString("not enough or too many args"));
+							return true;
+						}
+				} else {
+					msg(player, config.getString("no permission"));
+					return true;
+				}
+			} else {
+				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
+				return true;
+			}
+		} // End of Command Renameany
 
 		return false;
 	}
@@ -106,7 +153,7 @@ public class RenameRewrite extends JavaPlugin {
 		clogger.sendMessage(Prefix
 				+ ChatColor.RED
 				+ player.getName()
-				+ ChatColor.translateAlternateColorCodes('&', getConfig()
+				+ ChatColor.translateAlternateColorCodes('&', config
 						.getString("your msg")) + color(displayname));
 		return newitem;
 	}
@@ -158,7 +205,7 @@ public class RenameRewrite extends JavaPlugin {
 		clogger.sendMessage(color(Prefix
 				+ "&bSee LICENSE infomation here: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt"));
 		this.saveDefaultConfig();
-		Prefix = color(getConfig().getString("prefix"));
+		Prefix = color(config.getString("prefix"));
 		clogger.sendMessage(color(Prefix
 				+ "&6Prefix has been set to the one in the config."));
 		getServer().getPluginManager().addPermission(new Permissions().rename);
@@ -166,7 +213,7 @@ public class RenameRewrite extends JavaPlugin {
 				new Permissions().renameany);
 		getServer().getPluginManager().addPermission(new Permissions().lore);
 
-		if (getConfig().getBoolean("economy.use")) {
+		if (config.getBoolean("economy.use")) {
 			useEconomy = true;
 			clogger.sendMessage(Prefix + ChatColor.GOLD
 					+ "Use economy in the config is true. Enabling Economy.");
