@@ -124,9 +124,10 @@ public class RenameRewrite extends JavaPlugin {
 								player.setItemInHand(renameItemStack(player, args[0], inHand));
 								clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config.getString("your msg")) + color(args[0]));
 								msg(player,	config.getString("rename complete"));
-							
+								return true;						
 							} else {
 								msg(player, config.getString("item in hand is air"));
+								return true;
 							}
 						} else {
 							msg(player, config.getString("not enough or too many args"));
