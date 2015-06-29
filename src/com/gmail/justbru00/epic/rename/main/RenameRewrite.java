@@ -1,5 +1,6 @@
 package com.gmail.justbru00.epic.rename.main;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
@@ -143,6 +144,123 @@ public class RenameRewrite extends JavaPlugin {
 			}
 		} // End of Command Renameany
 
+		if (command.getName().equalsIgnoreCase("lore")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;
+				if (player.hasPermission("epicrename.lore")) {
+					if (args.length > 0) {
+						if (useEconomy) {
+							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
+							   if (r.transactionSuccess()) {
+								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+								int i = 0;
+								ArrayList<String> lore = new ArrayList<String>();
+								while (args.length > i) {
+									lore.add(color(args[i]));
+									i++;
+								}
+								player.setItemInHand(renameItemStack(player, lore, player.getItemInHand()));
+								msg(player, config.getString("lore complete"));
+								return true;
+							   } else {
+								   sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+									return true;
+							   }
+							   } 
+							   int i = 0;
+								ArrayList<String> lore = new ArrayList<String>();
+								while (args.length > i) {
+									lore.add(color(args[i]));
+									i++;
+								}
+								player.setItemInHand(renameItemStack(player, lore, player.getItemInHand()));
+							   msg(player, config.getString("lore complete"));
+							   return true;
+						
+					} else {
+						msg(player, config.getString("not enough or too many args"));
+						return true;
+					}
+				} else {
+					msg(player, config.getString("no permission"));
+					return true;
+				}
+			} else {
+				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
+				return true;
+			}
+		} // End of command Lore
+		
+		if (command.getName().equalsIgnoreCase("renameentity")) {
+			if (sender instanceof Player) {
+				Player player = (Player) sender;
+				if (player.hasPermission("epicrename.renameentity")) {
+					if (args.length == 1) {
+						if (useEconomy) {
+							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
+							   if (r.transactionSuccess()) {
+								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
+								ItemStack is = new ItemStack(Material.NAME_TAG);
+								ItemMeta im = is.getItemMeta();
+								im.setDisplayName(color(args[0]));	
+								is.setItemMeta(im);
+								ArrayList<String> lore = new ArrayList<String>();
+								lore.add(color("&bRight click me on an entity to rename it."));
+								player.getInventory().addItem((renameItemStack(player, lore, is)));
+								msg(player, "&aI gave you a name tag. Use it :D");								
+								return true;
+							   } else {
+								   sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
+									return true;
+							   }
+							   } 
+						ItemStack is = new ItemStack(Material.NAME_TAG);
+						ArrayList<String> lore = new ArrayList<String>();
+						lore.add(color("&bRight click me on an entity to rename it."));
+						player.setItemInHand(renameItemStack(player, lore, is));
+						msg(player, "&aI gave you a name tag. Use it :D");
+						return true;
+					} else {
+						msg(player, config.getString("not enough or too many args"));
+						return true;
+					}
+				} else {
+					msg(player, config.getString("no permission"));
+					return true;
+				}
+			} else {
+				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
+				return true;
+			}
+		} // End of command RenameEntity
+		
+		if (command.getName().equalsIgnoreCase("epicrename")) {			
+			if (args.length == 0) {
+				sender.sendMessage(Prefix + "Please type /epicrename help");
+				sender.sendMessage(Prefix + "Or type /epicrename license");
+				return true;
+			}
+			if (args.length == 1) {
+				if (args[0].equalsIgnoreCase("license")) {
+					sender.sendMessage(Prefix + "See License Information at: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt");
+					return true;
+				}
+				if (args[0].equalsIgnoreCase("help")){ 
+					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");
+					sender.sendMessage(Prefix + "/rename - Usage: /rename &b&lTest");
+					sender.sendMessage(Prefix + "/renameany - Usage: /renamyany &b&lTest");
+					sender.sendMessage(Prefix + "/lore - Usage: /lore &bHello");
+					sender.sendMessage(Prefix + "/renameentity - Usage: /renameentity &bTest");
+					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");					
+					return true;
+				} else {
+					sender.sendMessage(Prefix + "Please type /epicrename help");
+				    return true;
+				}				
+			}
+		} // End of command EpicRename
+			
+		
 		return false;
 	}
 
@@ -156,6 +274,14 @@ public class RenameRewrite extends JavaPlugin {
 				+ player.getName()
 				+ ChatColor.translateAlternateColorCodes('&', config
 						.getString("your msg")) + color(displayname));
+		return newitem;		
+	}
+	
+	public ItemStack renameItemStack(Player player, ArrayList<String> lore, ItemStack tobeRenamed) {
+		ItemStack newitem = new ItemStack(tobeRenamed);
+		ItemMeta im = tobeRenamed.getItemMeta();
+		im.setLore(lore);
+		newitem.setItemMeta(im);		
 		return newitem;
 	}
 
@@ -186,11 +312,7 @@ public class RenameRewrite extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		getServer().getPluginManager().removePermission(
-				new Permissions().rename);
-		getServer().getPluginManager().removePermission(
-				new Permissions().renameany);
-		getServer().getPluginManager().removePermission(new Permissions().lore);
+
 		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
 
 	}
@@ -208,11 +330,7 @@ public class RenameRewrite extends JavaPlugin {
 		this.saveDefaultConfig();
 		Prefix = color(config.getString("prefix"));
 		clogger.sendMessage(color(Prefix
-				+ "&6Prefix has been set to the one in the config."));
-		getServer().getPluginManager().addPermission(new Permissions().rename);
-		getServer().getPluginManager().addPermission(
-				new Permissions().renameany);
-		getServer().getPluginManager().addPermission(new Permissions().lore);
+				+ "&6Prefix has been set to the one in the config."));		
 
 		if (config.getBoolean("economy.use")) {
 			useEconomy = true;
@@ -226,6 +344,8 @@ public class RenameRewrite extends JavaPlugin {
 			useEconomy = false;
 		}
 
+		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
+		
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: "
 				+ pdfFile.getVersion() + " Has Been Enabled.");
 

@@ -11,6 +11,7 @@ economy:
       rename: 100
       renameany: 100
       lore: 100
+      renameentity: 100
 # Don't change This
 Config Version: 3
 
