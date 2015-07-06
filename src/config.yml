@@ -6,7 +6,7 @@ prefix: '&8[&bEpic&fRename&8] &f'
 
 # Economy Settings
 economy:
-   use: true
+   use: false
    costs:
       rename: 100
       renameany: 100
@@ -19,7 +19,7 @@ Config Version: 3
 no permission: '&cYou don''t have permission!'
 
 # When player puts too many or too little args. example: if a player types (/rename test good) or (/rename) without putting a name.
-not enough or too many args: '&cPlease put only one word after /rename or /renameany.'
+not enough or too many args: '&cToo many or too little arguments.'
 
 # When a player tries to rename air. (Not a good idea :D)
 item in hand is air: '&cItem in hand is air.'
@@ -39,3 +39,14 @@ lore usage: '&cPlease put at least one word after /lore'
 # What gets said when a item is /lore successfully
 lore complete: '&aItem Relored'
 
+
+#Blacklist Section
+
+#If the plugin finds a blacklisted word.
+found blacklisted word: '&4Sorry that message contains a blacklisted word.'
+
+#If any of these words are found the plugin will stop the rename and give a error message.
+blacklist:
+ - blacklist
+ -
+ -

@@ -1,6 +1,7 @@
 package com.gmail.justbru00.epic.rename.main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
@@ -51,7 +52,8 @@ public class RenameRewrite extends JavaPlugin {
 	public final Logger logger = Logger.getLogger("Minecraft");
 	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
-	public final FileConfiguration config = getConfig();
+	public FileConfiguration config = getConfig();
+	public List<String> blacklist;
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,
@@ -63,6 +65,10 @@ public class RenameRewrite extends JavaPlugin {
 				if (player.hasPermission("epicrename.rename")) {
 					ItemStack inHand = player.getItemInHand();
 					if (args.length == 1) {
+						if (checkBlacklist(args[0])) {
+							msg(player, config.getString("found blacklisted word"));
+							return true;
+						}
 						if (inHand.getType() != Material.AIR) {
 							if (inHand.getType() == Material.DIAMOND_PICKAXE) {
 								if (useEconomy) {
@@ -107,6 +113,10 @@ public class RenameRewrite extends JavaPlugin {
 				if (player.hasPermission("epicrename.renameany")) {
 					ItemStack inHand = player.getItemInHand();
 					if (args.length == 1) {
+						if (checkBlacklist(args[0])) {
+							msg(player, config.getString("found blacklisted word"));
+							return true;
+						}
 						Material inHandMaterial = inHand.getType();
 						if (inHandMaterial != Material.AIR) {
 							if (useEconomy) {
@@ -156,6 +166,10 @@ public class RenameRewrite extends JavaPlugin {
 								int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
 								while (args.length > i) {
+									if (checkBlacklist(args[i])) {
+										msg(player, config.getString("found blacklisted word"));
+										return true;
+									}
 									lore.add(color(args[i]));
 									i++;
 								}
@@ -170,6 +184,10 @@ public class RenameRewrite extends JavaPlugin {
 							   int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
 								while (args.length > i) {
+									if (checkBlacklist(args[i])) {
+										msg(player, config.getString("found blacklisted word"));
+										return true;
+									}
 									lore.add(color(args[i]));
 									i++;
 								}
@@ -196,8 +214,12 @@ public class RenameRewrite extends JavaPlugin {
 				Player player = (Player) sender;
 				if (player.hasPermission("epicrename.renameentity")) {
 					if (args.length == 1) {
+						if (checkBlacklist(args[0])) {
+							msg(player, config.getString("found blacklisted word"));
+							return true;
+						}
 						if (useEconomy) {
-							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
+							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.renameentity"));
 							   if (r.transactionSuccess()) {
 								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
 								ItemStack is = new ItemStack(Material.NAME_TAG);
@@ -362,5 +384,28 @@ public class RenameRewrite extends JavaPlugin {
 		}
 		econ = rsp.getProvider();
 		return econ != null;
+	}
+	/**
+	 * 
+	 * @param checking String to check for a blacklisted word.
+	 * @return TRUE if ok, FALSE if not
+	 */
+	public boolean checkBlacklist(String checking) {
+		
+		this.blacklist = config.getStringList("blacklist");
+		
+		int i = 0;
+		while (i < blacklist.size()){
+			if (blacklist.get(i) == null) {
+				break;
+			}			
+			if (checking.toLowerCase().contains(blacklist.get(i).toLowerCase())) {				
+				return false;
+			}	
+			
+			i++;
+		}
+		
+		return true;
 	}
 }
