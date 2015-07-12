@@ -237,11 +237,13 @@ public class RenameRewrite extends JavaPlugin {
 							   }
 							   } 
 						ItemStack is = new ItemStack(Material.NAME_TAG);
+						ItemMeta im = is.getItemMeta();
+						im.setDisplayName(color(args[0]));	
+						is.setItemMeta(im);
 						ArrayList<String> lore = new ArrayList<String>();
 						lore.add(color("&bRight click me on an entity to rename it."));
-						player.setItemInHand(renameItemStack(player, lore, is));
-						msg(player, "&aI gave you a name tag. Use it :D");
-						return true;
+						player.getInventory().addItem((renameItemStack(player, lore, is)));
+						msg(player, "&aI gave you a name tag. Use it :D");							
 					} else {
 						msg(player, config.getString("not enough or too many args"));
 						return true;
@@ -264,7 +266,7 @@ public class RenameRewrite extends JavaPlugin {
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("license")) {
-					sender.sendMessage(Prefix + "See License Information at: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt");
+					sender.sendMessage(Prefix + "See License Information at: http://tinyurl.com/epicrename1");
 					return true;
 				}
 				if (args[0].equalsIgnoreCase("help")){ 
@@ -342,23 +344,20 @@ public class RenameRewrite extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		clogger.sendMessage(color(Prefix
-				+ "&bThis plugin is made by Justin Brubaker."));
-		clogger.sendMessage(color(Prefix + "&bEpicRename version "
-				+ pdfFile.getVersion()
-				+ " is Copyright (C) 2015 Justin Brubaker"));
-		clogger.sendMessage(color(Prefix
-				+ "&bSee LICENSE infomation here: https://github.com/JustBru00/RenamePlugin/blob/master/Rename/src/LICENSE.txt"));
+		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
+		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2015 Justin Brubaker"));
+		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
+		
 		this.saveDefaultConfig();
+		
 		Prefix = color(config.getString("prefix"));
-		clogger.sendMessage(color(Prefix
-				+ "&6Prefix has been set to the one in the config."));		
+		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
 
 		if (config.getBoolean("economy.use")) {
 			useEconomy = true;
-			clogger.sendMessage(Prefix + ChatColor.GOLD
-					+ "Use economy in the config is true. Enabling Economy.");
+			clogger.sendMessage(Prefix + ChatColor.GOLD	+ "Use economy in the config is true. Enabling Economy.");
 		}
+		
 		if (!setupEconomy()) {
 			clogger.sendMessage(Prefix
 					+ color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
@@ -368,8 +367,7 @@ public class RenameRewrite extends JavaPlugin {
 
 		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
 		
-		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: "
-				+ pdfFile.getVersion() + " Has Been Enabled.");
+		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 
 	}
 
@@ -388,7 +386,7 @@ public class RenameRewrite extends JavaPlugin {
 	/**
 	 * 
 	 * @param checking String to check for a blacklisted word.
-	 * @return TRUE if ok, FALSE if not
+	 * @return False if ok. True if found in blacklist
 	 */
 	public boolean checkBlacklist(String checking) {
 		
@@ -398,14 +396,13 @@ public class RenameRewrite extends JavaPlugin {
 		while (i < blacklist.size()){
 			if (blacklist.get(i) == null) {
 				break;
-			}			
-			if (checking.toLowerCase().contains(blacklist.get(i).toLowerCase())) {				
-				return false;
+			} else if (checking.toLowerCase().contains(blacklist.get(i).toLowerCase())) {				
+				return true;
 			}	
 			
 			i++;
 		}
 		
-		return true;
+		return false;
 	}
 }
