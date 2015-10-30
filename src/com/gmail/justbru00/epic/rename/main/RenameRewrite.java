@@ -58,6 +58,7 @@ public class RenameRewrite extends JavaPlugin {
 	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
 	public FileConfiguration config = getConfig();
 	public List<String> blacklist;
+	public String[] colorLetters = {"a", "b", "c", "d", "e", "f"};
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
@@ -321,4 +322,58 @@ public class RenameRewrite extends JavaPlugin {
 		
 		return false;
 	}
+	/**
+	 * 
+	 * @return True if player can use the color. False if player can't
+	 */
+	public boolean checkColorPermissions(Player player, String proposedItemName) {
+		boolean color = false;
+		boolean format = false;
+		
+		// Check 0-9
+		int i = 0;
+		while (i < 10){
+			if (proposedItemName.contains("&" + i)) {
+				color = true;
+			}
+			i++;
+		}
+		
+		// Check a-f
+		i = 0;
+		while (i < 6){
+			if (proposedItemName.contains("&" + colorLetters[i])) {
+				color = true;
+			}
+			i++;
+		}
+		
+		// Check format
+		if (proposedItemName.contains("k")) format = true;
+		if (proposedItemName.contains("l")) format = true;
+		if (proposedItemName.contains("m")) format = true;
+		if (proposedItemName.contains("n")) format = true;
+		if (proposedItemName.contains("o")) format = true;
+		if (proposedItemName.contains("r")) format = true;
+		
+		if (color) {
+			if (player.hasPermission("epicrename.color.*")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		if (format) {
+			if (player.hasPermission("epicrename.format.*")) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		
+		return false;		
+	}
+	
+	
 }
