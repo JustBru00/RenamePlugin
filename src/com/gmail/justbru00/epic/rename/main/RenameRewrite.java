@@ -1,5 +1,6 @@
 package com.gmail.justbru00.epic.rename.main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,6 +21,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.gmail.justbru00.epic.rename.commands.Rename;
+import com.gmail.justbru00.epic.rename.commands.Renameany;
 
 /**
  *******************************************
@@ -50,110 +54,13 @@ public class RenameRewrite extends JavaPlugin {
 	public static Economy econ = null;
 	public Boolean useEconomy = false;
 	public final Logger logger = Logger.getLogger("Minecraft");
-	private ConsoleCommandSender clogger = this.getServer().getConsoleSender();
+	public ConsoleCommandSender clogger = this.getServer().getConsoleSender();
 	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
 	public FileConfiguration config = getConfig();
 	public List<String> blacklist;
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
-
-		if (command.getName().equalsIgnoreCase("rename")) {
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				if (player.hasPermission("epicrename.rename")) {
-					ItemStack inHand = player.getItemInHand();
-					if (args.length == 1) {
-						if (checkBlacklist(args[0])) {
-							msg(player, config.getString("found blacklisted word"));
-							return true;
-						}
-						if (inHand.getType() != Material.AIR) {
-							if (inHand.getType() == Material.DIAMOND_PICKAXE) {
-								if (useEconomy) {
-									EconomyResponse r = econ.withdrawPlayer(player,	config.getInt("economy.costs.rename"));
-									if (r.transactionSuccess()) {
-										player.sendMessage(String.format(Prefix	+ color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount),	econ.format(r.balance)));
-										player.setItemInHand(renameItemStack(player, args[0], inHand));
-										clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config	.getString("your msg")) + color(args[0]));
-										msg(player,	config.getString("rename complete"));
-										return true;
-									} else {
-										sender.sendMessage(String.format(Prefix	+ color("&6An error occured:&c %s"), r.errorMessage));
-										return true;
-									}
-								}
-								player.setItemInHand(renameItemStack(player, args[0], inHand));
-								msg(player,	config.getString("rename complete"));
-								return true;
-							} else {
-								msg(player,	config.getString("item in hand is not a diamond pickaxe"));
-							}
-						} else {
-							msg(player,	config.getString("item in hand is air"));
-							return true;
-						}
-					} else {
-						msg(player,	config.getString("not enough or too many args"));
-					}
-				} else {
-					msg(player, config.getString("no permission"));
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4Sorry you can't use that command."));
-				return true;
-			}
-		} // End of Command Rename.
-		
-		if (command.getName().equalsIgnoreCase("renameany")) {
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				if (player.hasPermission("epicrename.renameany")) {
-					ItemStack inHand = player.getItemInHand();
-					if (args.length == 1) {
-						if (checkBlacklist(args[0])) {
-							msg(player, config.getString("found blacklisted word"));
-							return true;
-						}
-						Material inHandMaterial = inHand.getType();
-						if (inHandMaterial != Material.AIR) {
-							if (useEconomy) {
-								EconomyResponse r = econ.withdrawPlayer(player,	config.getInt("economy.costs.renameany"));
-								if (r.transactionSuccess()) {
-									player.sendMessage(String.format(Prefix	+ color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount),	econ.format(r.balance)));
-									player.setItemInHand(renameItemStack(player, args[0], inHand));
-									clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config.getString("your msg")) + color(args[0]));
-									msg(player,	config.getString("rename complete"));
-									return true;
-								} else {
-									sender.sendMessage(String.format(Prefix	+ color("&6An error occured:&c %s"), r.errorMessage));
-									return true;
-								}
-							}
-								player.setItemInHand(renameItemStack(player, args[0], inHand));
-								clogger.sendMessage(Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', config.getString("your msg")) + color(args[0]));
-								msg(player,	config.getString("rename complete"));
-								return true;						
-							} else {
-								msg(player, config.getString("item in hand is air"));
-								return true;
-							}
-						} else {
-							msg(player, config.getString("not enough or too many args"));
-							return true;
-						}
-				} else {
-					msg(player, config.getString("no permission"));
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
-				return true;
-			}
-		} // End of Command Renameany
-
+	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
 		if (command.getName().equalsIgnoreCase("lore")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
@@ -350,6 +257,13 @@ public class RenameRewrite extends JavaPlugin {
 		
 		this.saveDefaultConfig();
 		
+		try {
+	        Metrics metrics = new Metrics(this);
+	        metrics.start();
+	    } catch (IOException e) {
+	        // Failed to submit the stats :-(
+	    }
+		
 		Prefix = color(config.getString("prefix"));
 		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
 
@@ -366,6 +280,8 @@ public class RenameRewrite extends JavaPlugin {
 		}
 
 		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
+		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
+		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
 		
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 
