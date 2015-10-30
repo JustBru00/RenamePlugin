@@ -349,12 +349,12 @@ public class RenameRewrite extends JavaPlugin {
 		}
 		
 		// Check format
-		if (proposedItemName.contains("k")) format = true;
-		if (proposedItemName.contains("l")) format = true;
-		if (proposedItemName.contains("m")) format = true;
-		if (proposedItemName.contains("n")) format = true;
-		if (proposedItemName.contains("o")) format = true;
-		if (proposedItemName.contains("r")) format = true;
+		if (proposedItemName.contains("&k")) format = true;
+		if (proposedItemName.contains("&l")) format = true;
+		if (proposedItemName.contains("&m")) format = true;
+		if (proposedItemName.contains("&n")) format = true;
+		if (proposedItemName.contains("&o")) format = true;
+		if (proposedItemName.contains("&r")) format = true;
 		
 		if (color) {
 			if (player.hasPermission("epicrename.color.*")) {
