@@ -60,6 +60,7 @@ public class Rename implements CommandExecutor {
 						// Check Format and Color permissions
 						if (!main.checkColorPermissions(player, args[0])) {
 							RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
+							return true;
 						}
 						
 						// Begin Command Code.

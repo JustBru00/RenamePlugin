@@ -357,21 +357,22 @@ public class RenameRewrite extends JavaPlugin {
 		if (proposedItemName.contains("&o")) format = true;
 		if (proposedItemName.contains("&r")) format = true;
 		
+		
 		if (color) {
-			if (player.hasPermission("epicrename.color.*")) {
-				if (format) {
-					if (player.hasPermission("epicrename.format.*")) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-				return true;
+			if (player.hasPermission("epicrename.color.*")) {				
+				color = true;
 			} else {
-				return false;
+				color = false;
+			}			
+		}	
+		
+		if (format) {
+			if (player.hasPermission("epicrename.format.*")) {
+				format = true;
+			} else {
+				format = false;
 			}
 		}		
-		
 		return false;		
 	}
 	
