@@ -322,6 +322,7 @@ public class RenameRewrite extends JavaPlugin {
 		
 		return false;
 	}
+	
 	/**
 	 * 
 	 * @return True if player can use the color. False if player can't
@@ -358,19 +359,18 @@ public class RenameRewrite extends JavaPlugin {
 		
 		if (color) {
 			if (player.hasPermission("epicrename.color.*")) {
+				if (format) {
+					if (player.hasPermission("epicrename.format.*")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
 				return true;
 			} else {
 				return false;
 			}
-		}
-		
-		if (format) {
-			if (player.hasPermission("epicrename.format.*")) {
-				return true;
-			} else {
-				return false;
-			}
-		}
+		}		
 		
 		return false;		
 	}

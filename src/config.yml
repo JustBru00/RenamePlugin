@@ -40,6 +40,7 @@ lore usage: '&cPlease put at least one word after /lore'
 # What gets said when a item is /lore successfully
 lore complete: '&aItem Relored'
 
+color or blacklist permission not found: '&cYou don't have permission to use that color or formatting code.'
 
 #Blacklist Section
 

@@ -50,10 +50,19 @@ public class Rename implements CommandExecutor {
 				if (player.hasPermission("epicrename.rename")) {
 					ItemStack inHand = player.getItemInHand();
 					if (args.length == 1) {
+						
+						// Check Text Blacklist
 						if (main.checkBlacklist(args[0])) {
 							RenameRewrite.msg(player, main.config.getString("found blacklisted word"));
 							return true;
 						}
+						
+						// Check Format and Color permissions
+						if (!main.checkColorPermissions(player, args[0])) {
+							RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
+						}
+						
+						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
 							if (inHand.getType() == Material.DIAMOND_PICKAXE) {
 								if (main.useEconomy) {
