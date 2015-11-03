@@ -22,6 +22,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
 import com.gmail.justbru00.epic.rename.commands.Renameany;
 
@@ -62,60 +63,7 @@ public class RenameRewrite extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
-		if (command.getName().equalsIgnoreCase("lore")) {
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				if (player.hasPermission("epicrename.lore")) {
-					if (args.length > 0) {
-						if (useEconomy) {
-							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.lore"));
-							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
-								int i = 0;
-								ArrayList<String> lore = new ArrayList<String>();
-								while (args.length > i) {
-									if (checkBlacklist(args[i])) {
-										msg(player, config.getString("found blacklisted word"));
-										return true;
-									}
-									lore.add(color(args[i]));
-									i++;
-								}
-								player.setItemInHand(renameItemStack(player, lore, player.getItemInHand()));
-								msg(player, config.getString("lore complete"));
-								return true;
-							   } else {
-								   sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
-									return true;
-							   }
-							   } 
-							   int i = 0;
-								ArrayList<String> lore = new ArrayList<String>();
-								while (args.length > i) {
-									if (checkBlacklist(args[i])) {
-										msg(player, config.getString("found blacklisted word"));
-										return true;
-									}
-									lore.add(color(args[i]));
-									i++;
-								}
-								player.setItemInHand(renameItemStack(player, lore, player.getItemInHand()));
-							   msg(player, config.getString("lore complete"));
-							   return true;
-						
-					} else {
-						msg(player, config.getString("not enough or too many args"));
-						return true;
-					}
-				} else {
-					msg(player, config.getString("no permission"));
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
-				return true;
-			}
-		} // End of command Lore
+		
 		
 		if (command.getName().equalsIgnoreCase("renameentity")) {
 			if (sender instanceof Player) {
@@ -283,6 +231,7 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
 		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
 		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
+		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
 		
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 
