@@ -36,9 +36,15 @@ public class Lore implements CommandExecutor {
 									if (main.checkBlacklist(args[i])) {
 										RenameRewrite.msg(player, main.config.getString("found blacklisted word"));
 										return true;
-									}
+									}						
+									
 									lore.add(RenameRewrite.color(args[i]));
 									i++;
+								}
+								// Check Material Blacklist
+								if (!main.checkMaterialBlacklist(player.getItemInHand().getType())) {
+									RenameRewrite.msg(player, main.config.getString("found blacklisted material"));
+									return true;
 								}
 								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
 								RenameRewrite.msg(player, main.config.getString("lore complete"));
@@ -57,6 +63,11 @@ public class Lore implements CommandExecutor {
 									}
 									lore.add(RenameRewrite.color(args[i]));
 									i++;
+								}
+								// Check Material Blacklist
+								if (!main.checkMaterialBlacklist(player.getItemInHand().getType())) {
+									RenameRewrite.msg(player, main.config.getString("found blacklisted material"));
+									return true;
 								}
 								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
 								RenameRewrite.msg(player, main.config.getString("lore complete"));

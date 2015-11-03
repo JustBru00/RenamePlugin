@@ -8,8 +8,7 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import org.bukkit.Material;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -59,13 +58,91 @@ public class RenameRewrite extends JavaPlugin {
 	public FileConfiguration config = getConfig();
 	public List<String> blacklist;
 	public String[] colorLetters = {"a", "b", "c", "d", "e", "f"};
+	public boolean optOut = false;
+	public List<String> materialBlacklist;
+	
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {				
+	public void onEnable() {
+		PluginDescriptionFile pdfFile = this.getDescription();
+		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
+		clogger.sendMessage(color(Prefix + "&bThis plugin sends anonymous stats to mcstats.org."));
+		clogger.sendMessage(color(Prefix + "&bTo disable change opt-out in the config to true."));
+		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2015 Justin Brubaker"));
+		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
 		
-		return false;
-	}
+		this.saveDefaultConfig();
+		
+		optOut = config.getBoolean("opt-out");
+		
+		// Start stats
+		if (!optOut) {		
+			try {
+				Metrics metrics = new Metrics(this);
+				metrics.start();
+			} catch (IOException e) {
+				// Failed to submit the stats :-(
+			}
+		}
+		
+		Prefix = color(config.getString("prefix"));
+		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
 
+		if (config.getBoolean("economy.use")) {
+			useEconomy = true;
+			clogger.sendMessage(Prefix + ChatColor.GOLD	+ "Use economy in the config is true. Enabling Economy.");
+		}
+		
+		if (!setupEconomy()) {
+			clogger.sendMessage(Prefix
+					+ color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
+							+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
+			useEconomy = false;
+		}
+
+		// Register Listener
+		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
+		
+		// Register Command Executors
+		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
+		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
+		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
+		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
+		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
+		
+		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
+
+	}
+	/**
+	 * 
+	 * @param player Player 
+	 * @param material Material that needs checked
+	 * @return True if ok False if not ok
+	 */
+	public boolean checkMaterialBlacklist(Material material) {
+		
+		this.materialBlacklist = config.getStringList("material blacklist");
+		
+		if (materialBlacklist == null) return false;
+					
+		int i = 0;
+		while (i < blacklist.size()){
+			Material temp = Material.getMaterial(materialBlacklist.get(i));
+			
+			if (temp == null) break;
+			
+			if (blacklist.get(i) == null) {
+				break;
+			} else if (material == temp) {				
+				return false;
+			}	
+			
+			i++;
+		}
+		
+		return true;
+	}
+	
 	public ItemStack renameItemStack(Player player, String displayname, ItemStack tobeRenamed) {
 		ItemStack newitem = new ItemStack(tobeRenamed);
 		ItemMeta im = tobeRenamed.getItemMeta();
@@ -79,6 +156,13 @@ public class RenameRewrite extends JavaPlugin {
 		return newitem;		
 	}
 	
+	/**
+	 * 
+	 * @param player 
+	 * @param lore
+	 * @param tobeRenamed
+	 * @return new item with the name.
+	 */
 	public ItemStack renameItemStack(Player player, ArrayList<String> lore, ItemStack tobeRenamed) {
 		ItemStack newitem = new ItemStack(tobeRenamed);
 		ItemMeta im = tobeRenamed.getItemMeta();
@@ -119,47 +203,7 @@ public class RenameRewrite extends JavaPlugin {
 
 	}
 
-	@Override
-	public void onEnable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
-		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2015 Justin Brubaker"));
-		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
-		
-		this.saveDefaultConfig();
-		
-		try {
-	        Metrics metrics = new Metrics(this);
-	        metrics.start();
-	    } catch (IOException e) {
-	        // Failed to submit the stats :-(
-	    }
-		
-		Prefix = color(config.getString("prefix"));
-		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
 
-		if (config.getBoolean("economy.use")) {
-			useEconomy = true;
-			clogger.sendMessage(Prefix + ChatColor.GOLD	+ "Use economy in the config is true. Enabling Economy.");
-		}
-		
-		if (!setupEconomy()) {
-			clogger.sendMessage(Prefix
-					+ color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
-							+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
-			useEconomy = false;
-		}
-
-		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
-		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
-		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
-		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
-		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
-		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
-		
-		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
-
-	}
 
 	private boolean setupEconomy() {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
@@ -173,6 +217,7 @@ public class RenameRewrite extends JavaPlugin {
 		econ = rsp.getProvider();
 		return econ != null;
 	}
+	
 	/**
 	 * 
 	 * @param checking String to check for a blacklisted word.

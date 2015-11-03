@@ -57,6 +57,12 @@ public class Rename implements CommandExecutor {
 							return true;
 						}
 						
+						// Check Material Blacklist
+						if (!main.checkMaterialBlacklist(inHand.getType())) {
+							RenameRewrite.msg(player, main.config.getString("found blacklisted material"));
+							return true;
+						}
+						
 						// Check Format and Color permissions
 						// Removing it for temp
 						//if (!main.checkColorPermissions(player, args[0])) {

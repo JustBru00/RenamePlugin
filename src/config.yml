@@ -1,6 +1,9 @@
 # EpicRename Configuration File
 # This is Color Code compatible (&)
 
+# To opt out of sending anonymous stats to mcstats.org change this to true.
+opt-out: 'false'
+
 # Prefix for all messages
 prefix: '&8[&bEpic&fRename&8] &f' 
 
@@ -14,7 +17,7 @@ economy:
       renameentity: 100
       
 # Don't change This
-Config Version: 3
+Config Version: 4
 
 # When a player doesn't have permission.
 no permission: '&cYou don''t have permission!'
@@ -44,8 +47,16 @@ color or blacklist permission not found: '&cYou do not have permission to use th
 
 #Blacklist Section
 
+# List of valid bukkit materials that can't be renamed.
+material blacklist:
+ - EXAMPLE_MATERIAL
+ - 
+
 #If the plugin finds a blacklisted word.
 found blacklisted word: '&4Sorry that message contains a blacklisted word.'
+
+#If the plugin finds a blacklisted word.
+found blacklisted material: '&4Sorry that material is blacklisted.'
 
 #If any of these words are found the plugin will stop the rename and print the message above.
 blacklist:
