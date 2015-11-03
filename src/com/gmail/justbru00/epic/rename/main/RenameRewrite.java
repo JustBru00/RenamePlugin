@@ -6,11 +6,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -22,8 +19,10 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.justbru00.epic.rename.commands.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
+import com.gmail.justbru00.epic.rename.commands.RenameEntity;
 import com.gmail.justbru00.epic.rename.commands.Renameany;
 
 /**
@@ -62,84 +61,7 @@ public class RenameRewrite extends JavaPlugin {
 	public String[] colorLetters = {"a", "b", "c", "d", "e", "f"};
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
-		
-		
-		if (command.getName().equalsIgnoreCase("renameentity")) {
-			if (sender instanceof Player) {
-				Player player = (Player) sender;
-				if (player.hasPermission("epicrename.renameentity")) {
-					if (args.length == 1) {
-						if (checkBlacklist(args[0])) {
-							msg(player, config.getString("found blacklisted word"));
-							return true;
-						}
-						if (useEconomy) {
-							EconomyResponse r = econ.withdrawPlayer(player, getConfig().getInt("economy.costs.renameentity"));
-							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(Prefix + color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), econ.format(r.amount), econ.format(r.balance)));
-								ItemStack is = new ItemStack(Material.NAME_TAG);
-								ItemMeta im = is.getItemMeta();
-								im.setDisplayName(color(args[0]));	
-								is.setItemMeta(im);
-								ArrayList<String> lore = new ArrayList<String>();
-								lore.add(color("&bRight click me on an entity to rename it."));
-								player.getInventory().addItem((renameItemStack(player, lore, is)));
-								msg(player, "&aI gave you a name tag. Use it :D");								
-								return true;
-							   } else {
-								   sender.sendMessage(String.format(Prefix + color("&6An error occured:&c %s"), r.errorMessage));
-									return true;
-							   }
-							   } 
-						ItemStack is = new ItemStack(Material.NAME_TAG);
-						ItemMeta im = is.getItemMeta();
-						im.setDisplayName(color(args[0]));	
-						is.setItemMeta(im);
-						ArrayList<String> lore = new ArrayList<String>();
-						lore.add(color("&bRight click me on an entity to rename it."));
-						player.getInventory().addItem((renameItemStack(player, lore, is)));
-						msg(player, "&aI gave you a name tag. Use it :D");							
-					} else {
-						msg(player, config.getString("not enough or too many args"));
-						return true;
-					}
-				} else {
-					msg(player, config.getString("no permission"));
-					return true;
-				}
-			} else {
-				sender.sendMessage(Prefix + color("&4Sorry you can't use this command."));
-				return true;
-			}
-		} // End of command RenameEntity
-		
-		if (command.getName().equalsIgnoreCase("epicrename")) {			
-			if (args.length == 0) {
-				sender.sendMessage(Prefix + "Please type /epicrename help");
-				sender.sendMessage(Prefix + "Or type /epicrename license");
-				return true;
-			}
-			if (args.length == 1) {
-				if (args[0].equalsIgnoreCase("license")) {
-					sender.sendMessage(Prefix + "See License Information at: http://tinyurl.com/epicrename1");
-					return true;
-				}
-				if (args[0].equalsIgnoreCase("help")){ 
-					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");
-					sender.sendMessage(Prefix + "/rename - Usage: /rename &b&lTest");
-					sender.sendMessage(Prefix + "/renameany - Usage: /renamyany &b&lTest");
-					sender.sendMessage(Prefix + "/lore - Usage: /lore &bHello");
-					sender.sendMessage(Prefix + "/renameentity - Usage: /renameentity &bTest");
-					sender.sendMessage(Prefix + ChatColor.GRAY + "---------------------------------------");					
-					return true;
-				} else {
-					sender.sendMessage(Prefix + "Please type /epicrename help");
-				    return true;
-				}				
-			}
-		} // End of command EpicRename
-			
+	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {				
 		
 		return false;
 	}
@@ -232,6 +154,8 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
 		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
 		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
+		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
+		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
 		
 		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
 
