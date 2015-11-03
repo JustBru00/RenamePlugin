@@ -58,10 +58,11 @@ public class Renameany implements CommandExecutor {
 						}
 						
 						// Check Format and Color permissions
-						if (!main.checkColorPermissions(player, args[0])) {
-							RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
-							return true;
-						}
+						// Temp remove
+						//if (!main.checkColorPermissions(player, args[0])) {
+						//	RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
+						//	return true;
+						//}
 						
 						// Begin Command
 						Material inHandMaterial = inHand.getType();
@@ -81,7 +82,7 @@ public class Renameany implements CommandExecutor {
 							}
 								player.setItemInHand(main.renameItemStack(player, args[0], inHand));
 								main.clogger.sendMessage(RenameRewrite.Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', main.config.getString("your msg")) + RenameRewrite.color(args[0]));
-								RenameRewrite.msg(player,	main.config.getString("rename complete"));
+								RenameRewrite.msg(player, main.config.getString("rename complete"));
 								return true;						
 							} else {
 								RenameRewrite.msg(player, main.config.getString("item in hand is air"));

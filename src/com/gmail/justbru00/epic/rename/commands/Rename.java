@@ -58,10 +58,11 @@ public class Rename implements CommandExecutor {
 						}
 						
 						// Check Format and Color permissions
-						if (!main.checkColorPermissions(player, args[0])) {
-							RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
-							return true;
-						}
+						// Removing it for temp
+						//if (!main.checkColorPermissions(player, args[0])) {
+						//	RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
+						//	return true;
+						//}
 						
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
@@ -80,17 +81,17 @@ public class Rename implements CommandExecutor {
 									}
 								}
 								player.setItemInHand(main.renameItemStack(player, args[0], inHand));
-								RenameRewrite.msg(player,	main.config.getString("rename complete"));
+								RenameRewrite.msg(player, main.config.getString("rename complete"));
 								return true;
 							} else {
-								RenameRewrite.msg(player,	main.config.getString("item in hand is not a diamond pickaxe"));
+								RenameRewrite.msg(player, main.config.getString("item in hand is not a diamond pickaxe"));
 							}
 						} else {
-							RenameRewrite.msg(player,	main.config.getString("item in hand is air"));
+							RenameRewrite.msg(player, main.config.getString("item in hand is air"));
 							return true;
 						}
 					} else {
-						RenameRewrite.msg(player,	main.config.getString("not enough or too many args"));
+						RenameRewrite.msg(player, main.config.getString("not enough or too many args"));
 					}
 				} else {
 					RenameRewrite.msg(player, main.config.getString("no permission"));

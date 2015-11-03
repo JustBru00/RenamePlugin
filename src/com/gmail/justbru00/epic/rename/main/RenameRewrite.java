@@ -360,20 +360,19 @@ public class RenameRewrite extends JavaPlugin {
 		
 		if (color) {
 			if (player.hasPermission("epicrename.color.*")) {				
-				color = true;
+				if (format) {
+					if (player.hasPermission("epicrename.format.*")) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+				return true;
 			} else {
-				color = false;
+				return false;
 			}			
 		}	
-		
-		if (format) {
-			if (player.hasPermission("epicrename.format.*")) {
-				format = true;
-			} else {
-				format = false;
-			}
-		}		
-		return false;		
+			return false;
 	}
 	
 	
