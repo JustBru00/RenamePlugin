@@ -42,7 +42,7 @@ public class Lore implements CommandExecutor {
 									i++;
 								}
 								// Check Material Blacklist
-								if (!main.checkMaterialBlacklist(player.getItemInHand().getType())) {
+								if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
 									RenameRewrite.msg(player, main.config.getString("found blacklisted material"));
 									return true;
 								}
@@ -65,7 +65,7 @@ public class Lore implements CommandExecutor {
 									i++;
 								}
 								// Check Material Blacklist
-								if (!main.checkMaterialBlacklist(player.getItemInHand().getType())) {
+								if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
 									RenameRewrite.msg(player, main.config.getString("found blacklisted material"));
 									return true;
 								}

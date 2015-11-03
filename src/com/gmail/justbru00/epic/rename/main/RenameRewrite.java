@@ -119,8 +119,10 @@ public class RenameRewrite extends JavaPlugin {
 	 * @param material Material that needs checked
 	 * @return True if ok False if not ok
 	 */
-	public boolean checkMaterialBlacklist(Material material) {
-		
+	public boolean checkMaterialBlacklist(Player player, Material material) {
+		if (player.hasPermission("epicrename.bypass.materialblacklist")) {
+			return true;
+		}
 		this.materialBlacklist = config.getStringList("material blacklist");
 		
 		if (materialBlacklist == null) return false;
