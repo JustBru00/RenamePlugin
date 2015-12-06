@@ -72,7 +72,7 @@ public class Rename implements CommandExecutor {
 						
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
-							if (inHand.getType() == Material.DIAMOND_PICKAXE) {
+							if (inHand.getType() == Material.getMaterial(main.config.getString("renamematerial"))) {
 								if (main.useEconomy) {
 									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.config.getInt("economy.costs.rename"));
 									if (r.transactionSuccess()) {

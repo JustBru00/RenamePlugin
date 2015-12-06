@@ -19,6 +19,9 @@ economy:
 # Don't change This
 Config Version: 4
 
+# What MATERIAL would you like /rename to look for?
+renamematerial: 'DIAMOND_PICKAXE'
+
 # When a player doesn't have permission.
 no permission: '&cYou don''t have permission!'
 
