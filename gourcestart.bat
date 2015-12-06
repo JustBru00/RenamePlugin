@@ -1,2 +1,2 @@
-gource -f -1920x1080 --seconds-per-day 3 --auto-skip-seconds 1 --dont-stop --loop --user-image-dir "C:\Users\justb\Pictures" --colour-images --key --title "EpicRename"
+gource -f -1920x1080 --seconds-per-day 3 --auto-skip-seconds 1 --user-image-dir "C:\Users\justb\Pictures" --colour-images --key --title "EpicRename"
 PAUSE

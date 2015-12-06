@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.RenameRewrite
-version: 2.4
+version: 2.5
 description: Renames items.
 author: Justin Brubaker
 softdepend: [Vault]

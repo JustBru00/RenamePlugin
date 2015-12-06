@@ -1,6 +1,10 @@
 package com.gmail.justbru00.epic.rename.main;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -26,7 +30,8 @@ import com.gmail.justbru00.epic.rename.commands.Renameany;
 
 /**
  *******************************************
- * @author Justin Brubaker Plugin name: EpicRename
+ * @author Justin Brubaker 
+ * Plugin name: EpicRename
  *
  *         Copyright (C) 2015 Justin Brubaker
  *
@@ -60,6 +65,8 @@ public class RenameRewrite extends JavaPlugin {
 	public String[] colorLetters = {"a", "b", "c", "d", "e", "f"};
 	public boolean optOut = false;
 	public List<String> materialBlacklist;
+	public final String PLUGIN_VERSION = this.getDescription().getVersion();
+	public final int RESOURCE_NUMBER = 4341;
 	
 
 	@Override
@@ -72,6 +79,25 @@ public class RenameRewrite extends JavaPlugin {
 		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
 		
 		this.saveDefaultConfig();
+		
+		// Check for updates
+		try {
+            HttpURLConnection con = (HttpURLConnection) new URL("http://www.spigotmc.org/api/general.php").openConnection();
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            con.getOutputStream().write(("key=98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4&resource=" + RESOURCE_NUMBER).getBytes("UTF-8"));
+            String version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
+            if (version != null) {            	
+            	if (version.equalsIgnoreCase(PLUGIN_VERSION)) {
+            		clogger.sendMessage(color(Prefix + "No Update Found."));
+            	} else {
+            		clogger.sendMessage(color(Prefix + "&6Found a update please download it at: https://www.spigotmc.org/resources/epicrename.4341/"));
+            	}
+            }
+        } catch (Exception ex) {
+           clogger.sendMessage(color(Prefix + "&cFailed to check for a update on spigot."));
+        }
+		
 		
 		optOut = config.getBoolean("opt-out");
 		
@@ -110,9 +136,10 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
 		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
 		
-		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + pdfFile.getVersion() + " Has Been Enabled.");
+		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + PLUGIN_VERSION + " Has Been Enabled.");
 
-	}
+	} //End of enable.
+	
 	/**
 	 * 
 	 * @param player Player 
