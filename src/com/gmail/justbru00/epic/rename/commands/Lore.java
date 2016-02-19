@@ -52,7 +52,7 @@ public class Lore implements CommandExecutor {
 						if (main.useEconomy) {
 							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.lore"));
 							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
 								int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
 								while (args.length > i) {

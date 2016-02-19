@@ -66,6 +66,7 @@ public class RenameRewrite extends JavaPlugin {
 	public List<String> materialBlacklist;
 	public final String PLUGIN_VERSION = this.getDescription().getVersion();
 	public final int RESOURCE_NUMBER = 4341;
+	public static boolean debug = true;
 	
 
 	@Override
@@ -90,7 +91,7 @@ public class RenameRewrite extends JavaPlugin {
             	if (version.equalsIgnoreCase(PLUGIN_VERSION)) {
             		clogger.sendMessage(color(Prefix + "No Update Found."));
             	} else {
-            		clogger.sendMessage(color(Prefix + "&6Found a update please download it at: https://www.spigotmc.org/resources/epicrename.4341/"));
+            		clogger.sendMessage(color(Prefix + "&6Found an update please download it at: https://www.spigotmc.org/resources/epicrename.4341/"));
             	}
             }
         } catch (Exception ex) {

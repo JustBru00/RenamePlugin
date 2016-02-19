@@ -2,4 +2,4 @@
 Minecraft plugin that renames your pickaxe.
 Made  by: Justin Brubaker
 
-Current Version: 2.5 (In Development)
+Current Version: 2.5 

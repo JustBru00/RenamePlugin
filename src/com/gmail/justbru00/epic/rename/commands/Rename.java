@@ -73,6 +73,8 @@ public class Rename implements CommandExecutor {
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
 							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) {
+								// Print correct permission
+								if (RenameRewrite.debug) RenameRewrite.msg(player, "Correct Permission: " + "epicrename.rename." + inHand.getType().toString());
 								if (main.useEconomy) {
 									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.config.getInt("economy.costs.rename"));
 									if (r.transactionSuccess()) {

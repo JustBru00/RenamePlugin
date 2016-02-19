@@ -60,7 +60,7 @@ public class RenameEntity implements CommandExecutor {
 						if (main.useEconomy) {
 							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.renameentity"));
 							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
 								ItemStack is = new ItemStack(Material.NAME_TAG);
 								ItemMeta im = is.getItemMeta();
 								im.setDisplayName(RenameRewrite.color(args[0]));	

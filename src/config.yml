@@ -28,7 +28,7 @@ not enough or too many args: '&cToo many or too little arguments.'
 item in hand is air: '&cItem in hand is air.'
 
 #For /rename only.
-you do not have permission for that item: '&cYou don''t have permission for that material.'
+you do not have permission for that item: '&cYou don''t have the correct permission for that material.'
 
 # What prints to console when item is renamed in /rename. example: playername (automatic) + your msg (below) + the renamed item name (automatic)
 your msg: ' renamed an item to '
