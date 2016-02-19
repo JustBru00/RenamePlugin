@@ -26,7 +26,6 @@ import com.gmail.justbru00.epic.rename.commands.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
 import com.gmail.justbru00.epic.rename.commands.RenameEntity;
-import com.gmail.justbru00.epic.rename.commands.Renameany;
 
 /**
  *******************************************
@@ -130,8 +129,7 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
 		
 		// Register Command Executors
-		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));
-		Bukkit.getPluginCommand("renameany").setExecutor(new Renameany(this));
+		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));		
 		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
 		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
 		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));

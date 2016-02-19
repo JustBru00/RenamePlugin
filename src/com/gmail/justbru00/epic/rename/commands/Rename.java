@@ -72,14 +72,14 @@ public class Rename implements CommandExecutor {
 						
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
-							if (inHand.getType() == Material.getMaterial(main.config.getString("renamematerial"))) {
+							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) {
 								if (main.useEconomy) {
 									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.config.getInt("economy.costs.rename"));
 									if (r.transactionSuccess()) {
-										player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrawed &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount),	RenameRewrite.econ.format(r.balance)));
+										player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount),	RenameRewrite.econ.format(r.balance)));
 										player.setItemInHand(main.renameItemStack(player, args[0], inHand));
 										main.clogger.sendMessage(RenameRewrite.Prefix + ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', main.config.getString("your msg")) + RenameRewrite.color(args[0]));
-										RenameRewrite.msg(player,	main.config.getString("rename complete"));
+										RenameRewrite.msg(player, main.config.getString("rename complete"));
 										return true;
 									} else {
 										sender.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"), r.errorMessage));
@@ -90,7 +90,8 @@ public class Rename implements CommandExecutor {
 								RenameRewrite.msg(player, main.config.getString("rename complete"));
 								return true;
 							} else {
-								RenameRewrite.msg(player, main.config.getString("item in hand is not a diamond pickaxe"));
+								RenameRewrite.msg(player, main.config.getString("you do not have permission for that item"));
+								return true;
 							}
 						} else {
 							RenameRewrite.msg(player, main.config.getString("item in hand is air"));
@@ -98,6 +99,7 @@ public class Rename implements CommandExecutor {
 						}
 					} else {
 						RenameRewrite.msg(player, main.config.getString("not enough or too many args"));
+						return true;
 					}
 				} else {
 					RenameRewrite.msg(player, main.config.getString("no permission"));

@@ -7,9 +7,7 @@ softdepend: [Vault]
 
 commands:
  rename:
-       description: Renames your diamond pickaxe.       
- renameany:
-       description: Renames any item. 
+       description: Renames Items.
  lore:
        description: Relores any item.   
  renameentity:
