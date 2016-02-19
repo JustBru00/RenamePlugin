@@ -33,7 +33,7 @@ import com.gmail.justbru00.epic.rename.commands.Renameany;
  * @author Justin Brubaker 
  * Plugin name: EpicRename
  *
- *         Copyright (C) 2015 Justin Brubaker
+ *         Copyright (C) 2016 Justin Brubaker
  *
  *         This program is free software; you can redistribute it and/or modify
  *         it under the terms of the GNU General Public License as published by
@@ -75,7 +75,7 @@ public class RenameRewrite extends JavaPlugin {
 		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
 		clogger.sendMessage(color(Prefix + "&bThis plugin sends anonymous stats to mcstats.org."));
 		clogger.sendMessage(color(Prefix + "&bTo disable change opt-out in the config to true."));
-		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2015 Justin Brubaker"));
+		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2016 Justin Brubaker"));
 		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
 		
 		this.saveDefaultConfig();

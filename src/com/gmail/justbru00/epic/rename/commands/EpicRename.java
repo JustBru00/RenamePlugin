@@ -2,7 +2,7 @@
  *******************************************
  * @author Justin Brubaker Plugin name: EpicRename
  *
- *         Copyright (C) 2015 Justin Brubaker
+ *         Copyright (C) 2016 Justin Brubaker
  *
  *         This program is free software; you can redistribute it and/or modify
  *         it under the terms of the GNU General Public License as published by
