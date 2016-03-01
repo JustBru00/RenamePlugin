@@ -66,7 +66,7 @@ public class RenameRewrite extends JavaPlugin {
 	public List<String> materialBlacklist;
 	public final String PLUGIN_VERSION = this.getDescription().getVersion();
 	public final int RESOURCE_NUMBER = 4341;
-	public static boolean debug = true;
+	public static boolean debug = false;
 	
 
 	@Override
