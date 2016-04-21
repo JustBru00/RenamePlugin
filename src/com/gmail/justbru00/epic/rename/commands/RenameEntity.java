@@ -34,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.utils.Messager;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 
@@ -45,6 +46,7 @@ public class RenameEntity implements CommandExecutor {
 		this.main = main;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
 		
@@ -54,21 +56,21 @@ public class RenameEntity implements CommandExecutor {
 				if (player.hasPermission("epicrename.renameentity")) {
 					if (args.length == 1) {
 						if (main.checkBlacklist(args[0])) {
-							RenameRewrite.msg(player, main.config.getString("found blacklisted word"));
+							Messager.msgPlayer(player, main.config.getString("found blacklisted word"));
 							return true;
 						}
 						if (main.useEconomy) {
 							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.renameentity"));
 							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
 								ItemStack is = new ItemStack(Material.NAME_TAG);
 								ItemMeta im = is.getItemMeta();
-								im.setDisplayName(RenameRewrite.color(args[0]));	
+								im.setDisplayName(Messager.color(args[0]));	
 								is.setItemMeta(im);
 								ArrayList<String> lore = new ArrayList<String>();
 								lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
 								player.getInventory().addItem((main.renameItemStack(player, lore, is)));
-								RenameRewrite.msg(player, "&aI gave you a name tag. Use it :D");								
+								Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");								
 								return true;
 							   } else {
 								   sender.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"), r.errorMessage));
@@ -82,17 +84,17 @@ public class RenameEntity implements CommandExecutor {
 						ArrayList<String> lore = new ArrayList<String>();
 						lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
 						player.getInventory().addItem((main.renameItemStack(player, lore, is)));
-						RenameRewrite.msg(player, "&aI gave you a name tag. Use it :D");							
+						Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");							
 					} else {
-						RenameRewrite.msg(player, main.config.getString("not enough or too many args"));
+						Messager.msgPlayer(player, main.config.getString("not enough or too many args"));
 						return true;
 					}
 				} else {
-					RenameRewrite.msg(player, main.config.getString("no permission"));
+					Messager.msgPlayer(player, main.config.getString("no permission"));
 					return true;
 				}
 			} else {
-				sender.sendMessage(RenameRewrite.Prefix + RenameRewrite.color("&4Sorry you can't use this command."));
+				Messager.msgSender(RenameRewrite.color("&4Sorry you can't use this command."), sender);
 				return true;
 			}
 		} // End of command RenameEntity

@@ -2,11 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/justb/Desktop/New EpicRealm/EpicSkyGrid/plugins/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/justb/Desktop/EpicRealm Test Server 1.9/spigot-1.9.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="https://hub.spigotmc.org/javadocs/spigot/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Test Server 1.9/spigot-1.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Test Server 1.9/plugins/Vault.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

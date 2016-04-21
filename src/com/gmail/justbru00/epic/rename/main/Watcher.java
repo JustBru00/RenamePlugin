@@ -29,6 +29,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Watcher implements Listener{
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 	 if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {

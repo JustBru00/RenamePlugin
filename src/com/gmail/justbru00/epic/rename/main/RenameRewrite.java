@@ -26,6 +26,7 @@ import com.gmail.justbru00.epic.rename.commands.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
 import com.gmail.justbru00.epic.rename.commands.RenameEntity;
+import com.gmail.justbru00.epic.rename.utils.Messager;
 
 /**
  *******************************************
@@ -56,9 +57,9 @@ public class RenameRewrite extends JavaPlugin {
 
 	public static Economy econ = null;
 	public Boolean useEconomy = false;
-	public final Logger logger = Logger.getLogger("Minecraft");
-	public ConsoleCommandSender clogger = this.getServer().getConsoleSender();
-	public static String Prefix = color("&8[&bEpic&fRename&8] &f");
+	public static Logger log = Bukkit.getLogger();
+	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
+	public static String Prefix = Messager.color("&8[&bEpic&fRename&8] &f");
 	public FileConfiguration config = getConfig();
 	public List<String> blacklist;
 	public String[] colorLetters = {"a", "b", "c", "d", "e", "f"};
@@ -72,11 +73,11 @@ public class RenameRewrite extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		clogger.sendMessage(color(Prefix + "&bThis plugin is made by Justin Brubaker."));
-		clogger.sendMessage(color(Prefix + "&bThis plugin sends anonymous stats to mcstats.org."));
-		clogger.sendMessage(color(Prefix + "&bTo disable change opt-out in the config to true."));
-		clogger.sendMessage(color(Prefix + "&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2016 Justin Brubaker"));
-		clogger.sendMessage(color(Prefix + "&bSee LICENSE infomation here: http://tinyurl.com/epicrename1"));
+		Messager.msgConsole("&bThis plugin is made by Justin Brubaker.");
+		Messager.msgConsole("&bThis plugin sends anonymous stats to mcstats.org.");
+		Messager.msgConsole("&bTo disable change opt-out in the config to true.");
+		Messager.msgConsole("&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2016 Justin Brubaker");
+		Messager.msgConsole("&bSee LICENSE infomation here: http://tinyurl.com/epicrename1");
 		
 		this.saveDefaultConfig();
 		
@@ -89,13 +90,13 @@ public class RenameRewrite extends JavaPlugin {
             String version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
             if (version != null) {            	
             	if (version.equalsIgnoreCase(PLUGIN_VERSION)) {
-            		clogger.sendMessage(color(Prefix + "No Update Found."));
+            		Messager.msgConsole("No Update Found.");
             	} else {
-            		clogger.sendMessage(color(Prefix + "&6Found an update please download it at: https://www.spigotmc.org/resources/epicrename.4341/"));
+            		Messager.msgConsole("&6Found an update please download it at: https://www.spigotmc.org/resources/epicrename.4341/");
             	}
             }
         } catch (Exception ex) {
-           clogger.sendMessage(color(Prefix + "&cFailed to check for a update on spigot."));
+           Messager.msgConsole(Prefix + "&cFailed to check for a update on spigot.");
         }
 		
 		
@@ -111,18 +112,17 @@ public class RenameRewrite extends JavaPlugin {
 			}
 		}
 		
-		Prefix = color(config.getString("prefix"));
-		clogger.sendMessage(color(Prefix + "&6Prefix has been set to the one in the config."));		
+		Prefix = Messager.color(config.getString("prefix"));
+		Messager.msgConsole("&6Prefix has been set to the one in the config.");		
 
 		if (config.getBoolean("economy.use")) {
 			useEconomy = true;
-			clogger.sendMessage(Prefix + ChatColor.GOLD	+ "Use economy in the config is true. Enabling Economy.");
+			Messager.msgConsole(ChatColor.GOLD	+ "Use economy in the config is true. Enabling Economy.");
 		}
 		
 		if (!setupEconomy()) {
-			clogger.sendMessage(Prefix
-					+ color("&cVault not found disabling support for economy. If you would like economy download Vault at: "
-							+ "http://dev.bukkit.org/bukkit-plugins/vault/"));
+			Messager.msgConsole("&cVault not found disabling support for economy. If you would like economy download Vault at: "
+							+ "http://dev.bukkit.org/bukkit-plugins/vault/");
 			useEconomy = false;
 		}
 
@@ -135,9 +135,18 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
 		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
 		
-		clogger.sendMessage(Prefix + ChatColor.GOLD + "Version: " + PLUGIN_VERSION + " Has Been Enabled.");
+		Messager.msgConsole(ChatColor.GOLD + "Version: " + PLUGIN_VERSION + " Has Been Enabled.");
 
 	} //End of enable.
+	
+	/**
+	 * @deprecated
+	 * @param uncolored 
+	 * @return colored string
+	 */
+	public static String color(String uncolored) {		
+		return Messager.color(uncolored);
+	}
 	
 	/**
 	 * 
@@ -174,13 +183,13 @@ public class RenameRewrite extends JavaPlugin {
 	public ItemStack renameItemStack(Player player, String displayname, ItemStack tobeRenamed) {
 		ItemStack newitem = new ItemStack(tobeRenamed);
 		ItemMeta im = tobeRenamed.getItemMeta();
-		im.setDisplayName(color(displayname));
+		im.setDisplayName(Messager.color(displayname));
 		newitem.setItemMeta(im);
-		clogger.sendMessage(Prefix
+		Messager.msgConsole(Prefix
 				+ ChatColor.RED
 				+ player.getName()
 				+ ChatColor.translateAlternateColorCodes('&', config
-						.getString("your msg")) + color(displayname));
+						.getString("your msg")) + Messager.color(displayname));
 		return newitem;		
 	}
 	
@@ -198,36 +207,11 @@ public class RenameRewrite extends JavaPlugin {
 		newitem.setItemMeta(im);		
 		return newitem;
 	}
-
-	/**
-	 * @param player
-	 *            Player you want to msg
-	 * @param msg
-	 *            message.
-	 */
-	public static void msg(Player player, String msg) {
-		if (msg == null) {
-			Bukkit.broadcastMessage(Prefix
-					+ color("&4ERROR: null message in msg()"));
-		}
-		player.sendMessage(Prefix + color(msg));
-	}
-
-	/**
-	 * @param uncoloredstring
-	 *            String with & color codes.
-	 * @return Returns string with ChatColor.[colorhere] instead of &b ect.
-	 */
-	public static String color(String uncoloredstring) {
-		String colored = uncoloredstring.replace('_', ' ');
-		colored = ChatColor.translateAlternateColorCodes('&', colored);
-		return colored;
-	}
-
+	
 	@Override
 	public void onDisable() {
 
-		clogger.sendMessage(Prefix + ChatColor.RED + "Has Been Disabled.");
+		Messager.msgConsole(ChatColor.RED + "Has Been Disabled.");
 
 	}
 
