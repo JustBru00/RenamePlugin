@@ -34,6 +34,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.utils.CharLimit;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -55,8 +56,25 @@ public class RenameEntity implements CommandExecutor {
 				Player player = (Player) sender;
 				if (player.hasPermission("epicrename.renameentity")) {
 					if (args.length == 1) {
+						
+						// Check Blacklist
 						if (main.checkBlacklist(args[0])) {
 							Messager.msgPlayer(player, main.config.getString("found blacklisted word"));
+							return true;
+						}
+						
+						// Check Material Blacklist
+						if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
+							Messager.msgPlayer(player, main.config.getString("found blacklisted material"));
+							return true;
+						}
+						
+						// Check CharLimit
+						CharLimit cl = new CharLimit();
+						cl.ready(main);
+						if (cl.checkCharLimit(args[0], player)) {
+							//Too long
+							Messager.msgPlayer(player, main.getConfig().getString("charlimitmessage"));
 							return true;
 						}
 						if (main.useEconomy) {

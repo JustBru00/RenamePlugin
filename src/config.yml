@@ -15,8 +15,8 @@ economy:
       lore: 100
       renameentity: 100
       
-# Don't change This
-Config Version: 4
+# Don't change this!
+Config Version: 5
 
 # When a player doesn't have permission.
 no permission: '&cYou don''t have permission!'
@@ -42,7 +42,10 @@ lore usage: '&cPlease put at least one word after /lore'
 # What gets said when a item is /lore successfully
 lore complete: '&aItem Relored'
 
-color or blacklist permission not found: '&cYou do not have permission to use that color or formatting code.'
+#Character Limit (Bypass with "epicrename.bypass.charlimit")
+charlimit: 30
+charlimitenabled: false
+charlimitmessage: '&cSorry that message is too long. The limit is ({char}).'
 
 #Blacklist Section
 
