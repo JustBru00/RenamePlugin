@@ -197,6 +197,10 @@ public class RenameRewrite extends JavaPlugin {
 		return newitem;		
 	}
 	
+	public void reloadConfig() {
+		this.reloadConfig();
+	}
+	
 	/**
 	 * 
 	 * @param player 
