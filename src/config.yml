@@ -46,6 +46,7 @@ lore complete: '&aItem Relored'
 charlimit: 30
 charlimitenabled: false
 charlimitmessage: '&cSorry that message is too long. The limit is ({char}).'
+charlimitbypassmessage: '&aYou just bypassed the character limit.'
 
 #Blacklist Section
 

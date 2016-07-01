@@ -38,65 +38,82 @@ import com.gmail.justbru00.epic.rename.utils.Messager;
 import net.milkbowl.vault.economy.EconomyResponse;
 
 public class Rename implements CommandExecutor {
-	
+
 	public RenameRewrite main;
 
 	public Rename(RenameRewrite main) {
 		this.main = main;
 	}
+
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("rename")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("epicrename.rename")) {
 					ItemStack inHand = player.getItemInHand();
 					if (args.length == 1) {
-						
+
 						// Check Text Blacklist
 						if (main.checkBlacklist(args[0])) {
 							Messager.msgPlayer(player, main.config.getString("found blacklisted word"));
 							return true;
 						}
-						
+
 						// Check Material Blacklist
 						if (!main.checkMaterialBlacklist(player, inHand.getType())) {
 							Messager.msgPlayer(player, main.config.getString("found blacklisted material"));
 							return true;
 						}
-						
+
 						// Check CharLimit
 						CharLimit cl = new CharLimit();
 						cl.ready(main);
 						if (cl.checkCharLimit(args[0], player)) {
-							//Too long
+							// Too long
 							Messager.msgPlayer(player, main.getConfig().getString("charlimitmessage"));
 							return true;
 						}
-						
+
 						// Check Format and Color permissions
 						// Removing it for temp
-						//if (!main.checkColorPermissions(player, args[0])) {
-						//	RenameRewrite.msg(player, main.config.getString("color or blacklist permission not found"));
-						//	return true;
-						//}
-						
+						// if (!main.checkColorPermissions(player, args[0])) {
+						// RenameRewrite.msg(player,
+						// main.config.getString("color or blacklist permission
+						// not found"));
+						// return true;
+						// }
+
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
-							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) {
+							if (player.hasPermission("epicrename.rename." + inHand.getType().toString())
+									|| player.hasPermission("epicrename.rename.*")) {
 								// Print correct permission
-								if (RenameRewrite.debug) Messager.msgPlayer(player, "Correct Permission: " + "epicrename.rename." + inHand.getType().toString());
+								if (RenameRewrite.debug)
+									Messager.msgPlayer(player, "Correct Permission: " + "epicrename.rename."
+											+ inHand.getType().toString());
 								if (main.useEconomy) {
-									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.config.getInt("economy.costs.rename"));
+									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
+											main.config.getInt("economy.costs.rename"));
 									if (r.transactionSuccess()) {
-										player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount),	RenameRewrite.econ.format(r.balance)));
+										player.sendMessage(String.format(
+												RenameRewrite.Prefix + Messager
+														.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+												RenameRewrite.econ.format(r.amount),
+												RenameRewrite.econ.format(r.balance)));
 										player.setItemInHand(main.renameItemStack(player, args[0], inHand));
-										Messager.msgConsole(ChatColor.RED + player.getName() + ChatColor.translateAlternateColorCodes('&', main.config.getString("your msg")) + Messager.color(args[0]));
+										Messager.msgConsole(
+												ChatColor.RED + player.getName()
+														+ ChatColor.translateAlternateColorCodes('&',
+																main.config.getString("your msg"))
+														+ Messager.color(args[0]));
 										Messager.msgPlayer(player, main.config.getString("rename complete"));
 										return true;
 									} else {
-										sender.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"), r.errorMessage));
+										sender.sendMessage(String.format(
+												RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
+												r.errorMessage));
 										return true;
 									}
 								}
@@ -104,7 +121,8 @@ public class Rename implements CommandExecutor {
 								Messager.msgPlayer(player, main.config.getString("rename complete"));
 								return true;
 							} else {
-								Messager.msgPlayer(player, main.config.getString("you do not have permission for that item"));
+								Messager.msgPlayer(player,
+										main.config.getString("you do not have permission for that item"));
 								return true;
 							}
 						} else {
@@ -122,7 +140,7 @@ public class Rename implements CommandExecutor {
 			} else {
 				Messager.msgSender(Messager.color("&4Sorry you can't use that command."), sender);
 				return true;
-			}			
+			}
 		} // End of Command Rename.
 		return false;
 	}

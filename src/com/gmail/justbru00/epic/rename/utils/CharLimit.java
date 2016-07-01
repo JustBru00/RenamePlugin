@@ -43,6 +43,7 @@ public class CharLimit {
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
+			Messager.msgPlayer(player, main.getConfig().getString("charlimitbypassmessage"));
 			return false;
 		}
 		
