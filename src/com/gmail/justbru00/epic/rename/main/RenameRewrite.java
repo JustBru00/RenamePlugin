@@ -220,9 +220,9 @@ public class RenameRewrite extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		plugin = null;
+		
 		Messager.msgConsole(ChatColor.RED + "Has Been Disabled.");
-
+		plugin = null;
 	}
 
 
