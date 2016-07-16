@@ -55,8 +55,7 @@ public class EpicRename implements CommandExecutor {
 					return true;
 				} else if (args[0].equalsIgnoreCase("help")){ 
 					Messager.msgSender(ChatColor.GRAY + "---------------------------------------", sender);
-					Messager.msgSender("/rename - Usage: /rename &b&lTest", sender);
-					Messager.msgSender("/renameany - Usage: /renamyany &b&lTest", sender);
+					Messager.msgSender("/rename - Usage: /rename &b&lTest", sender);				
 					Messager.msgSender("/lore - Usage: /lore &bHello", sender);
 					Messager.msgSender("/renameentity - Usage: /renameentity &bTest", sender);
 					Messager.msgSender(ChatColor.GRAY + "---------------------------------------", sender);					

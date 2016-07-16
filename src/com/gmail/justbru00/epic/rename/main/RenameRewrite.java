@@ -67,9 +67,15 @@ public class RenameRewrite extends JavaPlugin {
 	public final String PLUGIN_VERSION = this.getDescription().getVersion();
 	public final int RESOURCE_NUMBER = 4341;
 	public static boolean debug = false;
+	private static RenameRewrite plugin;
+	
+	public static RenameRewrite getInstance() {
+		return plugin;
+	}
 	
 	@Override
 	public void onEnable() {	
+		plugin = this;
 				
 		this.saveDefaultConfig();
 		
@@ -214,7 +220,7 @@ public class RenameRewrite extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-
+		plugin = null;
 		Messager.msgConsole(ChatColor.RED + "Has Been Disabled.");
 
 	}

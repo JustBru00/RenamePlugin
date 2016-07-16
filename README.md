@@ -1,3 +1,3 @@
 # RenamePlugin
-Minecraft plugin that renames your pickaxe.
-Made  by: Justin Brubaker
+Minecraft plugin that renames items.
+Made by: Justin Brubaker
