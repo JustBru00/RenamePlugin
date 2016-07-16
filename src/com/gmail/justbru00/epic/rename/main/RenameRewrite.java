@@ -50,7 +50,6 @@ import com.gmail.justbru00.epic.rename.commands.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
 import com.gmail.justbru00.epic.rename.commands.RenameEntity;
-import com.gmail.justbru00.epic.rename.utils.CharLimit;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 public class RenameRewrite extends JavaPlugin {
@@ -69,9 +68,11 @@ public class RenameRewrite extends JavaPlugin {
 	public final int RESOURCE_NUMBER = 4341;
 	public static boolean debug = false;
 	
-
 	@Override
-	public void onEnable() {
+	public void onEnable() {	
+				
+		this.saveDefaultConfig();
+		
 		PluginDescriptionFile pdfFile = this.getDescription();
 		Messager.msgConsole("&bThis plugin is made by Justin Brubaker.");
 		Messager.msgConsole("&bThis plugin sends anonymous stats to mcstats.org.");
@@ -79,7 +80,7 @@ public class RenameRewrite extends JavaPlugin {
 		Messager.msgConsole("&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2016 Justin Brubaker");
 		Messager.msgConsole("&bSee LICENSE infomation here: http://tinyurl.com/epicrename1");
 		
-		this.saveDefaultConfig();
+		
 		
 		// Check for updates
 		try {
@@ -135,9 +136,7 @@ public class RenameRewrite extends JavaPlugin {
 		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
 		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
 		
-		// Ready Utils
-		CharLimit cl =  new CharLimit();
-		cl.ready(this);
+		
 		
 		Messager.msgConsole(ChatColor.GOLD + "Version: " + PLUGIN_VERSION + " Has Been Enabled.");
 
@@ -197,10 +196,6 @@ public class RenameRewrite extends JavaPlugin {
 		return newitem;		
 	}
 	
-	public void reloadConfig() {
-		this.reloadConfig();
-	}
-	
 	/**
 	 * 
 	 * @param player 
@@ -215,6 +210,7 @@ public class RenameRewrite extends JavaPlugin {
 		newitem.setItemMeta(im);		
 		return newitem;
 	}
+
 	
 	@Override
 	public void onDisable() {

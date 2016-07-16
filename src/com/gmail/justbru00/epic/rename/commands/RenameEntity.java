@@ -70,13 +70,12 @@ public class RenameEntity implements CommandExecutor {
 						}
 						
 						// Check CharLimit
-						CharLimit cl = new CharLimit();
-						cl.ready(main);
-						if (cl.checkCharLimit(args[0], player)) {
+						if (CharLimit.checkCharLimit(args[0], player)) {
 							//Too long
 							Messager.msgPlayer(player, main.getConfig().getString("charlimitmessage"));
 							return true;
 						}
+						
 						if (main.useEconomy) {
 							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.renameentity"));
 							   if (r.transactionSuccess()) {

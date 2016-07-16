@@ -44,26 +44,27 @@ public class EpicRename implements CommandExecutor {
 		
 		if (command.getName().equalsIgnoreCase("epicrename")) {			
 			if (args.length == 0) {
-				Messager.msgSender(RenameRewrite.Prefix + "Please type /epicrename help", sender);
-				Messager.msgSender(RenameRewrite.Prefix + "Or type /epicrename license", sender);
-				Messager.msgSender(RenameRewrite.Prefix + "Or type /epicrename reload", sender);
+				Messager.msgSender("Please type /epicrename help", sender);
+				Messager.msgSender("Or type /epicrename license", sender);
+				Messager.msgSender("Or type /epicrename reload", sender);
 				return true;
 			}
 			if (args.length == 1) {
 				if (args[0].equalsIgnoreCase("license")) {
-					Messager.msgSender(RenameRewrite.Prefix + "See License Information at: http://tinyurl.com/epicrename1", sender);
+					Messager.msgSender("See License Information at: http://tinyurl.com/epicrename1", sender);
 					return true;
 				} else if (args[0].equalsIgnoreCase("help")){ 
-					Messager.msgSender(RenameRewrite.Prefix + ChatColor.GRAY + "---------------------------------------", sender);
-					Messager.msgSender(RenameRewrite.Prefix + "/rename - Usage: /rename &b&lTest", sender);
-					Messager.msgSender(RenameRewrite.Prefix + "/renameany - Usage: /renamyany &b&lTest", sender);
-					Messager.msgSender(RenameRewrite.Prefix + "/lore - Usage: /lore &bHello", sender);
-					Messager.msgSender(RenameRewrite.Prefix + "/renameentity - Usage: /renameentity &bTest", sender);
-					Messager.msgSender(RenameRewrite.Prefix + ChatColor.GRAY + "---------------------------------------", sender);					
+					Messager.msgSender(ChatColor.GRAY + "---------------------------------------", sender);
+					Messager.msgSender("/rename - Usage: /rename &b&lTest", sender);
+					Messager.msgSender("/renameany - Usage: /renamyany &b&lTest", sender);
+					Messager.msgSender("/lore - Usage: /lore &bHello", sender);
+					Messager.msgSender("/renameentity - Usage: /renameentity &bTest", sender);
+					Messager.msgSender(ChatColor.GRAY + "---------------------------------------", sender);					
 					return true;
 				} else if (args[0].equalsIgnoreCase("reload")) {
 					if (sender.hasPermission("epicrename.reload")) {
 						main.reloadConfig();
+						Messager.msgSender("&aConfig Reloaded!", sender);
 						return true;
 					} else {
 						Messager.msgSender("&cSorry you don't have the permission to do that.", sender);

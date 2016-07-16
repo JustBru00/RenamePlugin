@@ -33,11 +33,13 @@ import com.gmail.justbru00.epic.rename.main.RenameRewrite;
 public class Messager {
 
 	public static String color(String uncolored){
-		String colored = uncolored.replace('_', ' ');
+		String colored = uncolored.replace('_', ' ');		
 		return ChatColor.translateAlternateColorCodes('&', colored);		
 	}
 	
 	public static void msgConsole(String msg) {		
+		msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
+		
 		if (RenameRewrite.clogger != null) {
 		RenameRewrite.clogger.sendMessage(RenameRewrite.Prefix + Messager.color(msg));		
 		} else {
@@ -46,14 +48,17 @@ public class Messager {
 	}
 	
 	public static void msgPlayer(String msg, Player player) {
+		msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
 		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgPlayer(Player player, String msg) {
+		msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
 		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgSender(String msg, CommandSender sender) {
+		msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
 		sender.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 }

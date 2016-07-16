@@ -67,10 +67,7 @@ public class Rename implements CommandExecutor {
 							return true;
 						}
 
-						// Check CharLimit
-						CharLimit cl = new CharLimit();
-						cl.ready(main);
-						if (cl.checkCharLimit(args[0], player)) {
+						if (CharLimit.checkCharLimit(args[0], player)) {
 							// Too long
 							Messager.msgPlayer(player, main.getConfig().getString("charlimitmessage"));
 							return true;

@@ -27,23 +27,22 @@ import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
 
-public class CharLimit {
-	
-	RenameRewrite main;	
+public class CharLimit {	
+
 	/**
 	 * 
 	 * @param checking String that we are checking.
 	 * @param player Player who typed the command.
 	 * @return False if ok. True if too many chars.
 	 */
-	public boolean checkCharLimit(String checking, Player player) {
+	public static boolean checkCharLimit(String checking, Player player) {
 		
-		if (!main.getConfig().getBoolean(("charlimitenabled"))) {
+		if (!RenameRewrite.getInstance().getConfig().getBoolean(("charlimitenabled"))) {
 			return false;
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
-			Messager.msgPlayer(player, main.getConfig().getString("charlimitbypassmessage"));
+			Messager.msgPlayer(player, RenameRewrite.getInstance().getConfig().getString("charlimitbypassmessage"));
 			return false;
 		}
 		
@@ -54,12 +53,7 @@ public class CharLimit {
 		return false;
 	}
 	
-	public void ready(RenameRewrite main) {
-		this.main = main;
-	}
-	
-	
-	public int getCharLimit() {
-		return main.getConfig().getInt("charlimit");		
+	public static int getCharLimit() {
+		return RenameRewrite.getInstance().getConfig().getInt("charlimit");		
 	}
 }
