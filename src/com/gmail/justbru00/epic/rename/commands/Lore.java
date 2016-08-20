@@ -42,27 +42,31 @@ public class Lore implements CommandExecutor {
 	public Lore(RenameRewrite main) {
 		this.main = main;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("lore")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("epicrename.lore")) {
 					if (args.length > 0) {
 						if (main.useEconomy) {
-							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.lore"));
-							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
+									main.getConfig().getInt("economy.costs.lore"));
+							if (r.transactionSuccess()) {
+								player.sendMessage(String.format(
+										RenameRewrite.Prefix + Messager
+												.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
 								int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
 								while (args.length > i) {
 									if (main.checkBlacklist(args[i])) {
 										Messager.msgPlayer(main.config.getString("found blacklisted word"), player);
 										return true;
-									}						
-									
+									}
+
 									lore.add(Messager.color(args[i]));
 									i++;
 								}
@@ -74,30 +78,32 @@ public class Lore implements CommandExecutor {
 								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
 								Messager.msgPlayer(player, main.config.getString("lore complete"));
 								return true;
-							   } else {
-								   sender.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"), r.errorMessage));
-									return true;
-							   }
-							   } 
-							   int i = 0;
-								ArrayList<String> lore = new ArrayList<String>();
-								while (args.length > i) {
-									if (main.checkBlacklist(args[i])) {
-										Messager.msgPlayer(main.config.getString("found blacklisted word"), player);
-										return true;
-									}
-									lore.add(Messager.color(args[i]));
-									i++;
-								}
-								// Check Material Blacklist
-								if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
-									Messager.msgPlayer(main.config.getString("found blacklisted material"), player);
-									return true;
-								}
-								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
-								Messager.msgPlayer(main.config.getString("lore complete"), player);
-							   return true;
-						
+							} else {
+								sender.sendMessage(
+										String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
+												r.errorMessage));
+								return true;
+							}
+						}
+						int i = 0;
+						ArrayList<String> lore = new ArrayList<String>();
+						while (args.length > i) {
+							if (main.checkBlacklist(args[i])) {
+								Messager.msgPlayer(main.config.getString("found blacklisted word"), player);
+								return true;
+							}
+							lore.add(Messager.color(args[i]));
+							i++;
+						}
+						// Check Material Blacklist
+						if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
+							Messager.msgPlayer(main.config.getString("found blacklisted material"), player);
+							return true;
+						}
+						player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
+						Messager.msgPlayer(main.config.getString("lore complete"), player);
+						return true;
+
 					} else {
 						Messager.msgPlayer(main.config.getString("not enough or too many args"), player);
 						return true;

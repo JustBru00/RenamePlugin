@@ -31,9 +31,9 @@ public class Watcher implements Listener{
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
-	 if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {
-		 e.getPlayer().sendMessage(RenameRewrite.Prefix + RenameRewrite.color("&bThis Server uses EpicRename."));		 
-	 }
+	public void onPlayerJoin(PlayerJoinEvent e) {		
+		if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {
+			e.getPlayer().sendMessage(RenameRewrite.Prefix + RenameRewrite.color("&bThis Server uses EpicRename."));		 
+		}
 	}	
 }

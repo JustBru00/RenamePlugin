@@ -46,62 +46,68 @@ public class RenameEntity implements CommandExecutor {
 	public RenameEntity(RenameRewrite main) {
 		this.main = main;
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,	String label, String[] args) {	
-		
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
 		if (command.getName().equalsIgnoreCase("renameentity")) {
 			if (sender instanceof Player) {
 				Player player = (Player) sender;
 				if (player.hasPermission("epicrename.renameentity")) {
 					if (args.length == 1) {
-						
+
 						// Check Blacklist
 						if (main.checkBlacklist(args[0])) {
 							Messager.msgPlayer(player, main.config.getString("found blacklisted word"));
 							return true;
 						}
-						
+
 						// Check Material Blacklist
 						if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
 							Messager.msgPlayer(player, main.config.getString("found blacklisted material"));
 							return true;
 						}
-						
+
 						// Check CharLimit
 						if (CharLimit.checkCharLimit(args[0], player)) {
-							//Too long
+							// Too long
 							Messager.msgPlayer(player, main.getConfig().getString("charlimitmessage"));
 							return true;
 						}
-						
+
 						if (main.useEconomy) {
-							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.renameentity"));
-							   if (r.transactionSuccess()) {
-								player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"), RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
+									main.getConfig().getInt("economy.costs.renameentity"));
+							if (r.transactionSuccess()) {
+								player.sendMessage(String.format(
+										RenameRewrite.Prefix + Messager
+												.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
 								ItemStack is = new ItemStack(Material.NAME_TAG);
 								ItemMeta im = is.getItemMeta();
-								im.setDisplayName(Messager.color(args[0]));	
+								im.setDisplayName(Messager.color(args[0]));
 								is.setItemMeta(im);
 								ArrayList<String> lore = new ArrayList<String>();
 								lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
 								player.getInventory().addItem((main.renameItemStack(player, lore, is)));
-								Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");								
+								Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");
 								return true;
-							   } else {
-								   sender.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"), r.errorMessage));
-									return true;
-							   }
-							   } 
+							} else {
+								sender.sendMessage(String.format(
+										RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"),
+										r.errorMessage));
+								return true;
+							}
+						}
 						ItemStack is = new ItemStack(Material.NAME_TAG);
 						ItemMeta im = is.getItemMeta();
-						im.setDisplayName(RenameRewrite.color(args[0]));	
+						im.setDisplayName(RenameRewrite.color(args[0]));
 						is.setItemMeta(im);
 						ArrayList<String> lore = new ArrayList<String>();
 						lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
 						player.getInventory().addItem((main.renameItemStack(player, lore, is)));
-						Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");							
+						Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");
 					} else {
 						Messager.msgPlayer(player, main.config.getString("not enough or too many args"));
 						return true;

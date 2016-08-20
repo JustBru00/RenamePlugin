@@ -68,7 +68,8 @@ public class RenameRewrite extends JavaPlugin {
 	public final int RESOURCE_NUMBER = 4341;
 	public static boolean debug = false;
 	private static RenameRewrite plugin;
-	
+	public static boolean USE_NEW_GET_HAND;
+		
 	public static RenameRewrite getInstance() {
 		return plugin;
 	}
@@ -86,6 +87,14 @@ public class RenameRewrite extends JavaPlugin {
 		Messager.msgConsole("&bEpicRename version " + pdfFile.getVersion() + " is Copyright (C) 2016 Justin Brubaker");
 		Messager.msgConsole("&bSee LICENSE infomation here: http://tinyurl.com/epicrename1");
 		
+		// Check Server Version
+		if ((Bukkit.getVersion().contains("1.7")) || (Bukkit.getVersion().contains("1.8"))) {
+			USE_NEW_GET_HAND = false;
+		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))) {
+			USE_NEW_GET_HAND = true;
+		} else {
+			USE_NEW_GET_HAND = false;
+		}	// End of Server Version Check
 		
 		
 		// Check for updates

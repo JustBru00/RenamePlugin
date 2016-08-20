@@ -53,7 +53,7 @@ public class EpicRename implements CommandExecutor {
 				if (args[0].equalsIgnoreCase("license")) {
 					Messager.msgSender("See License Information at: http://tinyurl.com/epicrename1", sender);
 					return true;
-				} else if (args[0].equalsIgnoreCase("help")){ 
+				} else if (args[0].equalsIgnoreCase("help")) { 
 					Messager.msgSender(ChatColor.GRAY + "---------------------------------------", sender);
 					Messager.msgSender("/rename - Usage: /rename &b&lTest", sender);				
 					Messager.msgSender("/lore - Usage: /lore &bHello", sender);
@@ -70,7 +70,7 @@ public class EpicRename implements CommandExecutor {
 						return true;
 					}
 					
-			}else {
+			} else {
 					Messager.msgSender(RenameRewrite.Prefix + "Please type /epicrename help", sender);
 				    return true;
 				}				
