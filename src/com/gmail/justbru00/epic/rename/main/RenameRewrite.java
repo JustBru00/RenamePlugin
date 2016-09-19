@@ -176,12 +176,18 @@ public class RenameRewrite extends JavaPlugin {
 		if (player.hasPermission("epicrename.bypass.materialblacklist")) {
 			return true;
 		}
+		
 		this.materialBlacklist = config.getStringList("material blacklist");
 		
 		if (materialBlacklist == null) return false;
 					
 		int i = 0;
-		while (i < blacklist.size()){
+		while (i < blacklist.size()) {
+			
+			if (blacklist.get(i) == null) {
+				break;
+			}
+			
 			Material temp = Material.getMaterial(materialBlacklist.get(i));
 			
 			if (temp == null) break;

@@ -19,7 +19,7 @@ public class RenameUtil {
 		}
 		
 		for (String argscombined : args) {
-			Debug.send(argscombined);
+			Debug.send(argscombined);			
 		}
 		
 		// Check Text Blacklist

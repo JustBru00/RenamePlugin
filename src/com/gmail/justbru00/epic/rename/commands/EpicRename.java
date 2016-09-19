@@ -27,7 +27,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
@@ -49,7 +48,7 @@ public class EpicRename implements CommandExecutor {
 				Messager.msgSender("Or type /epicrename reload", sender);
 				return true;
 			}
-			if (args.length == 1) {
+			if (args.length >= 1) {
 				if (args[0].equalsIgnoreCase("license")) {
 					Messager.msgSender("See License Information at: http://tinyurl.com/epicrename1", sender);
 					return true;
@@ -70,13 +69,27 @@ public class EpicRename implements CommandExecutor {
 						return true;
 					}
 					
+			} 
+				if (args[1].equalsIgnoreCase("debug")) { // Debug Toggle
+					if (RenameRewrite.debug) {
+						RenameRewrite.debug = false;
+						Messager.msgSender("&6Plugin Debug Messages are now &4&lOFF&6.", sender);
+						return true;
+					} else {
+						RenameRewrite.debug = true;
+						Messager.msgSender("&6Plugin Debug Messages are now &a&lON&6.", sender);
+						return true;
+					}
+				} // End of debug Toggle			
+				
 			} else {
+			
 					Messager.msgSender(RenameRewrite.Prefix + "Please type /epicrename help", sender);
 				    return true;
 				}				
-			}
-		} // End of command EpicRename
+			
+		} // End of command EpicRename			
+
 		return false;
 	}
-
 }
