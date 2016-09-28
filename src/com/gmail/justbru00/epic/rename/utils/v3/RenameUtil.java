@@ -1,9 +1,12 @@
-package com.gmail.justbru00.epic.rename.utils;
+package com.gmail.justbru00.epic.rename.utils.v3;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.utils.CharLimit;
+import com.gmail.justbru00.epic.rename.utils.Debug;
+import com.gmail.justbru00.epic.rename.utils.Messager;
 
 public class RenameUtil {
 
