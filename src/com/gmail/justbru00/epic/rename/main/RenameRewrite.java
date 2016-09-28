@@ -50,6 +50,7 @@ import com.gmail.justbru00.epic.rename.commands.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.Lore;
 import com.gmail.justbru00.epic.rename.commands.Rename;
 import com.gmail.justbru00.epic.rename.commands.RenameEntity;
+import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 public class RenameRewrite extends JavaPlugin {
@@ -90,10 +91,13 @@ public class RenameRewrite extends JavaPlugin {
 		// Check Server Version
 		if ((Bukkit.getVersion().contains("1.7")) || (Bukkit.getVersion().contains("1.8"))) {
 			USE_NEW_GET_HAND = false;
+			Debug.send("Using methods for version 1.7 or 1.8");
 		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))) {
 			USE_NEW_GET_HAND = true;
+			Debug.send("Using methods for version 1.9");
 		} else {
 			USE_NEW_GET_HAND = false;
+			Debug.send("Using Old Get hand. (Else)");
 		}	// End of Server Version Check
 		
 		
@@ -108,7 +112,7 @@ public class RenameRewrite extends JavaPlugin {
             	if (version.equalsIgnoreCase(PLUGIN_VERSION)) {
             		Messager.msgConsole("No Update Found.");
             	} else {
-            		Messager.msgConsole("&6Found an update please download it at: https://www.spigotmc.org/resources/epicrename.4341/");
+            		Messager.msgConsole("&6Found an update! Please download it at: https://www.spigotmc.org/resources/epicrename.4341/");
             	}
             }
         } catch (Exception ex) {
