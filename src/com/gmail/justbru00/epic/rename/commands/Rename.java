@@ -23,7 +23,6 @@
  */
 package com.gmail.justbru00.epic.rename.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -84,37 +83,48 @@ public class Rename implements CommandExecutor {
 
 						// Begin Command Code.
 						if (inHand.getType() != Material.AIR) {
+							
 							if (player.hasPermission("epicrename.rename." + inHand.getType().toString())
 									|| player.hasPermission("epicrename.rename.*")) {
+								
 								// Print correct permission
-								if (RenameRewrite.debug)
-									Messager.msgPlayer(player, "Correct Permission: " + "epicrename.rename."
-											+ inHand.getType().toString());
-								if (main.useEconomy) {
-									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
-											main.config.getInt("economy.costs.rename"));
-									if (r.transactionSuccess()) {
-										player.sendMessage(String.format(
-												RenameRewrite.Prefix + Messager
-														.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+								if (RenameRewrite.debug) Messager.msgPlayer(player, "Correct Permission: " + "epicrename.rename." + inHand.getType().toString());
+								// End print correct permission
+								
+								if (main.useEconomy) { // Start Economy
+									
+									if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.rename")) { // Start Eco Bypass
+										
+										Messager.msgPlayer(player, "&aYou just bypassed the command cost.");
+										
+										player.setItemInHand(main.renameItemStack(player, args[0], inHand));
+										
+										Messager.msgPlayer(player, main.config.getString("rename complete"));
+									} // End Eco Bypass
+									
+									EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.config.getInt("economy.costs.rename"));
+									
+									if (r.transactionSuccess()) { // Eco Success
+										
+										player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
 												RenameRewrite.econ.format(r.amount),
 												RenameRewrite.econ.format(r.balance)));
-										player.setItemInHand(main.renameItemStack(player, args[0], inHand));
-										Messager.msgConsole(
-												ChatColor.RED + player.getName()
-														+ ChatColor.translateAlternateColorCodes('&',
-																main.config.getString("your msg"))
-														+ Messager.color(args[0]));
+										
+										player.setItemInHand(main.renameItemStack(player, args[0], inHand)); // TODO Add proper per version setHand
+										
+										Messager.msgConsole("&c" + player.getName()	+ main.config.getString("your msg")	+ args[0]);
+										
 										Messager.msgPlayer(player, main.config.getString("rename complete"));
 										return true;
-									} else {
-										sender.sendMessage(String.format(
-												RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
+									} else { // End Eco Success | Start Eco Fail
+										sender.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
 												r.errorMessage));
 										return true;
-									}
-								}
+									} // End Eco Fail
+								} // End Economy
+								
 								player.setItemInHand(main.renameItemStack(player, args[0], inHand));
+								
 								Messager.msgPlayer(player, main.config.getString("rename complete"));
 								return true;
 							} else {

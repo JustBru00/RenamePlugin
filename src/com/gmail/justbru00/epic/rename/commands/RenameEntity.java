@@ -76,14 +76,13 @@ public class RenameEntity implements CommandExecutor {
 							return true;
 						}
 
-						if (main.useEconomy) {
-							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
-									main.getConfig().getInt("economy.costs.renameentity"));
-							if (r.transactionSuccess()) {
-								player.sendMessage(String.format(
-										RenameRewrite.Prefix + Messager
-												.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
-										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+						if (main.useEconomy) { // Begin Economy Stuff
+							
+							if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.renameentity")) {
+								
+								Messager.msgPlayer(player, "&aYou just bypassed the command cost.");
+								
+								// Start Give Nametag
 								ItemStack is = new ItemStack(Material.NAME_TAG);
 								ItemMeta im = is.getItemMeta();
 								im.setDisplayName(Messager.color(args[0]));
@@ -92,14 +91,36 @@ public class RenameEntity implements CommandExecutor {
 								lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
 								player.getInventory().addItem((main.renameItemStack(player, lore, is)));
 								Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");
-								return true;
-							} else {
-								sender.sendMessage(String.format(
-										RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"),
-										r.errorMessage));
+								// End Give Nametag
 								return true;
 							}
-						}
+							
+							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.renameentity"));
+							
+							if (r.transactionSuccess()) {
+								
+								player.sendMessage(String.format(RenameRewrite.Prefix + 
+										Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								
+								// Start Give Nametag
+								ItemStack is = new ItemStack(Material.NAME_TAG);
+								ItemMeta im = is.getItemMeta();
+								im.setDisplayName(Messager.color(args[0]));
+								is.setItemMeta(im);
+								ArrayList<String> lore = new ArrayList<String>();
+								lore.add(RenameRewrite.color("&bRight click me on an entity to rename it."));
+								player.getInventory().addItem((main.renameItemStack(player, lore, is)));
+								Messager.msgPlayer(player, "&aI gave you a name tag. Use it :D");
+								// End Give Nametag
+								
+								return true;
+							} else { // Transaction Unsuccessfull							
+								sender.sendMessage(String.format(RenameRewrite.Prefix + RenameRewrite.color("&6An error occured:&c %s"), r.errorMessage));
+								return true;
+							}
+						} // End of Economy Stuff
+						
 						ItemStack is = new ItemStack(Material.NAME_TAG);
 						ItemMeta im = is.getItemMeta();
 						im.setDisplayName(RenameRewrite.color(args[0]));

@@ -46,21 +46,24 @@ public class Lore implements CommandExecutor {
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		
 		if (command.getName().equalsIgnoreCase("lore")) {
+			
 			if (sender instanceof Player) {
+				
 				Player player = (Player) sender;
+				
 				if (player.hasPermission("epicrename.lore")) {
+					
 					if (args.length > 0) {
-						if (main.useEconomy) {
-							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player,
-									main.getConfig().getInt("economy.costs.lore"));
-							if (r.transactionSuccess()) {
-								player.sendMessage(String.format(
-										RenameRewrite.Prefix + Messager
-												.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
-										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+						
+						if (main.useEconomy) { // Start Economy 
+							
+							if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.lore")) { // Start bypass
+								// Start Lore
 								int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
+								
 								while (args.length > i) {
 									if (main.checkBlacklist(args[i])) {
 										Messager.msgPlayer(main.config.getString("found blacklisted word"), player);
@@ -77,14 +80,47 @@ public class Lore implements CommandExecutor {
 								}
 								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
 								Messager.msgPlayer(player, main.config.getString("lore complete"));
+								// End Lore
+							} // End bypass
+							
+							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.lore"));
+							
+							if (r.transactionSuccess()) { // Start Eco Success
+								player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								
+								// Start Lore
+								int i = 0;
+								ArrayList<String> lore = new ArrayList<String>();
+								
+								while (args.length > i) {
+									if (main.checkBlacklist(args[i])) {
+										Messager.msgPlayer(main.config.getString("found blacklisted word"), player);
+										return true;
+									}
+
+									lore.add(Messager.color(args[i]));
+									i++;
+								}
+								// Check Material Blacklist
+								if (!main.checkMaterialBlacklist(player, player.getItemInHand().getType())) {
+									Messager.msgPlayer(main.config.getString("found blacklisted material"), player);
+									return true;
+								}
+								player.setItemInHand(main.renameItemStack(player, lore, player.getItemInHand()));
+								Messager.msgPlayer(player, main.config.getString("lore complete"));
+								// End Lore
+								
 								return true;
-							} else {
+								
+							} else { // End Eco Success | Start Eco Fail
 								sender.sendMessage(
 										String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
 												r.errorMessage));
 								return true;
-							}
-						}
+							} // End of Eco Fail
+						} // End of economy
+						
 						int i = 0;
 						ArrayList<String> lore = new ArrayList<String>();
 						while (args.length > i) {
