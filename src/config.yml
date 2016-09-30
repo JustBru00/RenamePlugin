@@ -10,6 +10,7 @@ prefix: '&8[&bEpic&fRename&8] &f'
 # Economy Settings
 economy:
    use: false
+   bypassmsg: '&aYou jsut bypassed the command cost.'
    costs:
       rename: 100      
       lore: 100

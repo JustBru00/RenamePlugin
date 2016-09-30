@@ -80,7 +80,7 @@ public class RenameEntity implements CommandExecutor {
 							
 							if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.renameentity")) {
 								
-								Messager.msgPlayer(player, "&aYou just bypassed the command cost.");
+								Messager.msgPlayer(player, RenameRewrite.getInstance().config.getString("economy.bypassmsg"));
 								
 								// Start Give Nametag
 								ItemStack is = new ItemStack(Material.NAME_TAG);

@@ -95,7 +95,7 @@ public class Rename implements CommandExecutor {
 									
 									if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.rename")) { // Start Eco Bypass
 										
-										Messager.msgPlayer(player, "&aYou just bypassed the command cost.");
+										Messager.msgPlayer(player, RenameRewrite.getInstance().config.getString("economy.bypassmsg"));
 										
 										player.setItemInHand(main.renameItemStack(player, args[0], inHand));
 										

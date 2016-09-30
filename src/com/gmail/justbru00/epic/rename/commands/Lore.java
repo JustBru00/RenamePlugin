@@ -60,6 +60,9 @@ public class Lore implements CommandExecutor {
 						if (main.useEconomy) { // Start Economy 
 							
 							if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.lore")) { // Start bypass
+								
+								Messager.msgPlayer(player, RenameRewrite.getInstance().config.getString("economy.bypassmsg"));
+								
 								// Start Lore
 								int i = 0;
 								ArrayList<String> lore = new ArrayList<String>();
