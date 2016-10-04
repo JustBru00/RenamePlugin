@@ -8,4 +8,8 @@ epicrename:
   debug_disable: '&6Plugin Debug Messages are now &4&lOFF&6.'
   invaild_args: '&cInvalid Arguments. Please put help, license, reload, debug, or version after /epicrename.'
   version: '&6You are running &bEpic&fRename &6version {version}.'
-  
+
+rename:
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
+  no_args: '&cYou need to place at least one argument after /rename.' 
