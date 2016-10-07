@@ -53,6 +53,19 @@ public class CharLimit {
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param checking {@link String[]} that we are checking.
+	 * @param player {@link Player} who typed the command.
+	 * @return TRUE if ok. FALSE if too many chars.
+	 */
+	public static boolean v3_checkCharLimit(String[] checking, Player player) {
+		
+		//TODO VERSION 3 CharLimit Check
+		
+		return true;
+	}
+	
 	public static int getCharLimit() {
 		return RenameRewrite.getInstance().getConfig().getInt("charlimit");		
 	}

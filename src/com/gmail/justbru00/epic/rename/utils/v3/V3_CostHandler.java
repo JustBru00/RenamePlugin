@@ -3,13 +3,13 @@ package com.gmail.justbru00.epic.rename.utils.v3;
 import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.customexceptions.v3.EcoDisabledException;
-import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 
-public class CostHandler {
+public class V3_CostHandler {
 
 	// This Class will handle all economy stuff in version 3
 	
@@ -20,7 +20,7 @@ public class CostHandler {
 	 * @return False if failed true if successfull.
 	 * @throws EcoDisabledException 
 	 */
-	public boolean withdrawMoney(Player sender, EpicRenameCommands cmd) throws EcoDisabledException {
+	public boolean withdrawMoney(Player sender, V3_EpicRenameCommands cmd) throws EcoDisabledException {
 	
 		if (RenameRewrite.getInstance().useEconomy) {
 			
