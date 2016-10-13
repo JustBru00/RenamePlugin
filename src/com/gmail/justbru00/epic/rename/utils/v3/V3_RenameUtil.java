@@ -39,10 +39,7 @@ public class V3_RenameUtil {
 					if (CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");
 						if (inHand.getType() != Material.AIR) { // Check != Air
-							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions
-								
-								// TODO Economy Here
-								
+							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions								
 								if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 									player.getInventory().setItemInMainHand(V3_RenameUtil.renameItemStack(player, args, inHand));
 									return;
@@ -51,7 +48,7 @@ public class V3_RenameUtil {
 									return;
 								}									
 							} else {
-								Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.no_permission_for_material."), player);
+								Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.no_permission_for_material"), player);
 								return;
 							}
 						} else {

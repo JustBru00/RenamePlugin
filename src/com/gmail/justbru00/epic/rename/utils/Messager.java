@@ -28,19 +28,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.utils.v3.V3_VaribleReplacer;
 
 
 public class Messager {
-	
-	// TODO Better varible replacement.
 
 	public static String color(String uncolored){
-		//String colored = uncolored.replace('_', ' ');		
 		return ChatColor.translateAlternateColorCodes('&', uncolored);		
 	}
 	
 	public static void msgConsole(String msg) {		
-		//msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
+		msg = V3_VaribleReplacer.replace(msg);
 		
 		if (RenameRewrite.clogger != null) {
 		RenameRewrite.clogger.sendMessage(RenameRewrite.Prefix + Messager.color(msg));		
@@ -50,17 +48,17 @@ public class Messager {
 	}
 	
 	public static void msgPlayer(String msg, Player player) {
-		//msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
+		msg = V3_VaribleReplacer.replace(msg);
 		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgPlayer(Player player, String msg) {
-		//msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
+		msg = V3_VaribleReplacer.replace(msg);
 		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgSender(String msg, CommandSender sender) {
-		//msg = msg.replace("{char}", Integer.toString(CharLimit.getCharLimit()));
+		msg = V3_VaribleReplacer.replace(msg);
 		sender.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
 	}	
 }

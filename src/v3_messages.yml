@@ -18,4 +18,5 @@ rename:
   cannot_rename_air: '&cSorry you can''t rename nothing.'  
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   charlimit:
-    name_too_long: '&cSorry that name is too long. The character limit is {CHAR}.'
+    name_too_long: '&cSorry that name is too long. The character limit is {char}.'
+    bypass_msg: '&aYou just bypassed the character limit of {char}.'

@@ -11,6 +11,7 @@ import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_MCVersion;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
+import com.gmail.justbru00.epic.rename.utils.v3.V3_PluginFile;
 
 public class V3_Main extends JavaPlugin{
 	
@@ -22,6 +23,7 @@ public class V3_Main extends JavaPlugin{
 	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x get in hand item method.
 	public static V3_MCVersion MC_VERSION; // Version is set in #checkServerVerison()
 	public static V3_Main plugin;
+	public static V3_PluginFile v3_messages = null;
 	
 	
 	
@@ -39,6 +41,7 @@ public class V3_Main extends JavaPlugin{
 		
 		checkServerVerison();
 		this.saveDefaultConfig();
+		v3_messages = new V3_PluginFile(this, "v3_messages.yml", "v3_messages.yml");
 		PLUGIN_VERISON = V3_Main.getInstance().getDescription().getVersion();
 		
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
@@ -53,7 +56,7 @@ public class V3_Main extends JavaPlugin{
 		
 		// Command Executors
 		getCommand("rename").setExecutor(new V3_Rename());
-		getCommand("epicrename").setExecutor(new V3_EpicRename());
+		getCommand("epicrename").setExecutor(new V3_EpicRename());	
 		
 		Messager.msgConsole("&aPlugin Enabled!");		
 	}
@@ -64,8 +67,8 @@ public class V3_Main extends JavaPlugin{
 	 * @return The colored string from messages.yml
 	 */
 	public static String getMsgFromConfig(String path) {
-		// TODO Get string from config and color.
-		return path;
+		
+		return Messager.color(v3_messages.getString(path));
 	}
 	
 	 public static V3_Main getInstance() {
@@ -73,7 +76,8 @@ public class V3_Main extends JavaPlugin{
 	 }
 	
 	public static void reloadConfigs() {
-		// TODO Reload config.yml and messages.yml
+		getInstance().reloadConfig();
+		v3_messages.reload();
 	}	
 	
 	public static void checkServerVerison() {
@@ -85,11 +89,11 @@ public class V3_Main extends JavaPlugin{
 				} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))) {
 					USE_NEW_GET_HAND = true;
 					MC_VERSION = V3_MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-					Debug.send("Using methods for version 1.9");
+					Debug.send("Using methods for version 1.9+");
 				} else {
 					USE_NEW_GET_HAND = true;
 					MC_VERSION = V3_MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-					Debug.send("Server running unknown version. Assuming newer than 1.10.");
+					Debug.send("Server running unknown version. Assuming newer than 1.10");
 				}	// End of Server Version Check
 	}
 	

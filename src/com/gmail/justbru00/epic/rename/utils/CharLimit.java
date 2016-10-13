@@ -26,8 +26,13 @@ package com.gmail.justbru00.epic.rename.utils;
 import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class CharLimit {	
+	
+
 
 	/**
 	 * 
@@ -59,11 +64,38 @@ public class CharLimit {
 	 * @param player {@link Player} who typed the command.
 	 * @return TRUE if ok. FALSE if too many chars.
 	 */
-	public static boolean v3_checkCharLimit(String[] checking, Player player) {
+	public static boolean v3_checkCharLimit(String[] checking, Player player) { // VERISON 3.0
+		StringBuilder builder = new StringBuilder("");		
+		String completeArgs = "";		
 		
-		//TODO VERSION 3 CharLimit Check
+		for (String item : checking) {
+			builder.append(item + " ");
+		}
+		
+		completeArgs = builder.toString();
+		completeArgs = ChatColor.stripColor(Messager.color(completeArgs));
+		
+		if (!V3_Main.getInstance().getConfig().getBoolean("charlimitenabled")) {
+			Debug.send("Char Limit is disabled.");
+			return true;
+		}
+		
+		if (player.hasPermission("epicrename.bypass.charlimit")) {
+			Debug.send("Player bypassed char limit");
+			Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.charlimit.bypass_msg"), player);
+			return true;
+		}
+		
+		if (completeArgs.length() > v3_getCharLimit()) {
+			Debug.send("Player failed char limit.");
+			return false;
+		}
 		
 		return true;
+	}
+	
+	public static int v3_getCharLimit() {
+		return V3_Main.getInstance().getConfig().getInt("charlimit");
 	}
 	
 	public static int getCharLimit() {
