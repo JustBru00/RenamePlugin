@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import com.gmail.justbru00.epic.rename.customexceptions.v3.EcoDisabledException;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -22,9 +23,9 @@ public class V3_CostHandler {
 	 */
 	public boolean withdrawMoney(Player sender, V3_EpicRenameCommands cmd) throws EcoDisabledException {
 	
-		if (RenameRewrite.getInstance().useEconomy) {
+	//	if (V3_Main.getInstance().useEconomy) {
 			
-		}
+	//	}
 		
 		throw new EcoDisabledException(); // If Economy is disabled throw exception.
 	}

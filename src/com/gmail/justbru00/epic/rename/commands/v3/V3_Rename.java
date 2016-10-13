@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.V3_RenameUtil;
@@ -24,9 +25,8 @@ public class V3_Rename implements CommandExecutor {
 				
 				if (player.hasPermission("epicrename.rename")) {				
 					
-					if (args.length == 1) {
-						// TODO Rename Item
-						
+					if (args.length >= 1) {
+						V3_RenameUtil.renameHandle(player, args, V3_EpicRenameCommands.RENAME);						
 					} else { // No Args
 						Messager.msgPlayer(player, V3_Main.getMsgFromConfig("rename.no_args"));
 						return true;						

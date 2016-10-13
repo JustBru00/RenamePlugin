@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
@@ -23,7 +24,8 @@ public class V3_RenameUtil {
 	 * @param args The arguments of the command sent to the {@link CommandExecutor}
 	 * @param erc The command that called this method.
 	 */
-	public static void rename(Player player, String[] args, V3_EpicRenameCommands erc) {
+	@SuppressWarnings("deprecation")
+	public static void renameHandle(Player player, String[] args, V3_EpicRenameCommands erc) {
 		
 		if (erc == V3_EpicRenameCommands.RENAME) { // Command /rename handling START
 			Debug.send("RenameUtil.rename() handling from /rename");
@@ -36,8 +38,22 @@ public class V3_RenameUtil {
 					Debug.send("Passed Material Blacklist Check.");
 					if (CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");
-						if (inHand.getType() != Material.AIR) {
-							//TODO Finish Command
+						if (inHand.getType() != Material.AIR) { // Check != Air
+							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions
+								
+								// TODO Economy Here
+								
+								if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+									player.getInventory().setItemInMainHand(V3_RenameUtil.renameItemStack(player, args, inHand));
+									return;
+								} else { // Use older method.
+									player.setItemInHand(V3_RenameUtil.renameItemStack(player, args, inHand));
+									return;
+								}									
+							} else {
+								Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.no_permission_for_material."), player);
+								return;
+							}
 						} else {
 							Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.cannot_rename_air"), player);
 							return;
@@ -54,10 +70,6 @@ public class V3_RenameUtil {
 				Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.blacklisted_word_found"), player);
 				return;
 			}
-			
-			Debug.send("Code didn't go through Blacklist check. Well that shouldn't happen.");
-			
-			return;
 		} else if (erc == V3_EpicRenameCommands.RENAMEENTITY) { // Command /rename handling END | Command /renameentity START
 			Debug.send("RenameUtil.rename() handling from /renameentity");
 			
@@ -66,6 +78,31 @@ public class V3_RenameUtil {
 		} else {
 			Debug.send("What are you sending a non rename command to RenameUtil#rename() for? Either you failed at using this plugin as a API or JustBru00 failed big time.");
 		}		
+	}
+	/**
+	 * 
+	 * @param player The {@link Player} who ran the command.
+	 * @param args The arguments of the command.
+	 * @param toRename The {@link ItemStack} that is being renamed.
+	 * @return The renamed {@link ItemStack}.
+	 */
+	public static ItemStack renameItemStack(Player player, String[] args, ItemStack toRename) {
+		
+		StringBuilder builder = new StringBuilder("");		
+		String completeArgs = "";		
+		
+		for (String item : args) {
+			builder.append(item + " ");
+		}
+		
+		completeArgs = builder.toString();
+		Debug.send("The args result is: " + completeArgs);
+		
+		ItemMeta im = toRename.getItemMeta();
+		im.setDisplayName(Messager.color(completeArgs));
+		toRename.setItemMeta(im);
+		
+		return toRename;
 	}
 	
 	@SuppressWarnings("deprecation")

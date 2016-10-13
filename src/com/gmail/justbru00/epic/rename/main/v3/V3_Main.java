@@ -1,27 +1,61 @@
 package com.gmail.justbru00.epic.rename.main.v3;
 
-import org.bukkit.Bukkit;
+import java.util.Calendar;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import com.gmail.justbru00.epic.rename.commands.v3.V3_EpicRename;
+import com.gmail.justbru00.epic.rename.commands.v3.V3_Rename;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_MCVersion;
 import com.gmail.justbru00.epic.rename.utils.Debug;
+import com.gmail.justbru00.epic.rename.utils.Messager;
 
-public class V3_Main{
+public class V3_Main extends JavaPlugin{
 	
 	public static boolean debug = false;
-	public static String PLUGIN_VERISON; // TODO Make final and get version from plugin.yml
+	public static String PLUGIN_VERISON = null; 
 	public static int RENAME_USES; // TODO Add one per successfull command usage. TODO Write to config. (Perferably in #onDisable())
 	public static int LORE_USES; // TODO Add one per successfull command usage.	
 	public static int RENAME_ENTITY_USES; // TODO Add one per successfull command usage. TODO Write to config. (Perferably in #onDisable())
 	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x get in hand item method.
 	public static V3_MCVersion MC_VERSION; // Version is set in #checkServerVerison()
+	public static V3_Main plugin;
 	
 	
-	//@Override
-	public static void onDisable() {
+	
+	@Override
+	public void onDisable() {
 		
 		
-		// TODO Plugin Disabled Message.
+		Messager.msgConsole("&cPlugin Disabled.");
+		plugin = null; // Fix memory leak.
+	}
+	
+	@Override
+	public void onEnable() {
+		plugin = this;
+		
+		checkServerVerison();
+		this.saveDefaultConfig();
+		PLUGIN_VERISON = V3_Main.getInstance().getDescription().getVersion();
+		
+		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
+		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MIT License. "
+				+ "You can view a copy of it at: http://choosealicense.com/licenses/mit/"); 
+				
+		Messager.msgConsole("&aStarting plugin enable...");
+		
+		// TODO Check Economy in config.
+		
+		// Register Listeners
+		
+		// Command Executors
+		getCommand("rename").setExecutor(new V3_Rename());
+		getCommand("epicrename").setExecutor(new V3_EpicRename());
+		
+		Messager.msgConsole("&aPlugin Enabled!");		
 	}
 	
 	/**
@@ -31,8 +65,12 @@ public class V3_Main{
 	 */
 	public static String getMsgFromConfig(String path) {
 		// TODO Get string from config and color.
-		return null;
+		return path;
 	}
+	
+	 public static V3_Main getInstance() {
+		 return plugin;
+	 }
 	
 	public static void reloadConfigs() {
 		// TODO Reload config.yml and messages.yml
