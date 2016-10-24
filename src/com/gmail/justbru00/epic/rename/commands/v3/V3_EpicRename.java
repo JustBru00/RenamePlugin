@@ -1,3 +1,8 @@
+/**
+ * @author Justin "JustBru00" Brubaker
+ * 
+ * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
+ */
 package com.gmail.justbru00.epic.rename.commands.v3;
 
 import org.bukkit.command.Command;
@@ -54,7 +59,7 @@ public class V3_EpicRename implements CommandExecutor {
 						return true;
 					}
 				} else if (args[0].equalsIgnoreCase("version")) { // End /epicrename debug | Start /epicrename version
-					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.version"), sender); // TODO Replace {version} varible.
+					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.version"), sender); 
 					return true;
 				} else { // End /epicrename version | Start /epicrename invalid args
 					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.invalid_args"), sender);
