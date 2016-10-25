@@ -1,7 +1,7 @@
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   no_args: '&cType /epicrename help for commands. (No Arguments)'
-  license: '&6View license information at: http://choosealicense.com/licenses/mit/'
+  license: '&6View license information at: http://bit.ly/2eMknxx'
   help: '&6/rename <name>\n&6/lore <lore>\n&6/renameentity <name>\n&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/\n&6/epicrename <help, license, reload, debug, version>'
   reload_success: '&aReloaded the plugin successfully!'
   debug_enable: '&6Plugin debug messages are now &a&lON&6.'
@@ -20,3 +20,9 @@ rename:
   charlimit:
     name_too_long: '&cSorry that name is too long. The character limit is {char}.'
     bypass_msg: '&aYou just bypassed the character limit of {char}.'
+
+economy:
+  bypass: '&aYou just bypassed the economy requirement.'
+  transaction_success: '&aJust took {cost} from your balance.' 
+  transaction_error: '&cThere was a problem taking money from your balance: {error}'
+  

@@ -13,7 +13,6 @@ import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
 public class Debug {
 	public static void send(String msg) {
 		if (V3_Main.debug) {
-		Messager.msgConsole(RenameRewrite.Prefix + "&8[&cDebug&8] &c" + msg);	
 		Bukkit.broadcastMessage(Messager.color(RenameRewrite.Prefix + "&8[&cDebug&8] &c" + msg));
 		}
 	}

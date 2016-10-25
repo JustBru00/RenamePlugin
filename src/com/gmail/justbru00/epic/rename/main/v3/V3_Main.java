@@ -8,28 +8,30 @@ package com.gmail.justbru00.epic.rename.main.v3;
 import java.util.Calendar;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.V3_EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.V3_Rename;
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_MCVersion;
 import com.gmail.justbru00.epic.rename.listeners.V3_OnJoin;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.V3_PluginFile;
 
+import net.milkbowl.vault.economy.Economy;
+
 public class V3_Main extends JavaPlugin{
 	
 	public static boolean debug = false;
 	public static String PLUGIN_VERISON = null; 
-	public static int RENAME_USES; // TODO Add one per successfull command usage. TODO Write to config. (Perferably in #onDisable())
-	public static int LORE_USES; // TODO Add one per successfull command usage.	
-	public static int RENAME_ENTITY_USES; // TODO Add one per successfull command usage. TODO Write to config. (Perferably in #onDisable())
 	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x get in hand item method.
 	public static V3_MCVersion MC_VERSION; // Version is set in #checkServerVerison()
 	public static V3_Main plugin;
 	public static V3_PluginFile v3_messages = null;
+	public static Economy econ = null; // Vault economy.
+	public static boolean USE_ECO = false;
+	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue #45)
 	
 	
 	
@@ -46,17 +48,27 @@ public class V3_Main extends JavaPlugin{
 		plugin = this;
 		
 		checkServerVerison();
-		this.saveDefaultConfig();
+		this.saveDefaultConfig();		
+		
 		v3_messages = new V3_PluginFile(this, "v3_messages.yml", "v3_messages.yml");
 		PLUGIN_VERISON = V3_Main.getInstance().getDescription().getVersion();
 		
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
-		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MIT License. "
-				+ "You can view a copy of it at: http://choosealicense.com/licenses/mit/"); 
+		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0 license. "
+				+ "You can view a copy of it at: http://bit.ly/2eMknxx"); 
 				
 		Messager.msgConsole("&aStarting plugin enable...");
 		
-		// TODO Check Economy in config.
+		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
+			USE_ECO = true;
+			Messager.msgConsole("&aEconomy is enabled in the config.");
+		}
+		
+		if (!setupEconomy()) {
+			Messager.msgConsole("&cVault not found! Disabling support for economy features. If you would like to use economy features download Vault at: "
+							+ "http://dev.bukkit.org/bukkit-plugins/vault/");
+			USE_ECO = false;
+		}
 		
 		// Register Listeners
 		Bukkit.getServer().getPluginManager().registerEvents(new V3_OnJoin(), this);
@@ -64,6 +76,10 @@ public class V3_Main extends JavaPlugin{
 		// Command Executors
 		getCommand("rename").setExecutor(new V3_Rename());
 		getCommand("epicrename").setExecutor(new V3_EpicRename());	
+		// TODO /lore
+		// TODO /saveitem
+		// TODO /getitem
+		// TODO /renameentity
 		
 		Messager.msgConsole("&aPlugin Enabled!");		
 	}
@@ -74,7 +90,7 @@ public class V3_Main extends JavaPlugin{
 	 * @return The colored string from messages.yml
 	 */
 	public static String getMsgFromConfig(String path) {
-		
+		if (Messager.color(v3_messages.getString(path)) == null) Debug.send("Message in V3_Main.getMsgFromConfig() is NULL.");
 		return Messager.color(v3_messages.getString(path));
 	}
 	
@@ -85,6 +101,10 @@ public class V3_Main extends JavaPlugin{
 	public static void reloadConfigs() {
 		getInstance().reloadConfig();
 		v3_messages.reload();
+		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
+			USE_ECO = true;
+			Messager.msgConsole("&aEconomy is enabled in the config.");
+		}
 	}	
 	
 	public static void checkServerVerison() {
@@ -104,35 +124,22 @@ public class V3_Main extends JavaPlugin{
 				}	// End of Server Version Check
 	}
 	
+
 	/**
-	 * Add Command Stats
-	 * @param erc The command that this method is coming from.
+	 * Sets up vault economy.
+	 * @return
 	 */
-	public static void cmdAddStats(V3_EpicRenameCommands erc) {
-		
-		try {	
-			
-			if (erc == V3_EpicRenameCommands.RENAME) {
-				RENAME_USES++;
-				Debug.send("Added one to the total for /renamee");
-				return;
-			} else if (erc == V3_EpicRenameCommands.LORE) {
-				LORE_USES++;
-				Debug.send("Added one to the total for /lore");
-				return;
-			} else if (erc == V3_EpicRenameCommands.RENAMEENTITY) {
-				RENAME_ENTITY_USES++;
-				Debug.send("Added one to the total for /renameentity");
-				return;
-			} else {
-				Debug.send("Incorrect command sent to #cmdAddStats()");
-				return;
-			}
-			
-		} catch(Exception e) {
-			Debug.send("Number in per command stats is probably too large. Please check your config and see if that number is 2,147,483,648. If it is then you can reset it to 0."
-					+ " Please email JustBru00 at justbru00@gmail.com when you reach this. I would love to know. :D");
+	private boolean setupEconomy() {
+		if (getServer().getPluginManager().getPlugin("Vault") == null) {
+			return false;
 		}
+		RegisteredServiceProvider<Economy> rsp = getServer()
+				.getServicesManager().getRegistration(Economy.class);
+		if (rsp == null) {
+			return false;
+		}
+		econ = rsp.getProvider();
+		return econ != null;
 	}
 	
 }

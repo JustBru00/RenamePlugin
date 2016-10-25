@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.gmail.justbru00.epic.rename.enums.v3.V3_EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.RenameRewrite;
 import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
@@ -44,7 +45,14 @@ public class V3_RenameUtil {
 					if (CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");
 						if (inHand.getType() != Material.AIR) { // Check != Air
-							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions								
+							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions		
+								
+								V3_EcoMessage ecoStatus = V3_EconomyManager.takeMoney(player, V3_EpicRenameCommands.RENAME);
+								
+								if (ecoStatus == V3_EcoMessage.TRANSACTION_ERROR) {
+									return;
+								}
+								
 								if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 									player.getInventory().setItemInMainHand(V3_RenameUtil.renameItemStack(player, args, inHand));
 									return;
