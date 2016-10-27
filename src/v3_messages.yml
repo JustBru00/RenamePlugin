@@ -1,3 +1,6 @@
+#EpicRename: messages.yml Version 3.0+
+messages_yml_version: 1
+
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   no_args: '&cType /epicrename help for commands. (No Arguments)'
@@ -17,9 +20,10 @@ rename:
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   cannot_rename_air: '&cSorry you can''t rename nothing.'  
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
-  charlimit:
-    name_too_long: '&cSorry that name is too long. The character limit is {char}.'
-    bypass_msg: '&aYou just bypassed the character limit of {char}.'
+  
+characterlimit:
+  name_too_long: '&cSorry that name is too long. The character limit is {char}.'
+  bypass_msg: '&aYou just bypassed the character limit of {char}.'
 
 economy:
   bypass: '&aYou just bypassed the economy requirement.'

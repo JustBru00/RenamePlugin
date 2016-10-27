@@ -69,7 +69,7 @@ public class V3_RenameUtil {
 							return;
 						}
 					} else {
-						Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.charlimit.name_too_long"), player);
+						Messager.msgPlayer(V3_Main.getMsgFromConfig("character_limit.name_too_long"), player);
 						return;
 					}
 				} else {

@@ -28,10 +28,12 @@ public class V3_Main extends JavaPlugin{
 	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x get in hand item method.
 	public static V3_MCVersion MC_VERSION; // Version is set in #checkServerVerison()
 	public static V3_Main plugin;
-	public static V3_PluginFile v3_messages = null;
+	public static V3_PluginFile messages = null;
 	public static Economy econ = null; // Vault economy.
 	public static boolean USE_ECO = false;
 	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue #45)
+	public static final int CONFIG_VERSION = 1; 
+	public static final int MESSAGES_VERSION = 1;
 	
 	
 	
@@ -48,9 +50,9 @@ public class V3_Main extends JavaPlugin{
 		plugin = this;
 		
 		checkServerVerison();
-		this.saveDefaultConfig();		
 		
-		v3_messages = new V3_PluginFile(this, "v3_messages.yml", "v3_messages.yml");
+		this.saveDefaultConfig();			
+		messages = new V3_PluginFile(this, "messages.yml", "messages.yml");
 		PLUGIN_VERISON = V3_Main.getInstance().getDescription().getVersion();
 		
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
@@ -58,6 +60,8 @@ public class V3_Main extends JavaPlugin{
 				+ "You can view a copy of it at: http://bit.ly/2eMknxx"); 
 				
 		Messager.msgConsole("&aStarting plugin enable...");
+		
+		checkConfigVersions();
 		
 		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
@@ -90,8 +94,8 @@ public class V3_Main extends JavaPlugin{
 	 * @return The colored string from messages.yml
 	 */
 	public static String getMsgFromConfig(String path) {
-		if (Messager.color(v3_messages.getString(path)) == null) Debug.send("Message in V3_Main.getMsgFromConfig() is NULL.");
-		return Messager.color(v3_messages.getString(path));
+		if (Messager.color(messages.getString(path)) == null) Debug.send("Message in V3_Main.getMsgFromConfig() is NULL.");
+		return Messager.color(messages.getString(path));
 	}
 	
 	 public static V3_Main getInstance() {
@@ -100,7 +104,7 @@ public class V3_Main extends JavaPlugin{
 	
 	public static void reloadConfigs() {
 		getInstance().reloadConfig();
-		v3_messages.reload();
+		messages.reload();
 		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
@@ -122,6 +126,16 @@ public class V3_Main extends JavaPlugin{
 					MC_VERSION = V3_MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 					Debug.send("Server running unknown version. Assuming newer than 1.10");
 				}	// End of Server Version Check
+	}
+	
+	public static void checkConfigVersions() {
+		if (getInstance().getConfig().getInt("config_version") != CONFIG_VERSION) {
+			Messager.msgConsole("&cWARNING -> config.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
+		} 
+		
+		if (messages.getInt("messages_yml_version") != MESSAGES_VERSION) {
+			Messager.msgConsole("&cWARNING -> messages.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
+		}
 	}
 	
 

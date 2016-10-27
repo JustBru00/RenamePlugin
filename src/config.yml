@@ -1,6 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.0
+#Version 3.0+
 
+#DO NOT CHANGE THIS PLEASE
+config_version: 1
 
 #Economy Features
 economy:
@@ -12,3 +14,16 @@ economy:
 
 # Should we auto update?    
 auto_update: true
+
+blacklists:
+  material:
+    - 'VAILD_MATERIAL_HERE'
+    -
+  
+  text:
+    - 'some_bad_phrase_here'
+    -
+    
+character_limit:
+  enabled: false
+  limit: 30  

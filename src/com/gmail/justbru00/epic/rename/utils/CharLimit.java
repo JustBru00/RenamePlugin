@@ -75,14 +75,14 @@ public class CharLimit {
 		completeArgs = builder.toString();
 		completeArgs = ChatColor.stripColor(Messager.color(completeArgs));
 		
-		if (!V3_Main.getInstance().getConfig().getBoolean("charlimitenabled")) {
+		if (!V3_Main.getInstance().getConfig().getBoolean("character_limit.enabled")) {
 			Debug.send("Char Limit is disabled.");
 			return true;
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
 			Debug.send("Player bypassed char limit");
-			Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.charlimit.bypass_msg"), player);
+			Messager.msgPlayer(V3_Main.getMsgFromConfig("character_limit.bypass_msg"), player);
 			return true;
 		}
 		
@@ -95,7 +95,7 @@ public class CharLimit {
 	}
 	
 	public static int v3_getCharLimit() {
-		return V3_Main.getInstance().getConfig().getInt("charlimit");
+		return V3_Main.getInstance().getConfig().getInt("character_limit.limit");
 	}
 	
 	public static int getCharLimit() {
