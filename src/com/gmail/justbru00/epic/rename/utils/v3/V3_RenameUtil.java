@@ -55,9 +55,11 @@ public class V3_RenameUtil {
 								
 								if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 									player.getInventory().setItemInMainHand(V3_RenameUtil.renameItemStack(player, args, inHand));
+									Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.success"), player);
 									return;
 								} else { // Use older method.
 									player.setItemInHand(V3_RenameUtil.renameItemStack(player, args, inHand));
+									Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.success"), player);
 									return;
 								}									
 							} else {

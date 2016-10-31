@@ -34,6 +34,12 @@ public class V3_EconomyManager {
 		}
 		
 		if (erc == V3_EpicRenameCommands.RENAME) {
+			
+			if (player.hasPermission("epicrename.bypass.costs.rename")) {
+				Messager.msgPlayer(V3_Main.getMsgFromConfig("economy.bypass"), player);
+				return V3_EcoMessage.ECO_BYPASS;
+			}
+			
 			EconomyResponse r = V3_Main.econ.withdrawPlayer(player, V3_Main.getInstance().getConfig().getInt("economy.costs.rename"));
 				
 			if (r.transactionSuccess()) {
@@ -45,6 +51,12 @@ public class V3_EconomyManager {
 			}
 		
 		} else if (erc == V3_EpicRenameCommands.LORE) {
+			
+			if (player.hasPermission("epicrename.bypass.costs.lore")) {
+				Messager.msgPlayer(V3_Main.getMsgFromConfig("economy.bypass"), player);
+				return V3_EcoMessage.ECO_BYPASS;
+			}
+			
 			EconomyResponse r = V3_Main.econ.withdrawPlayer(player, V3_Main.getInstance().getConfig().getInt("economy.costs.lore"));
 			
 			if (r.transactionSuccess()) {
@@ -55,6 +67,12 @@ public class V3_EconomyManager {
 				return V3_EcoMessage.TRANSACTION_ERROR;
 			}
 		} else if (erc == V3_EpicRenameCommands.RENAMEENTITY) {
+			
+			if (player.hasPermission("epicrename.bypass.costs.renameentity")) {
+				Messager.msgPlayer(V3_Main.getMsgFromConfig("economy.bypass"), player);
+				return V3_EcoMessage.ECO_BYPASS;
+			}
+			
 			EconomyResponse r = V3_Main.econ.withdrawPlayer(player, V3_Main.getInstance().getConfig().getInt("economy.costs.renameentity"));
 			
 			if (r.transactionSuccess()) {

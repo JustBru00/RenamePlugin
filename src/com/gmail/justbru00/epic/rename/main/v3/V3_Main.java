@@ -12,6 +12,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.V3_EpicRename;
+import com.gmail.justbru00.epic.rename.commands.v3.V3_Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.V3_Rename;
 import com.gmail.justbru00.epic.rename.enums.v3.V3_MCVersion;
 import com.gmail.justbru00.epic.rename.listeners.V3_OnJoin;
@@ -80,7 +81,7 @@ public class V3_Main extends JavaPlugin{
 		// Command Executors
 		getCommand("rename").setExecutor(new V3_Rename());
 		getCommand("epicrename").setExecutor(new V3_EpicRename());	
-		// TODO /lore
+		getCommand("lore").setExecutor(new V3_Lore());
 		// TODO /saveitem
 		// TODO /getitem
 		// TODO /renameentity
@@ -94,7 +95,10 @@ public class V3_Main extends JavaPlugin{
 	 * @return The colored string from messages.yml
 	 */
 	public static String getMsgFromConfig(String path) {
-		if (Messager.color(messages.getString(path)) == null) Debug.send("Message in V3_Main.getMsgFromConfig() is NULL.");
+		if (messages.getString(path) == null)  {
+			Debug.send("Message in V3_Main.getMsgFromConfig() is NULL. Bugged path is: " + path);
+			return "MESSAGE IS NULL FROM CONFIG.";
+		}
 		return Messager.color(messages.getString(path));
 	}
 	
