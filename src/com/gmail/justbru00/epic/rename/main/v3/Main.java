@@ -57,7 +57,7 @@ public class Main extends JavaPlugin{
 		PLUGIN_VERISON = Main.getInstance().getDescription().getVersion();
 		
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
-		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0 license. "
+		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
 				+ "You can view a copy of it at: http://bit.ly/2eMknxx"); 
 				
 		Messager.msgConsole("&aStarting plugin enable...");
