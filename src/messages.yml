@@ -35,10 +35,12 @@ lore:
 setloreline:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   wrong_sender: '&cSorry only a player can use that command.'
-  no_args: '&cYou need to place at least one argument after /setloreline.'
+  wrong_args: '&cYou need to place some arguments after /setloreline. /setloreline <linenumber> <text>'
+  not_an_int: '&cYou need to provide an integer as the first argument.'
+  provide_text: '&cPlease provide some text. /setloreline <linenumber> <text>'
   blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
-  cannot_lore_air: '&cSorry you can''t relore nothing.'
+  cannot_edit_air: '&cSorry you can''t relore nothing.'
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRelored the item successfully.'  
   
@@ -48,7 +50,7 @@ removeloreline:
   no_args: '&cYou need to place at least one argument after /removeloreline.'
   blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
-  cannot_lore_air: '&cSorry you can''t relore nothing.'
+  cannot_edit_air: '&cSorry you can''t edit nothing.'
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRelored the item successfully.'    
   

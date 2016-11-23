@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
+import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.listeners.OnJoin;
 import com.gmail.justbru00.epic.rename.utils.Debug;
@@ -84,7 +85,7 @@ public class Main extends JavaPlugin{
 		getCommand("lore").setExecutor(new Lore());
 		// TODO /saveitem
 		// TODO /getitem
-		// TODO /setloreline
+		getCommand("setloreline").setExecutor(new SetLoreLine());
 		// TODO /removeloreline		
 		// TODO /renameentity
 		
@@ -123,14 +124,14 @@ public class Main extends JavaPlugin{
 					USE_NEW_GET_HAND = false;
 					MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
 					Debug.send("Using methods for version 1.7 or 1.8");
-				} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))) {
+				} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10")) || (Bukkit.getVersion().contains("1.11"))) {
 					USE_NEW_GET_HAND = true;
 					MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 					Debug.send("Using methods for version 1.9+");
 				} else {
 					USE_NEW_GET_HAND = true;
 					MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-					Debug.send("Server running unknown version. Assuming newer than 1.10");
+					Debug.send("Server running unknown version. Assuming newer than 1.11");
 				}	// End of Server Version Check
 	}
 	

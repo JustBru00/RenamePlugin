@@ -15,6 +15,57 @@ import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 public class LoreUtil {
+	
+	@SuppressWarnings("deprecation")
+	public static void setLoreLine(int lineNumber, Player player, String[] args) {		
+		
+		StringBuilder builder = new StringBuilder("");
+		
+		for (int i = 1; i < args.length; i++) {
+			builder.append(args[i] + " ");
+		}
+		
+		String loreToBeSet = builder.toString().trim();
+		List<String> newLore = new ArrayList<String>();
+	
+		loreToBeSet = Messager.color(loreToBeSet);
+		
+		ItemStack inHand = RenameUtil.getInHand(player);						
+		ItemMeta im = inHand.getItemMeta();
+		
+		if (im.hasLore()) {
+			
+			List<String> oldLore = im.getLore();
+			
+			try {
+				oldLore.set(lineNumber, loreToBeSet);
+			} catch (IndexOutOfBoundsException e) {
+				
+				
+				for (int i = 0; i < oldLore.size(); i++) { // Fill new lore with old stuff
+					newLore.set(i, oldLore.get(i));
+				}
+				
+				for (int i = oldLore.size() - 1; i <= lineNumber; i++) { // Expand new lore to proper size
+					newLore.set(i, "");
+				}
+				
+				newLore.set(lineNumber, loreToBeSet);
+			}
+			
+			im.setLore(newLore);
+			inHand.setItemMeta(im);
+			if (Main.USE_NEW_GET_HAND) {
+				player.getInventory().setItemInMainHand(inHand);
+			} else {
+				player.setItemInHand(inHand);
+			}
+			
+		} else { // Item has no lore
+			
+		}
+		
+	}
 
 	@SuppressWarnings("deprecation")
 	/**
@@ -63,7 +114,7 @@ public class LoreUtil {
 						return;
 					}
 				} else {
-					Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_rename_air"), player);
+					Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_lore_air"), player);
 					return;
 				}
 			} else {

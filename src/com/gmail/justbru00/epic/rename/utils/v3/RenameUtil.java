@@ -107,7 +107,7 @@ public class RenameUtil {
 			builder.append(item + " ");
 		}
 		
-		completeArgs = builder.toString();
+		completeArgs = builder.toString().trim();
 		Debug.send("The args result is: " + completeArgs);
 		
 		ItemMeta im = toRename.getItemMeta();
