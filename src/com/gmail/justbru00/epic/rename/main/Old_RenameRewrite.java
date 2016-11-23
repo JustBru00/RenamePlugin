@@ -46,14 +46,14 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.justbru00.epic.rename.commands.EpicRename;
-import com.gmail.justbru00.epic.rename.commands.Lore;
-import com.gmail.justbru00.epic.rename.commands.Rename;
-import com.gmail.justbru00.epic.rename.commands.RenameEntity;
+import com.gmail.justbru00.epic.rename.commands.Old_EpicRename;
+import com.gmail.justbru00.epic.rename.commands.Old_Lore;
+import com.gmail.justbru00.epic.rename.commands.Old_Rename;
+import com.gmail.justbru00.epic.rename.commands.Old_RenameEntity;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
-public class RenameRewrite extends JavaPlugin {
+public class Old_RenameRewrite extends JavaPlugin {
 
 	public static Economy econ = null;
 	public Boolean useEconomy = false;
@@ -68,10 +68,10 @@ public class RenameRewrite extends JavaPlugin {
 	public final String PLUGIN_VERSION = this.getDescription().getVersion();
 	public final int RESOURCE_NUMBER = 4341;
 	public static boolean debug = false;
-	private static RenameRewrite plugin;
+	private static Old_RenameRewrite plugin;
 	public static boolean USE_NEW_GET_HAND;
 		
-	public static RenameRewrite getInstance() {
+	public static Old_RenameRewrite getInstance() {
 		return plugin;
 	}
 	
@@ -147,13 +147,13 @@ public class RenameRewrite extends JavaPlugin {
 		}
 
 		// Register Listener
-		Bukkit.getServer().getPluginManager().registerEvents(new Watcher(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new Old_Watcher(), this);
 		
 		// Register Command Executors
-		Bukkit.getPluginCommand("rename").setExecutor(new Rename(this));		
-		Bukkit.getPluginCommand("lore").setExecutor(new Lore(this));
-		Bukkit.getPluginCommand("renameentity").setExecutor(new RenameEntity(this));
-		Bukkit.getPluginCommand("epicrename").setExecutor(new EpicRename(this));
+		Bukkit.getPluginCommand("rename").setExecutor(new Old_Rename(this));		
+		Bukkit.getPluginCommand("lore").setExecutor(new Old_Lore(this));
+		Bukkit.getPluginCommand("renameentity").setExecutor(new Old_RenameEntity(this));
+		Bukkit.getPluginCommand("epicrename").setExecutor(new Old_EpicRename(this));
 		
 		
 		

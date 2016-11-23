@@ -5,11 +5,11 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.V3_LoreUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.LoreUtil;
 
-public class V3_Lore implements CommandExecutor {
+public class Lore implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,21 +24,21 @@ public class V3_Lore implements CommandExecutor {
 					
 					if (args.length >= 1) {
 						
-						V3_LoreUtil.loreHandle(args, player);
+						LoreUtil.loreHandle(args, player);
 						
 						return true;
 					} else {
-						Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.no_args"), player);
+						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_args"), player);
 						return true;
 					}
 					
 				} else {
-					Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.no_permission"), player);
+					Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission"), player);
 					return true;
 				}
 				
 			} else {
-				Messager.msgSender(V3_Main.getMsgFromConfig("lore.wrong_sender"), sender);
+				Messager.msgSender(Main.getMsgFromConfig("lore.wrong_sender"), sender);
 				return true;
 			}			
 		} // End /lore

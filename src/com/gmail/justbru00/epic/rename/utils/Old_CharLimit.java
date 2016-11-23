@@ -25,12 +25,12 @@ package com.gmail.justbru00.epic.rename.utils;
 
 import org.bukkit.entity.Player;
 
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class CharLimit {	
+public class Old_CharLimit {	
 	
 
 
@@ -42,12 +42,12 @@ public class CharLimit {
 	 */
 	public static boolean checkCharLimit(String checking, Player player) {
 		
-		if (!RenameRewrite.getInstance().getConfig().getBoolean(("charlimitenabled"))) {
+		if (!Old_RenameRewrite.getInstance().getConfig().getBoolean(("charlimitenabled"))) {
 			return false;
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
-			Messager.msgPlayer(player, RenameRewrite.getInstance().getConfig().getString("charlimitbypassmessage"));
+			Messager.msgPlayer(player, Old_RenameRewrite.getInstance().getConfig().getString("charlimitbypassmessage"));
 			return false;
 		}
 		
@@ -75,14 +75,14 @@ public class CharLimit {
 		completeArgs = builder.toString();
 		completeArgs = ChatColor.stripColor(Messager.color(completeArgs));
 		
-		if (!V3_Main.getInstance().getConfig().getBoolean("character_limit.enabled")) {
+		if (!Main.getInstance().getConfig().getBoolean("character_limit.enabled")) {
 			Debug.send("Char Limit is disabled.");
 			return true;
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
 			Debug.send("Player bypassed char limit");
-			Messager.msgPlayer(V3_Main.getMsgFromConfig("character_limit.bypass_msg"), player);
+			Messager.msgPlayer(Main.getMsgFromConfig("character_limit.bypass_msg"), player);
 			return true;
 		}
 		
@@ -95,10 +95,10 @@ public class CharLimit {
 	}
 	
 	public static int v3_getCharLimit() {
-		return V3_Main.getInstance().getConfig().getInt("character_limit.limit");
+		return Main.getInstance().getConfig().getInt("character_limit.limit");
 	}
 	
 	public static int getCharLimit() {
-		return RenameRewrite.getInstance().getConfig().getInt("charlimit");		
+		return Old_RenameRewrite.getInstance().getConfig().getInt("charlimit");		
 	}
 }

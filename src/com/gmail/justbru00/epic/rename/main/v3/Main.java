@@ -11,25 +11,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.justbru00.epic.rename.commands.v3.V3_EpicRename;
-import com.gmail.justbru00.epic.rename.commands.v3.V3_Lore;
-import com.gmail.justbru00.epic.rename.commands.v3.V3_Rename;
-import com.gmail.justbru00.epic.rename.enums.v3.V3_MCVersion;
-import com.gmail.justbru00.epic.rename.listeners.V3_OnJoin;
+import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
+import com.gmail.justbru00.epic.rename.commands.v3.Lore;
+import com.gmail.justbru00.epic.rename.commands.v3.Rename;
+import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
+import com.gmail.justbru00.epic.rename.listeners.OnJoin;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.V3_PluginFile;
+import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
 
 import net.milkbowl.vault.economy.Economy;
 
-public class V3_Main extends JavaPlugin{
+public class Main extends JavaPlugin{
 	
 	public static boolean debug = false;
 	public static String PLUGIN_VERISON = null; 
 	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x get in hand item method.
-	public static V3_MCVersion MC_VERSION; // Version is set in #checkServerVerison()
-	public static V3_Main plugin;
-	public static V3_PluginFile messages = null;
+	public static MCVersion MC_VERSION; // Version is set in #checkServerVerison()
+	public static Main plugin;
+	public static PluginFile messages = null;
 	public static Economy econ = null; // Vault economy.
 	public static boolean USE_ECO = false;
 	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue #45)
@@ -53,8 +53,8 @@ public class V3_Main extends JavaPlugin{
 		checkServerVerison();
 		
 		this.saveDefaultConfig();			
-		messages = new V3_PluginFile(this, "messages.yml", "messages.yml");
-		PLUGIN_VERISON = V3_Main.getInstance().getDescription().getVersion();
+		messages = new PluginFile(this, "messages.yml", "messages.yml");
+		PLUGIN_VERISON = Main.getInstance().getDescription().getVersion();
 		
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
 		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR) + " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0 license. "
@@ -64,7 +64,7 @@ public class V3_Main extends JavaPlugin{
 		
 		checkConfigVersions();
 		
-		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
+		if (Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
 		}
@@ -76,14 +76,16 @@ public class V3_Main extends JavaPlugin{
 		}
 		
 		// Register Listeners
-		Bukkit.getServer().getPluginManager().registerEvents(new V3_OnJoin(), this);
+		Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
 		
 		// Command Executors
-		getCommand("rename").setExecutor(new V3_Rename());
-		getCommand("epicrename").setExecutor(new V3_EpicRename());	
-		getCommand("lore").setExecutor(new V3_Lore());
+		getCommand("rename").setExecutor(new Rename());
+		getCommand("epicrename").setExecutor(new EpicRename());	
+		getCommand("lore").setExecutor(new Lore());
 		// TODO /saveitem
 		// TODO /getitem
+		// TODO /setloreline
+		// TODO /removeloreline		
 		// TODO /renameentity
 		
 		Messager.msgConsole("&aPlugin Enabled!");		
@@ -102,14 +104,14 @@ public class V3_Main extends JavaPlugin{
 		return Messager.color(messages.getString(path));
 	}
 	
-	 public static V3_Main getInstance() {
+	 public static Main getInstance() {
 		 return plugin;
 	 }
 	
 	public static void reloadConfigs() {
 		getInstance().reloadConfig();
 		messages.reload();
-		if (V3_Main.getInstance().getConfig().getBoolean("economy.use")) {
+		if (Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
 		}
@@ -119,15 +121,15 @@ public class V3_Main extends JavaPlugin{
 		// Check Server Version
 				if ((Bukkit.getVersion().contains("1.7")) || (Bukkit.getVersion().contains("1.8"))) {
 					USE_NEW_GET_HAND = false;
-					MC_VERSION = V3_MCVersion.OLDER_THAN_ONE_DOT_NINE;
+					MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
 					Debug.send("Using methods for version 1.7 or 1.8");
 				} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))) {
 					USE_NEW_GET_HAND = true;
-					MC_VERSION = V3_MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
+					MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 					Debug.send("Using methods for version 1.9+");
 				} else {
 					USE_NEW_GET_HAND = true;
-					MC_VERSION = V3_MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
+					MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 					Debug.send("Server running unknown version. Assuming newer than 1.10");
 				}	// End of Server Version Check
 	}

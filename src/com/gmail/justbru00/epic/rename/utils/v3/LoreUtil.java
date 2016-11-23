@@ -8,13 +8,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EcoMessage;
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
-public class V3_LoreUtil {
+public class LoreUtil {
 
 	@SuppressWarnings("deprecation")
 	/**
@@ -24,12 +24,12 @@ public class V3_LoreUtil {
 	 * @param player
 	 */
 	public static void loreHandle(String[] args, Player player) {
-		if (V3_Blacklists.checkTextBlacklist(args)) {
+		if (Blacklists.checkTextBlacklist(args)) {
 			Debug.send("Passed Text Blacklist");
-			if (V3_Blacklists.checkMaterialBlacklist(V3_RenameUtil.getInHand(player).getType())) {
+			if (Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType())) {
 				Debug.send("Passed Material Blacklist");
 
-				ItemStack inHand = V3_RenameUtil.getInHand(player);
+				ItemStack inHand = RenameUtil.getInHand(player);
 
 				if (inHand.getType() != Material.AIR) {
 					Debug.send("Passed Air check");
@@ -37,41 +37,41 @@ public class V3_LoreUtil {
 					if ((player.hasPermission("epicrename.lore." + inHand.getType().toString()))
 							|| player.hasPermission("epicrename.lore.*")) {
 
-						V3_EcoMessage ecoStatus = V3_EconomyManager.takeMoney(player, V3_EpicRenameCommands.LORE);
+						EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.LORE);
 
-						if (ecoStatus == V3_EcoMessage.TRANSACTION_ERROR) {
+						if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
 							return;
 						}
 
 						ItemStack toLore = inHand;
 						ItemMeta toLoreMeta = toLore.getItemMeta();
-						toLoreMeta.setLore(V3_LoreUtil.buildLoreFromArgs(args));
+						toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
 						toLore.setItemMeta(toLoreMeta);
 
-						if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+						if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 							player.getInventory().setItemInMainHand(toLore);
-							Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.success"), player);
+							Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
 							return;
 						} else { // Use older method.
 							player.setItemInHand(toLore);
-							Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.success"), player);
+							Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
 							return;
 						}
 
 					} else {
-						Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.no_permission_for_material"), player);
+						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission_for_material"), player);
 						return;
 					}
 				} else {
-					Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.cannot_rename_air"), player);
+					Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_rename_air"), player);
 					return;
 				}
 			} else {
-				Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.blacklisted_material_found"), player);
+				Messager.msgPlayer(Main.getMsgFromConfig("lore.blacklisted_material_found"), player);
 				return;
 			}
 		} else {
-			Messager.msgPlayer(V3_Main.getMsgFromConfig("lore.blacklisted_word_found"), player);
+			Messager.msgPlayer(Main.getMsgFromConfig("lore.blacklisted_word_found"), player);
 			return;
 		}
 	}

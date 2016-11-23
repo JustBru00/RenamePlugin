@@ -9,8 +9,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
-import com.gmail.justbru00.epic.rename.utils.v3.V3_VaribleReplacer;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
+import com.gmail.justbru00.epic.rename.utils.v3.VaribleReplacer;
 
 
 public class Messager {
@@ -20,27 +20,27 @@ public class Messager {
 	}
 	
 	public static void msgConsole(String msg) {		
-		msg = V3_VaribleReplacer.replace(msg);
+		msg = VaribleReplacer.replace(msg);
 		
-		if (RenameRewrite.clogger != null) {
-		RenameRewrite.clogger.sendMessage(RenameRewrite.Prefix + Messager.color(msg));		
+		if (Old_RenameRewrite.clogger != null) {
+		Old_RenameRewrite.clogger.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));		
 		} else {
-			RenameRewrite.log.info(ChatColor.stripColor(Messager.color(msg)));
+			Old_RenameRewrite.log.info(ChatColor.stripColor(Messager.color(msg)));
 		}
 	}
 	
 	public static void msgPlayer(String msg, Player player) {
-		msg = V3_VaribleReplacer.replace(msg);
-		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
+		msg = VaribleReplacer.replace(msg);
+		player.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgPlayer(Player player, String msg) {
-		msg = V3_VaribleReplacer.replace(msg);
-		player.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
+		msg = VaribleReplacer.replace(msg);
+		player.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
 	public static void msgSender(String msg, CommandSender sender) {
-		msg = V3_VaribleReplacer.replace(msg);
-		sender.sendMessage(RenameRewrite.Prefix + Messager.color(msg));
+		msg = VaribleReplacer.replace(msg);
+		sender.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));
 	}	
 }

@@ -30,16 +30,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 import net.milkbowl.vault.economy.EconomyResponse;
 
-public class Lore implements CommandExecutor {
+public class Old_Lore implements CommandExecutor {
 
-	public RenameRewrite main;
+	public Old_RenameRewrite main;
 
-	public Lore(RenameRewrite main) {
+	public Old_Lore(Old_RenameRewrite main) {
 		this.main = main;
 	}
 
@@ -61,7 +61,7 @@ public class Lore implements CommandExecutor {
 							
 							if (player.hasPermission("epicrename.bypass.costs.*") || player.hasPermission("epicrename.bypass.costs.lore")) { // Start bypass
 								
-								Messager.msgPlayer(player, RenameRewrite.getInstance().config.getString("economy.bypassmsg"));
+								Messager.msgPlayer(player, Old_RenameRewrite.getInstance().config.getString("economy.bypassmsg"));
 								
 								// Start Lore
 								int i = 0;
@@ -86,11 +86,11 @@ public class Lore implements CommandExecutor {
 								// End Lore
 							} // End bypass
 							
-							EconomyResponse r = RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.lore"));
+							EconomyResponse r = Old_RenameRewrite.econ.withdrawPlayer(player, main.getConfig().getInt("economy.costs.lore"));
 							
 							if (r.transactionSuccess()) { // Start Eco Success
-								player.sendMessage(String.format(RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
-										RenameRewrite.econ.format(r.amount), RenameRewrite.econ.format(r.balance)));
+								player.sendMessage(String.format(Old_RenameRewrite.Prefix + Messager.color("&6Withdrew &a%s &6from your balance. Your current balance is now: &a%s"),
+										Old_RenameRewrite.econ.format(r.amount), Old_RenameRewrite.econ.format(r.balance)));
 								
 								// Start Lore
 								int i = 0;
@@ -118,7 +118,7 @@ public class Lore implements CommandExecutor {
 								
 							} else { // End Eco Success | Start Eco Fail
 								sender.sendMessage(
-										String.format(RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
+										String.format(Old_RenameRewrite.Prefix + Messager.color("&6An error occured:&c %s"),
 												r.errorMessage));
 								return true;
 							} // End of Eco Fail

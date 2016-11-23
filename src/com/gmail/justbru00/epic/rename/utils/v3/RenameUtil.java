@@ -11,16 +11,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EcoMessage;
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
-import com.gmail.justbru00.epic.rename.utils.CharLimit;
+import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
+import com.gmail.justbru00.epic.rename.utils.Old_CharLimit;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
 
-public class V3_RenameUtil {
+public class RenameUtil {
 
 	// VERSION 3
 	
@@ -31,58 +31,58 @@ public class V3_RenameUtil {
 	 * @param erc The command that called this method.
 	 */
 	@SuppressWarnings("deprecation")
-	public static void renameHandle(Player player, String[] args, V3_EpicRenameCommands erc) {
+	public static void renameHandle(Player player, String[] args, EpicRenameCommands erc) {
 		
-		if (erc == V3_EpicRenameCommands.RENAME) { // Command /rename handling START
+		if (erc == EpicRenameCommands.RENAME) { // Command /rename handling START
 			Debug.send("RenameUtil.rename() handling from /rename");
 			
-			ItemStack inHand = V3_RenameUtil.getInHand(player); // Item in the players hand.
+			ItemStack inHand = RenameUtil.getInHand(player); // Item in the players hand.
 			
-			if (V3_Blacklists.checkTextBlacklist(args)) { // Check Text Blacklist
+			if (Blacklists.checkTextBlacklist(args)) { // Check Text Blacklist
 				Debug.send("Passed Text Blacklist");
-				if (V3_Blacklists.checkMaterialBlacklist(inHand.getType())) { // Check Material Blacklist
+				if (Blacklists.checkMaterialBlacklist(inHand.getType())) { // Check Material Blacklist
 					Debug.send("Passed Material Blacklist Check.");
-					if (CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
+					if (Old_CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");
 						if (inHand.getType() != Material.AIR) { // Check != Air
 							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions		
 								
-								V3_EcoMessage ecoStatus = V3_EconomyManager.takeMoney(player, V3_EpicRenameCommands.RENAME);
+								EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.RENAME);
 								
-								if (ecoStatus == V3_EcoMessage.TRANSACTION_ERROR) {
+								if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
 									return;
 								}
 								
-								if (V3_Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-									player.getInventory().setItemInMainHand(V3_RenameUtil.renameItemStack(player, args, inHand));
-									Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.success"), player);
+								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+									player.getInventory().setItemInMainHand(RenameUtil.renameItemStack(player, args, inHand));
+									Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
 									return;
 								} else { // Use older method.
-									player.setItemInHand(V3_RenameUtil.renameItemStack(player, args, inHand));
-									Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.success"), player);
+									player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
+									Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
 									return;
 								}									
 							} else {
-								Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.no_permission_for_material"), player);
+								Messager.msgPlayer(Main.getMsgFromConfig("rename.no_permission_for_material"), player);
 								return;
 							}
 						} else {
-							Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.cannot_rename_air"), player);
+							Messager.msgPlayer(Main.getMsgFromConfig("rename.cannot_rename_air"), player);
 							return;
 						}
 					} else {
-						Messager.msgPlayer(V3_Main.getMsgFromConfig("character_limit.name_too_long"), player);
+						Messager.msgPlayer(Main.getMsgFromConfig("character_limit.name_too_long"), player);
 						return;
 					}
 				} else {
-					Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.blacklisted_material_found"), player);
+					Messager.msgPlayer(Main.getMsgFromConfig("rename.blacklisted_material_found"), player);
 					return;
 				}
 			} else {
-				Messager.msgPlayer(V3_Main.getMsgFromConfig("rename.blacklisted_word_found"), player);
+				Messager.msgPlayer(Main.getMsgFromConfig("rename.blacklisted_word_found"), player);
 				return;
 			}
-		} else if (erc == V3_EpicRenameCommands.RENAMEENTITY) { // Command /rename handling END | Command /renameentity START
+		} else if (erc == EpicRenameCommands.RENAMEENTITY) { // Command /rename handling END | Command /renameentity START
 			Debug.send("RenameUtil.rename() handling from /renameentity");
 			
 			// TODO Handle /renameentity
@@ -125,7 +125,7 @@ public class V3_RenameUtil {
 	public static ItemStack getInHand(Player player) {	
 		ItemStack returning = null;
 		
-		if (RenameRewrite.USE_NEW_GET_HAND) {
+		if (Old_RenameRewrite.USE_NEW_GET_HAND) {
 			returning = player.getInventory().getItemInMainHand();
 			return returning;
 		} else {

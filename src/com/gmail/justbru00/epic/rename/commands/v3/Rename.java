@@ -10,14 +10,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.gmail.justbru00.epic.rename.enums.v3.V3_EpicRenameCommands;
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.V3_RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 
-public class V3_Rename implements CommandExecutor {
+public class Rename implements CommandExecutor {
 	
-	public static final V3_EpicRenameCommands COMMAND = V3_EpicRenameCommands.RENAME;
+	public static final EpicRenameCommands COMMAND = EpicRenameCommands.RENAME;
 
 	// VERSION 3
 	
@@ -33,19 +33,19 @@ public class V3_Rename implements CommandExecutor {
 					
 					if (args.length >= 1) {					
 						
-							V3_RenameUtil.renameHandle(player, args, COMMAND);
+							RenameUtil.renameHandle(player, args, COMMAND);
 							
 							return true;								
 					} else { // No Args
-						Messager.msgPlayer(player, V3_Main.getMsgFromConfig("rename.no_args"));
+						Messager.msgPlayer(player, Main.getMsgFromConfig("rename.no_args"));
 						return true;						
 					}
 				} else { // No basic permission.
-					Messager.msgPlayer(player, V3_Main.getMsgFromConfig("rename.no_permission"));
+					Messager.msgPlayer(player, Main.getMsgFromConfig("rename.no_permission"));
 					return true;
 				}
 			} else { // Wrong sender
-				Messager.msgSender(V3_Main.getMsgFromConfig("rename.wrong_sender"), sender);
+				Messager.msgSender(Main.getMsgFromConfig("rename.wrong_sender"), sender);
 				return true;
 			}
 		} // End /rename code

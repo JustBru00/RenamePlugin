@@ -7,13 +7,13 @@ package com.gmail.justbru00.epic.rename.utils;
 
 import org.bukkit.Bukkit;
 
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class Debug {
 	public static void send(String msg) {
-		if (V3_Main.debug) {
-		Bukkit.broadcastMessage(Messager.color(RenameRewrite.Prefix + "&8[&cDebug&8] &c" + msg));
+		if (Main.debug) {
+		Bukkit.broadcastMessage(Messager.color(Old_RenameRewrite.Prefix + "&8[&cDebug&8] &c" + msg));
 		}
 	}
 }

@@ -9,10 +9,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.gmail.justbru00.epic.rename.main.v3.V3_Main;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
-public class V3_EpicRename implements CommandExecutor {
+public class EpicRename implements CommandExecutor {
 	
 	// VERSION 3
 
@@ -23,50 +23,50 @@ public class V3_EpicRename implements CommandExecutor {
 		if (command.getName().equalsIgnoreCase("epicrename")) {
 			
 			if (!sender.hasPermission("epicrename.epicrename")) { // Check Basic Permission
-				Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.no_permission"), sender);
+				Messager.msgSender(Main.getMsgFromConfig("epicrename.no_permission"), sender);
 				return true;
 			}
 			
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("license")) { // Start /epicrename license
-					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.license"), sender);
+					Messager.msgSender(Main.getMsgFromConfig("epicrename.license"), sender);
 					return true;
 				} else if (args[0].equalsIgnoreCase("help")) { // End /epicrename license | Start /epicrename help
-					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.help"), sender);
+					Messager.msgSender(Main.getMsgFromConfig("epicrename.help"), sender);
 					return true;
 				} else if (args[0].equalsIgnoreCase("reload")) { // End /epicrename license | Start /epicrename reload
 					if (sender.hasPermission("epicrename.reload")) {
-						V3_Main.reloadConfigs();
-						Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.reload_success"), sender);
+						Main.reloadConfigs();
+						Messager.msgSender(Main.getMsgFromConfig("epicrename.reload_success"), sender);
 						return true;
 					} else {
-						Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.no_permission"), sender);
+						Messager.msgSender(Main.getMsgFromConfig("epicrename.no_permission"), sender);
 						return true;
 					}					
 				} else if (args[0].equalsIgnoreCase("debug")) { // End /epicrename reload | Start /epicrename debug
 					if (sender.hasPermission("epicrename.epicrename.debug")) {
-						if (V3_Main.debug) {
-							V3_Main.debug = false;
-							Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.debug_disable"), sender);
+						if (Main.debug) {
+							Main.debug = false;
+							Messager.msgSender(Main.getMsgFromConfig("epicrename.debug_disable"), sender);
 							return true;
 						} else {
-							V3_Main.debug = true;
-							Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.debug_enable"), sender);
+							Main.debug = true;
+							Messager.msgSender(Main.getMsgFromConfig("epicrename.debug_enable"), sender);
 							return true;
 						}
 					} else {
-						Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.no_permission"), sender);
+						Messager.msgSender(Main.getMsgFromConfig("epicrename.no_permission"), sender);
 						return true;
 					}
 				} else if (args[0].equalsIgnoreCase("version")) { // End /epicrename debug | Start /epicrename version
-					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.version"), sender); 
+					Messager.msgSender(Main.getMsgFromConfig("epicrename.version"), sender); 
 					return true;
 				} else { // End /epicrename version | Start /epicrename invalid args
-					Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.invalid_args"), sender);
+					Messager.msgSender(Main.getMsgFromConfig("epicrename.invalid_args"), sender);
 					return true;
 				}
 			} else { // No Args				
-				Messager.msgSender(V3_Main.getMsgFromConfig("epicrename.no_args"), sender);				
+				Messager.msgSender(Main.getMsgFromConfig("epicrename.no_args"), sender);				
 				return true;
 			} //End No args
 		} // End Command Handling | EpicRename

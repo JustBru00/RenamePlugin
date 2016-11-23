@@ -27,13 +27,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class Watcher implements Listener{
+public class Old_Watcher implements Listener{
 
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {		
 		if (e.getPlayer().getName().equalsIgnoreCase("JustBru00")) {
-			e.getPlayer().sendMessage(RenameRewrite.Prefix + RenameRewrite.color("&bThis Server uses EpicRename."));		 
+			e.getPlayer().sendMessage(Old_RenameRewrite.Prefix + Old_RenameRewrite.color("&bThis Server uses EpicRename."));		 
 		}
 	}	
 }

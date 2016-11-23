@@ -28,9 +28,29 @@ lore:
   no_args: '&cYou need to place at least one argument after /lore.'
   blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
-  cannot_lore_air: '&cSorry you can''t rename nothing.'
+  cannot_lore_air: '&cSorry you can''t relore nothing.'
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRelored the item successfully.'
+  
+setloreline:
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
+  no_args: '&cYou need to place at least one argument after /setloreline.'
+  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
+  cannot_lore_air: '&cSorry you can''t relore nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
+  success: '&aRelored the item successfully.'  
+  
+removeloreline: 
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
+  no_args: '&cYou need to place at least one argument after /removeloreline.'
+  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
+  cannot_lore_air: '&cSorry you can''t relore nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
+  success: '&aRelored the item successfully.'    
   
 characterlimit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'

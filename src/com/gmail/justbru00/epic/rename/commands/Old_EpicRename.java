@@ -27,14 +27,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import com.gmail.justbru00.epic.rename.main.RenameRewrite;
+import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
-public class EpicRename implements CommandExecutor {
+public class Old_EpicRename implements CommandExecutor {
 
-	public RenameRewrite main;
+	public Old_RenameRewrite main;
 
-	public EpicRename(RenameRewrite main) {
+	public Old_EpicRename(Old_RenameRewrite main) {
 		this.main = main;
 	}
 	
@@ -71,12 +71,12 @@ public class EpicRename implements CommandExecutor {
 					
 			} 
 				if (args[1].equalsIgnoreCase("debug")) { // Debug Toggle
-					if (RenameRewrite.debug) {
-						RenameRewrite.debug = false;
+					if (Old_RenameRewrite.debug) {
+						Old_RenameRewrite.debug = false;
 						Messager.msgSender("&6Plugin Debug Messages are now &4&lOFF&6.", sender);
 						return true;
 					} else {
-						RenameRewrite.debug = true;
+						Old_RenameRewrite.debug = true;
 						Messager.msgSender("&6Plugin Debug Messages are now &a&lON&6.", sender);
 						return true;
 					}
@@ -84,7 +84,7 @@ public class EpicRename implements CommandExecutor {
 				
 			} else {
 			
-					Messager.msgSender(RenameRewrite.Prefix + "Please type /epicrename help", sender);
+					Messager.msgSender(Old_RenameRewrite.Prefix + "Please type /epicrename help", sender);
 				    return true;
 				}				
 			

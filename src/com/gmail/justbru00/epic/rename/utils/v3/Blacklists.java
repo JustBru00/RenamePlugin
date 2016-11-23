@@ -8,7 +8,7 @@ package com.gmail.justbru00.epic.rename.utils.v3;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 
-public class V3_Blacklists {
+public class Blacklists {
 	
 	// VERSION 3
 	/**

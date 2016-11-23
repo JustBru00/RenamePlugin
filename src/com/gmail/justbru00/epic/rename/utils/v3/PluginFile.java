@@ -9,7 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class V3_PluginFile extends YamlConfiguration {   
+public class PluginFile extends YamlConfiguration {   
    
     private File file;
     private String defaults;
@@ -20,7 +20,7 @@ public class V3_PluginFile extends YamlConfiguration {
      * @param plugin - Your plugin
      * @param fileName - Name of the file
      */
-    public V3_PluginFile(JavaPlugin plugin, String fileName) {
+    public PluginFile(JavaPlugin plugin, String fileName) {
         this(plugin, fileName, null);
     }
    
@@ -30,7 +30,7 @@ public class V3_PluginFile extends YamlConfiguration {
      * @param fileName - Name of the file
      * @param defaultsName - Name of the defaults
      */
-    public V3_PluginFile(JavaPlugin plugin, String fileName, String defaultsName) {
+    public PluginFile(JavaPlugin plugin, String fileName, String defaultsName) {
         this.plugin = plugin;
         this.defaults = defaultsName;
         this.file = new File(plugin.getDataFolder(), fileName);
