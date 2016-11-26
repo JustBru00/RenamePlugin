@@ -17,7 +17,7 @@ import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 
 public class Rename implements CommandExecutor {
 	
-	public static final EpicRenameCommands COMMAND = EpicRenameCommands.RENAME;
+	private static final EpicRenameCommands COMMAND = EpicRenameCommands.RENAME;
 
 	// VERSION 3
 	
@@ -37,11 +37,11 @@ public class Rename implements CommandExecutor {
 							
 							return true;								
 					} else { // No Args
-						Messager.msgPlayer(player, Main.getMsgFromConfig("rename.no_args"));
+						Messager.msgPlayer(Main.getMsgFromConfig("rename.no_args"), player);
 						return true;						
 					}
 				} else { // No basic permission.
-					Messager.msgPlayer(player, Main.getMsgFromConfig("rename.no_permission"));
+					Messager.msgPlayer(Main.getMsgFromConfig("rename.no_permission"), player);
 					return true;
 				}
 			} else { // Wrong sender

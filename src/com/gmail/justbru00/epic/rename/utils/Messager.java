@@ -34,6 +34,11 @@ public class Messager {
 		player.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));
 	}	
 	
+	/**
+	 * @deprecated Please use {@link RenameUtil#msgPlayer(msg, player)} instead.
+	 * @param player
+	 * @param msg
+	 */
 	public static void msgPlayer(Player player, String msg) {
 		msg = VaribleReplacer.replace(msg);
 		player.sendMessage(Old_RenameRewrite.Prefix + Messager.color(msg));
