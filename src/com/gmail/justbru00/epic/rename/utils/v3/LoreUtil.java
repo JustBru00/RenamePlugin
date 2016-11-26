@@ -82,6 +82,22 @@ public class LoreUtil {
 			
 		} else { // Item has no lore
 			Debug.send("Item has no lore D:");
+			
+			for (int i = 0; i <= lineNumber; i++) {
+				newLore.add("");
+			}
+			
+			Debug.send("New Lore size is: " + newLore.size());
+			
+			newLore.set(lineNumber, loreToBeSet);
+			
+			im.setLore(newLore);
+			inHand.setItemMeta(im);
+			if (Main.USE_NEW_GET_HAND) {
+				player.getInventory().setItemInMainHand(inHand);
+			} else {
+				player.setItemInHand(inHand);
+			}
 		}
 		
 	}

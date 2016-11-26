@@ -21,6 +21,7 @@ rename:
   cannot_rename_air: '&cSorry you can''t rename nothing.'  
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRenamed the item successfully.'
+  log: '&aThe player &f{player} &ajust renamed an item to: &f"{name}&f"&a.'
 
 lore:
   no_permission: '&cSorry you don''t have permission to perform that command.'

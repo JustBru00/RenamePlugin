@@ -52,14 +52,24 @@ public class RenameUtil {
 								if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
 									return;
 								}
+								StringBuilder builder = new StringBuilder("");		
+								String completeArgs = "";		
+								
+								for (String item : args) {
+									builder.append(item + " ");
+								}
+								
+								completeArgs = Messager.color(builder.toString().trim());
 								
 								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 									player.getInventory().setItemInMainHand(RenameUtil.renameItemStack(player, args, inHand));
 									Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+									Messager.msgConsole(Main.getMsgFromConfig("rename.log").replace("{player}", player.getName()).replace("{name}", completeArgs));
 									return;
 								} else { // Use older method.
 									player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
 									Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+									Messager.msgConsole(Main.getMsgFromConfig("rename.log").replace("{player}", player.getName()).replace("{name}", completeArgs));
 									return;
 								}									
 							} else {
