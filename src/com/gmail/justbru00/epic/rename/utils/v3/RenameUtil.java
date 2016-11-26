@@ -15,7 +15,6 @@ import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Old_CharLimit;
 import com.gmail.justbru00.epic.rename.utils.Debug;
 import com.gmail.justbru00.epic.rename.utils.Messager;
 
@@ -42,7 +41,7 @@ public class RenameUtil {
 				Debug.send("Passed Text Blacklist");
 				if (Blacklists.checkMaterialBlacklist(inHand.getType())) { // Check Material Blacklist
 					Debug.send("Passed Material Blacklist Check.");
-					if (Old_CharLimit.v3_checkCharLimit(args, player)) { // Check Character Limit
+					if (CharLimit.checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");
 						if (inHand.getType() != Material.AIR) { // Check != Air
 							if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions		
