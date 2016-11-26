@@ -18,36 +18,55 @@ public class LoreUtil {
 	
 	@SuppressWarnings("deprecation")
 	public static void setLoreLine(int lineNumber, Player player, String[] args) {		
-		
+		Debug.send("LoreUtil#setLoreLine() start.");
 		StringBuilder builder = new StringBuilder("");
+		
+		lineNumber = lineNumber - 1;
 		
 		for (int i = 1; i < args.length; i++) {
 			builder.append(args[i] + " ");
 		}
 		
+		
+		
 		String loreToBeSet = builder.toString().trim();
+		Debug.send("Text to set is: " + loreToBeSet);
 		List<String> newLore = new ArrayList<String>();
 	
 		loreToBeSet = Messager.color(loreToBeSet);
+		
+		Debug.send("Colored args are: " + loreToBeSet);
 		
 		ItemStack inHand = RenameUtil.getInHand(player);						
 		ItemMeta im = inHand.getItemMeta();
 		
 		if (im.hasLore()) {
 			
-			List<String> oldLore = im.getLore();
+			Debug.send("Item has lore");
+			
+			List<String> oldLore = im.getLore();			
 			
 			try {
-				oldLore.set(lineNumber, loreToBeSet);
-			} catch (IndexOutOfBoundsException e) {
 				
+				oldLore.set(lineNumber, loreToBeSet); // ERROR WILL BE CAUSED IF BIGGER
+				
+				newLore = oldLore;
+				Debug.send("Line number " + lineNumber + " fits in the current lore.");			
+			} catch (IndexOutOfBoundsException e) {
+				Debug.send("Line number is bigger than current size.");
+				
+				// Debug
+				if (Main.debug) for (String item : oldLore) {Debug.send("oldLore has: " + item);}
 				
 				for (int i = 0; i < oldLore.size(); i++) { // Fill new lore with old stuff
-					newLore.set(i, oldLore.get(i));
+					newLore.add(oldLore.get(i));
 				}
 				
+				// Debug
+				if (Main.debug) for (String item : newLore) {Debug.send("newLore has: " + item);}
+				
 				for (int i = oldLore.size() - 1; i <= lineNumber; i++) { // Expand new lore to proper size
-					newLore.set(i, "");
+					newLore.add("");
 				}
 				
 				newLore.set(lineNumber, loreToBeSet);
@@ -62,7 +81,7 @@ public class LoreUtil {
 			}
 			
 		} else { // Item has no lore
-			
+			Debug.send("Item has no lore D:");
 		}
 		
 	}
