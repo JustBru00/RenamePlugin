@@ -88,11 +88,11 @@ public class Main extends JavaPlugin {
 		getCommand("rename").setExecutor(new Rename());
 		getCommand("epicrename").setExecutor(new EpicRename());
 		getCommand("lore").setExecutor(new Lore());
-		// TODO /saveitem
-		// TODO /getitem
+		// TODO /saveitem (Version 3.1)
+		// TODO /getitem (Version 3.1)
 		getCommand("setloreline").setExecutor(new SetLoreLine());
-		// TODO /removeloreline
-		// TODO /renameentity
+		// TODO /removeloreline	(Version 3.0)
+		
 
 		// Start Metrics
 		try {

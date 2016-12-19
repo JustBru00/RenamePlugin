@@ -91,12 +91,7 @@ public class RenameUtil {
 				Messager.msgPlayer(Main.getMsgFromConfig("rename.blacklisted_word_found"), player);
 				return;
 			}
-		} else if (erc == EpicRenameCommands.RENAMEENTITY) { // Command /rename handling END | Command /renameentity START
-			Debug.send("RenameUtil.rename() handling from /renameentity");
-			
-			// TODO Handle /renameentity
-			
-		} else {
+		}  else {
 			Debug.send("What are you sending a non rename command to RenameUtil#rename() for? Either you failed at using this plugin as a API or JustBru00 failed big time.");
 		}		
 	}

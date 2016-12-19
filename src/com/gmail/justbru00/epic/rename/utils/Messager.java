@@ -12,8 +12,15 @@ import org.bukkit.entity.Player;
 import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
 import com.gmail.justbru00.epic.rename.utils.v3.VaribleReplacer;
 
+/**
+ * 
+ * @author Justin Brubaker
+ * 
+ * TODO This needs updated before release.
+ *
+ */
+public class Messager {	
 
-public class Messager {
 
 	public static String color(String uncolored){
 		return ChatColor.translateAlternateColorCodes('&', uncolored);		
@@ -35,7 +42,7 @@ public class Messager {
 	}	
 	
 	/**
-	 * @deprecated Please use {@link RenameUtil#msgPlayer(msg, player)} instead.
+	 * @deprecated Please use {@link Messager#msgPlayer(msg, player)} instead.
 	 * @param player
 	 * @param msg
 	 */

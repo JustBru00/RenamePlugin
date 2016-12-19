@@ -66,23 +66,7 @@ public class EconomyManager {
 				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_error"), r), player);
 				return EcoMessage.TRANSACTION_ERROR;
 			}
-		} else if (erc == EpicRenameCommands.RENAMEENTITY) {
-			
-			if (player.hasPermission("epicrename.bypass.costs.renameentity")) {
-				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
-				return EcoMessage.ECO_BYPASS;
-			}
-			
-			EconomyResponse r = Main.econ.withdrawPlayer(player, Main.getInstance().getConfig().getInt("economy.costs.renameentity"));
-			
-			if (r.transactionSuccess()) {
-				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_success"), r), player);
-				return EcoMessage.SUCCESS;
-			} else {
-				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_error"), r), player);
-				return EcoMessage.TRANSACTION_ERROR;
-			}
-		}	
+		} 
 		
 		return EcoMessage.UNHANDLED;
 	}

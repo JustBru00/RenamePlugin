@@ -6,7 +6,6 @@
 package com.gmail.justbru00.epic.rename.utils.v3;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Old_CharLimit;
 
 public class VaribleReplacer {
 	
@@ -14,7 +13,7 @@ public class VaribleReplacer {
 
 	public static String replace(String toReplace) {
 		
-		toReplace = toReplace.replace("{char}", "" + Old_CharLimit.v3_getCharLimit()); // Make sure to use Version 3.0
+		toReplace = toReplace.replace("{char}", "" + CharLimit.getCharLimit()); 
 		toReplace = toReplace.replace("{version}", Main.PLUGIN_VERISON);
 		
 		return toReplace;

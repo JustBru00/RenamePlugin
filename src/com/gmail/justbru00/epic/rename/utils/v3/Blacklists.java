@@ -13,7 +13,7 @@ public class Blacklists {
 	// VERSION 3
 	/**
 	 * 
-	 * @param m The arguments from the {@link CommandExecutor}
+	 * @param m The Material from the {@link CommandExecutor}
 	 * @return True if NO blacklisted material found. False if a blacklisted material is FOUND.
 	 */
 	public static boolean checkMaterialBlacklist(Material m) {

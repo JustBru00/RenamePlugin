@@ -12,8 +12,8 @@ economy:
     lore: 100
     renameeentity: 100
 
-# Should we auto update?    
-auto_update: true
+# Should we auto update? This is for a FUTURE UPDATE.  
+auto_update: false
 
 blacklists:
   material:
