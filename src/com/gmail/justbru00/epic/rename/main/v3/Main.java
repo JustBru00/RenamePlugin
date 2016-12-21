@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
+import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
@@ -96,7 +97,7 @@ public class Main extends JavaPlugin {
 		// TODO /saveitem (Version 3.1)
 		// TODO /getitem (Version 3.1)
 		getCommand("setloreline").setExecutor(new SetLoreLine());
-		// TODO /removeloreline	(Version 3.0)
+		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		
 
 		// Start Metrics

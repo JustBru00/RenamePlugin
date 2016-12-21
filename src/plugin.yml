@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: 3.0-BETA1
+version: 3.0-BETA2
 description: Renames items.
 author: Justin Brubaker
 softdepend: [Vault]
@@ -10,8 +10,6 @@ commands:
        description: Renames Items.
  lore:
        description: Relores any item.   
- renameentity:
-       description: Gives you a nametag that is named.     
  epicrename:
        description: Help and version command.  
  setloreline:

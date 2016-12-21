@@ -24,6 +24,12 @@ public class LoreUtil {
 		Debug.send("LoreUtil#setLoreLine() start.");
 		StringBuilder builder = new StringBuilder("");
 		
+		// Check Blacklist
+		if (!Blacklists.checkTextBlacklist(args)) {
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_word_found"), player);
+			return;
+		}
+		
 		lineNumber = lineNumber - 1;
 		
 		for (int i = 1; i < args.length; i++) {
