@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Messager;
+import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 
 public class Rename implements CommandExecutor {

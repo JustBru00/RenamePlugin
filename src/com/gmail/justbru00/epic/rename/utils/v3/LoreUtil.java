@@ -1,3 +1,8 @@
+/**
+ * @author Justin "JustBru00" Brubaker
+ * 
+ * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
+ */
 package com.gmail.justbru00.epic.rename.utils.v3;
 
 import java.util.ArrayList;
@@ -11,8 +16,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Debug;
-import com.gmail.justbru00.epic.rename.utils.Messager;
 
 public class LoreUtil {
 	

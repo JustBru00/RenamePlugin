@@ -4,13 +4,15 @@
 #DO NOT CHANGE THIS PLEASE
 config_version: 1
 
+#Plugin Prefix
+prefix: '&8[&bEpic&fRename&8] &f'
+
 #Economy Features
 economy:
   use: false
   costs:
     rename: 100
     lore: 100
-    renameeentity: 100
 
 # Should we auto update? This is for a FUTURE UPDATE.  
 auto_update: false

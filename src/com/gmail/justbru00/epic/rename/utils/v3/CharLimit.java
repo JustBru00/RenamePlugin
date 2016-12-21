@@ -1,11 +1,14 @@
+/**
+ * @author Justin "JustBru00" Brubaker
+ * 
+ * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
+ */
 package com.gmail.justbru00.epic.rename.utils.v3;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Debug;
-import com.gmail.justbru00.epic.rename.utils.Messager;
 
 
 public class CharLimit {

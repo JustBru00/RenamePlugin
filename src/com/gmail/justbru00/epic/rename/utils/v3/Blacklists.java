@@ -8,6 +8,8 @@ package com.gmail.justbru00.epic.rename.utils.v3;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 
+import com.gmail.justbru00.epic.rename.main.v3.Main;
+
 public class Blacklists {
 	
 	// VERSION 3
@@ -18,8 +20,14 @@ public class Blacklists {
 	 */
 	public static boolean checkMaterialBlacklist(Material m) {
 		
-		// TODO Return true if check is okay | return false is blacklisted material is found.
-		
+		for (String s : Main.getInstance().getConfig().getStringList("blacklists.material")) {
+			if (s != null) {
+				if (m == Material.getMaterial(s)) {
+					Debug.send("Material blacklist detected blacklisted material. (" + m.toString() + ")");
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
@@ -30,7 +38,16 @@ public class Blacklists {
 	 */
 	public static boolean checkTextBlacklist(String[] args) {
 		
-		// TODO Return true if check is okay | return false is blacklisted text is found.
+		for (String s : Main.getInstance().getConfig().getStringList("blacklists.text")) {
+			if (s != null) {
+				for (String arg : args) {
+					if (arg.toLowerCase().contains(s.toLowerCase())) {
+						Debug.send("Text blacklist has found blacklisted word. (" + s + ")");
+						return false;
+					}
+				}
+			}
+		}
 		
 		return true;
 	}

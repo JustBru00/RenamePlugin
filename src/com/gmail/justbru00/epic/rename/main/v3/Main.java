@@ -7,8 +7,10 @@ package com.gmail.justbru00.epic.rename.main.v3;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,11 +19,10 @@ import com.gmail.justbru00.epic.rename.commands.v3.Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
-import com.gmail.justbru00.epic.rename.listeners.OnJoin;
-import com.gmail.justbru00.epic.rename.main.Metrics;
-import com.gmail.justbru00.epic.rename.main.Metrics.Graph;
-import com.gmail.justbru00.epic.rename.utils.Debug;
-import com.gmail.justbru00.epic.rename.utils.Messager;
+import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
+import com.gmail.justbru00.epic.rename.main.v3.Metrics.Graph;
+import com.gmail.justbru00.epic.rename.utils.v3.Debug;
+import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
 
 import net.milkbowl.vault.economy.Economy;
@@ -42,6 +43,10 @@ public class Main extends JavaPlugin {
 												// #45)
 	public static final int CONFIG_VERSION = 1;
 	public static final int MESSAGES_VERSION = 1;
+	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
+	public static Logger log = Bukkit.getLogger();
+	
+	public static String prefix = Messager.color("&8[&bEpic&fRename&8] &f");
 
 	@Override
 	public void onDisable() {
@@ -130,6 +135,14 @@ public class Main extends JavaPlugin {
 		} catch (IOException e) {
 			Messager.msgConsole("&cMCSTATS FAILED TO SUBMIT STATS.");
 		}
+		
+		// Prefix 
+		if (Main.getInstance().getConfig().getString("prefix") != null) {
+			prefix = Messager.color(Main.getInstance().getConfig().getString("prefix"));
+		} else {
+			Messager.msgConsole("&cSorry the prefix in the config is null. Keeping default instead.");
+		}
+		Messager.msgConsole("&Prefix set to: '" + prefix + "'");
 
 		Messager.msgConsole("&aPlugin Enabled!");
 	}

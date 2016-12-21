@@ -13,10 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
-import com.gmail.justbru00.epic.rename.main.Old_RenameRewrite;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Debug;
-import com.gmail.justbru00.epic.rename.utils.Messager;
 
 
 public class RenameUtil {
@@ -129,7 +126,7 @@ public class RenameUtil {
 	public static ItemStack getInHand(Player player) {	
 		ItemStack returning = null;
 		
-		if (Old_RenameRewrite.USE_NEW_GET_HAND) {
+		if (Main.USE_NEW_GET_HAND) {
 			returning = player.getInventory().getItemInMainHand();
 			return returning;
 		} else {

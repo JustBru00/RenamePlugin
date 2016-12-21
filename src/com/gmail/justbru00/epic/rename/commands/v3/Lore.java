@@ -1,3 +1,8 @@
+/**
+ * @author Justin "JustBru00" Brubaker
+ * 
+ * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
+ */
 package com.gmail.justbru00.epic.rename.commands.v3;
 
 import org.bukkit.command.Command;
@@ -6,8 +11,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.LoreUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 
 public class Lore implements CommandExecutor {
 
