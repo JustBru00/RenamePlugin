@@ -5,7 +5,6 @@
  */
 package com.gmail.justbru00.epic.rename.commands.v3;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
