@@ -8,6 +8,7 @@ config_version: 1
 prefix: '&8[&bEpic&fRename&8] &f'
 
 #Economy Features
+#You must restart the server after changing the ecomony settings.
 economy:
   use: false
   costs:
@@ -26,6 +27,7 @@ blacklists:
     - 'some_bad_phrase_here'
     -
     
+#Default Character Limit is 30
 character_limit:
   enabled: false
   limit: 30  

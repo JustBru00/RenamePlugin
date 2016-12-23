@@ -18,7 +18,7 @@ public class Blacklists {
 	 * @param m The Material from the {@link CommandExecutor}
 	 * @return True if NO blacklisted material found. False if a blacklisted material is FOUND.
 	 */
-	public static boolean checkMaterialBlacklist(Material m) {
+	public static boolean checkMaterialBlacklist(Material m) {		
 		
 		for (String s : Main.getInstance().getConfig().getStringList("blacklists.material")) {
 			if (s != null) {

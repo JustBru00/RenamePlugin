@@ -143,7 +143,7 @@ public class Main extends JavaPlugin {
 		} else {
 			Messager.msgConsole("&cSorry the prefix in the config is null. Keeping default instead.");
 		}
-		Messager.msgConsole("&Prefix set to: '" + prefix + "'");
+		Messager.msgConsole("&aPrefix set to: '" + prefix + "&a'");
 
 		Messager.msgConsole("&aPlugin Enabled!");
 	}

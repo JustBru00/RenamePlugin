@@ -34,9 +34,9 @@ public class RenameUtil {
 			
 			ItemStack inHand = RenameUtil.getInHand(player); // Item in the players hand.
 			
-			if (Blacklists.checkTextBlacklist(args)) { // Check Text Blacklist
+			if (Blacklists.checkTextBlacklist(args) || player.hasPermission("epicrename.bypass.textblacklist")) { // Check Text Blacklist
 				Debug.send("Passed Text Blacklist");
-				if (Blacklists.checkMaterialBlacklist(inHand.getType())) { // Check Material Blacklist
+				if (Blacklists.checkMaterialBlacklist(inHand.getType()) || player.hasPermission("epicrename.bypass.materialblacklist")) { // Check Material Blacklist
 					Debug.send("Passed Material Blacklist Check.");
 					if (CharLimit.checkCharLimit(args, player)) { // Check Character Limit
 						Debug.send("Passed Character Limit Check.");

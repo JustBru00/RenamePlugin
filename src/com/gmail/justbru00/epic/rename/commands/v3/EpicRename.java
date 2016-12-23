@@ -32,12 +32,12 @@ public class EpicRename implements CommandExecutor {
 					Messager.msgSender(Main.getMsgFromConfig("epicrename.license"), sender);
 					return true;
 				} else if (args[0].equalsIgnoreCase("help")) { // End /epicrename license | Start /epicrename help
-					String temp = Main.getMsgFromConfig("epicrename.help");
-					
-					Messager.msgSender(temp, sender);
+					for (String s : Main.messages.getStringList("epicrename.help")) {
+						Messager.msgSender(s, sender);
+					}
 					return true;
 				} else if (args[0].equalsIgnoreCase("reload")) { // End /epicrename license | Start /epicrename reload
-					if (sender.hasPermission("epicrename.reload")) {
+					if (sender.hasPermission("epicrename.epicrename.reload")) {
 						Main.reloadConfigs();
 						Messager.msgSender(Main.getMsgFromConfig("epicrename.reload_success"), sender);
 						return true;

@@ -5,11 +5,15 @@ epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   no_args: '&cType /epicrename help for commands. (No Arguments)'
   license: '&6View license information at: http://bit.ly/2eMknxx'
-  help: '&6/rename <name>\n&6/lore <lore>\n&6/renameentity <name>\n&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/\n&6/epicrename <help, license, reload, debug, version>'
+  help: 
+    - '&6/rename <name>'
+    - '&6/lore <lore>'
+    - '&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/'
+    - '&6/epicrename <help, license, reload, debug, version>'
   reload_success: '&aReloaded the plugin successfully!'
   debug_enable: '&6Plugin debug messages are now &a&lON&6.'
   debug_disable: '&6Plugin debug messages are now &4&lOFF&6.'
-  invaild_args: '&cInvalid arguments. Please put help, license, reload, debug, or version after /epicrename.'
+  invalid_args: '&cInvalid arguments. Please put help, license, reload, debug, or version after /epicrename.'
   version: '&6You are running &bEpic&fRename &6version {version}.'
 
 rename:
@@ -55,7 +59,7 @@ removeloreline:
   cannot_edit_air: '&cSorry you can''t edit nothing.'
   success: '&aRelored the item successfully.'    
   
-characterlimit:
+character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'
   bypass_msg: '&aYou just bypassed the character limit of {char}.'
 
