@@ -1,5 +1,4 @@
-#EpicRename
-by JustBru00
+JustBru00 - Creator
 
 
-Want to help make this plugin? Email me @ justbru00@gmail.com
+Want to help make this plugin? Fork this repository and create a pull request.

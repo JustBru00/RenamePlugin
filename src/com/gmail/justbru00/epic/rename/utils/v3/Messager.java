@@ -26,7 +26,7 @@ public class Messager {
 	}
 	
 	public static void msgConsole(String msg) {		
-		msg = VaribleReplacer.replace(msg);
+		msg = VariableReplacer.replace(msg);
 		
 		if (Main.clogger != null) {
 		Main.clogger.sendMessage(Main.prefix + Messager.color(msg));		
@@ -36,12 +36,12 @@ public class Messager {
 	}
 	
 	public static void msgPlayer(String msg, Player player) {
-		msg = VaribleReplacer.replace(msg);
+		msg = VariableReplacer.replace(msg);
 		player.sendMessage(Main.prefix + Messager.color(msg));
 	}	
 	
 	public static void msgSender(String msg, CommandSender sender) {
-		msg = VaribleReplacer.replace(msg);
+		msg = VariableReplacer.replace(msg);
 		sender.sendMessage(Main.prefix + Messager.color(msg));
 	}	
 }

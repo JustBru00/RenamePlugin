@@ -7,7 +7,7 @@ package com.gmail.justbru00.epic.rename.utils.v3;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
-public class VaribleReplacer {
+public class VariableReplacer {
 	
 	// Varibles: {char} {version} 
 
