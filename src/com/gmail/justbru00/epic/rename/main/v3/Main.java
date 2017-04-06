@@ -22,6 +22,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
 import com.gmail.justbru00.epic.rename.main.v3.Metrics.Graph;
+import com.gmail.justbru00.epic.rename.main.v3.bstats.BStats;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
@@ -94,8 +95,8 @@ public class Main extends JavaPlugin {
 		getCommand("rename").setExecutor(new Rename());
 		getCommand("epicrename").setExecutor(new EpicRename());
 		getCommand("lore").setExecutor(new Lore());
-		// TODO /saveitem (Version 3.1)
-		// TODO /getitem (Version 3.1)
+		// TODO /saveitem 
+		// TODO /getitem 
 		getCommand("setloreline").setExecutor(new SetLoreLine());
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		
@@ -103,11 +104,8 @@ public class Main extends JavaPlugin {
 		// Start Metrics
 		try {
 			Metrics metrics = new Metrics(plugin);
-
 			Graph ecoEnabledGraph = metrics.createGraph("Economy Features");
-
 			ecoEnabledGraph.addPlotter(new Metrics.Plotter("Enabled") {
-
 				@Override
 				public int getValue() {
 					if (Main.USE_ECO) {
@@ -116,11 +114,8 @@ public class Main extends JavaPlugin {
 						return 0; // False
 					}
 				}
-
-			});
-			
+			});			
 			ecoEnabledGraph.addPlotter(new Metrics.Plotter("Disabled") {
-
 				@Override
 				public int getValue() {
 					if (Main.USE_ECO) {
@@ -129,13 +124,24 @@ public class Main extends JavaPlugin {
 						return 1; // False
 					}
 				}
-
 			});
-
 			metrics.start();
 		} catch (IOException e) {
 			Messager.msgConsole("&cMCSTATS FAILED TO SUBMIT STATS.");
 		}
+		
+		// Start bstats
+		BStats bstats = new BStats(this);
+		
+		bstats.addCustomChart(new BStats.SimplePie("economy_features") {
+			
+			@Override
+			public String getValue() {
+				
+				return Boolean.toString(Main.USE_ECO);
+			}
+		});
+		
 		
 		// Prefix 
 		if (Main.getInstance().getConfig().getString("prefix") != null) {
