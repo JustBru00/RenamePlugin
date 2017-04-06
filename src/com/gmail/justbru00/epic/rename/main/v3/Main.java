@@ -43,7 +43,7 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue
 												// #45)
-	public static final int CONFIG_VERSION = 1;
+	public static final int CONFIG_VERSION = 2;
 	public static final int MESSAGES_VERSION = 1;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();

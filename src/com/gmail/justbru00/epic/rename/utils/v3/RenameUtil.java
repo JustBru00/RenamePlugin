@@ -54,8 +54,12 @@ public class RenameUtil {
 								for (String item : args) {
 									builder.append(item + " ");
 								}
+								if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
+									completeArgs.replace("_", " ");
+								}
 								
 								completeArgs = Messager.color(builder.toString().trim());
+								
 								
 								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 									player.getInventory().setItemInMainHand(RenameUtil.renameItemStack(player, args, inHand));
@@ -109,6 +113,10 @@ public class RenameUtil {
 		}
 		
 		completeArgs = builder.toString().trim();
+		if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
+			completeArgs.replace("_", " ");
+		}
+		
 		Debug.send("The args result is: " + completeArgs);
 		
 		ItemMeta im = toRename.getItemMeta();
