@@ -55,7 +55,8 @@ public class RenameUtil {
 									builder.append(item + " ");
 								}
 								if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
-									completeArgs.replace("_", " ");
+									completeArgs = completeArgs.replace("_", " ");
+									Debug.send("Replaced the underscores.");
 								}
 								
 								completeArgs = Messager.color(builder.toString().trim());
@@ -114,7 +115,8 @@ public class RenameUtil {
 		
 		completeArgs = builder.toString().trim();
 		if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
-			completeArgs.replace("_", " ");
+			completeArgs = completeArgs.replace("_", " ");
+			Debug.send("Replaced the underscores.");
 		}
 		
 		Debug.send("The args result is: " + completeArgs);

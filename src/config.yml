@@ -14,10 +14,7 @@ economy:
   costs:
     rename: 100
     lore: 100
-
-# Should we auto update? This is for a FUTURE UPDATE.  
-auto_update: false
-
+    
 blacklists:
   material:
     - 'VAILD_MATERIAL_HERE'
