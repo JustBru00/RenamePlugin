@@ -2,8 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Coding Etc/Coding API&apos;s/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Spigot Builds/BuildTools/spigot-1.11.jar">
+	<classpathentry kind="lib" path="C:/Users/dnkbr/Desktop/Spigot Test Server 1.11/plugins/Vault.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dnkbr/Documents/Spigot Builds/BuildTools/spigot-1.11.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Desktop/Coding%20Etc/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.11-R0.1-20161117.015008-1-javadoc.jar!/"/>
 		</attributes>
