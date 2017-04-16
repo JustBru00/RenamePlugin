@@ -186,6 +186,10 @@ public class LoreUtil {
 		String completeArgs = "";
 
 		for (String item : args) {
+			if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
+				item = item.replace("_", " ");
+				Debug.send("Replaced the underscores.");
+			}
 			builder.append(item + " ");
 		}
 
