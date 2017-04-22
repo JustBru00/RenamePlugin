@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.LoreUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
+import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class Lore implements CommandExecutor {
 
@@ -24,30 +25,36 @@ public class Lore implements CommandExecutor {
 			if (sender instanceof Player) {
 
 				Player player = (Player) sender;
-				
-				if (player.hasPermission("epicrename.lore")) {
-					
-					if (args.length >= 1) {
-						
-						LoreUtil.loreHandle(args, player);
-						
-						return true;
+
+				if (WorldChecker.checkWorld(player)) {
+
+					if (player.hasPermission("epicrename.lore")) {
+
+						if (args.length >= 1) {
+
+							LoreUtil.loreHandle(args, player);
+
+							return true;
+						} else {
+							Messager.msgPlayer(Main.getMsgFromConfig("lore.no_args"), player);
+							return true;
+						}
+
 					} else {
-						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_args"), player);
+						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission"), player);
 						return true;
 					}
-					
+
 				} else {
-					Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission"), player);
+					Messager.msgSender(Main.getMsgFromConfig("lore.disabled_world"), sender);
 					return true;
 				}
-				
 			} else {
 				Messager.msgSender(Main.getMsgFromConfig("lore.wrong_sender"), sender);
 				return true;
-			}			
+			}
 		} // End /lore
-		
+
 		return false;
 	}
 }

@@ -14,34 +14,43 @@ import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class Rename implements CommandExecutor {
-	
+
 	private static final EpicRenameCommands COMMAND = EpicRenameCommands.RENAME;
 
 	// VERSION 3
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		
-		if (command.getName().equalsIgnoreCase("rename")) { // Start /rename code
+
+		if (command.getName().equalsIgnoreCase("rename")) { // Start /rename
+															// code
 			if (sender instanceof Player) {
-				
-				Player player = (Player) sender; // Player is sender so do stuff :D
-				
-				if (player.hasPermission("epicrename.rename")) {				
-					
-					if (args.length >= 1) {					
-						
+
+				Player player = (Player) sender; // Player is sender so do stuff
+													// :D
+
+				if (WorldChecker.checkWorld(player)) {
+
+					if (player.hasPermission("epicrename.rename")) {
+
+						if (args.length >= 1) {
+
 							RenameUtil.renameHandle(player, args, COMMAND);
-							
-							return true;								
-					} else { // No Args
-						Messager.msgPlayer(Main.getMsgFromConfig("rename.no_args"), player);
-						return true;						
+
+							return true;
+						} else { // No Args
+							Messager.msgPlayer(Main.getMsgFromConfig("rename.no_args"), player);
+							return true;
+						}
+					} else { // No basic permission.
+						Messager.msgPlayer(Main.getMsgFromConfig("rename.no_permission"), player);
+						return true;
 					}
-				} else { // No basic permission.
-					Messager.msgPlayer(Main.getMsgFromConfig("rename.no_permission"), player);
+				} else {
+					Messager.msgSender(Main.getMsgFromConfig("rename.disabled_world"), sender);
 					return true;
 				}
 			} else { // Wrong sender
@@ -49,7 +58,7 @@ public class Rename implements CommandExecutor {
 				return true;
 			}
 		} // End /rename code
-		
+
 		return false;
 	}
 

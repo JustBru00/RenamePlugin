@@ -14,6 +14,7 @@ import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class Glow implements CommandExecutor {
 
@@ -25,42 +26,49 @@ public class Glow implements CommandExecutor {
 			if (sender.hasPermission("epicrename.glow")) {
 				if (sender instanceof Player) {
 					Player player = (Player) sender;
-					ItemStack inHand = RenameUtil.getInHand(player);
-					Material m = inHand.getType();
 
-					if (!(m == Material.AIR || m == null)) {
-						if (inHand.getEnchantments().size() == 0) {
-							if (m == Material.FISHING_ROD) {
-								Debug.send("Item is a fishing rod");
-								inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);								
-								ItemMeta im = inHand.getItemMeta();
-								im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-								inHand.setItemMeta(im);
-								
-								player.getInventory().setItemInMainHand(inHand);
-								Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
-								return true;
+					if (WorldChecker.checkWorld(player)) {
+						ItemStack inHand = RenameUtil.getInHand(player);
+						Material m = inHand.getType();
+
+						if (!(m == Material.AIR || m == null)) {
+							if (inHand.getEnchantments().size() == 0) {
+								if (m == Material.FISHING_ROD) {
+									Debug.send("Item is a fishing rod");
+									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);
+									ItemMeta im = inHand.getItemMeta();
+									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+									inHand.setItemMeta(im);
+
+									player.getInventory().setItemInMainHand(inHand);
+									Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
+									return true;
+								} else {
+									Debug.send("Item is not a fishing rod.");
+									inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);
+									ItemMeta im = inHand.getItemMeta();
+									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+									inHand.setItemMeta(im);
+
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
+																	// method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
+									return true;
+								}
 							} else {
-								Debug.send("Item is not a fishing rod.");
-								inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);
-								ItemMeta im = inHand.getItemMeta();
-								im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-								inHand.setItemMeta(im);								
-								
-								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-									player.getInventory().setItemInMainHand(inHand);									
-								} else { // Use older method.
-									player.setItemInHand(inHand);									
-								}									
-								Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
+								Messager.msgSender(Main.getMsgFromConfig("glow.has_enchants"), sender);
 								return true;
 							}
 						} else {
-							Messager.msgSender(Main.getMsgFromConfig("glow.has_enchants"), sender);
+							Messager.msgSender(Main.getMsgFromConfig("glow.cannot_edit_air"), sender);
 							return true;
 						}
 					} else {
-						Messager.msgSender(Main.getMsgFromConfig("glow.cannot_edit_air"), sender);
+						Messager.msgSender(Main.getMsgFromConfig("glow.disabled_world"), sender);
 						return true;
 					}
 				} else {

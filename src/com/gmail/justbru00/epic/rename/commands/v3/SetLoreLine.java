@@ -15,48 +15,57 @@ import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.LoreUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class SetLoreLine implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (command.getName().equalsIgnoreCase("setloreline")) { // Start /setloreline code
+		if (command.getName().equalsIgnoreCase("setloreline")) { // Start
+																	// /setloreline
+																	// code
 			if (sender.hasPermission("epicrename.setloreline")) {
 				if (sender instanceof Player) {
 
 					Player player = (Player) sender;
 
-					if (args.length > 1) {
+					if (WorldChecker.checkWorld(player)) {
 
-						int lineNumber = -1;
+						if (args.length > 1) {
 
-						try {
-							lineNumber = Integer.parseInt(args[0]);
-						} catch (Exception e) {
-							Debug.send(e.getMessage());
-							Messager.msgPlayer(Main.getMsgFromConfig("setloreline.not_an_int"), player);
+							int lineNumber = -1;
+
+							try {
+								lineNumber = Integer.parseInt(args[0]);
+							} catch (Exception e) {
+								Debug.send(e.getMessage());
+								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.not_an_int"), player);
+								return true;
+							}
+
+							if (args.length == 1) {
+								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.provide_text"), player);
+								return true;
+							}
+
+							if (RenameUtil.getInHand(player).getType() == Material.AIR
+									|| RenameUtil.getInHand(player) == null) {
+
+								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.cannot_edit_air"), player);
+
+								return true;
+							}
+
+							LoreUtil.setLoreLine(lineNumber, player, args);
+
+							return true;
+						} else {
+							Messager.msgPlayer(Main.getMsgFromConfig("setloreline.wrong_args"), player);
 							return true;
 						}
-
-						if (args.length == 1) {
-							Messager.msgPlayer(Main.getMsgFromConfig("setloreline.provide_text"), player);
-							return true;
-						}
-
-						if (RenameUtil.getInHand(player).getType() == Material.AIR
-								|| RenameUtil.getInHand(player) == null) {
-
-							Messager.msgPlayer(Main.getMsgFromConfig("setloreline.cannot_edit_air"), player);
-
-							return true;
-						}
-
-						LoreUtil.setLoreLine(lineNumber, player, args);
-
-						return true;
 					} else {
-						Messager.msgPlayer(Main.getMsgFromConfig("setloreline.wrong_args"), player);
+						Messager.msgSender(Main.getMsgFromConfig("setloreline.disabled_world"), sender);
 						return true;
 					}
 				} else {
@@ -68,7 +77,7 @@ public class SetLoreLine implements CommandExecutor {
 				return true;
 			}
 		} // Stop /setloreline code.
-		
+
 		return false;
 	}
 

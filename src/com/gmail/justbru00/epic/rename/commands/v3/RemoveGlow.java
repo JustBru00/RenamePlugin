@@ -13,59 +13,69 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class RemoveGlow implements CommandExecutor {
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
+
 		if (command.getName().equalsIgnoreCase("removeglow")) {
 			if (sender.hasPermission("epicrename.removeglow")) {
 				if (sender instanceof Player) {
 					Player player = (Player) sender;
-					ItemStack inHand = RenameUtil.getInHand(player);
-					Material m = inHand.getType();
+					if (WorldChecker.checkWorld(player)) {
+						ItemStack inHand = RenameUtil.getInHand(player);
+						Material m = inHand.getType();
 
-					if (!(m == Material.AIR || m == null)) {
-						if (inHand.getType() == Material.FISHING_ROD) {
-							if (inHand.getEnchantmentLevel(Enchantment.ARROW_INFINITE) == 4341) { // Has glowing
-								inHand.removeEnchantment(Enchantment.ARROW_INFINITE);
-								ItemMeta im = inHand.getItemMeta();
-								im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-								inHand.setItemMeta(im);
-								
-								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-									player.getInventory().setItemInMainHand(inHand);									
-								} else { // Use older method.
-									player.setItemInHand(inHand);									
+						if (!(m == Material.AIR || m == null)) {
+							if (inHand.getType() == Material.FISHING_ROD) {
+								if (inHand.getEnchantmentLevel(Enchantment.ARROW_INFINITE) == 4341) { // Has
+																										// glowing
+									inHand.removeEnchantment(Enchantment.ARROW_INFINITE);
+									ItemMeta im = inHand.getItemMeta();
+									im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+									inHand.setItemMeta(im);
+
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
+																	// method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
+								} else {
+									Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
+									return true;
 								}
-								Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
 							} else {
-								Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
-								return true;
+								if (inHand.getEnchantmentLevel(Enchantment.LURE) == 4341) { // Has
+																							// glowing
+
+									inHand.removeEnchantment(Enchantment.LURE);
+									ItemMeta im = inHand.getItemMeta();
+									im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+									inHand.setItemMeta(im);
+
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
+																	// method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
+								} else {
+									Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
+									return true;
+								}
 							}
 						} else {
-							if (inHand.getEnchantmentLevel(Enchantment.LURE) == 4341) { // Has glowing
-								
-								inHand.removeEnchantment(Enchantment.LURE);
-								ItemMeta im = inHand.getItemMeta();
-								im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-								inHand.setItemMeta(im);
-								
-								if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-									player.getInventory().setItemInMainHand(inHand);									
-								} else { // Use older method.
-									player.setItemInHand(inHand);									
-								}
-								Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
-							} else {
-								Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
-								return true;
-							}
+							Messager.msgSender(Main.getMsgFromConfig("removeglow.cannot_edit_air"), sender);
+							return true;
 						}
 					} else {
-						Messager.msgSender(Main.getMsgFromConfig("removeglow.cannot_edit_air"), sender);
+						Messager.msgSender(Main.getMsgFromConfig("removeglow.disabled_world"), sender);
 						return true;
 					}
 				} else {
@@ -77,7 +87,7 @@ public class RemoveGlow implements CommandExecutor {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
