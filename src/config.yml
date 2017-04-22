@@ -2,7 +2,7 @@
 #Version 3.0+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 2
+config_version: 3
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -31,3 +31,12 @@ character_limit:
   
 # Should underscores be replaced with spaces?
 replace_underscores: false
+
+#Per world plugin enable
+per_world: false
+
+#Enabled worlds
+enabled_worlds:
+  - 'world'
+  - 'world_nether'
+  - 'world_the_end'

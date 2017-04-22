@@ -8,6 +8,6 @@ package com.gmail.justbru00.epic.rename.enums.v3;
 public enum EpicRenameCommands {
 
 	RENAME, LORE, EPICRENAME, SETLORELINE, 
-	REMOVELORELINE;
+	REMOVELORELINE, GLOW, REMOVEGLOW;
 	
 }

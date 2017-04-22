@@ -185,13 +185,13 @@ public class LoreUtil {
 		StringBuilder builder = new StringBuilder("");
 		String completeArgs = "";
 
-		for (String item : args) {
+		for (String item : args) { // Closes #68
 			if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
 				item = item.replace("_", " ");
 				Debug.send("Replaced the underscores.");
 			}
 			builder.append(item + " ");
-		}
+		} // End closes #68
 
 		completeArgs = builder.toString();
 

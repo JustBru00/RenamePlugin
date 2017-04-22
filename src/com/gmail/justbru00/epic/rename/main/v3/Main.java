@@ -15,7 +15,9 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
+import com.gmail.justbru00.epic.rename.commands.v3.Glow;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
+import com.gmail.justbru00.epic.rename.commands.v3.RemoveGlow;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
@@ -43,8 +45,8 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue
 												// #45)
-	public static final int CONFIG_VERSION = 2;
-	public static final int MESSAGES_VERSION = 1;
+	public static final int CONFIG_VERSION = 3;
+	public static final int MESSAGES_VERSION = 2;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -99,6 +101,8 @@ public class Main extends JavaPlugin {
 		// TODO /getitem 
 		getCommand("setloreline").setExecutor(new SetLoreLine());
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
+		getCommand("glow").setExecutor(new Glow());
+		getCommand("removeglow").setExecutor(new RemoveGlow());
 		
 
 		// Start Metrics
