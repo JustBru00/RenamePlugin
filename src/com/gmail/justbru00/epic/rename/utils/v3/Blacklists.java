@@ -5,21 +5,21 @@
  */
 package com.gmail.justbru00.epic.rename.utils.v3;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class Blacklists {
-	
+
 	// VERSION 3
 	/**
 	 * 
 	 * @param m The Material from the {@link CommandExecutor}
 	 * @return True if NO blacklisted material found. False if a blacklisted material is FOUND.
 	 */
-	public static boolean checkMaterialBlacklist(Material m) {		
-		
+	public static boolean checkMaterialBlacklist(Material m) {
 		for (String s : Main.getInstance().getConfig().getStringList("blacklists.material")) {
 			if (s != null) {
 				if (m == Material.getMaterial(s)) {
@@ -37,19 +37,31 @@ public class Blacklists {
 	 * @return True if NO blacklisted word found. False if a blacklisted word is FOUND.
 	 */
 	public static boolean checkTextBlacklist(String[] args) {
+		StringBuilder builder = new StringBuilder("");		
+		String completeArgs = "";		
+		
+		for (String item : args) {
+			builder.append(item + " ");
+		}
+		
+		completeArgs = builder.toString().trim();
+		if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
+			completeArgs = completeArgs.replace("_", " ");
+			Debug.send("Replaced the underscores.");
+		}
+		
+		completeArgs = ChatColor.stripColor(Messager.color(completeArgs));
 		
 		for (String s : Main.getInstance().getConfig().getStringList("blacklists.text")) {
 			if (s != null) {
-				for (String arg : args) {
-					if (arg.toLowerCase().contains(s.toLowerCase())) {
-						Debug.send("Text blacklist has found blacklisted word. (" + s + ")");
-						return false;
-					}
+				if (completeArgs.toLowerCase().contains(s.toLowerCase())) {
+					Debug.send("Text blacklist has found blacklisted word. (" + s + ")");
+					return false;
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 }
