@@ -40,6 +40,8 @@ public class EconomyManager {
 			}
 			
 			EconomyResponse r = Main.econ.withdrawPlayer(player, Main.getInstance().getConfig().getInt("economy.costs.rename"));
+			
+			Debug.send("Value from config was: " + Main.getInstance().getConfig().getInt("economy.costs.rename"));
 				
 			if (r.transactionSuccess()) {
 				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_success"), r), player);
@@ -78,7 +80,7 @@ public class EconomyManager {
 	 */
 	public static String formatMsg(String msg, EconomyResponse r) {		
 		
-		msg = msg.replace("{cost}", String.valueOf(100.0));	
+		msg = msg.replace("{cost}", String.valueOf(r.amount));	
 		
 		if (!r.transactionSuccess()) msg = msg.replace("{error}", r.errorMessage);
 		return msg;
