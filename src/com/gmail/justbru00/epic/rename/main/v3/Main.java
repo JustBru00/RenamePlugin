@@ -43,8 +43,7 @@ public class Main extends JavaPlugin {
 	public static PluginFile messages = null;
 	public static Economy econ = null; // Vault economy.
 	public static boolean USE_ECO = false;
-	public static boolean AUTO_UPDATE = true; // For the SpigetUpdater (Issue
-												// #45)
+	
 	public static final int CONFIG_VERSION = 3;
 	public static final int MESSAGES_VERSION = 2;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
@@ -96,9 +95,7 @@ public class Main extends JavaPlugin {
 		// Command Executors
 		getCommand("rename").setExecutor(new Rename());
 		getCommand("epicrename").setExecutor(new EpicRename());
-		getCommand("lore").setExecutor(new Lore());
-		// TODO /saveitem 
-		// TODO /getitem 
+		getCommand("lore").setExecutor(new Lore());		
 		getCommand("setloreline").setExecutor(new SetLoreLine());
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
@@ -166,8 +163,8 @@ public class Main extends JavaPlugin {
 	 */
 	public static String getMsgFromConfig(String path) {
 		if (messages.getString(path) == null) {
-			Debug.send("Message in V3_Main.getMsgFromConfig() is NULL. Bugged path is: " + path);
-			return "MESSAGE IS NULL FROM CONFIG.";
+			Debug.send("Message in Main.getMsgFromConfig() is NULL. Bugged path is: " + path);
+			return "[ERROR] Message from config is null. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
 		}
 		return Messager.color(messages.getString(path));
 	}
@@ -192,14 +189,14 @@ public class Main extends JavaPlugin {
 			MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
 			Debug.send("Using methods for version 1.7 or 1.8");
 		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))
-				|| (Bukkit.getVersion().contains("1.11"))) {
+				|| (Bukkit.getVersion().contains("1.11")) || Bukkit.getVersion().contains("1.12")) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 			Debug.send("Using methods for version 1.9+");
 		} else {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("Server running unknown version. Assuming newer than 1.11");
+			Debug.send("Server running unknown version. Assuming newer than 1.12");
 		} // End of Server Version Check
 	}
 
