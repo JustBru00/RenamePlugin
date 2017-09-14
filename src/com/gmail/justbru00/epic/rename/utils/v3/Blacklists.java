@@ -43,7 +43,7 @@ public class Blacklists {
 
 	/**
 	 * 
-	 * @param args The arguments from the {@link CommandExecutor}
+	 * @param args The arguments from the {@link CommandExecutor}. This will also check is the player has the bypass permission. It will message the player.
 	 * @return True if NO blacklisted word found. False if a blacklisted word is FOUND.
 	 */
 	public static boolean checkTextBlacklist(String[] args, Player p) {
