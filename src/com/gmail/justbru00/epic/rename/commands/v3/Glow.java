@@ -32,12 +32,7 @@ public class Glow implements CommandExecutor {
 						ItemStack inHand = RenameUtil.getInHand(player);
 						Material m = inHand.getType();
 						
-						// Issue #76 | Check Blacklist
-						if (!Blacklists.checkTextBlacklist(args, player)) {
-							Messager.msgPlayer(Main.getMsgFromConfig("glow.blacklisted_word_found"), player);
-							return true;
-						}						
-						
+						// Issue #76 | Check Blacklist						
 						if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
 							Messager.msgPlayer(Main.getMsgFromConfig("glow.blacklisted_material_found"), player);
 							return true;

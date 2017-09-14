@@ -1,5 +1,5 @@
 #EpicRename: messages.yml Version 3.0+
-messages_yml_version: 3
+messages_yml_version: 4
 
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -59,7 +59,6 @@ removeloreline:
   has_no_lore: '&cThat item has no lore.'
   out_of_bounds: '&cThat line number does not exist in this lore.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
-  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   cannot_edit_air: '&cSorry you can''t edit nothing.'
   success: '&aRelored the item successfully.'    
   disabled_world: '&cYou are in a disabled world.'
@@ -71,7 +70,6 @@ glow:
   success: '&aAdded glow to the item successfully.'      
   has_enchants: '&cSorry that item has enchantments or is already glowing.'
   disabled_world: '&cYou are in a disabled world.'
-  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   
 removeglow: 
@@ -81,7 +79,6 @@ removeglow:
   success: '&aRemoved glow from the item successfully.'      
   not_glowing: '&cThat item is not glowing or has other enchantments.'  
   disabled_world: '&cYou are in a disabled world.'
-  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   
 character_limit:

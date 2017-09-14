@@ -31,11 +31,6 @@ public class RemoveGlow implements CommandExecutor {
 						Material m = inHand.getType();
 						
 						// Issue #76 | Check Blacklist
-						if (!Blacklists.checkTextBlacklist(args, player)) {
-							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_word_found"), player);
-							return true;
-						}						
-						
 						if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
 							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_material_found"), player);
 							return true;
