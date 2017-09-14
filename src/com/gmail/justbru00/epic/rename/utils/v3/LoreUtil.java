@@ -92,6 +92,7 @@ public class LoreUtil {
 			} else {
 				player.setItemInHand(inHand);
 			}
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.success"), player);
 			
 		} else { // Item has no lore
 			Debug.send("Item has no lore D:");
@@ -111,6 +112,7 @@ public class LoreUtil {
 			} else {
 				player.setItemInHand(inHand);
 			}
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.success"), player);
 		}
 		
 	}
