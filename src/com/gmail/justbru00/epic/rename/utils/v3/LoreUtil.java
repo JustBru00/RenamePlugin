@@ -25,8 +25,14 @@ public class LoreUtil {
 		StringBuilder builder = new StringBuilder("");
 		
 		// Check Blacklist
-		if (!Blacklists.checkTextBlacklist(args)) {
+		if (!Blacklists.checkTextBlacklist(args, player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_word_found"), player);
+			return;
+		}
+		
+		// Whoops forgot this in the release
+		if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_material_found"), player);
 			return;
 		}
 		
@@ -34,9 +40,7 @@ public class LoreUtil {
 		
 		for (int i = 1; i < args.length; i++) {
 			builder.append(args[i] + " ");
-		}
-		
-		
+		}		
 		
 		String loreToBeSet = builder.toString().trim();
 		Debug.send("Text to set is: " + loreToBeSet);
@@ -119,9 +123,9 @@ public class LoreUtil {
 	 * @param player
 	 */
 	public static void loreHandle(String[] args, Player player) {
-		if (Blacklists.checkTextBlacklist(args)) {
+		if (Blacklists.checkTextBlacklist(args, player)) {
 			Debug.send("Passed Text Blacklist");
-			if (Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType())) {
+			if (Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
 				Debug.send("Passed Material Blacklist");
 
 				ItemStack inHand = RenameUtil.getInHand(player);
@@ -172,11 +176,10 @@ public class LoreUtil {
 	}
 
 	/**
-	 * Takes the command args and changes them to a ArrayList with multible
+	 * Takes the command args and changes them to a ArrayList with multiple
 	 * lines and color
 	 * 
-	 * @param args
-	 *            The args you want to change.
+	 * @param args The args you want to change.
 	 * @return An ArrayList with line breaks at every '|'
 	 */
 	public static List<String> buildLoreFromArgs(String[] args) {

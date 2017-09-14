@@ -1,5 +1,5 @@
 #EpicRename: messages.yml Version 3.0+
-messages_yml_version: 2
+messages_yml_version: 3
 
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -46,6 +46,7 @@ setloreline:
   not_an_int: '&cYou need to provide an integer as the first argument.'
   provide_text: '&cPlease provide some text. /setloreline <linenumber> <text>'
   blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
   cannot_edit_air: '&cSorry you can''t relore nothing.'
   success: '&aRelored the item successfully.'  
   disabled_world: '&cYou are in a disabled world.'
@@ -70,6 +71,8 @@ glow:
   success: '&aAdded glow to the item successfully.'      
   has_enchants: '&cSorry that item has enchantments or is already glowing.'
   disabled_world: '&cYou are in a disabled world.'
+  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
   
 removeglow: 
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -78,10 +81,18 @@ removeglow:
   success: '&aRemoved glow from the item successfully.'      
   not_glowing: '&cThat item is not glowing or has other enchantments.'  
   disabled_world: '&cYou are in a disabled world.'
+  blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
   
 character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'
   bypass_msg: '&aYou just bypassed the character limit of {char}.'
+
+blacklists:
+  material:
+    bypass: '&aYou just bypassed the material blacklist.'
+  text:
+    bypass: '&aYou just bypassed the text blacklist.'
 
 economy:
   bypass: '&aYou just bypassed the economy requirement.'

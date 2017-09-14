@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	
 	public static final int CONFIG_VERSION = 3;
-	public static final int MESSAGES_VERSION = 2;
+	public static final int MESSAGES_VERSION = 3;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -148,7 +148,7 @@ public class Main extends JavaPlugin {
 		if (Main.getInstance().getConfig().getString("prefix") != null) {
 			prefix = Messager.color(Main.getInstance().getConfig().getString("prefix"));
 		} else {
-			Messager.msgConsole("&cSorry the prefix in the config is null. Keeping default instead.");
+			Messager.msgConsole("&cThe prefix in the config is null. Keeping default instead.");
 		}
 		Messager.msgConsole("&aPrefix set to: '" + prefix + "&a'");
 

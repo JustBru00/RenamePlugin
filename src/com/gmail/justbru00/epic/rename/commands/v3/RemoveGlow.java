@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
+import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -28,6 +29,18 @@ public class RemoveGlow implements CommandExecutor {
 					if (WorldChecker.checkWorld(player)) {
 						ItemStack inHand = RenameUtil.getInHand(player);
 						Material m = inHand.getType();
+						
+						// Issue #76 | Check Blacklist
+						if (!Blacklists.checkTextBlacklist(args, player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_word_found"), player);
+							return true;
+						}						
+						
+						if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_material_found"), player);
+							return true;
+						}
+						// End Issue #76
 
 						if (!(m == Material.AIR || m == null)) {
 							if (inHand.getType() == Material.FISHING_ROD) {

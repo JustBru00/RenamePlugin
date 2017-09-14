@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
+import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -30,6 +31,20 @@ public class RemoveLoreLine implements CommandExecutor {
 					Player player = (Player) sender;
 					if (WorldChecker.checkWorld(player)) {
 						if (args.length == 1) {
+							
+							// Issue #76 | Check Blacklist
+							if (!Blacklists.checkTextBlacklist(args, player)) {
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.blacklisted_word_found"), player);
+								return true;
+							}
+							
+							
+							if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.blacklisted_material_found"), player);
+								return true;
+							}
+							// End Issue #76
+							
 							int lineNumber = -1;
 
 							try {
