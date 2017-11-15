@@ -10,4 +10,20 @@ public enum EpicRenameCommands {
 	RENAME, LORE, EPICRENAME, SETLORELINE, 
 	REMOVELORELINE, GLOW, REMOVEGLOW;
 	
+	
+	public static String getStringName(EpicRenameCommands e) {
+		switch (e) {
+		case RENAME: {return "rename";}
+		case LORE: {return "lore";}
+		case EPICRENAME: {return "epicrename";}
+		case SETLORELINE: {return "setloreline";}
+		case REMOVELORELINE: {return "removeloreline";}
+		case GLOW: {return "glow";}
+		case REMOVEGLOW: {return "removeglow";}
+		default:
+			break;
+		}
+		return "Command not found";
+	}
+	
 }
