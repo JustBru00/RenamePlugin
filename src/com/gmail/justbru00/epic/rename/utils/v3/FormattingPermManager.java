@@ -26,7 +26,7 @@ public class FormattingPermManager {
 		
 		for (String code : FORMAT_CODES) {
 			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", code);
-			if (unformattedString.contains("&" + code)) {
+			if (unformattedString.toLowerCase().contains("&" + code)) {
 				Debug.send("[FormattingPermManager] The string has the formatting code: &" + code);
 				if (!p.hasPermission(perm)) {
 					Debug.send("[FormattingPermManager] The player doesn't have the permission: " + perm);
