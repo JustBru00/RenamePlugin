@@ -45,7 +45,7 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	
 	public static final int CONFIG_VERSION = 3;
-	public static final int MESSAGES_VERSION = 4;
+	public static final int MESSAGES_VERSION = 5;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	

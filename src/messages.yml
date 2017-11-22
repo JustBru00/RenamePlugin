@@ -1,5 +1,5 @@
 #EpicRename: messages.yml Version 3.0+
-messages_yml_version: 4
+messages_yml_version: 5
 
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -8,6 +8,10 @@ epicrename:
   help: 
     - '&6/rename <name>'
     - '&6/lore <lore>'
+    - '&6/setloreline <linenum> <text>'
+    - '&6/removeloreline <linenum>'
+    - '&6/glow'
+    - '&6/removeglow'
     - '&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/'
     - '&6/epicrename <help, license, reload, debug, version>'
   reload_success: '&aReloaded the plugin successfully!'
@@ -84,6 +88,9 @@ removeglow:
 character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'
   bypass_msg: '&aYou just bypassed the character limit of {char}.'
+  
+format_code_permission:
+  no_permission: '&cYou don''t have permission for the format code "{CODE}".'  
 
 blacklists:
   material:
