@@ -52,6 +52,7 @@ setloreline:
   blacklisted_word_found: '&cSorry that name contains a blacklisted word.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   cannot_edit_air: '&cSorry you can''t relore nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRelored the item successfully.'  
   disabled_world: '&cYou are in a disabled world.'
   

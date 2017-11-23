@@ -22,8 +22,10 @@ public class MaterialPermManager {
 	 */
 	public static boolean checkPerms(EpicRenameCommands erc, ItemStack toCheck, Player p) {
 		// New Permission Checks
-		String newPerm = MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc).replace("{MATERIAL}", toCheck.getType().toString()));
-		String allNewPerm = MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc).replace("{MATERIAL}", "*"));
+		String newPerm = MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", toCheck.getType().toString());
+		String allNewPerm = MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", "*");
+		
+		//Debug.send("[MaterialPermManager] NewPerm: " + newPerm + " allNewPerm: " + allNewPerm);
 		
 		if (p.hasPermission(allNewPerm)) {
 			Debug.send("[MaterialPermManager] The player has permission. Perm: " + allNewPerm);
@@ -36,9 +38,11 @@ public class MaterialPermManager {
 		}
 		
 		// Old Permission Checks | These will be removed in 3.3
-		if (erc.equals(EpicRenameCommands.RENAME) || erc.equals(EpicRenameCommands.LORE)) { // Old permissions only for /rename and /lore
-			String oldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc).replace("{MATERIAL}", toCheck.getType().toString()));
-			String allOldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc).replace("{MATERIAL}", "*"));
+		if (erc == EpicRenameCommands.RENAME || erc == EpicRenameCommands.LORE) { // Old permissions only for /rename and /lore
+			String oldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", toCheck.getType().toString());
+			String allOldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", "*");
+			
+			//Debug.send("[MaterialPermManager] OldPerm: " + oldPerm + " allOldPerm: " + allOldPerm);
 			
 			if (p.hasPermission(allOldPerm)) {
 				Debug.send("[MaterialPermManager] The player has permission. Perm: " + allOldPerm);
@@ -52,7 +56,7 @@ public class MaterialPermManager {
 				return true;
 			}
 		}
-		
+		Debug.send("[MaterialPermManager] The player doesn't have any of the correct material permissions.");
 		return false;
 	}
 }

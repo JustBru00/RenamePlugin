@@ -24,6 +24,14 @@ public class LoreUtil {
 		Debug.send("LoreUtil#setLoreLine() start.");
 		StringBuilder builder = new StringBuilder("");
 		
+		ItemStack inHand = RenameUtil.getInHand(player);
+		
+		// Check Material Permissions
+		if (!MaterialPermManager.checkPerms(EpicRenameCommands.SETLORELINE, inHand, player)) {
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.no_permission_for_material"), player);
+			return;
+		}
+		
 		// Check Blacklist
 		if (!Blacklists.checkTextBlacklist(args, player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_word_found"), player);
@@ -56,7 +64,7 @@ public class LoreUtil {
 		
 		Debug.send("Colored args are: " + loreToBeSet);
 		
-		ItemStack inHand = RenameUtil.getInHand(player);						
+						
 		ItemMeta im = inHand.getItemMeta();
 		
 		if (im.hasLore()) {
