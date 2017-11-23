@@ -90,7 +90,7 @@ character_limit:
   bypass_msg: '&aYou just bypassed the character limit of {char}.'
   
 format_code_permission:
-  no_permission: '&cYou don''t have permission for the format code "{CODE}".'  
+  no_permission: '&cYou don''t have permission for the format code "{code}".'  
 
 blacklists:
   material:

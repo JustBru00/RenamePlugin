@@ -36,6 +36,12 @@ public class LoreUtil {
 			return;
 		}
 		
+		// Check FormattingPerms
+		if (!FormattingPermManager.checkPerms(EpicRenameCommands.SETLORELINE, args, player)) {
+			/// FormattingPermManager handles the message.
+			return;
+		}
+		
 		lineNumber = lineNumber - 1;
 		
 		for (int i = 1; i < args.length; i++) {
@@ -126,14 +132,16 @@ public class LoreUtil {
 	 */
 	public static void loreHandle(String[] args, Player player) {
 		if (Blacklists.checkTextBlacklist(args, player)) {
-			Debug.send("Passed Text Blacklist");
+			Debug.send("[LoreUtil] Passed Text Blacklist");
 			if (Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
-				Debug.send("Passed Material Blacklist");
-
+				Debug.send("[LoreUtil] Passed Material Blacklist");
+				if (FormattingPermManager.checkPerms(EpicRenameCommands.LORE, args, player)) {
+					Debug.send("[LoreUtil] Passed FormattingPermManager#checkPerms()");
+					
 				ItemStack inHand = RenameUtil.getInHand(player);
 
 				if (inHand.getType() != Material.AIR) {
-					Debug.send("Passed Air check");
+					Debug.send("[LoreUtil] Passed Air check");
 
 					if ((player.hasPermission("epicrename.lore." + inHand.getType().toString()))
 							|| player.hasPermission("epicrename.lore.*")) {
@@ -158,13 +166,17 @@ public class LoreUtil {
 							Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
 							return;
 						}
-
+						
 					} else {
 						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission_for_material"), player);
 						return;
 					}
 				} else {
 					Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_lore_air"), player);
+					return;
+				}
+				} else {
+					// FormattingPermManager handles the message.
 					return;
 				}
 			} else {

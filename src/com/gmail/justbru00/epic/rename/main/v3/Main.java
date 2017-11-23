@@ -163,7 +163,7 @@ public class Main extends JavaPlugin {
 	 */
 	public static String getMsgFromConfig(String path) {
 		if (messages.getString(path) == null) {
-			Debug.send("Message in Main.getMsgFromConfig() is NULL. Bugged path is: " + path);
+			Debug.send("[Main#getMsgFromConfig()] A message from messages.yml was NULL. The path to the message is: " + path);
 			return "[ERROR] Message from config is null. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
 		}
 		return Messager.color(messages.getString(path));
@@ -187,16 +187,16 @@ public class Main extends JavaPlugin {
 		if ((Bukkit.getVersion().contains("1.7")) || (Bukkit.getVersion().contains("1.8"))) {
 			USE_NEW_GET_HAND = false;
 			MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
-			Debug.send("Using methods for version 1.7 or 1.8");
+			Debug.send("[Main#checkServerVersion()] Using methods for version 1.7 or 1.8");
 		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))
 				|| (Bukkit.getVersion().contains("1.11")) || Bukkit.getVersion().contains("1.12")) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("Using methods for version 1.9+");
+			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
 		} else {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("Server running unknown version. Assuming newer than 1.12");
+			Debug.send("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.12");
 		} // End of Server Version Check
 	}
 

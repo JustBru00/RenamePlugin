@@ -51,7 +51,7 @@ public class FormattingPermManager {
 				Debug.send("[FormattingPermManager] The string has the formatting code: " + code);
 				if (!p.hasPermission(perm)) {
 					Debug.send("[FormattingPermManager] The player doesn't have the permission: " + perm);
-					Messager.msgPlayer(Main.getMsgFromConfig("format_code_permission.no_permission").replace("{CODE}", code), p);
+					Messager.msgPlayer(Main.getMsgFromConfig("format_code_permission.no_permission").replace("{code}", code), p);
 					return false;
 				}
 			}
