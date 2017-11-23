@@ -143,8 +143,7 @@ public class LoreUtil {
 				if (inHand.getType() != Material.AIR) {
 					Debug.send("[LoreUtil] Passed Air check");
 
-					if ((player.hasPermission("epicrename.lore." + inHand.getType().toString()))
-							|| player.hasPermission("epicrename.lore.*")) {
+					if (MaterialPermManager.checkPerms(EpicRenameCommands.LORE, inHand, player)) {
 
 						EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.LORE);
 

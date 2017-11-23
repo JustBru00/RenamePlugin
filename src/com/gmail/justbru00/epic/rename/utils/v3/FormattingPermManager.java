@@ -20,7 +20,7 @@ public class FormattingPermManager {
 	 * @param erc The command this text will be used for.
 	 * @param args The uncolored/unformatted arguments. (Still has '&' color codes)
 	 * @param p The player to check permissions of.
-	 * @return True if the player is has permission. False if the player doesn't have permission.
+	 * @return True if the player has permission. False if the player doesn't have permission.
 	 */
 	public static boolean checkPerms(EpicRenameCommands erc, String[] args, Player p) {
 		StringBuilder builder = new StringBuilder("");				
@@ -35,7 +35,7 @@ public class FormattingPermManager {
 	 * @param erc The command this text will be used for.
 	 * @param unformattedString The uncolored/unformatted string. (Still has '&' color codes)
 	 * @param p The player to check permissions of.
-	 * @return True if the player is has permission. False if the player doesn't have permission.
+	 * @return True if the player has permission. False if the player doesn't have permission.
 	 */
 	public static boolean checkPerms(EpicRenameCommands erc, String unformattedString, Player p) {
 		

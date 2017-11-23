@@ -45,7 +45,7 @@ public class RenameUtil {
 						if (FormattingPermManager.checkPerms(erc, args, player)) {
 							Debug.send("[RenameUtil] Passed Format Permissions Check.");
 							if (inHand.getType() != Material.AIR) { // Check != Air
-								if (player.hasPermission("epicrename.rename." + inHand.getType().toString()) || player.hasPermission("epicrename.rename.*")) { // Check for per material permissions
+								if (MaterialPermManager.checkPerms(erc, inHand, player)) { // Check for per material permissions
 
 									EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.RENAME);
 
