@@ -14,9 +14,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
+import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -32,6 +34,12 @@ public class RemoveLoreLine implements CommandExecutor {
 					Player player = (Player) sender;
 					if (WorldChecker.checkWorld(player)) {
 						if (args.length == 1) {
+							
+							// Check Material Permissions
+							if (!MaterialPermManager.checkPerms(EpicRenameCommands.REMOVELORELINE, RenameUtil.getInHand(player), player)) {
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.no_permission_for_material"), player);
+								return true;
+							}
 							
 							// Issue #76 | Check Blacklist							
 							if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {

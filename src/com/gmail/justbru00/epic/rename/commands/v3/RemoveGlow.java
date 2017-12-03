@@ -10,8 +10,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
+import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -36,6 +38,12 @@ public class RemoveGlow implements CommandExecutor {
 							return true;
 						}
 						// End Issue #76
+						
+						// Check Material Permissions
+						if (!MaterialPermManager.checkPerms(EpicRenameCommands.REMOVEGLOW, inHand, player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.no_permission_for_material"), player);
+							return true;
+						}
 
 						if (!(m == Material.AIR || m == null)) {
 							if (inHand.getType() == Material.FISHING_ROD) {

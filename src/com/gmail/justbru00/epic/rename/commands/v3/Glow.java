@@ -10,9 +10,11 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
+import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -31,6 +33,12 @@ public class Glow implements CommandExecutor {
 					if (WorldChecker.checkWorld(player)) {
 						ItemStack inHand = RenameUtil.getInHand(player);
 						Material m = inHand.getType();
+						
+						// Check Material Permissions
+						if (!MaterialPermManager.checkPerms(EpicRenameCommands.GLOW, inHand, player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("glow.no_permission_for_material"), player);
+							return true;
+						}
 						
 						// Issue #76 | Check Blacklist						
 						if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {

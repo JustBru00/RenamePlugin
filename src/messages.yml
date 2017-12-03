@@ -67,6 +67,7 @@ removeloreline:
   out_of_bounds: '&cThat line number does not exist in this lore.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   cannot_edit_air: '&cSorry you can''t edit nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRelored the item successfully.'    
   disabled_world: '&cYou are in a disabled world.'
   
@@ -74,6 +75,7 @@ glow:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   wrong_sender: '&cSorry only a player can use that command.'
   cannot_edit_air: '&cSorry you can''t edit nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aAdded glow to the item successfully.'      
   has_enchants: '&cSorry that item has enchantments or is already glowing.'
   disabled_world: '&cYou are in a disabled world.'
@@ -83,6 +85,7 @@ removeglow:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   wrong_sender: '&cSorry only a player can use that command.'
   cannot_edit_air: '&cSorry you can''t edit nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRemoved glow from the item successfully.'      
   not_glowing: '&cThat item is not glowing or has other enchantments.'  
   disabled_world: '&cYou are in a disabled world.'
