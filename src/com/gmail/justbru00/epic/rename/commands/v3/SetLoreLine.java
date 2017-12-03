@@ -43,6 +43,14 @@ public class SetLoreLine implements CommandExecutor {
 								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.not_an_int"), player);
 								return true;
 							}
+							
+							// Issue #80
+							if (lineNumber <= 0) {
+								Debug.send("[SetLoreLine] The number " + lineNumber + " is below or equal to 0.");
+								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.invalid_number"), player);
+								return true;
+							}
+							// End Issue #80
 
 							if (args.length == 1) {
 								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.provide_text"), player);

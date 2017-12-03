@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
+import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
@@ -47,6 +48,14 @@ public class RemoveLoreLine implements CommandExecutor {
 								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.not_an_int"), player);
 								return true;
 							}
+							
+							// Issue #80
+							if (lineNumber <= 0) {
+								Debug.send("[RemoveLoreLine] The number " + lineNumber + " is below or equal to 0.");
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.invalid_number"), player);
+								return true;
+							}
+							// End Issue #80
 
 							if (RenameUtil.getInHand(player).hasItemMeta()) {
 								if (RenameUtil.getInHand(player).getType() == Material.AIR) {
