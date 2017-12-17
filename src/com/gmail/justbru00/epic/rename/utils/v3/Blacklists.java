@@ -15,6 +15,29 @@ import com.gmail.justbru00.epic.rename.main.v3.Main;
 public class Blacklists {
 
 	// VERSION 3
+	
+	/**
+	 * Issue #81
+	 * Checks if the name of the item is one of the ones from the config.
+	 * Useful to keep players from renaming important names.
+	 * @param p The Player that we are checking for.
+	 * @return True if the item can be edited. False if the item contains a blacklisted name.
+	 */
+	public static boolean checkExistingName(Player p) {
+		return false;
+	}
+	
+	/**
+	 * Issue #81
+	 * Checks if the lore of the item is one of the ones from the config.
+	 * Useful to keep players from changing important lore.
+	 * @param p The Player that we are checking for.
+	 * @return True if the item can be edited. False if the item contains a blacklisted lore string.
+	 */
+	public static boolean checkExistingLore(Player p) {
+		return false;
+	}
+	
 	/**
 	 * 
 	 * @param m The Material from the {@link CommandExecutor}. This will also check is the player has the bypass permission. It will message the player.

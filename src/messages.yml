@@ -1,5 +1,5 @@
 #EpicRename: messages.yml Version 3.0+
-messages_yml_version: 5
+messages_yml_version: 6
 
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'

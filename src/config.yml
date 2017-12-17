@@ -2,7 +2,7 @@
 #Version 3.0+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 3
+config_version: 4
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -14,7 +14,8 @@ economy:
   costs:
     rename: 100
     lore: 100
-    
+
+#Blacklists    
 blacklists:
   material:
     - 'VAILD_MATERIAL_HERE'
@@ -22,6 +23,14 @@ blacklists:
   
   text:
     - 'some_bad_phrase_here'
+    -
+    
+  existingname:
+    - 'a name that is not case sensitive'
+    - 
+    
+  existingloreline:
+    - 'a string of text to check for every lore line that is not case sensitive'
     -
     
 #Default Character Limit is 30
