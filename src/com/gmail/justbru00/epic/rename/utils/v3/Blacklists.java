@@ -5,6 +5,8 @@
  */
 package com.gmail.justbru00.epic.rename.utils.v3;
 
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +26,32 @@ public class Blacklists {
 	 * @return True if the item can be edited. False if the item contains a blacklisted name.
 	 */
 	public static boolean checkExistingName(Player p) {
-		return false;
+		Debug.send("[Blacklists#checkExistingName(Player)] Method called");
+		if (!p.hasPermission("epicrename.bypass.existingname")) {
+			// Player doesn't have the bypass permission
+			
+			String itemName = RenameUtil.getInHand(p).getItemMeta().getDisplayName();
+			itemName = ChatColor.stripColor(itemName);
+			
+			for (String blacklistedString : Main.getInstance().getConfig().getStringList("blacklists.existingname")) {
+				if (blacklistedString != null) {
+					
+					blacklistedString = ChatColor.stripColor(Messager.color(blacklistedString));
+					
+					if (itemName.toLowerCase().contains(blacklistedString.toLowerCase())) {			
+						Debug.send("[Blacklists#checkExistingName(Player)] Name contained '" + blacklistedString + "'");
+						return false;						
+					} 
+				}				
+			}
+			
+		} else {
+			Debug.send("[Blacklists#checkExistingName(Player)] Player had the epicrename.bypass.existingname permission.");
+			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
+			return true;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -35,7 +62,35 @@ public class Blacklists {
 	 * @return True if the item can be edited. False if the item contains a blacklisted lore string.
 	 */
 	public static boolean checkExistingLore(Player p) {
-		return false;
+		Debug.send("[Blacklists#checkExistingLore(Player)] Method called");
+		if (!p.hasPermission("epicrename.bypass.existinglore")) {
+			// Player doesn't have the bypass permission
+			
+			List<String> loreLines = RenameUtil.getInHand(p).getItemMeta().getLore();
+			
+			for (String loreLine : loreLines) {
+				loreLine = ChatColor.stripColor(loreLine);
+				
+				for (String blacklistedString : Main.getInstance().getConfig().getStringList("blacklists.existinglore")) {
+					if (blacklistedString != null) {
+					
+						blacklistedString = ChatColor.stripColor(Messager.color(blacklistedString));
+					
+						if (loreLine.toLowerCase().contains(blacklistedString.toLowerCase())) {
+							Debug.send("[Blacklists#checkExistingLore(Player)] Lore Line: '"+ loreLine +  "' contained '" + blacklistedString + "'");
+							return false;
+						}
+					}				
+				}
+			}
+			
+		} else {
+			Debug.send("[Blacklists#checkExistingLore(Player)] Player had the epicrename.bypass.existinglore permission.");
+			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existinglore.bypass"), p);
+			return true;
+		}
+		
+		return true;
 	}
 	
 	/**

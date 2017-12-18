@@ -103,6 +103,10 @@ blacklists:
     bypass: '&aYou just bypassed the material blacklist.'
   text:
     bypass: '&aYou just bypassed the text blacklist.'
+  existingname:
+    bypass: '&aYou just bypassed the existing name blacklist.'
+  existinglore:
+    bypass: '&aYou just bypassed the existing lore blacklist.'    
 
 economy:
   bypass: '&aYou just bypassed the economy requirement.'

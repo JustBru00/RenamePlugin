@@ -143,12 +143,14 @@ public class RenameUtil {
 		return toRename;
 	}
 
-	@SuppressWarnings("deprecation")
+	
 	/**
-	 * @param player
-	 *            The player to get the item from.
+	 * This method gets the item in the players main hand.
+	 * It will use the correct method for the server version it is running on.
+	 * @param player The player to get the item from.
 	 * @return The item stack in the players hand.
 	 */
+	@SuppressWarnings("deprecation")
 	public static ItemStack getInHand(Player player) {
 		ItemStack returning = null;
 
@@ -160,8 +162,8 @@ public class RenameUtil {
 			try {
 				returning = player.getItemInHand();
 			} catch (Exception e) {
-				Debug.send(
-						"Problem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Version problem?");
+				Debug.send("&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
+				Messager.msgConsole("&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
 			}
 
 			return returning;

@@ -24,11 +24,13 @@ blacklists:
   text:
     - 'some_bad_phrase_here'
     -
-    
+  
+  #These values are checked without color and are case insensitive.  
   existingname:
     - 'a name that is not case sensitive'
     - 
-    
+  
+  #These values are checked without color and are case insensitive.    
   existingloreline:
     - 'a string of text to check for every lore line that is not case sensitive'
     -
@@ -38,7 +40,7 @@ character_limit:
   enabled: false
   limit: 30  
   
-# Should underscores be replaced with spaces?
+#Should underscores be replaced with spaces?
 replace_underscores: false
 
 #Per world plugin enable
