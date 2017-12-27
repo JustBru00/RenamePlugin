@@ -40,59 +40,74 @@ public class RenameUtil {
 				Debug.send("[RenameUtil] Passed Text Blacklist");
 				if (Blacklists.checkMaterialBlacklist(inHand.getType(), player)) { // Check Material Blacklist
 					Debug.send("[RenameUtil] Passed Material Blacklist Check.");
-					if (CharLimit.checkCharLimit(args, player)) { // Check Character Limit
-						Debug.send("[RenameUtil] Passed Character Limit Check.");
-						if (FormattingPermManager.checkPerms(erc, args, player)) {
-							Debug.send("[RenameUtil] Passed Format Permissions Check.");
-							if (inHand.getType() != Material.AIR) { // Check != Air
-								if (MaterialPermManager.checkPerms(erc, inHand, player)) { // Check for per material permissions
+					if (Blacklists.checkExistingName(player)) { // Check Existing Name Blacklist
+						Debug.send("[RenameUtil] Passed Existing Name Blacklist Check.");
+						if (Blacklists.checkExistingLore(player)) { // Check Existing Lore Blacklist
+							Debug.send("[RenameUtil] Passed Existing Lore Blacklist Check.");
+							if (CharLimit.checkCharLimit(args, player)) { // Check Character Limit
+								Debug.send("[RenameUtil] Passed Character Limit Check.");
+								if (FormattingPermManager.checkPerms(erc, args, player)) {
+									Debug.send("[RenameUtil] Passed Format Permissions Check.");
+									if (inHand.getType() != Material.AIR) { // Check != Air
+										if (MaterialPermManager.checkPerms(erc, inHand, player)) { // Check for per material permissions
 
-									EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.RENAME);
+											EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.RENAME);
 
-									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
-										return;
-									}
-									StringBuilder builder = new StringBuilder("");
-									String completeArgs = "";
+											if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+												return;
+											}
+											StringBuilder builder = new StringBuilder("");
+											String completeArgs = "";
 
-									for (String item : args) {
-										builder.append(item + " ");
-									}
-									if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
-										completeArgs = completeArgs.replace("_", " ");
-										Debug.send("[RenameUtil] Replaced the underscores.");
-									}
+											for (String item : args) {
+												builder.append(item + " ");
+											}
+											if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
+												completeArgs = completeArgs.replace("_", " ");
+												Debug.send("[RenameUtil] Replaced the underscores.");
+											}
 
-									completeArgs = Messager.color(builder.toString().trim());
+											completeArgs = Messager.color(builder.toString().trim());
 
-									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-										player.getInventory()
-												.setItemInMainHand(RenameUtil.renameItemStack(player, args, inHand));
-										Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
-										Messager.msgConsole(Main.getMsgFromConfig("rename.log")
-												.replace("{player}", player.getName()).replace("{name}", completeArgs));
-										return;
-									} else { // Use older method.
-										player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
-										Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
-										Messager.msgConsole(Main.getMsgFromConfig("rename.log")
-												.replace("{player}", player.getName()).replace("{name}", completeArgs));
+											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+												player.getInventory().setItemInMainHand(
+														RenameUtil.renameItemStack(player, args, inHand));
+												Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
+														.replace("{player}", player.getName())
+														.replace("{name}", completeArgs));
+												return;
+											} else { // Use older method.
+												player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
+												Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
+														.replace("{player}", player.getName())
+														.replace("{name}", completeArgs));
+												return;
+											}
+										} else {
+											Messager.msgPlayer(
+													Main.getMsgFromConfig("rename.no_permission_for_material"), player);
+											return;
+										}
+									} else {
+										Messager.msgPlayer(Main.getMsgFromConfig("rename.cannot_rename_air"), player);
 										return;
 									}
 								} else {
-									Messager.msgPlayer(Main.getMsgFromConfig("rename.no_permission_for_material"), player);
+									// Message handled by FormattingPermManager
 									return;
 								}
 							} else {
-								Messager.msgPlayer(Main.getMsgFromConfig("rename.cannot_rename_air"), player);
+								Messager.msgPlayer(Main.getMsgFromConfig("character_limit.name_too_long"), player);
 								return;
 							}
 						} else {
-							// Message handled by FormattingPermManager
+							Messager.msgPlayer(Main.getMsgFromConfig("rename.blacklisted_existing_lore_found"), player);
 							return;
 						}
 					} else {
-						Messager.msgPlayer(Main.getMsgFromConfig("character_limit.name_too_long"), player);
+						Messager.msgPlayer(Main.getMsgFromConfig("rename.blacklisted_existing_name_found"), player);
 						return;
 					}
 				} else {
@@ -143,11 +158,12 @@ public class RenameUtil {
 		return toRename;
 	}
 
-	
 	/**
-	 * This method gets the item in the players main hand.
-	 * It will use the correct method for the server version it is running on.
-	 * @param player The player to get the item from.
+	 * This method gets the item in the players main hand. It will use the correct
+	 * method for the server version it is running on.
+	 * 
+	 * @param player
+	 *            The player to get the item from.
 	 * @return The item stack in the players hand.
 	 */
 	@SuppressWarnings("deprecation")
@@ -162,8 +178,10 @@ public class RenameUtil {
 			try {
 				returning = player.getItemInHand();
 			} catch (Exception e) {
-				Debug.send("&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
-				Messager.msgConsole("&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
+				Debug.send(
+						"&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
+				Messager.msgConsole(
+						"&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
 			}
 
 			return returning;
