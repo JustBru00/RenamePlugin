@@ -33,6 +33,11 @@ public class Blacklists {
 			String itemName = RenameUtil.getInHand(p).getItemMeta().getDisplayName();
 			itemName = ChatColor.stripColor(itemName);
 			
+			if (itemName == null) {
+				Debug.send("[Blacklists#checkExistingName(Player)] Item existing name was NULL");
+				return true;
+			}
+			
 			for (String blacklistedString : Main.getInstance().getConfig().getStringList("blacklists.existingname")) {
 				if (blacklistedString != null) {
 					
@@ -67,6 +72,11 @@ public class Blacklists {
 			// Player doesn't have the bypass permission
 			
 			List<String> loreLines = RenameUtil.getInHand(p).getItemMeta().getLore();
+			
+			if (loreLines == null) {
+				Debug.send("[Blacklists#checkExistingLore(Player)] Lore from existing item was NULL");
+				return true;
+			}
 			
 			for (String loreLine : loreLines) {
 				loreLine = ChatColor.stripColor(loreLine);
