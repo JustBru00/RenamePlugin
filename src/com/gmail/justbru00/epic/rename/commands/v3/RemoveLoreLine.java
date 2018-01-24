@@ -48,6 +48,18 @@ public class RemoveLoreLine implements CommandExecutor {
 							}
 							// End Issue #76
 							
+							// Check Existing Name Blacklist #81
+							if (!Blacklists.checkExistingName(player)) {
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.blacklisted_existing_name_found"), player);
+								return true;
+							}
+							
+							// Check Existing Lore Blacklist #81
+							if (!Blacklists.checkExistingLore(player)) {
+								Messager.msgPlayer(Main.getMsgFromConfig("removeloreline.blacklisted_existing_lore_found"), player);
+								return true;
+							}
+							
 							int lineNumber = -1;
 
 							try {
