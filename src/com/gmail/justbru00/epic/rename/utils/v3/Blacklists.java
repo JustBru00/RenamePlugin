@@ -81,7 +81,7 @@ public class Blacklists {
 			for (String loreLine : loreLines) {
 				loreLine = ChatColor.stripColor(loreLine);
 				
-				for (String blacklistedString : Main.getInstance().getConfig().getStringList("blacklists.existinglore")) {
+				for (String blacklistedString : Main.getInstance().getConfig().getStringList("blacklists.existingloreline")) {
 					if (blacklistedString != null) {
 					
 						blacklistedString = ChatColor.stripColor(Messager.color(blacklistedString));
