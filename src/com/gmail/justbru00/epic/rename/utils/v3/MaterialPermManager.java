@@ -37,7 +37,7 @@ public class MaterialPermManager {
 			return true;
 		}
 		
-		// Old Permission Checks | These will be removed in 3.3
+		/** Old Permission Checks | REMOVED IN VERSION 3.3 | Kept here as a reference just in case. REMOVE THIS CODE IN VERSION 3.4
 		if (erc == EpicRenameCommands.RENAME || erc == EpicRenameCommands.LORE) { // Old permissions only for /rename and /lore
 			String oldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", toCheck.getType().toString());
 			String allOldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", "*");
@@ -55,7 +55,7 @@ public class MaterialPermManager {
 				Messager.msgConsole("&cThe permission " + oldPerm + " is depreciated. It will be removed in the v3.3 update. Use " + newPerm + " instead.");
 				return true;
 			}
-		}
+		} **/
 		Debug.send("[MaterialPermManager] The player doesn't have any of the correct material permissions.");
 		return false;
 	}

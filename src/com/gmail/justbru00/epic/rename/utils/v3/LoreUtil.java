@@ -43,6 +43,18 @@ public class LoreUtil {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_material_found"), player);
 			return;
 		}
+		
+		// Check Existing Name Blacklist #81
+		if (!Blacklists.checkExistingName(player)) {
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_existing_name_found"), player);
+			return;
+		}
+		
+		// Check Existing Lore Blacklist #81
+		if (!Blacklists.checkExistingLore(player)) {
+			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_existing_lore_found"), player);
+			return;
+		}
 
 		// Check FormattingPerms
 		if (!FormattingPermManager.checkPerms(EpicRenameCommands.SETLORELINE, args, player)) {
