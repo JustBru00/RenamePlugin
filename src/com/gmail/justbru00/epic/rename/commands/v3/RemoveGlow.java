@@ -39,6 +39,18 @@ public class RemoveGlow implements CommandExecutor {
 						}
 						// End Issue #76
 						
+						// Check Existing Name Blacklist #81
+						if (!Blacklists.checkExistingName(player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_existing_name_found"), player);
+							return true;
+						}
+						
+						// Check Existing Lore Blacklist #81
+						if (!Blacklists.checkExistingLore(player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.blacklisted_existing_lore_found"), player);
+							return true;
+						}
+						
 						// Check Material Permissions
 						if (!MaterialPermManager.checkPerms(EpicRenameCommands.REMOVEGLOW, inHand, player)) {
 							Messager.msgPlayer(Main.getMsgFromConfig("removeglow.no_permission_for_material"), player);

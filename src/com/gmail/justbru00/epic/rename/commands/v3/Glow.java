@@ -46,6 +46,18 @@ public class Glow implements CommandExecutor {
 							return true;
 						}
 						// End Issue #76
+						
+						// Check Existing Name Blacklist #81
+						if (!Blacklists.checkExistingName(player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("glow.blacklisted_existing_name_found"), player);
+							return true;
+						}
+						
+						// Check Existing Lore Blacklist #81
+						if (!Blacklists.checkExistingLore(player)) {
+							Messager.msgPlayer(Main.getMsgFromConfig("glow.blacklisted_existing_lore_found"), player);
+							return true;
+						}
 
 						if (!(m == Material.AIR || m == null)) {
 							if (inHand.getEnchantments().size() == 0) {
