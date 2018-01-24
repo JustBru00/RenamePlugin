@@ -18,87 +18,92 @@ import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class LoreUtil {
-	
+
 	@SuppressWarnings("deprecation")
-	public static void setLoreLine(int lineNumber, Player player, String[] args) {		
+	public static void setLoreLine(int lineNumber, Player player, String[] args) {
 		Debug.send("LoreUtil#setLoreLine() start.");
 		StringBuilder builder = new StringBuilder("");
-		
+
 		ItemStack inHand = RenameUtil.getInHand(player);
-		
+
 		// Check Material Permissions
 		if (!MaterialPermManager.checkPerms(EpicRenameCommands.SETLORELINE, inHand, player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.no_permission_for_material"), player);
 			return;
 		}
-		
+
 		// Check Blacklist
 		if (!Blacklists.checkTextBlacklist(args, player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_word_found"), player);
 			return;
 		}
-		
+
 		// Whoops forgot this in the release
 		if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.blacklisted_material_found"), player);
 			return;
 		}
-		
+
 		// Check FormattingPerms
 		if (!FormattingPermManager.checkPerms(EpicRenameCommands.SETLORELINE, args, player)) {
 			/// FormattingPermManager handles the message.
 			return;
 		}
-		
+
 		lineNumber = lineNumber - 1;
-		
+
 		for (int i = 1; i < args.length; i++) {
 			builder.append(args[i] + " ");
-		}		
-		
+		}
+
 		String loreToBeSet = builder.toString().trim();
 		Debug.send("Text to set is: " + loreToBeSet);
 		List<String> newLore = new ArrayList<String>();
-	
+
 		loreToBeSet = Messager.color(loreToBeSet);
-		
+
 		Debug.send("Colored args are: " + loreToBeSet);
-		
-						
+
 		ItemMeta im = inHand.getItemMeta();
-		
+
 		if (im.hasLore()) {
-			
+
 			Debug.send("Item has lore");
-			
-			List<String> oldLore = im.getLore();			
-			
+
+			List<String> oldLore = im.getLore();
+
 			try {
-				
+
 				oldLore.set(lineNumber, loreToBeSet); // ERROR WILL BE CAUSED IF BIGGER
-				
+
 				newLore = oldLore;
-				Debug.send("Line number " + lineNumber + " fits in the current lore.");			
+				Debug.send("Line number " + lineNumber + " fits in the current lore.");
 			} catch (IndexOutOfBoundsException e) {
 				Debug.send("Line number is bigger than current size.");
-				
+
 				// Debug
-				if (Main.debug) for (String item : oldLore) {Debug.send("oldLore has: " + item);}
-				
+				if (Main.debug)
+					for (String item : oldLore) {
+						Debug.send("oldLore has: " + item);
+					}
+
 				for (int i = 0; i < oldLore.size(); i++) { // Fill new lore with old stuff
 					newLore.add(oldLore.get(i));
 				}
-				
+
 				// Debug
-				if (Main.debug) for (String item : newLore) {Debug.send("newLore has: " + item);}
-				
+				if (Main.debug)
+					for (String item : newLore) {
+						Debug.send("newLore has: " + item);
+					}
+
 				for (int i = oldLore.size() - 1; i <= lineNumber; i++) { // Expand new lore to proper size
 					newLore.add("");
 				}
-				
+
 				newLore.set(lineNumber, loreToBeSet);
 			}
-			
+
 			im.setLore(newLore);
 			inHand.setItemMeta(im);
 			if (Main.USE_NEW_GET_HAND) {
@@ -107,18 +112,18 @@ public class LoreUtil {
 				player.setItemInHand(inHand);
 			}
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.success"), player);
-			
+
 		} else { // Item has no lore
 			Debug.send("Item has no lore D:");
-			
+
 			for (int i = 0; i <= lineNumber; i++) {
 				newLore.add("");
 			}
-			
+
 			Debug.send("New Lore size is: " + newLore.size());
-			
+
 			newLore.set(lineNumber, loreToBeSet);
-			
+
 			im.setLore(newLore);
 			inHand.setItemMeta(im);
 			if (Main.USE_NEW_GET_HAND) {
@@ -128,7 +133,7 @@ public class LoreUtil {
 			}
 			Messager.msgPlayer(Main.getMsgFromConfig("setloreline.success"), player);
 		}
-		
+
 	}
 
 	@SuppressWarnings("deprecation")
@@ -143,47 +148,63 @@ public class LoreUtil {
 			Debug.send("[LoreUtil] Passed Text Blacklist");
 			if (Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
 				Debug.send("[LoreUtil] Passed Material Blacklist");
-				if (FormattingPermManager.checkPerms(EpicRenameCommands.LORE, args, player)) {
-					Debug.send("[LoreUtil] Passed FormattingPermManager#checkPerms()");
-					
-				ItemStack inHand = RenameUtil.getInHand(player);
+				if (Blacklists.checkExistingName(player)) {
+					Debug.send("[LoreUtil] Passed Existing Name Blacklist");
+					if (Blacklists.checkExistingLore(player)) {
+						Debug.send("[LoreUtil] Passed Existing Lore Blacklist");
 
-				if (inHand.getType() != Material.AIR) {
-					Debug.send("[LoreUtil] Passed Air check");
+						if (FormattingPermManager.checkPerms(EpicRenameCommands.LORE, args, player)) {
+							Debug.send("[LoreUtil] Passed FormattingPermManager#checkPerms()");
 
-					if (MaterialPermManager.checkPerms(EpicRenameCommands.LORE, inHand, player)) {
+							ItemStack inHand = RenameUtil.getInHand(player);
 
-						EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.LORE);
+							if (inHand.getType() != Material.AIR) {
+								Debug.send("[LoreUtil] Passed Air check");
 
-						if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+								if (MaterialPermManager.checkPerms(EpicRenameCommands.LORE, inHand, player)) {
+
+									EcoMessage ecoStatus = EconomyManager.takeMoney(player, EpicRenameCommands.LORE);
+
+									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+										return;
+									}
+
+									ItemStack toLore = inHand;
+									ItemMeta toLoreMeta = toLore.getItemMeta();
+									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
+									toLore.setItemMeta(toLoreMeta);
+
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(toLore);
+										Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
+										return;
+									} else { // Use older method.
+										player.setItemInHand(toLore);
+										Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
+										return;
+									}
+
+								} else {
+									Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission_for_material"),
+											player);
+									return;
+								}
+							} else {
+								Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_lore_air"), player);
+								return;
+							}
+						} else {
+							// FormattingPermManager handles the message.
 							return;
 						}
-
-						ItemStack toLore = inHand;
-						ItemMeta toLoreMeta = toLore.getItemMeta();
-						toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
-						toLore.setItemMeta(toLoreMeta);
-
-						if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-							player.getInventory().setItemInMainHand(toLore);
-							Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
-							return;
-						} else { // Use older method.
-							player.setItemInHand(toLore);
-							Messager.msgPlayer(Main.getMsgFromConfig("lore.success"), player);
-							return;
-						}
-						
 					} else {
-						Messager.msgPlayer(Main.getMsgFromConfig("lore.no_permission_for_material"), player);
+						// Existing lore
+						Messager.msgPlayer(Main.getMsgFromConfig("lore.blacklisted_existing_lore_found"), player);
 						return;
 					}
 				} else {
-					Messager.msgPlayer(Main.getMsgFromConfig("lore.cannot_lore_air"), player);
-					return;
-				}
-				} else {
-					// FormattingPermManager handles the message.
+					// Existing name
+					Messager.msgPlayer(Main.getMsgFromConfig("lore.blacklisted_existing_name_found"), player);
 					return;
 				}
 			} else {
@@ -197,10 +218,11 @@ public class LoreUtil {
 	}
 
 	/**
-	 * Takes the command args and changes them to a ArrayList with multiple
-	 * lines and color
+	 * Takes the command args and changes them to a ArrayList with multiple lines
+	 * and color
 	 * 
-	 * @param args The args you want to change.
+	 * @param args
+	 *            The args you want to change.
 	 * @return An ArrayList with line breaks at every '|'
 	 */
 	public static List<String> buildLoreFromArgs(String[] args) {
