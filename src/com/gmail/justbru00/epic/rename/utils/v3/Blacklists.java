@@ -61,7 +61,7 @@ public class Blacklists {
 	
 	/**
 	 * Issue #81
-	 * Checks if the lore of the item is one of the ones from the config.
+	 * Checks if the lore of the item is one of the ones from the config file.
 	 * Useful to keep players from changing important lore.
 	 * @param p The Player that we are checking for.
 	 * @return True if the item can be edited. False if the item contains a blacklisted lore string.
