@@ -8,7 +8,7 @@ config_version: 4
 prefix: '&8[&bEpic&fRename&8] &f'
 
 #Economy Features
-#You must restart the server after changing the ecomony settings.
+#You must restart the server after changing the economy settings.
 economy:
   use: false
   costs:
