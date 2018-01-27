@@ -27,8 +27,6 @@ public class Blacklists {
 	 */
 	public static boolean checkExistingName(Player p) {
 		Debug.send("[Blacklists#checkExistingName(Player)] Method called");
-		if (!p.hasPermission("epicrename.bypass.existingname")) {
-			// Player doesn't have the bypass permission
 			
 			String itemName = RenameUtil.getInHand(p).getItemMeta().getDisplayName();
 			itemName = ChatColor.stripColor(itemName);
@@ -45,17 +43,19 @@ public class Blacklists {
 					
 					if (itemName.toLowerCase().contains(blacklistedString.toLowerCase())) {			
 						Debug.send("[Blacklists#checkExistingName(Player)] Name contained '" + blacklistedString + "'");
+						
+						if (p.hasPermission("epicrename.bypass.existingname")) {
+							// Player has bypass permission
+							Debug.send("[Blacklists#checkExistingName(Player)] Player had the epicrename.bypass.existingname permission.");
+							Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
+							return true;	
+						} 							
+						
 						return false;						
 					} 
 				}				
 			}
 			
-		} else {
-			Debug.send("[Blacklists#checkExistingName(Player)] Player had the epicrename.bypass.existingname permission.");
-			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
-			return true;
-		}
-		
 		return true;
 	}
 	
@@ -68,8 +68,7 @@ public class Blacklists {
 	 */
 	public static boolean checkExistingLore(Player p) {
 		Debug.send("[Blacklists#checkExistingLore(Player)] Method called");
-		if (!p.hasPermission("epicrename.bypass.existinglore")) {
-			// Player doesn't have the bypass permission
+		
 			
 			List<String> loreLines = RenameUtil.getInHand(p).getItemMeta().getLore();
 			
@@ -88,17 +87,18 @@ public class Blacklists {
 					
 						if (loreLine.toLowerCase().contains(blacklistedString.toLowerCase())) {
 							Debug.send("[Blacklists#checkExistingLore(Player)] Lore Line: '"+ loreLine +  "' contained '" + blacklistedString + "'");
+							if (p.hasPermission("epicrename.bypass.existinglore")) {
+								// Player has bypass permission
+								Debug.send("[Blacklists#checkExistingLore(Player)] Player had the epicrename.bypass.existinglore permission.");
+								Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existinglore.bypass"), p);
+								return true;
+							} 								
+								
 							return false;
 						}
 					}				
 				}
-			}
-			
-		} else {
-			Debug.send("[Blacklists#checkExistingLore(Player)] Player had the epicrename.bypass.existinglore permission.");
-			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existinglore.bypass"), p);
-			return true;
-		}
+			}	
 		
 		return true;
 	}
