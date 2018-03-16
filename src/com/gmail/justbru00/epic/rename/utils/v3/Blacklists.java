@@ -27,6 +27,11 @@ public class Blacklists {
 	 */
 	public static boolean checkExistingName(Player p) {
 		Debug.send("[Blacklists#checkExistingName(Player)] Method called");
+		
+			if (RenameUtil.getInHand(p).getType() == Material.AIR || RenameUtil.getInHand(p) == null) {
+				Debug.send("[Blacklists#checkExistingName(Player)] Item was AIR or NULL");
+				return true;
+			}
 			
 			String itemName = RenameUtil.getInHand(p).getItemMeta().getDisplayName();
 			itemName = ChatColor.stripColor(itemName);
@@ -69,7 +74,11 @@ public class Blacklists {
 	public static boolean checkExistingLore(Player p) {
 		Debug.send("[Blacklists#checkExistingLore(Player)] Method called");
 		
-			
+		if (RenameUtil.getInHand(p).getType() == Material.AIR || RenameUtil.getInHand(p) == null) {
+			Debug.send("[Blacklists#checkExistingLore(Player)] Item was AIR or NULL");
+			return true;
+		}
+		
 			List<String> loreLines = RenameUtil.getInHand(p).getItemMeta().getLore();
 			
 			if (loreLines == null) {
