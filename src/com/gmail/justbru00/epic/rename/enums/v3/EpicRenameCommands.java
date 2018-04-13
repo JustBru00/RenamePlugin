@@ -20,7 +20,7 @@ public enum EpicRenameCommands {
 		case REMOVELORELINE: {return "removeloreline";}
 		case GLOW: {return "glow";}
 		case REMOVEGLOW: {return "removeglow";}
-		case ALIGN: {return "removeglow";}
+		case ALIGN: {return "align";}
 		default:
 			break;
 		}
