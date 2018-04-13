@@ -14,8 +14,6 @@ import com.gmail.justbru00.epic.rename.main.v3.Main;
 /**
  * 
  * @author Justin Brubaker
- * 
- * TODO This needs updated before release.
  *
  */
 public class Messager {	
@@ -39,6 +37,16 @@ public class Messager {
 		msg = VariableReplacer.replace(msg);
 		player.sendMessage(Main.prefix + Messager.color(msg));
 	}	
+	/**
+	 * Sends a message from the provided messages.yml path to the provided sender.
+	 * @param msgPath
+	 * @param sender
+	 */
+	public static void msgSenderWithConfigMsg(String msgPath, CommandSender sender) {
+		String msg = Main.getMsgFromConfig(msgPath);
+		msg = VariableReplacer.replace(msg);
+		sender.sendMessage(Main.prefix + Messager.color(msg));
+	}
 	
 	public static void msgSender(String msg, CommandSender sender) {
 		msg = VariableReplacer.replace(msg);

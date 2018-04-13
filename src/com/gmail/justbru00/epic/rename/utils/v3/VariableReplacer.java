@@ -9,7 +9,7 @@ import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class VariableReplacer {
 	
-	// Varibles: {char} {version} 
+	// Variables: {char} {version} 
 
 	public static String replace(String toReplace) {
 		
