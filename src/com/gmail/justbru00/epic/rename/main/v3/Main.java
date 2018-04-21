@@ -14,6 +14,7 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.justbru00.epic.rename.commands.v3.Align;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Glow;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
@@ -100,7 +101,7 @@ public class Main extends JavaPlugin {
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		
+		getCommand("align").setExecutor(new Align());
 
 		// Start Metrics
 		try {

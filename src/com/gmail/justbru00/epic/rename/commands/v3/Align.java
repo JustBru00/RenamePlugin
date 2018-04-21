@@ -1,6 +1,8 @@
 package com.gmail.justbru00.epic.rename.commands.v3;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -8,8 +10,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
@@ -41,6 +45,7 @@ public class Align implements CommandExecutor {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
@@ -90,15 +95,75 @@ public class Align implements CommandExecutor {
 						if (args.length == 0) {
 							Messager.msgSenderWithConfigMsg("align.not_enough_args", sender);
 							return true;
-						}
+						}						
 						
-						if (args.length >= 2) {
+						if (args.length >= 2) {				
+							ArrayList<String> textToAlign = new ArrayList<String>();
+							
+							if (inHand.getItemMeta().hasDisplayName()) {
+								textToAlign.add(inHand.getItemMeta().getDisplayName());
+							} else {
+								if (inHand.getItemMeta().hasLocalizedName()) {
+									textToAlign.add(inHand.getItemMeta().getLocalizedName());
+								} else {
+									textToAlign.add(Messager.color("&rNo name found"));
+								}
+							}
+								
+							if (inHand.getItemMeta().hasLore()) {
+								for (String s : inHand.getItemMeta().getLore()) {
+									textToAlign.add(s);
+								}
+							} else {
+								// Well nothing /shrug
+							}
+							
 							if (args[0].equalsIgnoreCase("name")) {
 								if (args[1].equalsIgnoreCase("left")) {
-									// TODO
+									ArrayList<String> aligned = alignStrings(textToAlign, ALIGN_LEFT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));
+									
+									/*if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									} */
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.name_aligned_left_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("center")) {
-									// TODO
+									ArrayList<String> aligned = alignStrings(textToAlign, ALIGN_CENTER);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));
+									
+									/*if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									} */
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.name_aligned_center_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("right")) {
 									// TODO
