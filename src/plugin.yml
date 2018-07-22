@@ -1,9 +1,10 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: 3.4-INDEV-b1
+version: 3.4
 description: Renames items.
 author: Justin Brubaker
 softdepend: [Vault]
+api-version: 1.13
 
 commands:
   rename:
@@ -20,5 +21,5 @@ commands:
     description: Adds an enchantment glow.  
   removeglow:
     description: Removes an enchantment glow.          
-  align:        
-    description: Aligns the name or lore of an item.   
+#  align:        
+#    description: Aligns the name or lore of an item.   

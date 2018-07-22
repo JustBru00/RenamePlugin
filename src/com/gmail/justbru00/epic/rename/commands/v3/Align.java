@@ -1,8 +1,6 @@
 package com.gmail.justbru00.epic.rename.commands.v3;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -15,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
+import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
@@ -103,10 +102,11 @@ public class Align implements CommandExecutor {
 							if (inHand.getItemMeta().hasDisplayName()) {
 								textToAlign.add(inHand.getItemMeta().getDisplayName());
 							} else {
+								// TODO Fix this section. Need to research proper method.
 								if (inHand.getItemMeta().hasLocalizedName()) {
 									textToAlign.add(inHand.getItemMeta().getLocalizedName());
 								} else {
-									textToAlign.add(Messager.color("&rNo name found"));
+									textToAlign.add(Messager.color("&rERROR - NO LOCAL NAME FOUND"));
 								}
 							}
 								
@@ -334,6 +334,10 @@ public class Align implements CommandExecutor {
 				}
 				current++;
 			}
+		}
+		
+		for (String value : toReturn) {
+			Debug.send(value);
 		}
 		
 		return toReturn;

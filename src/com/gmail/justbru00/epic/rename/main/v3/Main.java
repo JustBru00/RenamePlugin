@@ -14,7 +14,6 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.gmail.justbru00.epic.rename.commands.v3.Align;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Glow;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
@@ -62,12 +61,12 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		plugin = this;
-
-		checkServerVerison();
-
+		
 		this.saveDefaultConfig();
 		messages = new PluginFile(this, "messages.yml", "messages.yml");
 		PLUGIN_VERISON = Main.getInstance().getDescription().getVersion();
+		
+		checkServerVerison();
 
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
 		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR)
@@ -101,7 +100,7 @@ public class Main extends JavaPlugin {
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		getCommand("align").setExecutor(new Align());
+		// getCommand("align").setExecutor(new Align()); *Remove for now so I can get a 1.13 update out*
 
 		// Start Metrics
 		try {
@@ -190,14 +189,14 @@ public class Main extends JavaPlugin {
 			MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.7 or 1.8");
 		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))
-				|| (Bukkit.getVersion().contains("1.11")) || Bukkit.getVersion().contains("1.12")) {
+				|| (Bukkit.getVersion().contains("1.11")) || Bukkit.getVersion().contains("1.12") || Bukkit.getVersion().contains("1.13")) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
 		} else {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.12");
+			Debug.send("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.13");
 		} // End of Server Version Check
 	}
 

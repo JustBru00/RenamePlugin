@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/justb/OneDrive/Coding/Test_Server_1.12/spigot-1.12.jar">
+	<classpathentry kind="lib" path="C:/Users/justb/Desktop/EpicRealm_Minigames_Server/Test_Server_1.13/spigot-1.13.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/OneDrive/Coding/spigot-api-1.12-R0.1-20170608.083637-1-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Desktop/Coding%20Etc/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.13-R0.1-20180722.042426-1-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/justb/OneDrive/Coding/Test_Server_1.12/plugins/Vault.jar"/>
