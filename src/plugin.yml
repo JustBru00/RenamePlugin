@@ -9,18 +9,26 @@ api-version: 1.13
 commands:
   rename:
     description: Renames items.
+    aliases: [eprename]
   lore:
     description: Relores any item.   
+    aliases: [eplore]
   epicrename:
     description: Plugin information command.
+    aliases: [epepicrename]
   setloreline:
-    description: Sets a certain line o f lore.
+    description: Sets a certain line of lore.
+    aliases: [epsetloreline]
   removeloreline:
     description: Remove a line of lore.     
+    aliases: [epremoveloreline]
   glow:
     description: Adds an enchantment glow.  
+    aliases: [epglow]
   removeglow:
-    description: Removes an enchantment glow.          
+    description: Removes an enchantment glow.     
+    aliases: [epremoveglow]     
 # Remove for now as it is not working.
 #  align:        
 #    description: Aligns the name or lore of an item.   
+#    aliases: [epalign]
