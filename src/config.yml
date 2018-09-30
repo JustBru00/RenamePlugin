@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.0+
+#Version 3.5+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 4
+config_version: 5
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -35,8 +35,8 @@ blacklists:
     - 'a string of text to check for every lore line that is not case sensitive'
     -
     
-#Default Character Limit is 30
-character_limit:
+#Character limit for /rename. Default limit is 30 characters.
+rename_character_limit:
   enabled: false
   limit: 30  
   

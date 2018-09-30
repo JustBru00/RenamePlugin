@@ -1,5 +1,5 @@
-#EpicRename: messages.yml Version 3.4+
-messages_yml_version: 7
+#EpicRename: messages.yml Version 3.5+
+messages_yml_version: 8
 
 epicrename:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -103,7 +103,7 @@ removeglow:
   blacklisted_existing_name_found: '&cSorry that item has an existing name that is blacklisted.'
   blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'
   
-character_limit:
+rename_character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'
   bypass_msg: '&aYou just bypassed the character limit of {char}.'
   

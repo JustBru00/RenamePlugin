@@ -99,7 +99,7 @@ public class RenameUtil {
 									return;
 								}
 							} else {
-								Messager.msgPlayer(Main.getMsgFromConfig("character_limit.name_too_long"), player);
+								Messager.msgPlayer(Main.getMsgFromConfig("rename_character_limit.name_too_long"), player);
 								return;
 							}
 						} else {

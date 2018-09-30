@@ -1,25 +1,26 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: 3.4
-description: Renames items.
+version: 3.5-INDEV
+description: Preforms different item modifcations with easy to use commands.
 author: Justin Brubaker
 softdepend: [Vault]
 api-version: 1.13
 
 commands:
   rename:
-    description: Renames Items.
+    description: Renames items.
   lore:
     description: Relores any item.   
   epicrename:
     description: Plugin information command.
   setloreline:
-    description: Sets a certain line of lore.
+    description: Sets a certain line o f lore.
   removeloreline:
     description: Remove a line of lore.     
   glow:
     description: Adds an enchantment glow.  
   removeglow:
     description: Removes an enchantment glow.          
+# Remove for now as it is not working.
 #  align:        
 #    description: Aligns the name or lore of an item.   

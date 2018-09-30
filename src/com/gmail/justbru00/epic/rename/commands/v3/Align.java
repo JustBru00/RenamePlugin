@@ -1,6 +1,8 @@
 package com.gmail.justbru00.epic.rename.commands.v3;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -14,9 +16,13 @@ import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
+import com.gmail.justbru00.epic.rename.utils.v3.FormatItem;
 import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
+import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator;
+import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator.Alignment;
+import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator.Receiver;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 /**
@@ -39,7 +45,7 @@ public class Align implements CommandExecutor {
 		text.add("");
 		text.add("Click to see all custom");
 		text.add("enchantments for swords!");
-		for(String s : alignStrings(text, ALIGN_CENTER)) {
+		for(String s : alignStrings(text, ALIGN_RIGHT)) {
 			System.out.println(s);
 		}
 	}
@@ -100,31 +106,29 @@ public class Align implements CommandExecutor {
 							ArrayList<String> textToAlign = new ArrayList<String>();
 							
 							if (inHand.getItemMeta().hasDisplayName()) {
-								textToAlign.add(inHand.getItemMeta().getDisplayName());
-							} else {
-								// TODO Fix this section. Need to research proper method.
-								if (inHand.getItemMeta().hasLocalizedName()) {
-									textToAlign.add(inHand.getItemMeta().getLocalizedName());
-								} else {
-									textToAlign.add(Messager.color("&rERROR - NO LOCAL NAME FOUND"));
-								}
+								textToAlign.add((inHand.getItemMeta().getDisplayName()).trim().replace("៲", ""));
+							} else {								
+								textToAlign.add(Messager.color("&r" + new FormatItem(inHand).getName().trim()).replace("៲", ""));								
 							}
 								
 							if (inHand.getItemMeta().hasLore()) {
 								for (String s : inHand.getItemMeta().getLore()) {
-									textToAlign.add(s);
+									textToAlign.add(s.trim().replace("៲", ""));
 								}
 							} else {
 								// Well nothing /shrug
 							}
 							
+							
+							
 							if (args[0].equalsIgnoreCase("name")) {
 								if (args[1].equalsIgnoreCase("left")) {
-									ArrayList<String> aligned = alignStrings(textToAlign, ALIGN_LEFT);
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_LEFT);
 									
 									ItemMeta meta = inHand.getItemMeta();
 									meta.setDisplayName(aligned.get(0));
 									
+									// Only Name
 									/*if (aligned.size() > 1) {
 										// Lore in this thing
 										List<String> lore = new ArrayList<String>();
@@ -143,11 +147,12 @@ public class Align implements CommandExecutor {
 									Messager.msgSenderWithConfigMsg("align.name_aligned_left_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("center")) {
-									ArrayList<String> aligned = alignStrings(textToAlign, ALIGN_CENTER);
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_CENTER);
 									
 									ItemMeta meta = inHand.getItemMeta();
 									meta.setDisplayName(aligned.get(0));
 									
+									// Only Name
 									/*if (aligned.size() > 1) {
 										// Lore in this thing
 										List<String> lore = new ArrayList<String>();
@@ -155,7 +160,7 @@ public class Align implements CommandExecutor {
 											lore.add(aligned.get(i));
 										}
 										meta.setLore(lore);
-									} */
+									}*/
 									
 									inHand.setItemMeta(meta);
 									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
@@ -166,21 +171,102 @@ public class Align implements CommandExecutor {
 									Messager.msgSenderWithConfigMsg("align.name_aligned_center_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("right")) {
-									// TODO
-									return true;
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_RIGHT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));
+									
+									// Only Name
+									/*if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}*/
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.name_aligned_right_success", sender);
+									return true;									
 								} else {
 									Messager.msgSenderWithConfigMsg("align.incorrect_name_args", sender);
 									return true;
 								}
 							} else if (args[0].equalsIgnoreCase("lore")) {
 								if (args[1].equalsIgnoreCase("left")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_LEFT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									/*meta.setDisplayName(aligned.get(0));*/								
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.lore_aligned_left_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("center")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_CENTER);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									/*meta.setDisplayName(aligned.get(0));*/								
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.lore_aligned_center_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("right")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_RIGHT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									/*meta.setDisplayName(aligned.get(0));*/								
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.lore_aligned_right_success", sender);
 									return true;
 								} else {
 									Messager.msgSenderWithConfigMsg("align.incorrect_lore_args", sender);
@@ -188,13 +274,73 @@ public class Align implements CommandExecutor {
 								}
 							} else if (args[0].equalsIgnoreCase("both")) {
 								if (args[1].equalsIgnoreCase("left")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_LEFT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));							
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.both_aligned_left_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("center")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_CENTER);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));							
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.both_aligned_center_success", sender);
 									return true;
 								} else if (args[1].equalsIgnoreCase("right")) {
-									// TODO
+									ArrayList<String> aligned = alignStringsClient(textToAlign, ALIGN_RIGHT);
+									
+									ItemMeta meta = inHand.getItemMeta();
+									meta.setDisplayName(aligned.get(0));							
+									
+									if (aligned.size() > 1) {
+										// Lore in this thing
+										List<String> lore = new ArrayList<String>();
+										for (int i = 1; i < aligned.size(); i++) {
+											lore.add(aligned.get(i));
+										}
+										meta.setLore(lore);
+									}
+									
+									inHand.setItemMeta(meta);
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
+										player.getInventory().setItemInMainHand(inHand);
+									} else { // Use older method.
+										player.setItemInHand(inHand);
+									}
+									Messager.msgSenderWithConfigMsg("align.both_aligned_right_success", sender);
 									return true;
 								} else {
 									Messager.msgSenderWithConfigMsg("align.incorrect_both_args", sender);
@@ -225,6 +371,61 @@ public class Align implements CommandExecutor {
 		return false;
 	}
 	/**
+	 * Attempts to align text for the minecraft client.
+	 * @param itemTextList
+	 * @param alignmentScheme
+	 * @return
+	 */
+	public static ArrayList<String> alignStringsClient(ArrayList<String> itemTextList, int alignmentScheme) {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		
+		TableGenerator tg = null;
+		
+		if (alignmentScheme == ALIGN_LEFT) {
+			tg = new TableGenerator(Alignment.LEFT);
+		} else if (alignmentScheme == ALIGN_CENTER) {
+			tg = new TableGenerator(Alignment.CENTER);
+		} else if (alignmentScheme == ALIGN_RIGHT) {
+			tg = new TableGenerator(Alignment.RIGHT);
+		}
+		
+		for (String s : itemTextList) {
+			tg.addRow(s);
+		}
+		
+		toReturn = (ArrayList<String>) tg.generate(Receiver.CLIENT, true, true);
+		
+		return toReturn;
+	}
+	
+	/**
+	 * Attempts to align text for the minecraft client.
+	 * @param itemTextList
+	 * @param alignmentScheme
+	 * @return
+	 */
+	public static ArrayList<String> alignStringsClientNew(ArrayList<String> itemTextList, int alignmentScheme) {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		
+		// TODO Align is being very easy to make
+		
+		if (alignmentScheme == ALIGN_LEFT) {
+			
+		} else if (alignmentScheme == ALIGN_CENTER) {
+			
+		} else if (alignmentScheme == ALIGN_RIGHT) {
+			
+		}
+		
+		
+		
+		
+		
+		return toReturn;
+	}
+	
+	/**
+	 * @deprecated
 	 * Aligns text to the LEFT, CENTER, or RIGHT
 	 * Ignores color codes.
 	 * @param itemTextList

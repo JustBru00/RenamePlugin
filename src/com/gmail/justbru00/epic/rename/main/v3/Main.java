@@ -44,8 +44,8 @@ public class Main extends JavaPlugin {
 	public static Economy econ = null; // Vault economy.
 	public static boolean USE_ECO = false;
 	
-	public static final int CONFIG_VERSION = 4;
-	public static final int MESSAGES_VERSION = 7;
+	public static final int CONFIG_VERSION = 5;
+	public static final int MESSAGES_VERSION = 8;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -100,7 +100,8 @@ public class Main extends JavaPlugin {
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		// getCommand("align").setExecutor(new Align()); *Remove for now so I can get a 1.13 update out*
+		// TODO Re add /align once it is working
+		//getCommand("align").setExecutor(new Align());
 
 		// Start Metrics
 		try {
