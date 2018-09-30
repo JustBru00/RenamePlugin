@@ -20,7 +20,9 @@ blacklists:
   material:
     - 'VAILD_MATERIAL_HERE'
     -
-  
+  #Only player provided text is checked against the text blacklist. 
+  #Use blacklists.existingname or blacklists.existinglore to prevent players from 
+  #editing already created items with certain text as part of their name or lore.
   text:
     - 'some_bad_phrase_here'
     -
