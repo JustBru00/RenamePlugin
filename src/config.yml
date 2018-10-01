@@ -41,7 +41,18 @@ blacklists:
 rename_character_limit:
   enabled: false
   limit: 30  
-  
+
+formatting_code_limit:
+  rename:
+    min: 0
+    max: 20
+  lore: 
+    min: 0
+    max: 20
+  setloreline:
+    min: 0
+    max: 20   
+    
 #Should underscores be replaced with spaces?
 replace_underscores: false
 
