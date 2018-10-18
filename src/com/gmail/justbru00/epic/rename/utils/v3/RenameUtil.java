@@ -66,6 +66,20 @@ public class RenameUtil {
 												completeArgs = completeArgs.replace("_", " ");
 												Debug.send("[RenameUtil] Replaced the underscores.");
 											}
+											
+											// Issue #32
+											if (!MinMaxColorCodes.checkMinColorCodes(player, completeArgs, erc)) {
+												Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.min_not_reached").replace("{min}", 
+														String.valueOf(Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".min"))), player);
+												return;
+											}
+											
+											if (!MinMaxColorCodes.checkMaxColorCodes(player, completeArgs, erc)) {
+												Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.max_reached").replace("{max}", 
+														String.valueOf(Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".max"))), player);
+												return;
+											}
+											// End Issue #32
 
 											completeArgs = Messager.color(builder.toString().trim());
 

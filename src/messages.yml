@@ -32,7 +32,7 @@ rename:
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aRenamed the item successfully.'
   log: '&aThe player &f{player} &ajust renamed an item to: &f"{name}&f"&a.'
-  disabled_world: '&cYou are in a disabled world.'
+  disabled_world: '&cYou are in a disabled world.'  
 
 lore:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -109,6 +109,12 @@ rename_character_limit:
   
 format_code_permission:
   no_permission: '&cYou don''t have permission for the format code "{code}".'  
+  
+format_code_limit:
+  min_not_reached: '&cYou didn''t reach the minimum amount of formatting codes. Please use more than {min}.'
+  max_reached: '&cYou reached the maximum amount of formatting codes. Please use less than {max}'
+  bypass_min: '&aYou bypassed the minimum formatting code limit.'
+  bypass_max: '&aYou bypassed the maximum formatting code limit.'
 
 blacklists:
   material:

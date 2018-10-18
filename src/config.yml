@@ -43,15 +43,17 @@ rename_character_limit:
   limit: 30  
 
 formatting_code_limit:
+  enabled: false
   rename:
     min: 0
     max: 20
+  # Checked per line of lore  
   lore: 
     min: 0
     max: 20
   setloreline:
     min: 0
-    max: 20   
+    max: 20    
     
 #Should underscores be replaced with spaces?
 replace_underscores: false
