@@ -51,7 +51,16 @@ public class SetLoreLine implements CommandExecutor {
 								return true;
 							}
 							// End Issue #80
-
+							
+							// Issue #95
+							int maxLines = Main.getInstance().getConfig().getInt("set_lore_line.max_lines");
+							if (lineNumber > maxLines) {
+								Debug.send("[SetLoreLine] The number " + lineNumber + " is greater than " + maxLines + ".");
+								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.invalid_number"), player);
+								return true;
+							}
+							// End Issue #95
+							
 							if (args.length == 1) {
 								Messager.msgPlayer(Main.getMsgFromConfig("setloreline.provide_text"), player);
 								return true;
