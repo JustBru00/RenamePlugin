@@ -42,8 +42,7 @@ rename_character_limit:
   enabled: false
   limit: 30  
 
-set_lore_line:
-  max_lines: 20
+setloreline_max_lines: 20
 
 formatting_code_limit:
   enabled: false
