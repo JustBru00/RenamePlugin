@@ -22,9 +22,7 @@ public class SetLoreLine implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (command.getName().equalsIgnoreCase("setloreline")) { // Start
-																	// /setloreline
-																	// code
+		if (command.getName().equalsIgnoreCase("setloreline")) { // Start /setloreline code
 			if (sender.hasPermission("epicrename.setloreline")) {
 				if (sender instanceof Player) {
 

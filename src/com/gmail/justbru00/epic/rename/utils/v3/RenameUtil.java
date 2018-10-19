@@ -62,23 +62,24 @@ public class RenameUtil {
 											for (String item : args) {
 												builder.append(item + " ");
 											}
+											
 											if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
 												completeArgs = completeArgs.replace("_", " ");
 												Debug.send("[RenameUtil] Replaced the underscores.");
 											}
 											
 											// Issue #32
-											if (!MinMaxColorCodes.checkMinColorCodes(player, completeArgs, erc)) {
-												Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.min_not_reached").replace("{min}", 
-														String.valueOf(Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".min"))), player);
+											if (!FormattingCodeCounter.checkMinColorCodes(player, completeArgs, erc, true)) {
+												FormattingCodeCounter.sendMinNotReachedMsg(player, erc);
 												return;
 											}
+											Debug.send("[RenameUtil] Passed FormattingCodeCounter Minimum Check.");
 											
-											if (!MinMaxColorCodes.checkMaxColorCodes(player, completeArgs, erc)) {
-												Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.max_reached").replace("{max}", 
-														String.valueOf(Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".max"))), player);
+											if (!FormattingCodeCounter.checkMaxColorCodes(player, completeArgs, erc, true)) {
+												FormattingCodeCounter.sendMaxReachedMsg(player, erc);
 												return;
 											}
+											Debug.send("[RenameUtil] Passed FormattingCodeCounter Maximum Check.");
 											// End Issue #32
 
 											completeArgs = Messager.color(builder.toString().trim());

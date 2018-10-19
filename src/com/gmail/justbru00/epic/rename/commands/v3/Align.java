@@ -16,14 +16,14 @@ import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
-import com.gmail.justbru00.epic.rename.utils.v3.FormatItem;
 import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
-import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator;
-import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator.Alignment;
-import com.gmail.justbru00.epic.rename.utils.v3.TableGenerator.Receiver;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
+import com.gmail.justbru00.epic.rename.utils.v3.align.FormatItem;
+import com.gmail.justbru00.epic.rename.utils.v3.align.TableGenerator;
+import com.gmail.justbru00.epic.rename.utils.v3.align.TableGenerator.Alignment;
+import com.gmail.justbru00.epic.rename.utils.v3.align.TableGenerator.Receiver;
 
 /**
  * 

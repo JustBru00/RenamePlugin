@@ -1,4 +1,4 @@
-package com.gmail.justbru00.epic.rename.utils.v3;
+package com.gmail.justbru00.epic.rename.utils.v3.align;
 
 import java.util.ArrayList;
 import java.util.Arrays;

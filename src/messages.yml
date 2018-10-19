@@ -111,8 +111,8 @@ format_code_permission:
   no_permission: '&cYou don''t have permission for the format code "{code}".'  
   
 format_code_limit:
-  min_not_reached: '&cYou didn''t reach the minimum amount of formatting codes. Please use more than {min}.'
-  max_reached: '&cYou reached the maximum amount of formatting codes. Please use less than {max}'
+  min_not_reached: '&cYou didn''t reach the minimum amount of formatting codes. Please use more than {min} formatting codes.'
+  max_reached: '&cYou reached the maximum amount of formatting codes. Please use less than {max} formatting codes.'
   bypass_min: '&aYou bypassed the minimum formatting code limit.'
   bypass_max: '&aYou bypassed the maximum formatting code limit.'
 

@@ -58,10 +58,10 @@ public class LoreUtil {
 
 		// Check FormattingPerms
 		if (!FormattingPermManager.checkPerms(EpicRenameCommands.SETLORELINE, args, player)) {
-			/// FormattingPermManager handles the message.
+			// FormattingPermManager handles the message.
 			return;
 		}
-
+		
 		lineNumber = lineNumber - 1;
 
 		for (int i = 1; i < args.length; i++) {
@@ -70,6 +70,19 @@ public class LoreUtil {
 
 		String loreToBeSet = builder.toString().trim();
 		Debug.send("Text to set is: " + loreToBeSet);
+		
+		// Issue #32
+		if (!FormattingCodeCounter.checkMinColorCodes(player, loreToBeSet, EpicRenameCommands.SETLORELINE, true)) {
+			FormattingCodeCounter.sendMinNotReachedMsg(player, EpicRenameCommands.SETLORELINE);
+			return;
+		}		
+				
+		if (!FormattingCodeCounter.checkMaxColorCodes(player, loreToBeSet, EpicRenameCommands.SETLORELINE, true)) {
+			FormattingCodeCounter.sendMaxReachedMsg(player, EpicRenameCommands.SETLORELINE);
+			return;
+		}		
+		// End Issue #32
+		
 		List<String> newLore = new ArrayList<String>();
 
 		loreToBeSet = Messager.color(loreToBeSet);
@@ -168,6 +181,25 @@ public class LoreUtil {
 						if (FormattingPermManager.checkPerms(EpicRenameCommands.LORE, args, player)) {
 							Debug.send("[LoreUtil] Passed FormattingPermManager#checkPerms()");
 
+							boolean firstLine = true;
+							
+							// Issue #32
+							for (String line : LoreUtil.buildLoreFromArgs(args, false)) {
+							
+								if (!FormattingCodeCounter.checkMinColorCodes(player, line, EpicRenameCommands.LORE, firstLine)) {
+									FormattingCodeCounter.sendMinNotReachedMsg(player, EpicRenameCommands.LORE);
+									return;
+								}		
+										
+								if (!FormattingCodeCounter.checkMaxColorCodes(player, line, EpicRenameCommands.LORE, firstLine)) {
+									FormattingCodeCounter.sendMaxReachedMsg(player, EpicRenameCommands.LORE);
+									return;
+								}		
+								firstLine = false;
+							}
+							Debug.send("[LoreUtil] Passed FormattingCodeCounter min and max");
+							// End Issue #32
+							
 							ItemStack inHand = RenameUtil.getInHand(player);
 
 							if (inHand.getType() != Material.AIR) {
@@ -183,7 +215,7 @@ public class LoreUtil {
 
 									ItemStack toLore = inHand;
 									ItemMeta toLoreMeta = toLore.getItemMeta();
-									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
+									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args, true));
 									toLore.setItemMeta(toLoreMeta);
 
 									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
@@ -237,7 +269,7 @@ public class LoreUtil {
 	 *            The args you want to change.
 	 * @return An ArrayList with line breaks at every '|'
 	 */
-	public static List<String> buildLoreFromArgs(String[] args) {
+	public static List<String> buildLoreFromArgs(String[] args, boolean colorOutput) {
 		List<String> toBeLore = new ArrayList<String>();
 
 		StringBuilder builder = new StringBuilder("");
@@ -270,7 +302,11 @@ public class LoreUtil {
 		List<String> loreToReturn = new ArrayList<String>();
 
 		for (String item : toBeLore) {
-			loreToReturn.add(Messager.color(item.replace("|", "")));
+			if (colorOutput) {
+				loreToReturn.add(Messager.color(item.replace("|", "")));
+			} else {
+				loreToReturn.add(item.replace("|", ""));
+			}
 		}
 
 		return loreToReturn;
