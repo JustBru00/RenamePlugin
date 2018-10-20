@@ -14,6 +14,7 @@ public class FormattingCodeCounter {
 	 */
 	public static boolean checkMaxColorCodes(Player p, String valueToCheck, EpicRenameCommands cmd, boolean sendBypassMsg) {
 		if (!Main.getInstance().getConfig().getBoolean("formatting_code_limit.enabled")) {
+			Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Formatting code limits are disabled.");
 			return true;
 		}
 		
@@ -23,6 +24,7 @@ public class FormattingCodeCounter {
 		}
 		
 		int numOfCodes = getAmountOfColorCodes(valueToCheck, '&');
+		Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Number of formatting codes: " + numOfCodes);
 		
 		if (numOfCodes > Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(cmd) + ".max")) {
 			return false;
@@ -37,6 +39,7 @@ public class FormattingCodeCounter {
 	 */
 	public static boolean checkMinColorCodes(Player p, String valueToCheck, EpicRenameCommands cmd, boolean sendBypassMsg) {
 		if (!Main.getInstance().getConfig().getBoolean("formatting_code_limit.enabled")) {
+			Debug.send("[FormattingCodeCounter#checkMinColorCodes] Formatting code limits are disabled.");
 			return true;
 		}
 		
@@ -46,6 +49,7 @@ public class FormattingCodeCounter {
 		}
 		
 		int numOfCodes = getAmountOfColorCodes(valueToCheck, '&');
+		Debug.send("[FormattingCodeCounter#checkMinColorCodes] Number of formatting codes: " + numOfCodes);
 		
 		if (numOfCodes < Main.getInstance().getConfig().getInt("formatting_code_limit." + EpicRenameCommands.getStringName(cmd) + ".min")) {
 			return false;
