@@ -83,9 +83,8 @@ public class Main extends JavaPlugin {
 		}
 
 		if (!setupEconomy()) {
-			Messager.msgConsole(
-					"&cVault not found! Disabling support for economy features. If you would like to use economy features download Vault at: "
-							+ "http://dev.bukkit.org/bukkit-plugins/vault/");
+			// Message now handled in setupEconomy()
+			Messager.msgConsole("&cDisabling support for economy features.");
 			USE_ECO = false;
 		}
 
@@ -220,10 +219,13 @@ public class Main extends JavaPlugin {
 	 */
 	private boolean setupEconomy() {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
+			Messager.msgConsole("&cVault not found! If you would like to use economy features download Vault at: "
+							+ "http://dev.bukkit.org/bukkit-plugins/vault/");
 			return false;
 		}
 		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
 		if (rsp == null) {
+			Messager.msgConsole("&cFailed to get the economy details from Vault. Is there a Vault compatible economy plugin installed?");
 			return false;
 		}
 		econ = rsp.getProvider();
