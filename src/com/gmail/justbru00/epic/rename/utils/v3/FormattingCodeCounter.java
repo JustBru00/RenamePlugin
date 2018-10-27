@@ -13,6 +13,7 @@ public class FormattingCodeCounter {
 	 * @return True if the max. is not reached. False if the max. has been reached.
 	 */
 	public static boolean checkMaxColorCodes(Player p, String valueToCheck, EpicRenameCommands cmd, boolean sendBypassMsg) {
+		
 		if (!Main.getInstance().getConfig().getBoolean("formatting_code_limit.enabled")) {
 			Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Formatting code limits are disabled.");
 			return true;
@@ -20,6 +21,7 @@ public class FormattingCodeCounter {
 		
 		if (p.hasPermission("epicrename.bypass.formattingcodemax")) {
 			if (sendBypassMsg) Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_max"), p);
+			Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Formatting code limit bypassed");
 			return true;
 		}
 		
@@ -38,6 +40,7 @@ public class FormattingCodeCounter {
 	 * @return True if the min. is reached. False if the min. has not been reached.
 	 */
 	public static boolean checkMinColorCodes(Player p, String valueToCheck, EpicRenameCommands cmd, boolean sendBypassMsg) {
+		
 		if (!Main.getInstance().getConfig().getBoolean("formatting_code_limit.enabled")) {
 			Debug.send("[FormattingCodeCounter#checkMinColorCodes] Formatting code limits are disabled.");
 			return true;
@@ -45,6 +48,7 @@ public class FormattingCodeCounter {
 		
 		if (p.hasPermission("epicrename.bypass.formattingcodemin")) {
 			if (sendBypassMsg) Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_min"), p);
+			Debug.send("[FormattingCodeCounter#checkMinColorCodes] Formatting code limit bypassed.");
 			return true;
 		}
 		

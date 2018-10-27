@@ -167,7 +167,7 @@ public class Main extends JavaPlugin {
 			Debug.send("[Main#getMsgFromConfig()] A message from messages.yml was NULL. The path to the message is: " + path);
 			return "[ERROR] Message from config is null. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
 		}
-		return Messager.color(messages.getString(path));
+		return messages.getString(path); // Removed duplicate Messager.color(); Messager#msgXXXX colors the message.
 	}
 
 	public static Main getInstance() {
@@ -197,7 +197,7 @@ public class Main extends JavaPlugin {
 		} else {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.13");
+			Messager.msgConsole("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.13");
 		} // End of Server Version Check
 	}
 

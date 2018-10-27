@@ -63,6 +63,8 @@ public class RenameUtil {
 												builder.append(item + " ");
 											}
 											
+											completeArgs = builder.toString().trim();
+											
 											if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
 												completeArgs = completeArgs.replace("_", " ");
 												Debug.send("[RenameUtil] Replaced the underscores.");
@@ -82,7 +84,7 @@ public class RenameUtil {
 											Debug.send("[RenameUtil] Passed FormattingCodeCounter Maximum Check.");
 											// End Issue #32
 
-											completeArgs = Messager.color(builder.toString().trim());
+											completeArgs = Messager.color(completeArgs);
 
 											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 												player.getInventory().setItemInMainHand(
@@ -194,9 +196,9 @@ public class RenameUtil {
 				returning = player.getItemInHand();
 			} catch (Exception e) {
 				Debug.send(
-						"&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
+						"&cProblem while getting the ItemStack inHand. Failed at player.getItemInHand() Server version problem?");
 				Messager.msgConsole(
-						"&cProblem while getting the ItemStack inHand. (Failed at player.getItemInHand()) Server version problem?");
+						"&cProblem while getting the ItemStack inHand. Failed at player.getItemInHand() Server version problem?");
 			}
 
 			return returning;
