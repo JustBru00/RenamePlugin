@@ -16,7 +16,7 @@ import net.milkbowl.vault.economy.EconomyResponse;
 public class EconomyManager {
 
 	/**
-	 * Tries to take the specified amount of money from the players balance. Will message player any needed economy messages.
+	 * Tries to take the specified amount of money from the players balance. Will send the player any needed economy messages.
 	 * @param player The {@link Player} to take the money from.	
 	 * @param erc The command that is trying to withdraw money. (Used for getting the proper amount.)
 	 * @return The {@link EcoMessage}
@@ -67,7 +67,23 @@ public class EconomyManager {
 				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_error"), r), player);
 				return EcoMessage.TRANSACTION_ERROR;
 			}
-		} 
+		} else if (erc == EpicRenameCommands.GLOW) { // ISSUE #101
+			
+			if (player.hasPermission("epicrename.bypass.costs.glow")) {
+				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				return EcoMessage.ECO_BYPASS;
+			}
+			
+			EconomyResponse r = Main.econ.withdrawPlayer(player, Main.getInstance().getConfig().getInt("economy.costs.glow"));
+			
+			if (r.transactionSuccess()) {
+				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_success"), r), player);
+				return EcoMessage.SUCCESS;
+			} else {
+				Messager.msgPlayer(formatMsg(Main.getMsgFromConfig("economy.transaction_error"), r), player);
+				return EcoMessage.TRANSACTION_ERROR;
+			}
+		} // END ISSUE #101
 		
 		return EcoMessage.UNHANDLED;
 	}

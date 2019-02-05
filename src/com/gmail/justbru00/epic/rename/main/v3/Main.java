@@ -35,16 +35,23 @@ public class Main extends JavaPlugin {
 
 	public static boolean debug = false;
 	public static String PLUGIN_VERISON = null;
-	public static boolean USE_NEW_GET_HAND = true; // Default to the post 1.9.x
-													// get in hand item method.
-	public static MCVersion MC_VERSION; // Version is set in
-										// #checkServerVerison()
+	/**
+	 * Default to the method for getting items in hand for MC version 1.9.x+
+	 */
+	public static boolean USE_NEW_GET_HAND = true; 
+	/**
+	 *  Version is set in checkServerVerison()
+	 */
+	public static MCVersion MC_VERSION;
 	public static Main plugin;
 	public static PluginFile messages = null;
-	public static Economy econ = null; // Vault economy.
+	/**
+	 * Vault economy.
+	 */
+	public static Economy econ = null;
 	public static boolean USE_ECO = false;
 	
-	public static final int CONFIG_VERSION = 5;
+	public static final int CONFIG_VERSION = 6;
 	public static final int MESSAGES_VERSION = 8;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
@@ -53,7 +60,6 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
 		Messager.msgConsole("&cPlugin Disabled.");
 		plugin = null; // Fix memory leak.
 	}
@@ -73,7 +79,7 @@ public class Main extends JavaPlugin {
 				+ " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
 				+ "You can view a copy of it at: http://bit.ly/2eMknxx");
 
-		Messager.msgConsole("&aStarting plugin enable...");
+		Messager.msgConsole("&aStarting to enable plugin...");
 
 		checkConfigVersions();
 

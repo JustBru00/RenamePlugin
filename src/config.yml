@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.5+
+#Version 3.6+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 5
+config_version: 6
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -14,6 +14,7 @@ economy:
   costs:
     rename: 100
     lore: 100
+    glow: 100
 
 #Blacklists    
 blacklists:
@@ -42,15 +43,16 @@ rename_character_limit:
   enabled: false
   limit: 30  
 
+#Maximum lines allowed for /setloreline
 setloreline_max_lines: 20
 
-# Formatting Code Limit.
+#Formatting Code Limit.
 formatting_code_limit:
   enabled: false
   rename:
     min: 0
     max: 30
-  # Checked per line of lore  
+  #Checked per line of lore  
   lore: 
     min: 0
     max: 30

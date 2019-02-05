@@ -50,12 +50,7 @@ public class RenameUtil {
 									Debug.send("[RenameUtil] Passed Format Permissions Check.");
 									if (inHand.getType() != Material.AIR) { // Check != Air
 										if (MaterialPermManager.checkPerms(erc, inHand, player)) { // Check for per material permissions
-
-											EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.RENAME);
-
-											if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
-												return;
-											}
+											
 											StringBuilder builder = new StringBuilder("");
 											String completeArgs = "";
 
@@ -85,6 +80,12 @@ public class RenameUtil {
 											// End Issue #32
 
 											completeArgs = Messager.color(completeArgs);
+											
+											EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.RENAME);
+
+											if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+												return;
+											}
 
 											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 												player.getInventory().setItemInMainHand(

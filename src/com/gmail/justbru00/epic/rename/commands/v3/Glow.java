@@ -10,10 +10,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
+import com.gmail.justbru00.epic.rename.utils.v3.EconomyManager;
 import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
@@ -57,12 +59,20 @@ public class Glow implements CommandExecutor {
 						if (!Blacklists.checkExistingLore(player)) {
 							Messager.msgPlayer(Main.getMsgFromConfig("glow.blacklisted_existing_lore_found"), player);
 							return true;
-						}
+						}						
 
 						if (!(m == Material.AIR || m == null)) {
 							if (inHand.getEnchantments().size() == 0) {
 								if (m == Material.FISHING_ROD) {
 									Debug.send("Item is a fishing rod");
+									
+									// Add economy cost option #101
+									EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
+
+									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+										return true;
+									}
+									
 									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);
 									ItemMeta im = inHand.getItemMeta();
 									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -73,13 +83,20 @@ public class Glow implements CommandExecutor {
 									return true;
 								} else {
 									Debug.send("Item is not a fishing rod.");
+									
+									// Add economy cost option #101
+									EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
+
+									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+										return true;
+									}
+									
 									inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);
 									ItemMeta im = inHand.getItemMeta();
 									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 									inHand.setItemMeta(im);
 
-									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
-																	// method
+									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 										player.getInventory().setItemInMainHand(inHand);
 									} else { // Use older method.
 										player.setItemInHand(inHand);
