@@ -3,7 +3,7 @@ main: com.gmail.justbru00.epic.rename.main.v3.Main
 version: 3.6-INDEV
 description: Preforms different item modifications with easy to use commands.
 authors: [Justin Brubaker, JustBru00]
-softdepend: [Vault]
+softdepend: [Vault, MVdWPlaceholderAPI]
 api-version: 1.13
 
 commands:

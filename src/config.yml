@@ -71,3 +71,7 @@ enabled_worlds:
   - 'world'
   - 'world_nether'
   - 'world_the_end'
+  
+#Enable MVdWPlaceholderAPI
+#This will attempt to replace MVdWPlaceholders in any message or command that a player uses.
+mvdwplaceholderapi: false  

@@ -57,6 +57,8 @@ public class Main extends JavaPlugin {
 	public static Logger log = Bukkit.getLogger();
 	
 	public static String prefix = Messager.color("&8[&bEpic&fRename&8] &f");
+	
+	public static boolean enableMvdwPlaceholderApi = false;
 
 	@Override
 	public void onDisable() {
