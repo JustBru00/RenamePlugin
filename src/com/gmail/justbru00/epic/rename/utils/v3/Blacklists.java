@@ -52,7 +52,9 @@ public class Blacklists {
 						if (p.hasPermission("epicrename.bypass.existingname")) {
 							// Player has bypass permission
 							Debug.send("[Blacklists#checkExistingName(Player)] Player had the epicrename.bypass.existingname permission.");
-							Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
+							if (!Main.getBooleanFromConfig("disable_bypass_messages")) {
+								Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
+							}
 							return true;	
 						} 							
 						

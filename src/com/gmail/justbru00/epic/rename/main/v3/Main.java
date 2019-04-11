@@ -35,16 +35,19 @@ public class Main extends JavaPlugin {
 
 	public static boolean debug = false;
 	public static String PLUGIN_VERISON = null;
+	
 	/**
 	 * Default to the method for getting items in hand for MC version 1.9.x+
 	 */
 	public static boolean USE_NEW_GET_HAND = true; 
+	
 	/**
 	 *  Version is set in checkServerVerison()
 	 */
 	public static MCVersion MC_VERSION;
 	public static Main plugin;
 	public static PluginFile messages = null;
+	
 	/**
 	 * Vault economy.
 	 */
@@ -52,7 +55,7 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	
 	public static final int CONFIG_VERSION = 6;
-	public static final int MESSAGES_VERSION = 8;
+	public static final int MESSAGES_VERSION = 9;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -175,6 +178,10 @@ public class Main extends JavaPlugin {
 			return "[ERROR] Message from config is null. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
 		}
 		return messages.getString(path); // Removed duplicate Messager.color(); Messager#msgXXXX colors the message.
+	}
+	
+	public static boolean getBooleanFromConfig(String path) {
+		return Main.getInstance().getConfig().getBoolean(path);
 	}
 
 	public static Main getInstance() {

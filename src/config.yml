@@ -71,6 +71,9 @@ enabled_worlds:
   - 'world'
   - 'world_nether'
   - 'world_the_end'
+
+#Disables bypass messages from being sent to all players.  
+disable_bypass_messages: false 
   
 #Enable MVdWPlaceholderAPI
 #This will attempt to replace MVdWPlaceholders in any message or command that a player uses.
