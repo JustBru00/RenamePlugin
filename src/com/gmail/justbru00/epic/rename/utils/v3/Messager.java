@@ -11,8 +11,6 @@ import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
-import be.maximvdw.placeholderapi.PlaceholderAPI;
-
 /**
  * 
  * @author Justin Brubaker
