@@ -28,7 +28,9 @@ commands:
   removeglow:
     description: Removes an enchantment glow.     
     aliases: [epremoveglow]     
-# Remove for now as it is not working.
-#  align:        
-#    description: Aligns the name or lore of an item.   
-#    aliases: [epalign]
+  import:
+    description: Imports items from a website.
+    aliases: [epimport]
+  export:
+    description: Exports items to a website.
+    aliases: [epexport]    

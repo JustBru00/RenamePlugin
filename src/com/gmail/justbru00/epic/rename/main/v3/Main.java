@@ -108,8 +108,8 @@ public class Main extends JavaPlugin {
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		// TODO Re add /align once it is working
-		//getCommand("align").setExecutor(new Align());
+		getCommand("import");
+		getCommand("export");
 
 		// Start Metrics
 		try {

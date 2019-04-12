@@ -102,6 +102,12 @@ removeglow:
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   blacklisted_existing_name_found: '&cSorry that item has an existing name that is blacklisted.'
   blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'
+
+import:
+  #Oh booooy
+  
+export:
+  #Ohh man this will be fun.  
   
 rename_character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'
