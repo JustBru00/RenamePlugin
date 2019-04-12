@@ -10,14 +10,15 @@ import org.bukkit.entity.Player;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
-
+/**
+ * This is currently only used by /rename
+ */
 public class CharLimit {
 
 	
 	/**
-	 * 
-	 * @param checking {@link String[]} that we are checking.
-	 * @param player {@link Player} who typed the command.
+	 * @param checking The {@link String[]} that we are checking.
+	 * @param player The {@link Player} who sent the command.
 	 * @return TRUE if ok. FALSE if too many chars.
 	 */
 	public static boolean checkCharLimit(String[] checking, Player player) { // VERISON 3.0
@@ -32,13 +33,17 @@ public class CharLimit {
 		completeArgs = ChatColor.stripColor(Messager.color(completeArgs));
 		
 		if (!Main.getInstance().getConfig().getBoolean("rename_character_limit.enabled")) {
-			Debug.send("Char Limit is disabled.");
+			Debug.send("Character Limit is disabled.");
 			return true;
 		}
 		
 		if (player.hasPermission("epicrename.bypass.charlimit")) {
-			Debug.send("Player bypassed char limit");
-			Messager.msgPlayer(Main.getMsgFromConfig("rename_character_limit.bypass_msg"), player);
+			Debug.send("Player bypassed char limit");			
+			if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+				Messager.msgPlayer(Main.getMsgFromConfig("rename_character_limit.bypass_msg"), player);
+			} else {
+				Debug.send("Bypass messages are disabled.");
+			} // End Issue #107
 			return true;
 		}
 		

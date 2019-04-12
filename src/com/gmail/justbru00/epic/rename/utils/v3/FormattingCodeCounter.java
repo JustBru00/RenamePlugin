@@ -20,8 +20,15 @@ public class FormattingCodeCounter {
 		}
 		
 		if (p.hasPermission("epicrename.bypass.formattingcodemax")) {
-			if (sendBypassMsg) Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_max"), p);
-			Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Formatting code limit bypassed");
+			if (sendBypassMsg) {				
+				if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+					Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_max"), p);
+				} else {
+					Debug.send("Bypass messages are disabled.");
+				} // End Issue #107
+			}
+			
+			Debug.send("[FormattingCodeCounter#checkMaxColorCodes] Formatting code limit bypassed");			
 			return true;
 		}
 		
@@ -47,7 +54,13 @@ public class FormattingCodeCounter {
 		}
 		
 		if (p.hasPermission("epicrename.bypass.formattingcodemin")) {
-			if (sendBypassMsg) Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_min"), p);
+			if (sendBypassMsg) {				
+				if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+					Messager.msgPlayer(Main.getMsgFromConfig("format_code_limit.bypass_min"), p);
+				} else {
+					Debug.send("Bypass messages are disabled.");
+				} // End Issue #107
+			}
 			Debug.send("[FormattingCodeCounter#checkMinColorCodes] Formatting code limit bypassed.");
 			return true;
 		}

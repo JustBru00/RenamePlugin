@@ -18,19 +18,17 @@ import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class Rename implements CommandExecutor {
 
-	private static final EpicRenameCommands COMMAND = EpicRenameCommands.RENAME;
+	private static final EpicRenameCommands RENAME = EpicRenameCommands.RENAME;
 
 	// VERSION 3
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 
-		if (command.getName().equalsIgnoreCase("rename")) { // Start /rename
-															// code
+		if (command.getName().equalsIgnoreCase("rename")) { // Start /rename code
 			if (sender instanceof Player) {
 
-				Player player = (Player) sender; // Player is sender so do stuff
-													// :D
+				Player player = (Player) sender; // Player is sender so do stuff :D
 
 				if (WorldChecker.checkWorld(player)) {
 
@@ -38,7 +36,7 @@ public class Rename implements CommandExecutor {
 
 						if (args.length >= 1) {
 
-							RenameUtil.renameHandle(player, args, COMMAND);
+							RenameUtil.renameHandle(player, args, RENAME);
 
 							return true;
 						} else { // No Args
