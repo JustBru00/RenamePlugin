@@ -52,8 +52,10 @@ public class Blacklists {
 						if (p.hasPermission("epicrename.bypass.existingname")) {
 							// Player has bypass permission
 							Debug.send("[Blacklists#checkExistingName(Player)] Player had the epicrename.bypass.existingname permission.");
-							if (!Main.getBooleanFromConfig("disable_bypass_messages")) {
+							if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
 								Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existingname.bypass"), p);
+							} else {
+								Debug.send("Bypass messages are disabled.");
 							}
 							return true;	
 						} 							
@@ -101,7 +103,11 @@ public class Blacklists {
 							if (p.hasPermission("epicrename.bypass.existinglore")) {
 								// Player has bypass permission
 								Debug.send("[Blacklists#checkExistingLore(Player)] Player had the epicrename.bypass.existinglore permission.");
-								Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existinglore.bypass"), p);
+								if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+									Messager.msgPlayer(Main.getMsgFromConfig("blacklists.existinglore.bypass"), p);
+								} else {
+									Debug.send("Bypass messages are disabled.");
+								}
 								return true;
 							} 								
 								
@@ -123,8 +129,12 @@ public class Blacklists {
 		
 		// Issue #74
 		if (p.hasPermission("epicrename.bypass.materialblacklist")) {
-			Debug.send("Player just bypassed the material blacklist.");
-			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.material.bypass"), p);
+			Debug.send("Player just bypassed the material blacklist.");			
+			if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+				Messager.msgPlayer(Main.getMsgFromConfig("blacklists.material.bypass"), p);
+			} else {
+				Debug.send("Bypass messages are disabled.");
+			}
 			return true;
 		}
 		// End issue #74
@@ -150,7 +160,12 @@ public class Blacklists {
 		// Issue #74
 		if (p.hasPermission("epicrename.bypass.textblacklist")) {
 			Debug.send("Player just bypassed the text blacklist.");
-			Messager.msgPlayer(Main.getMsgFromConfig("blacklists.text.bypass"), p);
+			if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #107
+				Messager.msgPlayer(Main.getMsgFromConfig("blacklists.text.bypass"), p);
+			} else {
+				Debug.send("Bypass messages are disabled.");
+			}
+			
 			return true;
 		}
 		// End issue #74
