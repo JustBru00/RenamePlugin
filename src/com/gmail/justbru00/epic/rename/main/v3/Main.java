@@ -15,7 +15,9 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
+import com.gmail.justbru00.epic.rename.commands.v3.Export;
 import com.gmail.justbru00.epic.rename.commands.v3.Glow;
+import com.gmail.justbru00.epic.rename.commands.v3.Import;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveGlow;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
@@ -108,8 +110,8 @@ public class Main extends JavaPlugin {
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
 		getCommand("glow").setExecutor(new Glow());
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		getCommand("import");
-		getCommand("export");
+		getCommand("import").setExecutor(new Import());;
+		getCommand("export").setExecutor(new Export());
 
 		// Start Metrics
 		try {
