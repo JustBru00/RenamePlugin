@@ -30,6 +30,7 @@ public class ItemSerialization {
 		
 		return config.saveToString();
 	}
+	
 	/**
 	 * This method will completely clear the players inventory.
 	 * @author Justin Brubaker
@@ -48,7 +49,9 @@ public class ItemSerialization {
 			return;
 		}
 		
-		
+		for (int i = 0; i < inv.getSize(); i++) {
+			inv.setItem(i, config.getItemStack(String.valueOf(i), null));
+		}		
 	}
 	
 	/**
