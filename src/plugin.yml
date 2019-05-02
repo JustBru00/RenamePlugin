@@ -1,7 +1,7 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
 version: 3.6-INDEV
-description: Preforms different item modifications with easy to use commands.
+description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker, JustBru00]
 softdepend: [Vault]
 api-version: 1.13
@@ -29,8 +29,8 @@ commands:
     description: Removes an enchantment glow.     
     aliases: [epremoveglow]     
   import:
-    description: Imports items from a website.
+    description: Imports items from a URL.
     aliases: [epimport]
   export:
-    description: Exports items to a website.
+    description: Exports items to PasteBin.
     aliases: [epexport]    

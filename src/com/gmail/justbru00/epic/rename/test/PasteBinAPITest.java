@@ -7,6 +7,6 @@ import com.gmail.justbru00.epic.rename.utils.v3.PasteBinAPI;
 
 public class PasteBinAPITest {
 	public static void main(String[] args) throws MalformedURLException, IOException {
-		PasteBinAPI.paste("This is a test of the Pastebin api");
+		System.out.println(PasteBinAPI.paste("This is a test of the Pastebin api"));
 	}
 }

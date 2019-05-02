@@ -16,7 +16,7 @@ public class OnJoin implements Listener {
 
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		if (e.getPlayer().getUniqueId().toString().equals("28f9bb08-b33c-4a7d-b098-ebf271383966"))  { // UUID = the UUID of plugin author do stuff.
+		if (e.getPlayer().getUniqueId().toString().equals("28f9bb08-b33c-4a7d-b098-ebf271383966"))  { // If UUID == The UUID of JustBru00.
 			Messager.msgPlayer("&a&lThis server uses &b&lEpic&f&lRename &a&lversion &c&l" + Main.PLUGIN_VERISON, e.getPlayer());
 		}
 	}

@@ -104,10 +104,19 @@ removeglow:
   blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'
 
 import:
-  #Oh booooy
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
   
 export:
-  #Ohh man this will be fun.  
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
+  no_args: '&cPlease provide at least one argument after /export. /export <hand,inventory>'
+  wrong_args: '&cPlease follow the correct argument usage. /export <hand, inventory>'
+  warn_public: '&6/export sends your item(s) to a public PasteBin link. Type "/export confirm" to confirm you are okay with this action. You will not be asked again until after the next server restart.'
+  success: '&aExported item(s) successfully. Use the following link to /import the item(s). The link expires in one month. {LINK}'
+  post_fail: '&cFailed to post to PasteBin: {ERROR}'
+  confirmed: '&aYou confirmed that it is okay to post your item(s) publicaly. You can now use /export normally until the next server restart.'
+  no_air: '&cYou cannot export nothing.'
   
 rename_character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'

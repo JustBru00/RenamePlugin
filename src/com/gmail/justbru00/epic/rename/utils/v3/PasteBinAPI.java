@@ -14,6 +14,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import com.gmail.justbru00.epic.rename.main.v3.Main;
+
 /**
  * Created for issue #105, #106
  * @author Justin Brubaker
@@ -22,10 +24,11 @@ import javax.net.ssl.HttpsURLConnection;
 public class PasteBinAPI {
 	
 	private static final String DEV_KEY = "c577908005909793b051b84c01254a82";
-	private static final String POST_URL = "https://pastebin.com/api/api_post.php?api_option=paste&api_dev_key=" + DEV_KEY + "&api_paste_code={DATA}&api_paste_format=yaml&api_paste_expire_date=1M";
-
+	private static final String POST_URL = "https://pastebin.com/api/api_post.php";
+	private static final String POST_PARAMETERS = "api_option=paste&api_dev_key=" + DEV_KEY + "&api_paste_name=EpicRename v" + Main.PLUGIN_VERISON + " /export&api_paste_code={DATA}&api_paste_format=yaml&api_paste_expire_date=1M";
+	
 	/**
-	 * Pastes the data provided directly to https://pastebin.com/api
+	 * Pastes the data provided directly to https://pastebin.com/
 	 * @param data The text to paste.
 	 * @return The response from pastebin. This can be a link to the paste or an error message beginning with 
 	 * "Bad API request," 
@@ -38,12 +41,21 @@ public class PasteBinAPI {
 		return response;
 	}
 	
+	/**
+	 * Posts text data to PasteBin.
+	 * @param data
+	 * @return If this contains "Bad API request," then the post failed.
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 */
 	private static String post(String data) throws IOException, MalformedURLException {
 		URL formattedUrl = null;
-		formattedUrl = new URL(POST_URL.replace("{DATA}", data));
+		formattedUrl = new URL(POST_URL);
+		
+		String formattedData = POST_PARAMETERS.replace("{DATA}", data);
 		
 		
-		System.out.println("[PasteBinAPI] Attempting to POST.");		
+		Debug.send("[PasteBinAPI] Attempting to POST.");		
 		
 			HttpsURLConnection httpsCon = (HttpsURLConnection) formattedUrl.openConnection();
 			httpsCon.setDoOutput(true);
@@ -52,7 +64,7 @@ public class PasteBinAPI {
 			
 			OutputStreamWriter out = new OutputStreamWriter(
 			    httpsCon.getOutputStream());
-			out.write(data);
+			out.write(formattedData);
 			out.flush();
 			out.close();
 			
@@ -70,10 +82,10 @@ public class PasteBinAPI {
 			
 			String response = builder.toString();
 					
-			System.out.println("[PasteBinAPI] POST response code was: " + httpsCon.getResponseCode());
+			Debug.send("[PasteBinAPI] POST response code was: " + httpsCon.getResponseCode());
 			
 			if (response.contains("Bad API request,"))	{
-				System.out.println("[PasteBinAPI] FAILED TO POST: " + response);
+				Debug.send("[PasteBinAPI] FAILED TO POST: " + response);
 			}
 			
 			return response;

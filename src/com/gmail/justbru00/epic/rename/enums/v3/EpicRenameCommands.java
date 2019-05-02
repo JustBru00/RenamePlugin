@@ -8,7 +8,7 @@ package com.gmail.justbru00.epic.rename.enums.v3;
 public enum EpicRenameCommands {
 
 	RENAME, LORE, EPICRENAME, SETLORELINE, 
-	REMOVELORELINE, GLOW, REMOVEGLOW, ALIGN;
+	REMOVELORELINE, GLOW, REMOVEGLOW, ALIGN, EXPORT, IMPORT;
 	
 	
 	public static String getStringName(EpicRenameCommands e) {
@@ -21,6 +21,8 @@ public enum EpicRenameCommands {
 		case GLOW: {return "glow";}
 		case REMOVEGLOW: {return "removeglow";}
 		case ALIGN: {return "align";}
+		case EXPORT: {return "export";}
+		case IMPORT: {return "import";}
 		default:
 			break;
 		}
