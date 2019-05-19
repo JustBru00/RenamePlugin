@@ -115,7 +115,7 @@ export:
   warn_public: '&6/export sends your item(s) to a public PasteBin link. Type "/export confirm" to confirm you are okay with this action. You will not be asked again until after the next server restart.'
   success: '&aExported item(s) successfully. Use the following link to /import the item(s). The link expires in one month. {LINK}'
   post_fail: '&cFailed to post to PasteBin: {ERROR}'
-  confirmed: '&aYou confirmed that it is okay to post your item(s) publicaly. You can now use /export normally until the next server restart.'
+  confirmed: '&aYou confirmed that it is okay to post your item(s) publicly. You can now use /export normally until the next server restart.'
   no_air: '&cYou cannot export nothing.'
   
 rename_character_limit:

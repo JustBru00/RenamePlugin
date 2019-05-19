@@ -82,11 +82,43 @@ public class Export implements CommandExecutor {
 								return true;
 							}
 							
-							// TODO
+							if (response.startsWith("Bad API request,")) {
+								// FAILED
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", response), sender);
+							} else {
+								// SUCCESS
+								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{LINK}", response), sender);
+							}			
 							
 							return true;
 						} else if (arg.equalsIgnoreCase("inventory")) { // /export inventory
-							// TODO
+							
+							String theInventory = ItemSerialization.toString(p.getInventory());
+							String response = null;
+							try {
+								response = PasteBinAPI.paste(theInventory);
+							} catch (MalformedURLException e) {
+								if (Main.debug) {
+									e.printStackTrace();
+								}
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "MalformedURLException"), sender);
+								return true;
+							} catch (IOException e) {
+								if (Main.debug) {
+									e.printStackTrace();
+								}
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "IOException"), sender);
+								return true;
+							}
+							
+							if (response.startsWith("Bad API request,")) {
+								// FAILED
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", response), sender);
+							} else {
+								// SUCCESS
+								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{LINK}", response), sender);
+							}						
+							
 							return true;
 						} else {
 							Messager.msgSenderWithConfigMsg("export.wrong_args", sender);
