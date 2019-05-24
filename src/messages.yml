@@ -106,6 +106,13 @@ removeglow:
 import:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   wrong_sender: '&cSorry only a player can use that command.'
+  no_args: '&cPlease provide at least one argument after /import. /import <hand,inventory, raw'
+  wrong_args: '&cPlease follow the correct argument usage. /import <hand, inventory, raw>'
+  success: '&aImported successfully.'
+  failed_to_get_data: '&cFailed to import from "{link}". {error}'
+  confirmed: '&aYou confirmed that you understand your items will be deleted by /import inventory. You can now use /import normally until the next server restart.'
+  full_hand: '&cYour main hand must be empty to import an item. Try again after clearing your main hand.'
+  raw_fail: '&cFailed to import an item from the provided yaml. Make sure the yaml text is formatted correctly.'
   
 export:
   no_permission: '&cSorry you don''t have permission to perform that command.'
@@ -113,8 +120,8 @@ export:
   no_args: '&cPlease provide at least one argument after /export. /export <hand,inventory>'
   wrong_args: '&cPlease follow the correct argument usage. /export <hand, inventory>'
   warn_public: '&6/export sends your item(s) to a public PasteBin link. Type "/export confirm" to confirm you are okay with this action. You will not be asked again until after the next server restart.'
-  success: '&aExported item(s) successfully. Use the following link to /import the item(s). The link expires in one month. {LINK}'
-  post_fail: '&cFailed to post to PasteBin: {ERROR}'
+  success: '&aExported item(s) successfully. Use the following link to /import the item(s). The link expires in one month. {link}'
+  post_fail: '&cFailed to post to PasteBin: {error}'
   confirmed: '&aYou confirmed that it is okay to post your item(s) publicly. You can now use /export normally until the next server restart.'
   no_air: '&cYou cannot export nothing.'
   

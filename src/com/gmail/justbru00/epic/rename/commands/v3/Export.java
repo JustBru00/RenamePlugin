@@ -8,7 +8,6 @@ package com.gmail.justbru00.epic.rename.commands.v3;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -19,7 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.ItemSerialization;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.PasteBinAPI;
@@ -56,7 +54,7 @@ public class Export implements CommandExecutor {
 							return true;
 						}
 						
-						if (arg.equalsIgnoreCase("hand")) { // /export hand
+						if (arg.equalsIgnoreCase("hand") || arg.equalsIgnoreCase("h")) { // /export hand
 							ItemStack inHand = p.getInventory().getItemInMainHand();
 							
 							if (inHand.getType() == Material.AIR || inHand == null) {
@@ -72,26 +70,26 @@ public class Export implements CommandExecutor {
 								if (Main.debug) {
 									e.printStackTrace();
 								}
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "MalformedURLException"), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", "MalformedURLException"), sender);
 								return true;
 							} catch (IOException e) {
 								if (Main.debug) {
 									e.printStackTrace();
 								}
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "IOException"), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", "IOException"), sender);
 								return true;
 							}
 							
 							if (response.startsWith("Bad API request,")) {
 								// FAILED
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", response), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", response), sender);
 							} else {
 								// SUCCESS
-								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{LINK}", response), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{link}", response), sender);
 							}			
 							
 							return true;
-						} else if (arg.equalsIgnoreCase("inventory")) { // /export inventory
+						} else if (arg.equalsIgnoreCase("inventory") || arg.equalsIgnoreCase("inv") || arg.equalsIgnoreCase("i")) { // /export inventory
 							
 							String theInventory = ItemSerialization.toString(p.getInventory());
 							String response = null;
@@ -101,22 +99,22 @@ public class Export implements CommandExecutor {
 								if (Main.debug) {
 									e.printStackTrace();
 								}
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "MalformedURLException"), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", "MalformedURLException"), sender);
 								return true;
 							} catch (IOException e) {
 								if (Main.debug) {
 									e.printStackTrace();
 								}
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", "IOException"), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", "IOException"), sender);
 								return true;
 							}
 							
 							if (response.startsWith("Bad API request,")) {
 								// FAILED
-								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{ERROR}", response), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", response), sender);
 							} else {
 								// SUCCESS
-								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{LINK}", response), sender);
+								Messager.msgSender(Main.getMsgFromConfig("export.success").replace("{link}", response), sender);
 							}						
 							
 							return true;
