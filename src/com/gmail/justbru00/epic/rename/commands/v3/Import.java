@@ -39,13 +39,6 @@ public class Import implements CommandExecutor {
 	 * 
 	 * import <hand,inventory> <link,rawyaml>
 	 * 
-	 * Examples:
-	 * 
-	 * import hand https://pastebin.com/ValidLink import hand random yaml stuff
-	 * import inventory https://pastebin.com/ValidLink import inv
-	 * https://pastebin.com/ValidLink import h https://pastebin.com/ValidLink import
-	 * i https://pastebin.com/ValidLink import raw yaml text here
-	 * 
 	 * Importing an inventory forces a /import confirm before allowing a player to
 	 * import once per server restart. Importing to your hand only works if the hand
 	 * is empty.

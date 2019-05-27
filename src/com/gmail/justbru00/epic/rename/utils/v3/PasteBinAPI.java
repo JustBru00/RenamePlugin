@@ -62,8 +62,8 @@ public class PasteBinAPI {
 		httpConn.setRequestProperty("Content-Type", "0");
 		httpConn.setRequestMethod("GET");
 		httpConn.setUseCaches(false);
-		httpConn.setConnectTimeout(10000);
-		httpConn.setReadTimeout(10000);
+		httpConn.setConnectTimeout(300);
+		httpConn.setReadTimeout(1000);
 		httpConn.setAllowUserInteraction(false);
 		httpConn.setInstanceFollowRedirects(true);
 		httpConn.setRequestProperty("Connection", "close");
@@ -118,6 +118,8 @@ public class PasteBinAPI {
 		HttpsURLConnection httpsCon = (HttpsURLConnection) formattedUrl.openConnection();
 		httpsCon.setDoOutput(true);
 		httpsCon.setDoInput(true);
+		httpsCon.setConnectTimeout(300);
+		httpsCon.setReadTimeout(1000);
 		httpsCon.setRequestMethod("POST");
 
 		OutputStreamWriter out = new OutputStreamWriter(httpsCon.getOutputStream(), "UTF-8");
