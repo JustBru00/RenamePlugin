@@ -6,6 +6,9 @@
 package com.gmail.justbru00.epic.rename.main.v3;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Calendar;
 import java.util.logging.Logger;
 
@@ -248,4 +251,15 @@ public class Main extends JavaPlugin {
 		return econ != null;
 	}
 
+	/**
+	 * Gets the stack trace as a String from a Throwable
+	 * @param aThrowable
+	 * @return
+	 */
+	public static String getStackTrace(Throwable aThrowable) {
+	    Writer result = new StringWriter();
+	    PrintWriter printWriter = new PrintWriter(result);
+	    aThrowable.printStackTrace(printWriter);
+	    return result.toString();
+	  }
 }

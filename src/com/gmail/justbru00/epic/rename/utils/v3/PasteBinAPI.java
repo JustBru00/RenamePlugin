@@ -46,10 +46,11 @@ public class PasteBinAPI {
 		if (url.contains("https://pastebin.com/") && !url.contains("raw/")) {
 			String newUrl = "";
 
-			newUrl = url.substring(0, 22);
+			newUrl = url.substring(21, url.length());
 
 			newUrl = "https://pastebin.com/raw/VALUE".replace("VALUE", newUrl);
 			url = newUrl;
+			Debug.send("[PasteBinAPI] New URL is: " + url);
 		}
 
 		URL urlObj = null;
@@ -69,12 +70,12 @@ public class PasteBinAPI {
 		httpConn.connect();
 
 		// Attempt to get the json data
-		BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), "UTF-8"));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
 		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
+			response.append(inputLine + "\n");
 		}
 		in.close();
 
@@ -119,12 +120,12 @@ public class PasteBinAPI {
 		httpsCon.setDoInput(true);
 		httpsCon.setRequestMethod("POST");
 
-		OutputStreamWriter out = new OutputStreamWriter(httpsCon.getOutputStream());
+		OutputStreamWriter out = new OutputStreamWriter(httpsCon.getOutputStream(), "UTF-8");
 		out.write(formattedData);
 		out.flush();
 		out.close();
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(httpsCon.getInputStream()));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(httpsCon.getInputStream(), "UTF-8"));
 		StringBuilder builder = new StringBuilder();
 		String line;
 		while ((line = reader.readLine()) != null) {

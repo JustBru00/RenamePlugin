@@ -106,7 +106,7 @@ removeglow:
 import:
   no_permission: '&cSorry you don''t have permission to perform that command.'
   wrong_sender: '&cSorry only a player can use that command.'
-  no_args: '&cPlease provide at least one argument after /import. /import <hand, inventory, raw'
+  no_args: '&cPlease provide at least one argument after /import. /import <hand, inventory, raw>'
   wrong_args: '&cPlease follow the correct argument usage. /import <hand, inventory, raw>'
   success: '&aImported successfully.'
   failed_to_get_data: '&cFailed to import from "{link}". Error: {error}'

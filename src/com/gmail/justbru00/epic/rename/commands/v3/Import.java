@@ -77,7 +77,8 @@ public class Import implements CommandExecutor {
 								} catch (IOException e) {
 									Debug.send("Failed to GET text data from URL.");
 									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
-											.replace("{link}", link).replace("{error}", e.getMessage()), sender);
+											.replace("{link}", link).replace("{error}", "IOException. Turn on debugging with /epicrename debug."), sender);
+									Debug.send("[Import] " + Main.getStackTrace(e));
 									return true;
 								} catch (NoSuchElementException e2) {
 									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
@@ -120,11 +121,12 @@ public class Import implements CommandExecutor {
 							String textFromWeb = null;
 
 							try {
-								textFromWeb = PasteBinAPI.getTextFromURL(link).get();
+								textFromWeb = PasteBinAPI.getTextFromURL(link).get();								
 							} catch (IOException e) {
 								Debug.send("Failed to GET text data from URL.");
 								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
-										.replace("{link}", link).replace("{error}", e.getMessage()), sender);
+										.replace("{link}", link).replace("{error}", "IOException. Turn on debugging with /epicrename debug."), sender);
+								Debug.send("[Import] " + Main.getStackTrace(e));
 								return true;
 							} catch (NoSuchElementException e2) {
 								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
