@@ -66,11 +66,17 @@ public class EpicRenameOnlineAPI {
 		httpsConn.setInstanceFollowRedirects(false);
 		httpsConn.setRequestProperty("Connection", "close");
 		httpsConn.connect();
-
-		// Attempt to get raw text data
-		BufferedReader in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "UTF-8"));
+		
+		BufferedReader in = null;
 		String inputLine;
 		StringBuffer response = new StringBuffer();
+
+		if (httpsConn.getResponseCode() >= 200 && httpsConn.getResponseCode() < 300) {
+			// Attempt to get raw text data
+			 in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "UTF-8"));
+		} else {
+			 in = new BufferedReader(new InputStreamReader(httpsConn.getErrorStream(), "UTF-8"));
+		}
 
 		while ((inputLine = in.readLine()) != null) {
 			response.append(inputLine + "\n");
@@ -80,7 +86,7 @@ public class EpicRenameOnlineAPI {
 		textData = response.toString();
 		
 		if (textData.startsWith("ERROR:")) {
-			if (textData.equalsIgnoreCase("ERROR: 404 - Not Found. Link has expired.")) {
+			if (textData.startsWith("ERROR: 404 - Not Found." ) && textData.contains("Link has expired")) {
 				// Link expired on EpicRenameOnline server
 				throw new EpicRenameOnlineExpiredException();
 			} else if (textData.startsWith("ERROR: 404 - Not Found." ) && textData.contains("doesn't exist")) {

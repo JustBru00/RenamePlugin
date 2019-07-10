@@ -122,7 +122,7 @@ export:
   wrong_sender: '&cSorry only a player can use that command.'
   no_args: '&cPlease provide at least one argument after /export. /export <hand, inventory>'
   wrong_args: '&cPlease follow the correct argument usage. /export <hand, inventory>'
-  warn_public: '&6/export sends your item(s) to a public EpicRename.com link. By using /export you are agreeing to the EpicRename.com privacy policy which is located at: https://epicrename.com/privacy Type "/export confirm" to confirm you are okay with this action. You will not be asked again until after the next server restart.'
+  warn_public: '&6/export sends your item(s) to a public EpicRename.com link. By using /export you are agreeing to EpicRename.com''s privacy policy which can be found at https://epicrename.com/privacy. Type "/export confirm" to confirm you are okay with this action. You will not be asked again until after the next server restart.'
   success: '&aExported item(s) successfully. Use the following link to /import the item(s). The link expires in one month. {link}'
   post_fail: '&cFailed to post to EpicRenameOnline: {error}'
   confirmed: '&aYou confirmed that it is okay to post your item(s) publicly. You can now use /export normally until the next server restart.'
