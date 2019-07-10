@@ -9,14 +9,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.gmail.justbru00.epic.rename.main.v3.Main;
+import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineExpiredException;
+import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineNotFoundException;
 
 /**
  * Created for issue #105, #106
@@ -24,13 +24,9 @@ import com.gmail.justbru00.epic.rename.main.v3.Main;
  * @author Justin Brubaker
  *
  */
-public class PasteBinAPI {
-
-	private static final String DEV_KEY = "c577908005909793b051b84c01254a82";
-	private static final String POST_URL = "https://pastebin.com/api/api_post.php";
-	private static final String POST_PARAMETERS = "api_option=paste&api_dev_key=" + DEV_KEY
-			+ "&api_paste_name=EpicRename v" + Main.PLUGIN_VERISON
-			+ " /export&api_paste_code={DATA}&api_paste_format=yaml&api_paste_expire_date=1M";
+public class EpicRenameOnlineAPI {
+	
+	private static final String POST_URL = "https://epicrename.com/api/v1/export";
 
 	/**
 	 * Attempts to GET raw text from a URL. If the URL is a pastebin link such as
@@ -38,11 +34,13 @@ public class PasteBinAPI {
 	 * https://pastebin.com/raw/e5mwvrJ8 If the URL is not a pastebin link then it
 	 * will just attempt to get raw text.
 	 * 
+	 * This method attempts to connect with HTTPS if possible.
+	 * 
 	 * @param url
 	 * @return The text retrieved from the server
 	 * @throws IOException
 	 */
-	public static Optional<String> getTextFromURL(String url) throws IOException {
+	public static Optional<String> getTextFromURL(String url) throws IOException, EpicRenameOnlineExpiredException, EpicRenameOnlineNotFoundException {
 		if (url.contains("https://pastebin.com/") && !url.contains("raw/")) {
 			String newUrl = "";
 
@@ -58,19 +56,19 @@ public class PasteBinAPI {
 
 		urlObj = new URL(url);
 
-		HttpURLConnection httpConn = (HttpURLConnection) urlObj.openConnection();
-		httpConn.setRequestProperty("Content-Type", "0");
-		httpConn.setRequestMethod("GET");
-		httpConn.setUseCaches(false);
-		httpConn.setConnectTimeout(300);
-		httpConn.setReadTimeout(1000);
-		httpConn.setAllowUserInteraction(false);
-		httpConn.setInstanceFollowRedirects(true);
-		httpConn.setRequestProperty("Connection", "close");
-		httpConn.connect();
+		HttpsURLConnection httpsConn = (HttpsURLConnection) urlObj.openConnection();
+		httpsConn.setRequestProperty("Content-Type", "0");
+		httpsConn.setRequestMethod("GET");
+		httpsConn.setUseCaches(false);
+		httpsConn.setConnectTimeout(300);
+		httpsConn.setReadTimeout(1000);
+		httpsConn.setAllowUserInteraction(false);
+		httpsConn.setInstanceFollowRedirects(false);
+		httpsConn.setRequestProperty("Connection", "close");
+		httpsConn.connect();
 
-		// Attempt to get the json data
-		BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(), "UTF-8"));
+		// Attempt to get raw text data
+		BufferedReader in = new BufferedReader(new InputStreamReader(httpsConn.getInputStream(), "UTF-8"));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 
@@ -80,16 +78,30 @@ public class PasteBinAPI {
 		in.close();
 
 		textData = response.toString();
+		
+		if (textData.startsWith("ERROR:")) {
+			if (textData.equalsIgnoreCase("ERROR: 404 - Not Found. Link has expired.")) {
+				// Link expired on EpicRenameOnline server
+				throw new EpicRenameOnlineExpiredException();
+			} else if (textData.startsWith("ERROR: 404 - Not Found." ) && textData.contains("doesn't exist")) {
+				// Link not found on EpicRenameOnline server.
+				throw new EpicRenameOnlineNotFoundException();
+			}
+		}
+		
+		if(textData.trim().equalsIgnoreCase("") || textData == null) {
+			return Optional.ofNullable(null);
+		}
 
 		return Optional.ofNullable(textData);
 	}
 
 	/**
-	 * Pastes the data provided directly to https://pastebin.com/
+	 * Pastes the data provided directly to https://epicrename.com/
 	 * 
 	 * @param data The text to paste.
-	 * @return The response from pastebin. This can be a link to the paste or an
-	 *         error message beginning with "Bad API request,"
+	 * @return The response from EpicRenameOnline. This can be a link to the paste or an
+	 *         error message beginning with "ERROR:"
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 */
@@ -100,18 +112,16 @@ public class PasteBinAPI {
 	}
 
 	/**
-	 * Posts text data to PasteBin.
+	 * Posts text data to EpicRenameOnline.
 	 * 
 	 * @param data
-	 * @return If this contains "Bad API request," then the post failed.
+	 * @return If this contains "ERROR: " then the post failed.
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 */
 	private static String post(String data) throws IOException, MalformedURLException {
 		URL formattedUrl = null;
 		formattedUrl = new URL(POST_URL);
-
-		String formattedData = POST_PARAMETERS.replace("{DATA}", data);
 
 		Debug.send("[PasteBinAPI] Attempting to POST.");
 
@@ -123,7 +133,7 @@ public class PasteBinAPI {
 		httpsCon.setRequestMethod("POST");
 
 		OutputStreamWriter out = new OutputStreamWriter(httpsCon.getOutputStream(), "UTF-8");
-		out.write(formattedData);
+		out.write(data);
 		out.flush();
 		out.close();
 
@@ -140,10 +150,10 @@ public class PasteBinAPI {
 
 		String response = builder.toString();
 
-		Debug.send("[PasteBinAPI] POST response code was: " + httpsCon.getResponseCode());
+		Debug.send("[EpicRenameOnlineAPI] POST response code was: " + httpsCon.getResponseCode());
 
-		if (response.contains("Bad API request,")) {
-			Debug.send("[PasteBinAPI] FAILED TO POST: " + response);
+		if (response.contains("ERROR:")) {
+			Debug.send("[EpicRenameOnlineAPI] FAILED TO POST: " + response);
 		}
 
 		return response;

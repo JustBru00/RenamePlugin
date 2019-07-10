@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.ItemSerialization;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.PasteBinAPI;
+import com.gmail.justbru00.epic.rename.utils.v3.EpicRenameOnlineAPI;
 
 /**
  * Created for #105
@@ -65,7 +65,7 @@ public class Export implements CommandExecutor {
 							String theItem = ItemSerialization.toString(inHand);
 							String response = null;
 							try {
-								response = PasteBinAPI.paste(theItem);
+								response = EpicRenameOnlineAPI.paste(theItem);
 							} catch (MalformedURLException e) {
 								if (Main.debug) {
 									e.printStackTrace();
@@ -80,7 +80,7 @@ public class Export implements CommandExecutor {
 								return true;
 							}
 							
-							if (response.startsWith("Bad API request,")) {
+							if (response.startsWith("ERROR:")) {
 								// FAILED
 								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", response), sender);
 							} else {
@@ -94,7 +94,7 @@ public class Export implements CommandExecutor {
 							String theInventory = ItemSerialization.toString(p.getInventory());
 							String response = null;
 							try {
-								response = PasteBinAPI.paste(theInventory);
+								response = EpicRenameOnlineAPI.paste(theInventory);
 							} catch (MalformedURLException e) {
 								if (Main.debug) {
 									e.printStackTrace();
@@ -109,7 +109,7 @@ public class Export implements CommandExecutor {
 								return true;
 							}
 							
-							if (response.startsWith("Bad API request,")) {
+							if (response.startsWith("ERROR:")) {
 								// FAILED
 								Messager.msgSender(Main.getMsgFromConfig("export.post_fail").replace("{error}", response), sender);
 							} else {

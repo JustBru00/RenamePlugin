@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: 3.6-RC2
+version: 3.6-RC3
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker, JustBru00]
 softdepend: [Vault]
@@ -32,5 +32,5 @@ commands:
     description: Imports items from a URL.
     aliases: [epimport]
   export:
-    description: Exports items to PasteBin.
+    description: Exports items to EpicRenameOnline.
     aliases: [epexport]    

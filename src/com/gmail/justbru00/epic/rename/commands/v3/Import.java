@@ -18,11 +18,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineExpiredException;
+import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineNotFoundException;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.ItemSerialization;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.PasteBinAPI;
+import com.gmail.justbru00.epic.rename.utils.v3.EpicRenameOnlineAPI;
 
 /**
  * Created for #106
@@ -66,7 +68,8 @@ public class Import implements CommandExecutor {
 								String textFromWeb = null;
 
 								try {
-									textFromWeb = PasteBinAPI.getTextFromURL(link).get();
+									textFromWeb = EpicRenameOnlineAPI.getTextFromURL(link).get();
+									Debug.send("Got: " + textFromWeb);
 								} catch (IOException e) {
 									Debug.send("Failed to GET text data from URL.");
 									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
@@ -75,7 +78,17 @@ public class Import implements CommandExecutor {
 									return true;
 								} catch (NoSuchElementException e2) {
 									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
-											.replace("{link}", link).replace("{error}", "Text is null."), sender);
+											.replace("{link}", link).replace("{error}", "Text received from server is null."), sender);
+									return true;
+								} catch (EpicRenameOnlineExpiredException e) {
+									Debug.send("EpicRenameOnlineExpiredException - Link has expired.");
+									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
+											.replace("{link}", link).replace("{error}", "EpicRenameOnline reports that the link has expired."), sender);
+									return true;
+								} catch (EpicRenameOnlineNotFoundException e) {
+									Debug.send("EpicRenameOnlineNotFoundException - Link doesn't exist.");
+									Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
+											.replace("{link}", link).replace("{error}", "EpicRenameOnline reports that the link doesn't exist."), sender);
 									return true;
 								}
 
@@ -114,7 +127,8 @@ public class Import implements CommandExecutor {
 							String textFromWeb = null;
 
 							try {
-								textFromWeb = PasteBinAPI.getTextFromURL(link).get();								
+								textFromWeb = EpicRenameOnlineAPI.getTextFromURL(link).get();	
+								Debug.send("Got :" + textFromWeb);
 							} catch (IOException e) {
 								Debug.send("Failed to GET text data from URL.");
 								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
@@ -123,7 +137,17 @@ public class Import implements CommandExecutor {
 								return true;
 							} catch (NoSuchElementException e2) {
 								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
-										.replace("{link}", link).replace("{error}", "Text is null."), sender);
+										.replace("{link}", link).replace("{error}", "Text received from server is null."), sender);
+								return true;
+							} catch (EpicRenameOnlineExpiredException e) {
+								Debug.send("EpicRenameOnlineExpiredException - Link has expired.");
+								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
+										.replace("{link}", link).replace("{error}", "EpicRenameOnline reports that the link has expired."), sender);
+								return true;
+							} catch (EpicRenameOnlineNotFoundException e) {
+								Debug.send("EpicRenameOnlineNotFoundException - Link doesn't exist.");
+								Messager.msgSender(Main.getMsgFromConfig("import.failed_to_get_data")
+										.replace("{link}", link).replace("{error}", "EpicRenameOnline reports that the link doesn't exist."), sender);
 								return true;
 							}
 
