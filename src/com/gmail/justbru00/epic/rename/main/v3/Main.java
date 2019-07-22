@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,6 +28,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
+import com.gmail.justbru00.epic.rename.exploit_prevention.ExploitPreventionListener;
 import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
 import com.gmail.justbru00.epic.rename.main.v3.Metrics.Graph;
 import com.gmail.justbru00.epic.rename.main.v3.bstats.BStats;
@@ -59,8 +61,8 @@ public class Main extends JavaPlugin {
 	public static Economy econ = null;
 	public static boolean USE_ECO = false;
 	
-	public static final int CONFIG_VERSION = 6;
-	public static final int MESSAGES_VERSION = 9;
+	public static final int CONFIG_VERSION = 7;
+	public static final int MESSAGES_VERSION = 10;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -103,7 +105,9 @@ public class Main extends JavaPlugin {
 		}
 
 		// Register Listeners
-		Bukkit.getServer().getPluginManager().registerEvents(new OnJoin(), this);
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		pm.registerEvents(new OnJoin(), this);
+		pm.registerEvents(new ExploitPreventionListener(), this);
 
 		// Command Executors
 		getCommand("rename").setExecutor(new Rename());

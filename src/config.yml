@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.6+
+#Version 3.6.1+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 6
+config_version: 7
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -74,3 +74,6 @@ enabled_worlds:
 
 #Disables bypass messages from being sent to all players.  
 disable_bypass_messages: false 
+
+# Exploit Prevention
+disable_grindstone_for_glowing_items: true
