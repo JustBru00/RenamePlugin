@@ -61,8 +61,10 @@ public class Main extends JavaPlugin {
 	public static Economy econ = null;
 	public static boolean USE_ECO = false;
 	
+	public static boolean usesEpicRenameOnlineFeatures = false;
+	
 	public static final int CONFIG_VERSION = 7;
-	public static final int MESSAGES_VERSION = 10;
+	public static final int MESSAGES_VERSION = 11;
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -158,6 +160,15 @@ public class Main extends JavaPlugin {
 			public String getValue() {
 				
 				return Boolean.toString(Main.USE_ECO);
+			}
+		});
+		
+		bstats.addCustomChart(new BStats.SimplePie("uses_epicrenameonline_features") {
+			
+			@Override
+			public String getValue() {
+				
+				return Boolean.toString(Main.usesEpicRenameOnlineFeatures);
 			}
 		});
 		

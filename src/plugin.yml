@@ -1,10 +1,10 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: 3.6.1
+version: 3.6.2
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker, JustBru00]
 softdepend: [Vault]
-api-version: 1.13
+api-version: 1.14
 
 commands:
   rename:

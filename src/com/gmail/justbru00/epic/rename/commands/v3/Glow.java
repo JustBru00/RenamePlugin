@@ -62,7 +62,7 @@ public class Glow implements CommandExecutor {
 						}						
 
 						if (!(m == Material.AIR || m == null)) {
-							if (inHand.getEnchantments().size() == 0) {
+							if (inHand.getEnchantments().size() == 0) {								
 								if (m == Material.FISHING_ROD) {
 									Debug.send("Item is a fishing rod");
 									

@@ -17,6 +17,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineExpiredException;
 import com.gmail.justbru00.epic.rename.exceptions.EpicRenameOnlineNotFoundException;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 /**
  * Created for issue #105, #106
@@ -41,6 +42,7 @@ public class EpicRenameOnlineAPI {
 	 * @throws IOException
 	 */
 	public static Optional<String> getTextFromURL(String url) throws IOException, EpicRenameOnlineExpiredException, EpicRenameOnlineNotFoundException {
+		Main.usesEpicRenameOnlineFeatures = true;
 		if (url.contains("https://pastebin.com/") && !url.contains("raw/")) {
 			String newUrl = "";
 
@@ -113,6 +115,7 @@ public class EpicRenameOnlineAPI {
 	 */
 	public static String paste(String data) throws MalformedURLException, IOException {
 		String response = post(data);
+		Main.usesEpicRenameOnlineFeatures = true;
 
 		return response;
 	}
