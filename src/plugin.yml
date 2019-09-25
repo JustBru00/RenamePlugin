@@ -4,7 +4,7 @@ version: 3.6.2
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker, JustBru00]
 softdepend: [Vault]
-api-version: 1.14
+api-version: 1.13
 
 commands:
   rename:

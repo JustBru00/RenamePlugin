@@ -27,6 +27,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.RemoveGlow;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
+import com.gmail.justbru00.epic.rename.configuration.ConfigurationManager;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.exploit_prevention.ExploitPreventionListener;
 import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
@@ -62,9 +63,7 @@ public class Main extends JavaPlugin {
 	public static boolean USE_ECO = false;
 	
 	public static boolean usesEpicRenameOnlineFeatures = false;
-	
-	public static final int CONFIG_VERSION = 7;
-	public static final int MESSAGES_VERSION = 11;
+
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
 	
@@ -73,7 +72,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		Messager.msgConsole("&cPlugin Disabled.");
-		plugin = null; // Fix memory leak.
+		plugin = null; // Fix memory leak - maybe?
 	}
 
 	@Override
@@ -234,13 +233,17 @@ public class Main extends JavaPlugin {
 		} // End of Server Version Check
 	}
 
+	/**
+	 * @deprecated Use {@link ConfigurationManager} instead.
+	 */
+	@Deprecated
 	public static void checkConfigVersions() {
-		if (getInstance().getConfig().getInt("config_version") != CONFIG_VERSION) {
+		if (getInstance().getConfig().getInt("config_version") != ConfigurationManager.CONFIG_VERSION) {
 			Messager.msgConsole(
 					"&cWARNING -> config.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
 		}
 
-		if (messages.getInt("messages_yml_version") != MESSAGES_VERSION) {
+		if (messages.getInt("messages_yml_version") != ConfigurationManager.MESSAGES_VERSION) {
 			Messager.msgConsole(
 					"&cWARNING -> messages.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
 		}
