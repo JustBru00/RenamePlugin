@@ -280,4 +280,8 @@ public class Main extends JavaPlugin {
 	    aThrowable.printStackTrace(printWriter);
 	    return result.toString();
 	  }
+	
+	public static PluginFile getMessagesYmlFile() {
+		return messages;
+	}
 }
