@@ -185,14 +185,13 @@ public class Main extends JavaPlugin {
 
 	/**
 	 * 
-	 * @param path
-	 *            Path to the message in messages.yml
+	 * @param path Path to the message in messages.yml
 	 * @return The colored string from messages.yml
 	 */
 	public static String getMsgFromConfig(String path) {
 		if (messages.getString(path) == null) {
 			Debug.send("[Main#getMsgFromConfig()] A message from messages.yml was NULL. The path to the message is: " + path);
-			return "[ERROR] Message from config is null. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
+			return "[ERROR] Could not read value from messages.yml. Ask a server admin to enable /epicrename debug to find the broken value. [ERROR]";
 		}
 		return messages.getString(path); // Removed duplicate Messager.color(); Messager#msgXXXX colors the message.
 	}
@@ -212,6 +211,15 @@ public class Main extends JavaPlugin {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
 		}
+		
+		// ISSUE #125 - Prefix not correctly loaded by /epicrename reload
+		if (Main.getInstance().getConfig().getString("prefix") != null) {
+			prefix = Messager.color(Main.getInstance().getConfig().getString("prefix"));
+			Messager.msgConsole("&aPrefix set to: '" + prefix + "&a'");	
+		} else {
+			Messager.msgConsole("&cThe prefix in the config is null. Keeping the prefix set as the default instead.");
+		}			
+		// END ISSUE #125
 	}
 
 	public static void checkServerVerison() {
