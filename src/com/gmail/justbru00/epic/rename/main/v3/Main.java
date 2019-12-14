@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Calendar;
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
@@ -153,24 +154,23 @@ public class Main extends JavaPlugin {
 		// Start bstats
 		BStats bstats = new BStats(this);
 		
-		bstats.addCustomChart(new BStats.SimplePie("economy_features") {
+		bstats.addCustomChart(new BStats.SimplePie("economy_features", new Callable<String>() {
 			
 			@Override
-			public String getValue() {
-				
+	        public String call() throws Exception {
 				return Boolean.toString(Main.USE_ECO);
-			}
-		});
+	        }
+			
+		}));
 		
-		bstats.addCustomChart(new BStats.SimplePie("uses_epicrenameonline_features") {
+		bstats.addCustomChart(new BStats.SimplePie("uses_epicrenameonline_features", new Callable<String>() {
 			
 			@Override
-			public String getValue() {
-				
+	        public String call() throws Exception {
 				return Boolean.toString(Main.usesEpicRenameOnlineFeatures);
-			}
-		});
+	        }
 		
+		}));		
 		
 		// Prefix 
 		if (Main.getInstance().getConfig().getString("prefix") != null) {
