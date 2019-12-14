@@ -50,7 +50,7 @@ public class EpicRenameOnlineAPI {
 
 			newUrl = "https://pastebin.com/raw/VALUE".replace("VALUE", newUrl);
 			url = newUrl;
-			Debug.send("[PasteBinAPI] New URL is: " + url);
+			Debug.send("[EpicRenameOnlineAPI] New URL is: " + url);
 		}
 
 		URL urlObj = null;
@@ -132,7 +132,7 @@ public class EpicRenameOnlineAPI {
 		URL formattedUrl = null;
 		formattedUrl = new URL(POST_URL);
 
-		Debug.send("[PasteBinAPI] Attempting to POST.");
+		Debug.send("[EpicRenameOnlineAPI] Attempting to POST.");
 
 		HttpsURLConnection httpsCon = (HttpsURLConnection) formattedUrl.openConnection();
 		httpsCon.setDoOutput(true);

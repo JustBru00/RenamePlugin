@@ -18,10 +18,10 @@ commands:
     aliases: [epepicrename]
   setloreline:
     description: Sets a certain line of lore.
-    aliases: [epsetloreline]
+    aliases: [epsetloreline,sll]
   removeloreline:
     description: Remove a line of lore.     
-    aliases: [epremoveloreline]
+    aliases: [epremoveloreline,rll]
   glow:
     description: Adds an enchantment glow.  
     aliases: [epglow]
