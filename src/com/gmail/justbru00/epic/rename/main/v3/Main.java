@@ -223,14 +223,16 @@ public class Main extends JavaPlugin {
 	}
 
 	public static void checkServerVerison() {
+		String version = Bukkit.getVersion();
 		// Check Server Version
-		if ((Bukkit.getVersion().contains("1.7")) || (Bukkit.getVersion().contains("1.8"))) {
+		if ((version.contains("1.7")) || (version.contains("1.8"))) {
 			USE_NEW_GET_HAND = false;
 			MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.7 or 1.8");
-		} else if ((Bukkit.getVersion().contains("1.9")) || (Bukkit.getVersion().contains("1.10"))
-				|| (Bukkit.getVersion().contains("1.11")) || Bukkit.getVersion().contains("1.12") || 
-				Bukkit.getVersion().contains("1.13") || Bukkit.getVersion().contains("1.14")) {
+		} else if ((version.contains("1.9")) || (version.contains("1.10"))
+				|| (version.contains("1.11")) || version.contains("1.12") || 
+				version.contains("1.13") || version.contains("1.14") ||
+				version.contains("1.15")) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
