@@ -93,18 +93,18 @@ public class ConfigUpdater {
 			} else {
 				messages.set("messages_yml_version", currentMessagesVersion);
 				Debug.send("[ConfigUpdater] Found config version  = " + currentMessagesVersion);
-				Main.getInstance().saveConfig();
+				messages.save();
 			}
 		} else {
 			// Config value cannot be found.
 			messages.set("messages_yml_version", currentMessagesVersion);
-			Main.getInstance().saveConfig();
+			messages.save();
 		}
 
 		// Add new values if needed.
 		// /epicrename
 		updateMessagesYmlString("epicrename.no_permission",
-				"&cSorry you don''t have permission to perform that command.");
+				"&cSorry you don't have permission to perform that command.");
 		updateMessagesYmlString("epicrename.no_args", "&cType /epicrename help for commands. (No Arguments)");
 		updateMessagesYmlString("epicrename.license", "&6View license information at: http://bit.ly/2eMknxx");
 		updateMessagesYmlStringList("epicrename.help", "&6/rename <name>", "&6/lore <lore>",
@@ -300,16 +300,16 @@ public class ConfigUpdater {
 	}
 
 	private static void updateMessagesYmlString(String path, String updatedValue) {
-		if (messages.getConfigurationSection(path) == null) {
+		if (!messages.isString(path)) {
 			// Path doesn't exist.
 			messages.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to messages.yml.");
-			Main.getInstance().saveConfig();
+			messages.save();
 		}
 	}
 
 	private static void updateMessagesYmlStringList(String path, String... updatedValue) {
-		if (messages.getConfigurationSection(path) == null) {
+		if (messages.getStringList(path).isEmpty()) {
 			// Path doesn't exist.
 			List<String> stringList = new ArrayList<String>();
 			for (String s : updatedValue) {
@@ -318,12 +318,12 @@ public class ConfigUpdater {
 
 			messages.set(path, stringList);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
-			Main.getInstance().saveConfig();
+			messages.save();
 		}
 	}
 
 	private static void updateConfigYmlInteger(String path, int updatedValue) {
-		if (config.getConfigurationSection(path) == null) {
+		if (!config.isInt(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -332,7 +332,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlString(String path, String updatedValue) {
-		if (config.getConfigurationSection(path) == null) {
+		if (!config.isString(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -341,7 +341,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlBoolean(String path, boolean updatedValue) {
-		if (config.getConfigurationSection(path) == null) {
+		if (!config.isBoolean(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -350,7 +350,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlStringList(String path, String... updatedValue) {
-		if (config.getConfigurationSection(path) == null) {
+		if (config.getStringList(path).isEmpty()) {
 			// Path doesn't exist.
 			List<String> stringList = new ArrayList<String>();
 			for (String s : updatedValue) {
