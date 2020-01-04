@@ -47,6 +47,19 @@ public class PluginFile extends YamlConfiguration {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
+                
+                if (defaults != null) {
+                    InputStreamReader reader = new InputStreamReader(plugin.getResource(defaults));
+                    FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);       
+                   
+                    setDefaults(defaultsConfig);
+                    options().copyDefaults(true);
+                    
+                    
+                    reader.close();
+                    save();
+                    options().copyDefaults(false);
+                }
                
             } catch (IOException exception) {
                 exception.printStackTrace();
@@ -56,19 +69,7 @@ public class PluginFile extends YamlConfiguration {
         }
        
         try {
-            load(file);
-           
-            if (defaults != null) {
-                InputStreamReader reader = new InputStreamReader(plugin.getResource(defaults));
-                FileConfiguration defaultsConfig = YamlConfiguration.loadConfiguration(reader);       
-               
-                setDefaults(defaultsConfig);
-                options().copyDefaults(true);
-               
-                reader.close();
-                save();
-            }
-       
+            load(file);      
         } catch (IOException exception) {
             exception.printStackTrace();
             plugin.getLogger().severe("Error while loading file " + file.getName());

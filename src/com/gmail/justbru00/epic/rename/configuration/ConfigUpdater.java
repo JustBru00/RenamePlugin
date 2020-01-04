@@ -300,7 +300,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateMessagesYmlString(String path, String updatedValue) {
-		if (!messages.isString(path)) {
+		if (!messages.isSet(path)) {
 			// Path doesn't exist.
 			messages.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to messages.yml.");
@@ -309,7 +309,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateMessagesYmlStringList(String path, String... updatedValue) {
-		if (messages.getStringList(path).isEmpty()) {
+		if (!messages.isSet(path)) {
 			// Path doesn't exist.
 			List<String> stringList = new ArrayList<String>();
 			for (String s : updatedValue) {
@@ -323,7 +323,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlInteger(String path, int updatedValue) {
-		if (!config.isInt(path)) {
+		if (!config.isSet(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -332,7 +332,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlString(String path, String updatedValue) {
-		if (!config.isString(path)) {
+		if (!config.isSet(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -341,7 +341,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlBoolean(String path, boolean updatedValue) {
-		if (!config.isBoolean(path)) {
+		if (!config.isSet(path)) {
 			// Path doesn't exist.
 			config.set(path, updatedValue);
 			Messager.msgConsole("[ConfigUpdater] Added " + path + " to config.yml.");
@@ -350,7 +350,7 @@ public class ConfigUpdater {
 	}
 
 	private static void updateConfigYmlStringList(String path, String... updatedValue) {
-		if (config.getStringList(path).isEmpty()) {
+		if (!config.isSet(path)) {
 			// Path doesn't exist.
 			List<String> stringList = new ArrayList<String>();
 			for (String s : updatedValue) {

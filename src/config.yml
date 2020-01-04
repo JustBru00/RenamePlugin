@@ -20,23 +20,19 @@ economy:
 blacklists:
   material:
     - 'VAILD_MATERIAL_HERE'
-    -
   #Only player provided text is checked against the text blacklist. 
   #Use blacklists.existingname or blacklists.existingloreline to prevent players from 
   #editing already created items with certain text as part of their name or lore.
   text:
     - 'some_bad_phrase_here'
-    -
   
   #These values are checked without color and are case insensitive.  
   existingname:
     - 'a name that is not case sensitive'
-    - 
   
   #These values are checked without color and are case insensitive.    
   existingloreline:
     - 'a string of text to check for every lore line that is not case sensitive'
-    -
     
 #Character limit for /rename. Default limit is 30 characters.
 rename_character_limit:
@@ -75,5 +71,5 @@ enabled_worlds:
 #Disables bypass messages from being sent to all players.  
 disable_bypass_messages: false 
 
-# Exploit Prevention
+#Exploit Prevention
 disable_grindstone_for_glowing_items: true
