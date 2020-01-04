@@ -299,15 +299,6 @@ public class ConfigUpdater {
 				"&cYou cannot use a grindstone on a glowing item. Please remove glow from the item first with /removeglow.");
 	}
 
-	private static void updateMessagesYmlInteger(String path, int updatedValue) {
-		if (messages.getConfigurationSection(path) == null) {
-			// Path doesn't exist.
-			messages.set(path, updatedValue);
-			Messager.msgConsole("[ConfigUpdater] Added " + path + " to messages.yml.");
-			Main.getInstance().saveConfig();
-		}
-	}
-
 	private static void updateMessagesYmlString(String path, String updatedValue) {
 		if (messages.getConfigurationSection(path) == null) {
 			// Path doesn't exist.

@@ -93,7 +93,6 @@ public class Main extends JavaPlugin {
 
 		Messager.msgConsole("&aStarting to enable plugin...");
 
-		checkConfigVersions();
 		// ISSUE #113
 		if (ConfigurationManager.doesConfigYmlNeedUpdated()) {
 			Messager.msgConsole("&c[WARN] The config.yml file version is incorrect. EpicRename v" + PLUGIN_VERISON +
@@ -256,22 +255,6 @@ public class Main extends JavaPlugin {
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 			Messager.msgConsole("[Main#checkServerVersion()] Server running unknown version. Assuming newer than 1.13");
 		} // End of Server Version Check
-	}
-
-	/**
-	 * @deprecated Use {@link ConfigurationManager} instead.
-	 */
-	@Deprecated
-	public static void checkConfigVersions() {
-		if (getInstance().getConfig().getInt("config_version") != ConfigurationManager.CONFIG_VERSION) {
-			Messager.msgConsole(
-					"&cWARNING -> config.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
-		}
-
-		if (messages.getInt("messages_yml_version") != ConfigurationManager.MESSAGES_VERSION) {
-			Messager.msgConsole(
-					"&cWARNING -> messages.yml is outdated. Please delete it and restart the server. The plugin may not work as intended.");
-		}
 	}
 
 	/**
