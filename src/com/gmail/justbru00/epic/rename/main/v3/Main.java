@@ -94,6 +94,21 @@ public class Main extends JavaPlugin {
 		Messager.msgConsole("&aStarting to enable plugin...");
 
 		checkConfigVersions();
+		// ISSUE #113
+		if (ConfigurationManager.doesConfigYmlNeedUpdated()) {
+			Messager.msgConsole("&c[WARN] The config.yml file version is incorrect. EpicRename v" + PLUGIN_VERISON +
+					" expects a config.yml version of " + ConfigurationManager.CONFIG_VERSION + 
+					". Attempting to add missing values to the config file.");
+			ConfigurationManager.updateConfigYml();
+		}
+		
+		if (ConfigurationManager.doesMessagesYmlNeedUpdated()) {
+			Messager.msgConsole("&c[WARN] The messages.yml file version is incorrect. EpicRename v" + PLUGIN_VERISON +
+					" expects a messages.yml version of " + ConfigurationManager.MESSAGES_VERSION + 
+					". Attempting to add missing values to the config file.");
+			ConfigurationManager.updateMessagesYml();
+		}		
+		// END ISSUE #113
 
 		if (Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;

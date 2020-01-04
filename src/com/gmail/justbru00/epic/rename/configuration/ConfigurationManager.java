@@ -42,7 +42,8 @@ public class ConfigurationManager {
 	}
 	
 	/**
-	 * Tries to add only new values to the file. These must be set manually in the ConfigUpdater file.
+	 * Adds any new config values to the config.yml file if the config_version value doesn't match the value of this version of EpicRename.
+	 * These must be set manually in the {@link ConfigUpdater}.
 	 * Doesn't touch old values.
 	 */
 	public static void updateConfigYml() {
@@ -50,9 +51,10 @@ public class ConfigurationManager {
 	}
 	
 	/**
-	 * Copies new values from the messages.yml file in the jar to the server messages.yml file.
+	 * Adds any new messages values to the messages.yml file if the messages_version value doesn't match the value of this version of EpicRename.
+	 * These must be set manually in the {@link ConfigUpdater}.
 	 * Doesn't touch old values.
-	 */
+	 * */
 	public static void updateMessagesYml() {
 		ConfigUpdater.updateMessagesYml();
 	}
