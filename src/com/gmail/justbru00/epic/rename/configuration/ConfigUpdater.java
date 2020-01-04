@@ -71,6 +71,7 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("formatting_code_limit.setloreline.max", 30);
 
 		updateConfigYmlBoolean("replace_underscores", false);
+		updateConfigYmlBoolean("add_trailing_space_to_rename", false);
 
 		updateConfigYmlBoolean("per_world", false);
 

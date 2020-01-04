@@ -166,6 +166,13 @@ public class RenameUtil {
 			completeArgs = completeArgs.replace("_", " ");
 			Debug.send("Replaced the underscores.");
 		}
+		
+		// ISSUE #130
+		if (Main.getInstance().getConfig().getBoolean("add_trailing_space_to_rename")) {
+			completeArgs = completeArgs + " ";
+			Debug.send("[RenameUtil] Added trailing space to rename arguments.");
+		}
+		// END ISSUE #130
 
 		Debug.send("The args result is: " + completeArgs);
 
