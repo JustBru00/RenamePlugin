@@ -205,7 +205,7 @@ public class ConfigUpdater {
 		updateMessagesYmlString("insertloreline.wrong_args", "&cYou need to place some arguments after /insertloreline. /insertloreline <beforeLineNumber> <text>");
 		updateMessagesYmlString("insertloreline.has_no_lore", "&cThat item has no lore.");
 		updateMessagesYmlString("insertloreline.success", "&aInserted line of lore successfully.");
-		updateMessagesYmlString("insertloreline.line_number_too_large", "&cThat line number is too large.");
+		updateMessagesYmlString("insertloreline.invalid_number", "&cSorry that line number is not valid.");
 		updateMessagesYmlString("insertloreline.blacklisted_material_found", "&cSorry that material is blacklisted.");
 		updateMessagesYmlString("insertloreline.blacklisted_existing_name_found",
 				"&cSorry that item has an existing name that is blacklisted.");

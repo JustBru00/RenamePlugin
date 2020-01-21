@@ -89,7 +89,7 @@ insertloreline:
   wrong_args: '&cYou need to place some arguments after /insertloreline. /insertloreline <beforeLineNumber> <text>'  
   has_no_lore: '&cThat item has no lore.'
   success: '&aInserted line of lore successfully.'
-  line_number_too_large: '&cThat line number is too large.'
+  invalid_number: '&cSorry that line number is not valid.'
   blacklisted_material_found: '&cSorry that material is blacklisted.'
   blacklisted_existing_name_found: '&cSorry that item has an existing name that is blacklisted.'
   blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'

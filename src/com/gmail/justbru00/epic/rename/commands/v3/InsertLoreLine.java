@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.FormattingCodeCounter;
@@ -55,6 +56,12 @@ public class InsertLoreLine implements CommandExecutor {
 							if (args.length == 1) {
 								// No text arguments
 								Messager.msgSenderWithConfigMsg("insertloreline.wrong_args", sender);
+								return true;
+							}
+							
+							if (lineNumber <= 0) {
+								Debug.send("[InsertLoreLine] The number " + lineNumber + " is below or equal to 0.");
+								Messager.msgPlayer(Main.getMsgFromConfig("insertloreline.invalid_number"), player);
 								return true;
 							}
 							
@@ -141,9 +148,9 @@ public class InsertLoreLine implements CommandExecutor {
 							if (im.hasLore()) {
 								List<String> oldLore = im.getLore();
 								
-								if (oldLore.size() > lineNumber) {
+								if (oldLore.size() < lineNumber) {
 									// selected line number is too large.
-									Messager.msgSenderWithConfigMsg("insertloreline.line_number_too_large", sender);
+									Messager.msgSenderWithConfigMsg("insertloreline.invalid_number", sender);
 									return true;
 								} 
 								
