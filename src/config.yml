@@ -55,6 +55,9 @@ formatting_code_limit:
   setloreline:
     min: 0
     max: 30
+  insertloreline:
+    min: 0
+    max: 30 
     
 #Should underscores be replaced with spaces?
 replace_underscores: false

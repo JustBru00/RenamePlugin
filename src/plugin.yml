@@ -22,6 +22,9 @@ commands:
   removeloreline:
     description: Remove a line of lore.     
     aliases: [epremoveloreline,rll]
+  insertloreline:
+    description: Insert a certain line of lore.
+    aliases: [epinsertloreline,ill]
   glow:
     description: Adds an enchantment glow.  
     aliases: [epglow]

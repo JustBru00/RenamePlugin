@@ -69,6 +69,8 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("formatting_code_limit.lore.max", 30);
 		updateConfigYmlInteger("formatting_code_limit.setloreline.min", 0);
 		updateConfigYmlInteger("formatting_code_limit.setloreline.max", 30);
+		updateConfigYmlInteger("formatting_code_limit.insertloreline.min", 0);
+		updateConfigYmlInteger("formatting_code_limit.insertloreline.max", 30);
 
 		updateConfigYmlBoolean("replace_underscores", false);
 		updateConfigYmlBoolean("add_trailing_space_to_rename", false);
@@ -195,6 +197,24 @@ public class ConfigUpdater {
 				"&cSorry you don't have permission for that material.");
 		updateMessagesYmlString("removeloreline.success", "&aRelored the item successfully.");
 		updateMessagesYmlString("removeloreline.disabled_world", "&cYou are in a disabled world.");
+		
+		// /insertloreline
+		updateMessagesYmlString("insertloreline.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("insertloreline.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("insertloreline.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("insertloreline.wrong_args", "&cYou need to place some arguments after /insertloreline. /insertloreline <beforeLineNumber> <text>");
+		updateMessagesYmlString("insertloreline.has_no_lore", "&cThat item has no lore.");
+		updateMessagesYmlString("insertloreline.success", "&aInserted line of lore successfully.");
+		updateMessagesYmlString("insertloreline.line_number_too_large", "&cThat line number is too large.");
+		updateMessagesYmlString("insertloreline.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("insertloreline.blacklisted_existing_name_found",
+				"&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("insertloreline.blacklisted_existing_lore_found",
+				"&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("insertloreline.blacklisted_word_found", "&cSorry that name contains a blacklisted word.");
+		updateMessagesYmlString("insertloreline.no_permission_for_material", "&cSorry you don't have permission for that material.");
+		updateMessagesYmlString("insertloreline.cannot_edit_air", "&cSorry you can't relore nothing.");
+		updateMessagesYmlString("insertloreline.not_an_int", "&cYou need to provide an integer as the first argument.");
 
 		// /glow
 		updateMessagesYmlString("glow.no_permission", "&cSorry you don't have permission to perform that command.");

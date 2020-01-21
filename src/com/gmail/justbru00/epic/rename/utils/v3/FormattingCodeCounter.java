@@ -105,7 +105,8 @@ public class FormattingCodeCounter {
 	 * @param erc
 	 */
 	public static void sendMinNotReachedMsg(Player p, EpicRenameCommands erc) {
-		if (erc.equals(EpicRenameCommands.RENAME) || erc.equals(EpicRenameCommands.LORE) || erc.equals(EpicRenameCommands.SETLORELINE)) {
+		if (erc.equals(EpicRenameCommands.RENAME) || erc.equals(EpicRenameCommands.LORE)
+				|| erc.equals(EpicRenameCommands.SETLORELINE) || erc.equals(EpicRenameCommands.INSERTLORELINE)) {
 			String msgFromConfig = Main.getMsgFromConfig("format_code_limit.min_not_reached");
 			FileConfiguration config = Main.getInstance().getConfig();
 			int minimum = config.getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".min");
@@ -113,8 +114,8 @@ public class FormattingCodeCounter {
 			msgFromConfig = msgFromConfig.replace("{min}", String.valueOf(minimum));
 			Messager.msgPlayer(msgFromConfig, p);
 		} else {
-			Debug.send("[FormattingCodeCounter#sendMinNotReachedMsg] This method can only handle messages for RENAME, LORE, SETLORELINE."
-					+ " config.yml version 5 only supports those commands.");
+			Debug.send("[FormattingCodeCounter#sendMinNotReachedMsg] This method can only handle messages for RENAME, LORE, SETLORELINE, INSERTLORELINE."
+					+ " config.yml version 8 only supports those commands.");
 		}
 	}
 	
@@ -124,7 +125,8 @@ public class FormattingCodeCounter {
 	 * @param erc
 	 */
 	public static void sendMaxReachedMsg(Player p, EpicRenameCommands erc) {
-		if (erc.equals(EpicRenameCommands.RENAME) || erc.equals(EpicRenameCommands.LORE) || erc.equals(EpicRenameCommands.SETLORELINE)) {
+		if (erc.equals(EpicRenameCommands.RENAME) || erc.equals(EpicRenameCommands.LORE)
+				|| erc.equals(EpicRenameCommands.SETLORELINE) || erc.equals(EpicRenameCommands.INSERTLORELINE)) {
 			String msgFromConfig = Main.getMsgFromConfig("format_code_limit.max_reached");
 			FileConfiguration config = Main.getInstance().getConfig();
 			int minimum = config.getInt("formatting_code_limit." + EpicRenameCommands.getStringName(erc) + ".max");
@@ -132,8 +134,8 @@ public class FormattingCodeCounter {
 			msgFromConfig = msgFromConfig.replace("{max}", String.valueOf(minimum));
 			Messager.msgPlayer(msgFromConfig, p);
 		} else {
-			Debug.send("[FormattingCodeCounter#sendMaxReachedMsg] This method can only handle messages for RENAME, LORE, SETLORELINE."
-					+ " config.yml version 5 only supports those commands.");
+			Debug.send("[FormattingCodeCounter#sendMaxReachedMsg] This method can only handle messages for RENAME, LORE, SETLORELINE, INSERTLORELINE."
+					+ " config.yml version 8 only supports those commands.");
 		}
 	}
 	
