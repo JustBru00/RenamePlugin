@@ -122,7 +122,7 @@ public class LoreUtil {
 						Debug.send("newLore has: " + item);
 					}
 
-				for (int i = oldLore.size() - 1; i <= lineNumber; i++) { // Expand new lore to proper size
+				for (int i = oldLore.size() - 1; i < lineNumber; i++) { // Expand new lore to proper size
 					newLore.add("");
 				}
 
