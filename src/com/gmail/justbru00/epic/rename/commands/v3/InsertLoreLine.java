@@ -78,7 +78,7 @@ public class InsertLoreLine implements CommandExecutor {
 							// Check Material Permissions
 							if (!MaterialPermManager.checkPerms(EpicRenameCommands.INSERTLORELINE, inHand, player)) {
 								// Doesn't have material permissions
-								Messager.msgSenderWithConfigMsg("insertloreline.no_permisson_for_material", sender);
+								Messager.msgSenderWithConfigMsg("insertloreline.no_permission_for_material", sender);
 								return true;
 							}
 							
