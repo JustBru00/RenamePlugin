@@ -52,9 +52,9 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("economy.costs.glow", 100);
 		
 		updateConfigYmlBoolean("xp.use", false);
-		updateConfigYmlInteger("xp.costs.rename", 100);
-		updateConfigYmlInteger("xp.costs.lore", 100);
-		updateConfigYmlInteger("xp.costs.glow", 100);
+		updateConfigYmlInteger("xp.costs.rename", 55);
+		updateConfigYmlInteger("xp.costs.lore", 55);
+		updateConfigYmlInteger("xp.costs.glow", 55);
 
 		updateConfigYmlStringList("blacklists.material", "VAILD_MATERIAL_HERE");
 		updateConfigYmlStringList("blacklists.text", "some_bad_phrase_here");

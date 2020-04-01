@@ -118,7 +118,7 @@ public class Main extends JavaPlugin {
 		
 		if (Main.getInstance().getConfig().getBoolean("xp.use")) {
 			USE_XP_COST = true;
-			Messager.msgConsole("&aXp cost is enabled in the config.");
+			Messager.msgConsole("&aExperience cost is enabled in the config.");
 		}
 
 		if (!setupEconomy()) {

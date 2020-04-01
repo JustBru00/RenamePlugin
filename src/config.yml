@@ -21,9 +21,9 @@ economy:
 xp:
   use: false
   costs:
-    rename: 100
-    lore: 100
-    glow: 100    
+    rename: 55
+    lore: 55
+    glow: 55    
 
 #Blacklists    
 blacklists:
