@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.enums.v3.XpMessage;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class LoreUtil {
@@ -212,6 +213,13 @@ public class LoreUtil {
 									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
 										return;
 									}
+									
+									// Add experience cost option #121
+									XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.LORE);
+									
+									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
+										return;
+									}
 
 									ItemStack toLore = inHand;
 									ItemMeta toLoreMeta = toLore.getItemMeta();
@@ -283,7 +291,8 @@ public class LoreUtil {
 			builder.append(item + " ");
 		} // End closes #68
 
-		completeArgs = builder.toString();
+		// Add .trim() to fix ISSUE #135
+		completeArgs = builder.toString().trim();
 
 		int lastBreak = 0;
 

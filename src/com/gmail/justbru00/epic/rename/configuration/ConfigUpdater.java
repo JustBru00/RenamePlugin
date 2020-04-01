@@ -50,6 +50,11 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("economy.costs.rename", 100);
 		updateConfigYmlInteger("economy.costs.lore", 100);
 		updateConfigYmlInteger("economy.costs.glow", 100);
+		
+		updateConfigYmlBoolean("xp.use", false);
+		updateConfigYmlInteger("xp.costs.rename", 100);
+		updateConfigYmlInteger("xp.costs.lore", 100);
+		updateConfigYmlInteger("xp.costs.glow", 100);
 
 		updateConfigYmlStringList("blacklists.material", "VAILD_MATERIAL_HERE");
 		updateConfigYmlStringList("blacklists.text", "some_bad_phrase_here");
@@ -314,6 +319,12 @@ public class ConfigUpdater {
 		updateMessagesYmlString("economy.transaction_success", "&aJust took {cost} from your balance.");
 		updateMessagesYmlString("economy.transaction_error",
 				"&cThere was a problem taking money from your balance: {error}");
+		
+		// xp cost
+		updateMessagesYmlString("xp.bypass", "&aYou just bypassed the experience requirement.");
+		updateMessagesYmlString("xp.transaction_success", "&aJust took {cost} experience points from your inventory.");
+		updateMessagesYmlString("xp.transaction_error",
+						"&cThere was a problem taking experience from your inventory: {error}");
 
 		// exploit prevention
 		updateMessagesYmlString("exploit_prevention.no_grindstone_with_glowing_items",

@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.7+
+#Version 3.7.1+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 8
+config_version: 9
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -15,6 +15,15 @@ economy:
     rename: 100
     lore: 100
     glow: 100
+
+#Experience Cost. The values below are individual experience points NOT levels.
+#Minecraft uses a system where higher experience levels require more experience points for each level.
+xp:
+  use: false
+  costs:
+    rename: 100
+    lore: 100
+    glow: 100    
 
 #Blacklists    
 blacklists:

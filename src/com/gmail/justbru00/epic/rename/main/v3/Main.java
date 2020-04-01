@@ -63,6 +63,7 @@ public class Main extends JavaPlugin {
 	 */
 	public static Economy econ = null;
 	public static boolean USE_ECO = false;
+	public static boolean USE_XP_COST = false;
 	
 	public static boolean usesEpicRenameOnlineFeatures = false;
 
@@ -113,6 +114,11 @@ public class Main extends JavaPlugin {
 		if (Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
+		}
+		
+		if (Main.getInstance().getConfig().getBoolean("xp.use")) {
+			USE_XP_COST = true;
+			Messager.msgConsole("&aXp cost is enabled in the config.");
 		}
 
 		if (!setupEconomy()) {
@@ -226,6 +232,11 @@ public class Main extends JavaPlugin {
 		if (Main.getInstance().getConfig().getBoolean("economy.use")) {
 			USE_ECO = true;
 			Messager.msgConsole("&aEconomy is enabled in the config.");
+		}
+		
+		if (Main.getInstance().getConfig().getBoolean("xp.use")) {
+			USE_XP_COST = true;
+			Messager.msgConsole("&aXp cost is enabled in the config.");
 		}
 		
 		// ISSUE #125 - Prefix not correctly loaded by /epicrename reload

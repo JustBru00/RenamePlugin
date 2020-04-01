@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.enums.v3.XpMessage;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
@@ -20,6 +21,7 @@ import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
 import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
+import com.gmail.justbru00.epic.rename.utils.v3.XpCostManager;
 
 public class Glow implements CommandExecutor {
 
@@ -73,6 +75,13 @@ public class Glow implements CommandExecutor {
 										return true;
 									}
 									
+									// Add experience cost option #121
+									XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.GLOW);
+									
+									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
+										return true;
+									}
+									
 									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);
 									ItemMeta im = inHand.getItemMeta();
 									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -88,6 +97,13 @@ public class Glow implements CommandExecutor {
 									EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
 
 									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+										return true;
+									}
+									
+									// Add experience cost option #121
+									XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.GLOW);
+									
+									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
 										return true;
 									}
 									

@@ -13,6 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
+import com.gmail.justbru00.epic.rename.enums.v3.XpMessage;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
 
 public class RenameUtil {
@@ -84,6 +85,13 @@ public class RenameUtil {
 											EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.RENAME);
 
 											if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
+												return;
+											}
+											
+											// Add experience cost option #121
+											XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.RENAME);
+											
+											if (xpStatus == XpMessage.TRANSACTION_ERROR) {
 												return;
 											}
 
