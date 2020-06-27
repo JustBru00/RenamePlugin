@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.7.1+
+#Version 3.8+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 9
+config_version: 10
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
@@ -71,6 +71,7 @@ formatting_code_limit:
 #Should underscores be replaced with spaces?
 replace_underscores: false
 add_trailing_space_to_rename: false
+add_leading_space_to_rename: false
 
 #Per world plugin enable
 per_world: false

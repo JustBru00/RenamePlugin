@@ -79,6 +79,7 @@ public class ConfigUpdater {
 
 		updateConfigYmlBoolean("replace_underscores", false);
 		updateConfigYmlBoolean("add_trailing_space_to_rename", false);
+		updateConfigYmlBoolean("add_leading_space_to_rename", false);
 
 		updateConfigYmlBoolean("per_world", false);
 

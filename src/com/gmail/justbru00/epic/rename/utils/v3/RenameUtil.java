@@ -181,8 +181,15 @@ public class RenameUtil {
 			Debug.send("[RenameUtil] Added trailing space to rename arguments.");
 		}
 		// END ISSUE #130
+		
+		// ISSUE #137
+		if (Main.getInstance().getConfig().getBoolean("add_leading_space_to_rename")) {
+			completeArgs = " " + completeArgs;
+			Debug.send("[RenameUtil] Added leading space to rename arguments.");
+		}
+		// END ISSUE #137
 
-		Debug.send("The args result is: " + completeArgs);
+		Debug.send("The complete args result is: " + completeArgs);
 
 		ItemMeta im = toRename.getItemMeta();
 		im.setDisplayName(Messager.color(completeArgs));
