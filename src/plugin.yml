@@ -37,3 +37,215 @@ commands:
   export:
     description: Exports items to EpicRenameOnline.
     aliases: [epexport]    
+    
+permissions:
+  epicrename.epicrename:
+    description: Basic permission for the /epicrename command.
+  epicrename.epicrename.reload:
+    description: Allows /epicrename reload. This will allow the user to reload the config.yml and messages.yml file.
+  epicrename.epicrename.debug:
+    description: Allows /epicrename debug.  This will allow the use to turn EpicRename debug mode on and off. This will cause many messages to spam in chat and is only recommended for diagnosing issues with EpicRename.
+  
+  epicrename.rename:
+    description: Basic permission for the /rename command.  
+  epicrename.rename.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.rename.material.STONE
+  epicrename.rename.material.*:
+    description: Allows all materials for the /rename command.
+  epicrename.rename.format.FORMAT_CODE:
+    description: Placeholder permission. Use an actual bukkit color code for this permission to work. Ex. epicrename.rename.material.b   
+  epicrename.rename.format.*:
+    description: Allows all formatting codes for the /rename command.
+  
+  epicrename.lore:
+    description: Basic permission for the /lore command.  
+  epicrename.lore.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.lore.material.STONE
+  epicrename.lore.material.*:
+    description: Allows all materials for the /lore command.
+  epicrename.lore.format.FORMAT_CODE:
+    description: Placeholder permission. Use an actual bukkit color code for this permission to work. Ex. epicrename.lore.material.b   
+  epicrename.lore.format.*:
+    description: Allows all formatting codes for the /lore command.
+      
+  epicrename.setloreline:
+    description: Basic permission for the /setloreline command.  
+  epicrename.setloreline.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.setloreline.material.STONE
+  epicrename.setloreline.material.*:
+    description: Allows all materials for the /setloreline command.
+  epicrename.setloreline.format.FORMAT_CODE:
+    description: Placeholder permission. Use an actual bukkit color code for this permission to work. Ex. epicrename.setloreline.material.b   
+  epicrename.setloreline.format.*:
+    description: Allows all formatting codes for the /setloreline command.  
+    
+  epicrename.removeloreline:
+    description: Basic permission for the /removeloreline command.  
+  epicrename.removeloreline.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.removeloreline.material.STONE
+  epicrename.removeloreline.material.*:
+    description: Allows all materials for the /removeloreline command.  
+    
+  epicrename.insertloreline:
+    description: Basic permission for the /insertloreline command.  
+  epicrename.insertloreline.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.insertloreline.material.STONE
+  epicrename.insertloreline.material.*:
+    description: Allows all materials for the /insertloreline command.
+  epicrename.insertloreline.format.FORMAT_CODE:
+    description: Placeholder permission. Use an actual bukkit color code for this permission to work. Ex. epicrename.insertloreline.material.b   
+  epicrename.insertloreline.format.*:
+    description: Allows all formatting codes for the /insertloreline command.      
+    
+  epicrename.glow:
+    description: Basic permission for the /glow command.  
+  epicrename.glow.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.glow.material.STONE
+  epicrename.glow.material.*:
+    description: Allows all materials for the /glow command.     
+    
+  epicrename.removeglow:
+    description: Basic permission for the /removeglow command.  
+  epicrename.removeglow.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.removeglow.material.STONE
+  epicrename.removeglow.material.*:
+    description: Allows all materials for the /removeglow command.   
+    
+  epicrename.import:
+    description: Allows access to the /import command. WARNING! This command allows the user to import ANY item they desire. This command should be reserved for server admins.
+        
+  epicrename.export:
+    description: Allows access to the /export command. This command allows the player to export their items to be used on another server with EpicRename installed with just a link.
+      
+  epicrename.bypass.charlimit:
+    description: Allows the user to bypass the character limit set for /rename.
+  epicrename.bypass.materialblacklist:
+    description: Allows the user to bypass the material blacklist.
+  epicrename.bypass.textblacklist:
+    description: Allows the user to bypass the text blacklist.
+  epicrename.bypass.existingname:
+    description: Allows the user to bypass the existing name blacklist.
+  epicrename.bypass.existinglore:
+    description: Allows the user to bypass the existing lore blacklist.
+  
+  epicrename.bypass.costs.rename:
+    description: Allows the user to bypass the economy or experience cost set for /rename.
+  epicrename.bypass.costs.lore:
+    description: Allows the user to bypass the economy or experience cost set for /lore.
+  epicrename.bypass.costs.glow:
+    description: Allows the user to bypass the economy or experience cost set for /glow.
+  epicrename.bypass.costs.*:
+    description: Allows the user to bypass the economy or experience cost of ALL supported commands.
+    
+  epicrename.bypass.formattingcodemax:
+    description: Allows the user to bypass the formatting code maximum setting.
+  epicrename.bypass.formattingcodemin:
+    description: Allows the user to bypass the formatting code minimum setting.        
+    
+  epicrename.administrator:
+    description: Provides the user permission for all materials and all formatting codes for all commands. Does not provide bypass permissions. Use epicrename.bypass.* for that.
+    children:
+      epicrename.epicrename: true
+      epicrename.epicrename.reload: true
+      epicrename.epicrename.debug: true
+      epicrename.rename.*: true
+      epicrename.lore.*: true
+      epicrename.setloreline.*: true
+      epicrename.removeloreline.*: true
+      epicrename.insertloreline.*: true
+      epicrename.glow.*: true
+      epicrename.removeglow.*: true
+      epicrename.import: true
+      epicrename.export: true
+      
+  epicrename.poweruser:
+    description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
+    children:
+      epicrename.epicrename: true
+      epicrename.rename.*: true
+      epicrename.lore.*: true
+      epicrename.setloreline.*: true
+      epicrename.removeloreline.*: true
+      epicrename.insertloreline.*: true
+      epicrename.glow.*: true
+      epicrename.removeglow.*: true
+      epicrename.export: true
+      
+  epicrename.rename.*:
+    description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
+    children:
+      epicrename.rename: true
+      epicrename.rename.material.*: true
+      epicrename.rename.format.*: true
+      
+  epicrename.lore.*:
+    description: Provides the user permission for all materials and all formatting codes for /lore. Also provides basic permission epicrename.lore.
+    children:
+      epicrename.lore: true
+      epicrename.lore.material.*: true
+      epicrename.lore.format.*: true
+      
+  epicrename.setloreline.*:
+    description: Provides the user permission for all materials and all formatting codes for /setloreline. Also provides basic permission epicrename.setloreline.           
+    children:
+      epicrename.setloreline: true
+      epicrename.setloreline.material.*: true
+      epicrename.setloreline.format.*: true
+      
+  epicrename.removeloreline.*:
+    description: Provides the user permission for all materials for /removeloreline. Also provides basic permission epicrename.removeloreline.       
+    children:
+      epicrename.removeloreline: true
+      epicrename.removeloreline.material.*: true
+      
+  epicrename.insertloreline.*:
+    description: Provides the user permission for all materials and all formatting codes for /insertloreline. Also provides basic permission epicrename.insertloreline.
+    children:
+      epicrename.insertloreline: true
+      epicrename.insertloreline.material.*: true
+      epicrename.insertloreline.format.*: true
+            
+  epicrename.glow.*:
+    description: Provides the user permission for all materials for /glow. Also provides basic permission epicrename.glow.       
+    children:
+      epicrename.glow: true
+      epicrename.glow.material.*: true
+      
+  epicrename.removeglow.*:
+    description: Provides the user permission for all materials for /removeglow. Also provides basic permission epicrename.removeglow.     
+    children:
+      epicrename.removeglow: true
+      epicrename.removeglow.material.*: true
+      
+  epicrename.bypass.*:
+    description: Provides the user permission to bypass all the things. Bypasses character limit, material blacklist, text blacklist, existing name blacklist, existing lore blacklist, all economy or experience costs, formatting code minimum, formatting code maximum.
+    children:
+      epicrename.bypass.charlimit: true
+      epicrename.bypass.materialblacklist: true
+      epicrename.bypass.textblacklist: true
+      epicrename.bypass.existingname: true
+      epicrename.bypass.existinglore: true
+      epicrename.bypass.costs.*: true
+      epicrename.bypass.formattingcodemax: true
+      epicrename.bypass.formattingcodemin: true
+  
+        
+             
+    
+    
+    
+    
+    
+    
+    
+    
+        
+    
+      
+    
+    
+    
+    
+    
+    
+    
