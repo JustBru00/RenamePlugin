@@ -45,6 +45,7 @@ public class Main extends JavaPlugin {
 
 	public static boolean debug = false;
 	public static String PLUGIN_VERISON = null;
+	private static int BSTATS_PLUGIN_ID = 548;
 	
 	/**
 	 * Default to the method for getting items in hand for MC version 1.9.x+
@@ -174,7 +175,7 @@ public class Main extends JavaPlugin {
 		}
 		
 		// Start bstats
-		BStats bstats = new BStats(this);
+		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
 		
 		bstats.addCustomChart(new BStats.SimplePie("economy_features", new Callable<String>() {
 			
