@@ -56,6 +56,16 @@ public class FormattingPermManager {
 				}
 			}
 		}
+		// TODO TEST THIS
+		if (unformattedString.matches("&#[0-9a-fA-F]{6}")) {
+			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", "hex");
+			Debug.send("[FormattingPermManager] The string has hex color code");
+			if (!p.hasPermission(perm)) {
+				Debug.send("[FormattingPermManager] The player doesn't have the permission: " + perm);
+				Messager.msgPlayer(Main.getMsgFromConfig("format_code_permission.no_permission").replace("{code}", "hex color code"), p);
+				return false;
+			}
+		}
 		
 		return true;
 	}

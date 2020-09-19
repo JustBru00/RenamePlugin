@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/justb/OneDrive/Coding/Test_Server_1.12/plugins/Vault.jar"/>
-	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Spigot Builds/New BuildTools Folder/spigot-1.16.1.jar">
+	<classpathentry kind="lib" path="C:/Users/justb/Desktop/Spigot Builds/New BuildTools Folder/spigot-1.16.2.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Desktop/Coding/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.16.1-R0.1-20200625.005128-1-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Desktop/Coding/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.16.2-R0.1-20200818.075412-17-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

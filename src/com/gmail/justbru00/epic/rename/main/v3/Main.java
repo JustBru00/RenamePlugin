@@ -263,6 +263,11 @@ public class Main extends JavaPlugin {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
 			Messager.msgConsole("&c[CheckServerVersion] Server running 1.9-1.12. EpicRename may stop supporting these versions in the future.");
+		} else if (version.contains("1.16")) {
+			// ISSUE #150 HEX COLOR CODES
+			USE_NEW_GET_HAND = true;
+			MC_VERSION = MCVersion.ONE_DOT_SIXTEEN_OR_NEWER;
+			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
 		} else {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
