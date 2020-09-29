@@ -193,7 +193,17 @@ public class Main extends JavaPlugin {
 				return Boolean.toString(Main.usesEpicRenameOnlineFeatures);
 	        }
 		
-		}));		
+		}));	
+		
+		// ISSUE #152
+		bstats.addCustomChart(new BStats.SimplePie("experience_cost_feature", new Callable<String>() {
+			
+			@Override
+	        public String call() throws Exception {
+				return Boolean.toString(Main.USE_XP_COST);
+	        }
+		
+		}));
 		
 		// Prefix 
 		if (Main.getInstance().getConfig().getString("prefix") != null) {
