@@ -8,10 +8,6 @@ import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 public class MaterialPermManager {
 
 	public static final String MATERIAL_PERM = "epicrename.{CMD}.material.{MATERIAL}";
-	/**
-	 * @deprecated depreciated in RELEASE 3.2
-	 */
-	public static final String OLD_MATERIAL_PERM = "epicrename.{CMD}.{MATERIAL}";
 	
 	/**
 	 * Checks if the player has permission for the material provided.
@@ -36,26 +32,7 @@ public class MaterialPermManager {
 			Debug.send("[MaterialPermManager] The player has permission. Perm: " + newPerm);
 			return true;
 		}
-		
-		/** Old Permission Checks | REMOVED IN VERSION 3.3 | Kept here as a reference just in case. REMOVE THIS CODE IN VERSION 3.4
-		if (erc == EpicRenameCommands.RENAME || erc == EpicRenameCommands.LORE) { // Old permissions only for /rename and /lore
-			String oldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", toCheck.getType().toString());
-			String allOldPerm = OLD_MATERIAL_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{MATERIAL}", "*");
-			
-			//Debug.send("[MaterialPermManager] OldPerm: " + oldPerm + " allOldPerm: " + allOldPerm);
-			
-			if (p.hasPermission(allOldPerm)) {
-				Debug.send("[MaterialPermManager] The player has permission. Perm: " + allOldPerm);
-				Messager.msgConsole("&cThe permission " + allOldPerm + " is depreciated. It will be removed in the v3.3 update. Use " + allNewPerm + " instead.");
-				return true;
-			}
-			
-			if (p.hasPermission(oldPerm)) {
-				Debug.send("[MaterialPermManager] The player has permission. Perm: " + oldPerm);
-				Messager.msgConsole("&cThe permission " + oldPerm + " is depreciated. It will be removed in the v3.3 update. Use " + newPerm + " instead.");
-				return true;
-			}
-		} **/
+
 		Debug.send("[MaterialPermManager] The player doesn't have any of the correct material permissions.");
 		return false;
 	}

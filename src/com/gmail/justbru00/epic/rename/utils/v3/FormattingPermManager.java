@@ -39,12 +39,8 @@ public class FormattingPermManager {
 	 */
 	public static boolean checkPerms(EpicRenameCommands erc, String unformattedString, Player p) {
 		
-		String allPerms = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", "*");
-		if (p.hasPermission(allPerms)) {
-			Debug.send("[FormattingPermManager] The player has the permission: " + allPerms + " Bypassing individual code checks.");
-			return true;
-		}
-		
+		// ISSUE #155 Remove efficient wildcard check.
+				
 		for (String code : FORMAT_CODES) {
 			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", code);
 			if (unformattedString.toLowerCase().contains("&" + code)) {
@@ -56,7 +52,8 @@ public class FormattingPermManager {
 				}
 			}
 		}
-		// TODO TEST THIS
+		
+		// TODO ISSUE #150 - TEST THIS
 		if (unformattedString.matches("&#[0-9a-fA-F]{6}")) {
 			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", "hex");
 			Debug.send("[FormattingPermManager] The string has hex color code");
