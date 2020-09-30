@@ -54,7 +54,7 @@ public class FormattingPermManager {
 		}
 		
 		// ISSUE #150
-		if (unformattedString.matches("&#[0-9a-fA-F]{6}")) {
+		if (unformattedString.matches(".*&#[0-9a-fA-F]{6}.*")) {
 			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", "hex");
 			Debug.send("[FormattingPermManager] The string has hex color code");
 			if (!p.hasPermission(perm)) {
