@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="C:/Users/justb/Documents/Coding/Test_Server_1.17/plugins/Vault.jar"/>
 	<classpathentry kind="lib" path="C:/Users/justb/Documents/Coding/Test_Server_1.17/spigot-1.17.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Documents/Coding/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.16.2-R0.1-20200818.075412-17-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/C:/Users/justb/Documents/Coding/Downloaded%20Java%20Docs%20for%20Spigot/spigot-api-1.17-R0.1-20210618.225034-49-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="output" path="bin"/>

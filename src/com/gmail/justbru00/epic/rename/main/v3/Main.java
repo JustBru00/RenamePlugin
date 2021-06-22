@@ -5,11 +5,9 @@
  */
 package com.gmail.justbru00.epic.rename.main.v3;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Calendar;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
@@ -33,7 +31,6 @@ import com.gmail.justbru00.epic.rename.configuration.ConfigurationManager;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.exploit_prevention.ExploitPreventionListener;
 import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
-import com.gmail.justbru00.epic.rename.main.v3.Metrics.Graph;
 import com.gmail.justbru00.epic.rename.main.v3.bstats.BStats;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
@@ -90,8 +87,7 @@ public class Main extends JavaPlugin {
 		checkServerVerison();
 
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
-		Messager.msgConsole("&cThis plugin is Copyright (c) " + Calendar.getInstance().get(Calendar.YEAR)
-				+ " Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
+		Messager.msgConsole("&cThis plugin is Copyright (c) 2021 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
 				+ "You can view a copy of it at: http://bit.ly/2eMknxx");
 
 		Messager.msgConsole("&aStarting to enable plugin...");
@@ -145,34 +141,7 @@ public class Main extends JavaPlugin {
 		getCommand("import").setExecutor(new Import());;
 		getCommand("export").setExecutor(new Export());
 
-		// Start Metrics
-		try {
-			Metrics metrics = new Metrics(plugin);
-			Graph ecoEnabledGraph = metrics.createGraph("Economy Features");
-			ecoEnabledGraph.addPlotter(new Metrics.Plotter("Enabled") {
-				@Override
-				public int getValue() {
-					if (Main.USE_ECO) {
-						return 1; // True
-					} else {
-						return 0; // False
-					}
-				}
-			});			
-			ecoEnabledGraph.addPlotter(new Metrics.Plotter("Disabled") {
-				@Override
-				public int getValue() {
-					if (Main.USE_ECO) {
-						return 0; // True
-					} else {
-						return 1; // False
-					}
-				}
-			});
-			metrics.start();
-		} catch (IOException e) {
-			Messager.msgConsole("&cMCSTATS FAILED TO SUBMIT STATS.");
-		}
+		// Issue #161 - Removed MC Stats
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
@@ -265,23 +234,24 @@ public class Main extends JavaPlugin {
 		// Check Server Version
 		if ((version.contains("1.7")) || (version.contains("1.8"))) {
 			USE_NEW_GET_HAND = false;
-			MC_VERSION = MCVersion.OLDER_THAN_ONE_DOT_NINE;
+			MC_VERSION = MCVersion.ONE_DOT_SEVEN_OR_NEWER;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.7 or 1.8");
-			Messager.msgConsole("&c[CheckServerVersion] Server running 1.7 or 1.8. EpicRename will stop supporting these versions in the future.");
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.7 or 1.8. EpicRename will stop supporting these versions in the near future.");
 		} else if ((version.contains("1.9")) || (version.contains("1.10"))
 				|| (version.contains("1.11")) || version.contains("1.12")) {
 			USE_NEW_GET_HAND = true;
-			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Messager.msgConsole("&c[CheckServerVersion] Server running 1.9-1.12. EpicRename may stop supporting these versions in the future.");
-		} else if (version.contains("1.16")) {
+			MC_VERSION = MCVersion.ONE_DOT_NINE_OR_NEWER;
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.9-1.12. EpicRename will stop supporting these versions in the future.");
+		} else if (version.contains("1.13") || version.contains("1.14") || version.contains("1.15")) {
+			USE_NEW_GET_HAND = true;
+			MC_VERSION = MCVersion.ONE_DOT_NINE_OR_NEWER;
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.13-1.15. EpicRename may stop supporting these versions in the future.");
+		} else {
+			// Version 1.16 or newer
 			// ISSUE #150 HEX COLOR CODES
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_SIXTEEN_OR_NEWER;
-			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
-		} else {
-			USE_NEW_GET_HAND = true;
-			MC_VERSION = MCVersion.NEWER_THAN_ONE_DOT_EIGHT;
-			Debug.send("[Main#checkServerVersion()] Using methods for version 1.9+");
+			Messager.msgConsole("&a[CheckServerVersion] Server running 1.16 or newer. Hex color code support has been enabled.");
 		} // End of Server Version Check
 	}
 
