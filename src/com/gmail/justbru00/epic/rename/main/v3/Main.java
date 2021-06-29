@@ -55,6 +55,7 @@ public class Main extends JavaPlugin {
 	public static MCVersion MC_VERSION;
 	public static Main plugin;
 	public static PluginFile messages = null;
+	public static PluginFile statsFile = null;
 	
 	/**
 	 * Vault economy.
@@ -62,8 +63,6 @@ public class Main extends JavaPlugin {
 	public static Economy econ = null;
 	public static boolean USE_ECO = false;
 	public static boolean USE_XP_COST = false;
-	
-	public static boolean usesEpicRenameOnlineFeatures = false;
 
 	public static ConsoleCommandSender clogger = Bukkit.getServer().getConsoleSender();
 	public static Logger log = Bukkit.getLogger();
@@ -80,8 +79,11 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		
+		// Save default yaml files.
 		this.saveDefaultConfig();
 		messages = new PluginFile(this, "messages.yml", "messages.yml");
+		statsFile = new PluginFile(this, "stats.yml"); // Issue #162
+		
 		PLUGIN_VERISON = Main.getInstance().getDescription().getVersion();
 		
 		checkServerVerison();
@@ -159,7 +161,7 @@ public class Main extends JavaPlugin {
 			
 			@Override
 	        public String call() throws Exception {
-				return Boolean.toString(Main.usesEpicRenameOnlineFeatures);
+				return Boolean.toString(Main.isEpicRenameOnlineFeaturesUsedBefore());
 	        }
 		
 		}));	
@@ -289,5 +291,45 @@ public class Main extends JavaPlugin {
 	
 	public static PluginFile getMessagesYmlFile() {
 		return messages;
+	}
+	
+	/**
+	 * Issue #162
+	 * Saves the given value to the stats.yml file.
+	 * Will only actually save the value to the file if it is different than the value already set in the file.
+	 * This is to prevent any extra IO calls.
+	 * @param The boolean value of EpicRenameOnline feature use.
+	 */
+	public static void setEpicRenameOnlineFeaturesUsedBefore(boolean value) {
+		if (statsFile != null) {
+			if (statsFile.isBoolean("epicrenameonline_features_used_before")) {
+				if (statsFile.getBoolean("epicrenameonline_features_used_before") != value) {
+					statsFile.set("epicrenameonline_features_used_before", value);
+					statsFile.save();
+				}
+			}			
+		} else {
+			Debug.send("[Main#setEpicRenameOnlineFeaturesUsedBefore] stats.yml file is null. Are you sure it was able to be saved during onEnable?");
+		}
+	}
+	
+	/**
+	 * Issue #162
+	 * Reads the current boolean value of the key epicrenameonline_features_used_before from stats.yml
+	 * @return The boolean value.
+	 */
+	public static boolean isEpicRenameOnlineFeaturesUsedBefore() {
+		if (statsFile == null) {
+			Debug.send("[Main#isEpicRenameOnlineFeaturesUsedBefore] stats.yml file is null. Are you sure it was able to be saved duriong onEnable?");
+			return false;
+		}
+		
+		if (statsFile.isBoolean("epicrenameonline_features_used_before")) {
+			return statsFile.getBoolean("epicrenameonline_features_used_before");
+		} else {
+			statsFile.set("epicrenameonline_features_used_before", false);
+			statsFile.save();
+			return false;
+		}
 	}
 }

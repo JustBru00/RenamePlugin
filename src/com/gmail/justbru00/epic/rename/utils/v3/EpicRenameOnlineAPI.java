@@ -42,7 +42,7 @@ public class EpicRenameOnlineAPI {
 	 * @throws IOException
 	 */
 	public static Optional<String> getTextFromURL(String url) throws IOException, EpicRenameOnlineExpiredException, EpicRenameOnlineNotFoundException {
-		Main.usesEpicRenameOnlineFeatures = true;
+		Main.setEpicRenameOnlineFeaturesUsedBefore(true);
 		if (url.contains("https://pastebin.com/") && !url.contains("raw/")) {
 			String newUrl = "";
 
@@ -115,7 +115,7 @@ public class EpicRenameOnlineAPI {
 	 */
 	public static String paste(String data) throws MalformedURLException, IOException {
 		String response = post(data);
-		Main.usesEpicRenameOnlineFeatures = true;
+		Main.setEpicRenameOnlineFeaturesUsedBefore(true);
 
 		return response;
 	}
