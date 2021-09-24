@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: '3.10'
+version: '3.11-INDEV'
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker,JustBru00,jayoevans]
 softdepend: [Vault]
@@ -83,7 +83,17 @@ permissions:
   epicrename.rename.format.8:
     description: Permission for the color code 8.  
   epicrename.rename.format.9:
-    description: Permission for the color code 9.  
+    description: Permission for the color code 9.
+  epicrename.rename.format.m:
+    description: Permission for the format code m.
+  epicrename.rename.format.n:
+   description: Permission for the format code n.
+  epicrename.rename.format.l:
+   description: Permission for the format code l.
+  epicrename.rename.format.k:
+   description: Permission for the format code k.
+  epicrename.rename.format.o:
+   description: Permission for the format code o.      
   epicrename.rename.format.hex:
     description: Permission for any hex color code.  
   
@@ -125,6 +135,16 @@ permissions:
     description: Permission for the color code 8.  
   epicrename.lore.format.9:
     description: Permission for the color code 9.  
+  epicrename.lore.format.m:
+    description: Permission for the format code m.
+  epicrename.lore.format.n:
+   description: Permission for the format code n.
+  epicrename.lore.format.l:
+   description: Permission for the format code l.
+  epicrename.lore.format.k:
+   description: Permission for the format code k.
+  epicrename.lore.format.o:
+   description: Permission for the format code o.   
   epicrename.lore.format.hex:
     description: Permission for any hex color code.    
       
@@ -165,7 +185,17 @@ permissions:
   epicrename.setloreline.format.8:
     description: Permission for the color code 8.  
   epicrename.setloreline.format.9:
-    description: Permission for the color code 9.  
+    description: Permission for the color code 9. 
+  epicrename.setloreline.format.m:
+    description: Permission for the format code m.
+  epicrename.setloreline.format.n:
+   description: Permission for the format code n.
+  epicrename.setloreline.format.l:
+   description: Permission for the format code l.
+  epicrename.setloreline.format.k:
+   description: Permission for the format code k.
+  epicrename.setloreline.format.o:
+   description: Permission for the format code o.    
   epicrename.setloreline.format.hex:
     description: Permission for any hex color code.
     
@@ -214,6 +244,16 @@ permissions:
     description: Permission for the color code 8.  
   epicrename.insertloreline.format.9:
     description: Permission for the color code 9.  
+  epicrename.insertloreline.format.m:
+    description: Permission for the format code m.
+  epicrename.insertloreline.format.n:
+   description: Permission for the format code n.
+  epicrename.insertloreline.format.l:
+   description: Permission for the format code l.
+  epicrename.insertloreline.format.k:
+   description: Permission for the format code k.
+  epicrename.insertloreline.format.o:
+   description: Permission for the format code o.   
   epicrename.insertloreline.format.hex:
     description: Permission for any hex color code.      
     
@@ -281,6 +321,11 @@ permissions:
       epicrename.rename.format.7: true
       epicrename.rename.format.8: true
       epicrename.rename.format.9: true
+      epicrename.rename.format.m: true
+      epicrename.rename.format.n: true
+      epicrename.rename.format.l: true
+      epicrename.rename.format.k: true
+      epicrename.rename.format.o: true
       epicrename.rename.format.hex: true
       
   epicrename.lore.format.*:
@@ -302,6 +347,11 @@ permissions:
       epicrename.lore.format.7: true
       epicrename.lore.format.8: true
       epicrename.lore.format.9: true
+      epicrename.lore.format.m: true
+      epicrename.lore.format.n: true
+      epicrename.lore.format.l: true
+      epicrename.lore.format.k: true
+      epicrename.lore.format.o: true      
       epicrename.lore.format.hex: true      
 
   epicrename.setloreline.format.*:
@@ -323,6 +373,11 @@ permissions:
       epicrename.setloreline.format.7: true
       epicrename.setloreline.format.8: true
       epicrename.setloreline.format.9: true
+      epicrename.setloreline.format.m: true
+      epicrename.setloreline.format.n: true
+      epicrename.setloreline.format.l: true
+      epicrename.setloreline.format.k: true
+      epicrename.setloreline.format.o: true
       epicrename.setloreline.format.hex: true 
 
   epicrename.insertloreline.format.*:
@@ -344,6 +399,11 @@ permissions:
       epicrename.insertloreline.format.7: true
       epicrename.insertloreline.format.8: true
       epicrename.insertloreline.format.9: true
+      epicrename.insertloreline.format.m: true
+      epicrename.insertloreline.format.n: true
+      epicrename.insertloreline.format.l: true
+      epicrename.insertloreline.format.k: true
+      epicrename.insertloreline.format.o: true      
       epicrename.insertloreline.format.hex: true
     
   epicrename.administrator:
