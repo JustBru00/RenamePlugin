@@ -30,7 +30,7 @@ import com.gmail.justbru00.epic.rename.utils.v3.align.TableGenerator.Receiver;
  * @author Justin "JustBru00" Brubaker
  * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
  * Created for Issue #86
- *
+ * 
  */
 public class Align implements CommandExecutor {
 	
