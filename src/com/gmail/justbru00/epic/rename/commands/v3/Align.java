@@ -372,7 +372,7 @@ public class Align implements CommandExecutor {
 	
 	}
 	
-	/**
+	/** 
 	 * Attempts to align text for the minecraft client.
 	 * @param itemTextList
 	 * @param alignmentScheme

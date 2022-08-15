@@ -330,6 +330,7 @@ public class ConfigUpdater {
 		// exploit prevention
 		updateMessagesYmlString("exploit_prevention.no_grindstone_with_glowing_items",
 				"&cYou cannot use a grindstone on a glowing item. Please remove glow from the item first with /removeglow.");
+		updateMessagesYmlString("exploit_prevention.no_anvil_with_glowing_items", "&cYou cannot use an anvil on a glowing item. Please remove glow from the item first with /removeglow.");
 	}
 
 	private static void updateMessagesYmlString(String path, String updatedValue) {
