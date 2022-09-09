@@ -291,6 +291,17 @@ public class ConfigUpdater {
 				"&aYou confirmed that it is okay to post your item(s) publicly. You can now use /export normally until the next server restart.");
 		updateMessagesYmlString("export.no_air", "&cYou cannot export nothing.");
 
+		// /removename
+		updateMessagesYmlString("removename.no_permission", "&cSorry you don''t have permission to perform that command.");
+		updateMessagesYmlString("removename.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("removename.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("removename.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("removename.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("removename.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("removename.cannot_edit_air", "&cSorry you can''t edit nothing.");
+		updateMessagesYmlString("removename.no_permission_for_material", "&cSorry you don''t have permission for that material.");
+		updateMessagesYmlString("removename.success", "&aRemoved the display name from the item successfully.");
+		
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",
 				"&cSorry that name is too long. The character limit is {char}.");

@@ -25,6 +25,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.InsertLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveGlow;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
+import com.gmail.justbru00.epic.rename.commands.v3.RemoveName;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
 import com.gmail.justbru00.epic.rename.configuration.ConfigurationManager;
@@ -142,8 +143,7 @@ public class Main extends JavaPlugin {
 		getCommand("removeglow").setExecutor(new RemoveGlow());
 		getCommand("import").setExecutor(new Import());;
 		getCommand("export").setExecutor(new Export());
-
-		// Issue #161 - Removed MC Stats
+		getCommand("removename").setExecutor(new RemoveName());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);

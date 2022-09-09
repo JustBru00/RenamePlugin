@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: '3.10.3'
+version: '3.11-INDEV'
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker,JustBru00,jayoevans]
 softdepend: [Vault]
@@ -37,6 +37,9 @@ commands:
   export:
     description: Exports items to EpicRenameOnline.
     aliases: [epexport]    
+  removename:
+    description: Removes the display name from an item.
+    aliases: [epremovename]  
     
 permissions:
   epicrename.epicrename:
@@ -276,6 +279,13 @@ permissions:
         
   epicrename.export:
     description: Allows access to the /export command. This command allows the player to export their items to be used on another server with EpicRename installed with just a link.
+
+  epicrename.removename:
+    description: Basic permission for the /removename command.  
+  epicrename.removename.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.removename.material.STONE
+  epicrename.removename.material.*:
+    description: Allows all materials for the /removename command.  
       
   epicrename.bypass.charlimit:
     description: Allows the user to bypass the character limit set for /rename.
@@ -421,6 +431,7 @@ permissions:
       epicrename.removeglow.*: true
       epicrename.import: true
       epicrename.export: true
+      epicrename.removename.*: true
       
   epicrename.poweruser:
     description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -434,6 +445,7 @@ permissions:
       epicrename.glow.*: true
       epicrename.removeglow.*: true
       epicrename.export: true
+      epicrename.removename.*: true
       
   epicrename.rename.*:
     description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
@@ -461,6 +473,12 @@ permissions:
     children:
       epicrename.removeloreline: true
       epicrename.removeloreline.material.*: true
+      
+  epicrename.removename.*:
+    description: Provides the user permission for all materials for /removename. Also provides basic permission epicrename.removename.
+    children:
+      epicrename.removename: true
+      epicrename.removename.material.*: true     
       
   epicrename.insertloreline.*:
     description: Provides the user permission for all materials and all formatting codes for /insertloreline. Also provides basic permission epicrename.insertloreline.

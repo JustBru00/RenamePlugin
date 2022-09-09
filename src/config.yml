@@ -1,8 +1,8 @@
 #EpicRename by Justin Brubaker. https://www.spigotmc.org/resources/epicrename.4341/
-#Version 3.8+
+#Version 3.11+
 
 #DO NOT CHANGE THIS PLEASE
-config_version: 10
+config_version: 11
 
 #Plugin Prefix
 prefix: '&8[&bEpic&fRename&8] &f'
