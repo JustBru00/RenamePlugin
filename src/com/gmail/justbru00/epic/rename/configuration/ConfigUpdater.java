@@ -302,6 +302,17 @@ public class ConfigUpdater {
 		updateMessagesYmlString("removename.no_permission_for_material", "&cSorry you don''t have permission for that material.");
 		updateMessagesYmlString("removename.success", "&aRemoved the display name from the item successfully.");
 		
+		// /removelore
+		updateMessagesYmlString("removelore.no_permission", "&cSorry you don''t have permission to perform that command.");
+		updateMessagesYmlString("removelore.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("removelore.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("removelore.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("removelore.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("removelore.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("removelore.cannot_edit_air", "&cSorry you can''t edit nothing.");
+		updateMessagesYmlString("removelore.no_permission_for_material", "&cSorry you don''t have permission for that material.");
+		updateMessagesYmlString("removelore.success", "&aRemoved the lore from the item successfully.");
+		
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",
 				"&cSorry that name is too long. The character limit is {char}.");

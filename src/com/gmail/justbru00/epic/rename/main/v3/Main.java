@@ -24,6 +24,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.Import;
 import com.gmail.justbru00.epic.rename.commands.v3.InsertLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveGlow;
+import com.gmail.justbru00.epic.rename.commands.v3.RemoveLore;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveName;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
@@ -90,8 +91,8 @@ public class Main extends JavaPlugin {
 		checkServerVerison();
 
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
-		Messager.msgConsole("&cThis plugin is Copyright (c) 2021 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
-				+ "You can view a copy of it at: http://bit.ly/2eMknxx");
+		Messager.msgConsole("&cThis plugin is Copyright (c) 2022 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
+				+ "You can view a copy of the MPL v2.0 license at: http://bit.ly/2eMknxx");
 
 		Messager.msgConsole("&aStarting to enable plugin...");
 
@@ -144,6 +145,7 @@ public class Main extends JavaPlugin {
 		getCommand("import").setExecutor(new Import());;
 		getCommand("export").setExecutor(new Export());
 		getCommand("removename").setExecutor(new RemoveName());
+		getCommand("removelore").setExecutor(new RemoveLore());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
