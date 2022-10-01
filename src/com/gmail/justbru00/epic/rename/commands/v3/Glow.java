@@ -80,10 +80,10 @@ public class Glow implements CommandExecutor {
 									
 									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
 										return true;
-									}
+									}									
 									
-									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);
-									ItemMeta im = inHand.getItemMeta();
+									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);									
+									ItemMeta im = inHand.getItemMeta();				
 									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 									inHand.setItemMeta(im);
 
@@ -105,9 +105,9 @@ public class Glow implements CommandExecutor {
 									
 									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
 										return true;
-									}
+									}									
 									
-									inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);
+									inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);									
 									ItemMeta im = inHand.getItemMeta();
 									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 									inHand.setItemMeta(im);

@@ -94,21 +94,31 @@ public class RenameUtil {
 											if (xpStatus == XpMessage.TRANSACTION_ERROR) {
 												return;
 											}
+											
+											String oldName = inHand.getItemMeta().getDisplayName();
 
 											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 												player.getInventory().setItemInMainHand(
 														RenameUtil.renameItemStack(player, args, inHand));
-												Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")
+														.replace("{previous_name}", oldName)
+														.replace("{new_name}", completeArgs), player);
 												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
 														.replace("{player}", player.getName())
-														.replace("{name}", completeArgs));
+														.replace("{name}", completeArgs)
+														.replace("{previous_name}", oldName)
+														.replace("{new_name}", completeArgs));
 												return;
 											} else { // Use older method.
 												player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
-												Messager.msgPlayer(Main.getMsgFromConfig("rename.success"), player);
+												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")														
+														.replace("{previous_name}", oldName)
+														.replace("{new_name}", completeArgs), player);
 												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
 														.replace("{player}", player.getName())
-														.replace("{name}", completeArgs));
+														.replace("{name}", completeArgs)
+														.replace("{previous_name}", oldName)
+														.replace("{new_name}", completeArgs));
 												return;
 											}
 										} else {
