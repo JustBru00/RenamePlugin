@@ -88,6 +88,9 @@ public class ConfigUpdater {
 		updateConfigYmlBoolean("disable_bypass_messages", false);
 
 		updateConfigYmlBoolean("disable_grindstone_for_glowing_items", false);
+		
+		updateConfigYmlString("command_argument.prefixes.rename", "");
+		updateConfigYmlString("command_argument.suffixes.rename", "");
 	}
 
 	public static void updateMessagesYml() {

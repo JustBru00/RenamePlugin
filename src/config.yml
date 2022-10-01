@@ -87,3 +87,10 @@ disable_bypass_messages: false
 
 #Exploit Prevention
 disable_grindstone_for_glowing_items: true
+
+# Command arguments prefixes and suffixes
+command_argument:
+  prefixes:
+    rename: ''
+  suffixes:
+    rename: ''

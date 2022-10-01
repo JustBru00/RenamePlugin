@@ -80,7 +80,8 @@ public class RenameUtil {
 											Debug.send("[RenameUtil] Passed FormattingCodeCounter Maximum Check.");
 											// End Issue #32
 
-											completeArgs = Messager.color(completeArgs);
+											completeArgs = Messager.color(Main.getInstance().getConfig().getString("command_argument.prefixes.rename") 
+													+ completeArgs + Main.getInstance().getConfig().getString("command_argument.suffixes.rename"));
 											
 											EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.RENAME);
 
@@ -99,7 +100,7 @@ public class RenameUtil {
 
 											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
 												player.getInventory().setItemInMainHand(
-														RenameUtil.renameItemStack(player, args, inHand));
+														RenameUtil.renameItemStack(player, completeArgs, inHand));
 												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")
 														.replace("{previous_name}", oldName)
 														.replace("{new_name}", completeArgs), player);
@@ -110,7 +111,7 @@ public class RenameUtil {
 														.replace("{new_name}", completeArgs));
 												return;
 											} else { // Use older method.
-												player.setItemInHand(RenameUtil.renameItemStack(player, args, inHand));
+												player.setItemInHand(RenameUtil.renameItemStack(player, completeArgs, inHand));
 												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")														
 														.replace("{previous_name}", oldName)
 														.replace("{new_name}", completeArgs), player);
@@ -170,20 +171,7 @@ public class RenameUtil {
 	 *            The {@link ItemStack} that is being renamed.
 	 * @return The renamed {@link ItemStack}.
 	 */
-	public static ItemStack renameItemStack(Player player, String[] args, ItemStack toRename) {
-
-		StringBuilder builder = new StringBuilder("");
-		String completeArgs = "";
-
-		for (String item : args) {
-			builder.append(item + " ");
-		}
-
-		completeArgs = builder.toString().trim();
-		if (Main.getInstance().getConfig().getBoolean("replace_underscores")) {
-			completeArgs = completeArgs.replace("_", " ");
-			Debug.send("Replaced the underscores.");
-		}
+	public static ItemStack renameItemStack(Player player, String completeArgs, ItemStack toRename) {		
 		
 		// ISSUE #130
 		if (Main.getInstance().getConfig().getBoolean("add_trailing_space_to_rename")) {
