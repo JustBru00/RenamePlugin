@@ -96,6 +96,15 @@ public class FormattingCodeCounter {
 			}			
 		}
 		
+		// Issue #167 - Count hex color codes as well.	
+		int numberOfHexColorCodes = valueToCountCodesIn.split("&#([A-Fa-f0-9]{6})").length - 1;
+		
+		Debug.send("[FormattingCodeCounter#getAmountOfColorCodes] numberOfHexColorCodes = " +  numberOfHexColorCodes);
+		
+		if (numberOfHexColorCodes > 0) {
+			colorCodes = colorCodes + numberOfHexColorCodes;
+		}
+		
 		return colorCodes;
 	}
 	
