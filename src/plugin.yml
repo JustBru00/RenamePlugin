@@ -1,6 +1,6 @@
 name: EpicRename
 main: com.gmail.justbru00.epic.rename.main.v3.Main
-version: '3.11-INDEV'
+version: '3.11-RC1'
 description: Performs different item modifications with easy to use commands.
 authors: [Justin Brubaker,JustBru00,jayoevans]
 softdepend: [Vault]
@@ -43,6 +43,9 @@ commands:
   removelore:
     description: Removes the lore from and item.
     aliases: [epremovelore]  
+  hideenchantments:
+    description: Hides enchantments on an item.
+    aliases: [ephideenchantments,hideenchants]  
     
 permissions:
   epicrename.epicrename:
@@ -322,6 +325,13 @@ permissions:
   epicrename.bypass.formattingcodemin:
     description: Allows the user to bypass the formatting code minimum setting.        
   
+  epicrename.hideenchantments:
+    description: Allows the user to use the /hideenchantments command.
+  epicrename.hideenchantments.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.hideenchantments.material.STONE
+  epicrename.hideenchantments.material.*:
+    description: Allows all materials for the /hideenchantments command.  
+  
   epicrename.rename.format.*:
     description: Allows all formatting codes for the /rename command.
     children:
@@ -443,6 +453,7 @@ permissions:
       epicrename.export: true
       epicrename.removename.*: true
       epicrename.removelore.*: true
+      epicrename.hideenchantments.*: true
       
   epicrename.poweruser:
     description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -458,6 +469,7 @@ permissions:
       epicrename.export: true
       epicrename.removename.*: true
       epicrename.removelore.*: true
+      epicrename.hideenchantments.*: true
       
   epicrename.rename.*:
     description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
@@ -504,6 +516,12 @@ permissions:
       epicrename.insertloreline: true
       epicrename.insertloreline.material.*: true
       epicrename.insertloreline.format.*: true
+      
+  epicrename.hideenchantments.*:
+    description: Provides the user permission for all materials for /hideenchantments. Also provides basic permission epicrename.hideenchantments.
+    children:
+      epicrename.hideenchantments: true
+      epicrename.hideenchantments.material.*: true
             
   epicrename.glow.*:
     description: Provides the user permission for all materials for /glow. Also provides basic permission epicrename.glow.       

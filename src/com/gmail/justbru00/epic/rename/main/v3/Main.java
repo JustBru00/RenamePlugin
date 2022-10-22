@@ -20,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Export;
 import com.gmail.justbru00.epic.rename.commands.v3.Glow;
+import com.gmail.justbru00.epic.rename.commands.v3.HideEnchantments;
 import com.gmail.justbru00.epic.rename.commands.v3.Import;
 import com.gmail.justbru00.epic.rename.commands.v3.InsertLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.Lore;
@@ -146,6 +147,7 @@ public class Main extends JavaPlugin {
 		getCommand("export").setExecutor(new Export());
 		getCommand("removename").setExecutor(new RemoveName());
 		getCommand("removelore").setExecutor(new RemoveLore());
+		getCommand("hideenchantments").setExecutor(new HideEnchantments());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
