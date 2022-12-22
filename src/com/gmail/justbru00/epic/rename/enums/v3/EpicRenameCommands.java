@@ -25,7 +25,7 @@ public enum EpicRenameCommands {
 		case EXPORT: {return "export";}
 		case IMPORT: {return "import";}
 		case REMOVENAME: {return "removename";}
-		case REMOVELORE: {return "returnlore";}
+		case REMOVELORE: {return "removelore";}
 		case HIDEENCHANTMENTS: {return "hideenchantments";}
 		default:
 			break;
