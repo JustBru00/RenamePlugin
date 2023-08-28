@@ -11,13 +11,11 @@ import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
 
 /**
+ * ISSUE #113
  * Is there a better way to do what this class does? Definitely, although google
  * doesn't want to tell me, hence this class.
  * 
  * @author Justin Brubaker
- * 
- *         ISSUE #113
- *
  */
 public class ConfigUpdater {
 	private static FileConfiguration config;
@@ -145,7 +143,7 @@ public class ConfigUpdater {
 		updateMessagesYmlString("rename.no_permission_for_material",
 				"&cSorry you don't have permission for that material.");
 		updateMessagesYmlString("rename.success", "&aRenamed the item successfully.");
-		updateMessagesYmlString("rename.log", "&aThe player &f{player} &ajust renamed an item to: &f\"{name}&f\"&a.");
+		updateMessagesYmlString("rename.log", "&aThe player &f{player} &ajust renamed an item to: &f\"{new_name}&f\"&a.");
 		updateMessagesYmlString("rename.disabled_world", "&cYou are in a disabled world.");
 
 		// /lore

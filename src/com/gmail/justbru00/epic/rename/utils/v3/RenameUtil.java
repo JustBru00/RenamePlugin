@@ -99,27 +99,18 @@ public class RenameUtil {
 											String oldName = inHand.getItemMeta().getDisplayName();
 
 											if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-												player.getInventory().setItemInMainHand(
-														RenameUtil.renameItemStack(player, completeArgs, inHand));
-												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")
-														.replace("{previous_name}", oldName)
-														.replace("{new_name}", completeArgs), player);
-												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
-														.replace("{player}", player.getName())
-														.replace("{name}", completeArgs)
-														.replace("{previous_name}", oldName)
-														.replace("{new_name}", completeArgs));
+												player.getInventory().setItemInMainHand(RenameUtil.renameItemStack(player, completeArgs, inHand));
+												Messager.msgPlayer(VariableReplacer.replaceRenameSuccessVariables(Main.getMsgFromConfig("rename.success"),
+														oldName, completeArgs), player);
+												Messager.msgConsole(VariableReplacer.replaceRenameLogVariables(Main.getMsgFromConfig("rename.log"),
+														player.getName(), oldName, completeArgs));
 												return;
 											} else { // Use older method.
 												player.setItemInHand(RenameUtil.renameItemStack(player, completeArgs, inHand));
-												Messager.msgPlayer(Main.getMsgFromConfig("rename.success")														
-														.replace("{previous_name}", oldName)
-														.replace("{new_name}", completeArgs), player);
-												Messager.msgConsole(Main.getMsgFromConfig("rename.log")
-														.replace("{player}", player.getName())
-														.replace("{name}", completeArgs)
-														.replace("{previous_name}", oldName)
-														.replace("{new_name}", completeArgs));
+												Messager.msgPlayer(VariableReplacer.replaceRenameSuccessVariables(Main.getMsgFromConfig("rename.success"),
+														oldName, completeArgs), player);
+												Messager.msgConsole(VariableReplacer.replaceRenameLogVariables(Main.getMsgFromConfig("rename.log"),
+														player.getName(), oldName, completeArgs));
 												return;
 											}
 										} else {

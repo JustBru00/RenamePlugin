@@ -18,5 +18,24 @@ public class VariableReplacer {
 		
 		return toReplace;
 	}
+	/**
+	 * Replaces {player}, {previous_name}, {new_name} and depreciated {name}
+	 * @param toReplace
+	 * @return
+	 */
+	public static String replaceRenameLogVariables(String toReplace, String playerUsername, String oldName, String completeArgs) {
+		return replaceRenameSuccessVariables(toReplace.replace("{player}", playerUsername), oldName, completeArgs);
+	}
+	
+	/**
+	 * Replaces {previous_name}, {new_name} and depreciated {name}
+	 * @param toReplace
+	 * @param oldName
+	 * @param completeArgs
+	 * @return
+	 */
+	public static String replaceRenameSuccessVariables(String toReplace, String oldName, String completeArgs) {
+		return toReplace.replace("{previous_name}", oldName).replace("{new_name}", completeArgs).replace("{name}", completeArgs);
+	}
 	
 }
