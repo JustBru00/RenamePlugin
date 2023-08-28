@@ -14,7 +14,7 @@ public class VariableReplacer {
 	public static String replace(String toReplace) {
 		
 		toReplace = toReplace.replace("{char}", "" + CharLimit.getCharLimit()); 
-		toReplace = toReplace.replace("{version}", Main.PLUGIN_VERISON);		
+		toReplace = toReplace.replace("{version}", Main.PLUGIN_VERSION);		
 		
 		return toReplace;
 	}

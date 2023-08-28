@@ -44,7 +44,7 @@ import net.milkbowl.vault.economy.Economy;
 public class Main extends JavaPlugin {
 
 	public static boolean debug = false;
-	public static String PLUGIN_VERISON = null;
+	public static String PLUGIN_VERSION = null;
 	private static int BSTATS_PLUGIN_ID = 548;
 	
 	/**
@@ -87,11 +87,11 @@ public class Main extends JavaPlugin {
 		messages = new PluginFile(this, "messages.yml", "messages.yml");
 		statsFile = new PluginFile(this, "stats.yml"); // Issue #162
 		
-		PLUGIN_VERISON = Main.getInstance().getDescription().getVersion();
+		PLUGIN_VERSION = Main.getInstance().getDescription().getVersion();
 		
 		checkServerVerison();
 
-		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERISON + " &bMC Version: &c" + MC_VERSION.toString());
+		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERSION + " &bMC Version: &c" + MC_VERSION.toString());
 		Messager.msgConsole("&cThis plugin is Copyright (c) 2022 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
 				+ "You can view a copy of the MPL v2.0 license at: http://bit.ly/2eMknxx");
 
@@ -99,14 +99,14 @@ public class Main extends JavaPlugin {
 
 		// ISSUE #113
 		if (ConfigurationManager.doesConfigYmlNeedUpdated()) {
-			Messager.msgConsole("&c[WARN] The config.yml file version is incorrect. EpicRename v" + PLUGIN_VERISON +
+			Messager.msgConsole("&c[WARN] The config.yml file version is incorrect. EpicRename v" + PLUGIN_VERSION +
 					" expects a config.yml version of " + ConfigurationManager.CONFIG_VERSION + 
 					". Attempting to add missing values to the config file.");
 			ConfigurationManager.updateConfigYml();
 		}
 		
 		if (ConfigurationManager.doesMessagesYmlNeedUpdated()) {
-			Messager.msgConsole("&c[WARN] The messages.yml file version is incorrect. EpicRename v" + PLUGIN_VERISON +
+			Messager.msgConsole("&c[WARN] The messages.yml file version is incorrect. EpicRename v" + PLUGIN_VERSION +
 					" expects a messages.yml version of " + ConfigurationManager.MESSAGES_VERSION + 
 					". Attempting to add missing values to the config file.");
 			ConfigurationManager.updateMessagesYml();
