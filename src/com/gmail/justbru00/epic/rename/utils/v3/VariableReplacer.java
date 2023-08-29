@@ -18,6 +18,7 @@ public class VariableReplacer {
 		
 		return toReplace;
 	}
+	
 	/**
 	 * Replaces {player}, {previous_name}, {new_name} and depreciated {name}
 	 * @param toReplace

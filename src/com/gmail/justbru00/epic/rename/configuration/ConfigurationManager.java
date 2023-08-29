@@ -8,12 +8,11 @@ import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
 /**
  * ISSUE #113
  * @author Justin Brubaker
- *
  */
 public class ConfigurationManager {
 
-	public static final int CONFIG_VERSION = 11;
-	public static final int MESSAGES_VERSION = 17;
+	public static final int CONFIG_VERSION = 12;
+	public static final int MESSAGES_VERSION = 18;
 	private static FileConfiguration config = null;
 	private static PluginFile messages = null;
 	

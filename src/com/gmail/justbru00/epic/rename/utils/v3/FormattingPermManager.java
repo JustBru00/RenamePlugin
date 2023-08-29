@@ -37,9 +37,11 @@ public class FormattingPermManager {
 	 * @param p The player to check permissions of.
 	 * @return True if the player has permission. False if the player doesn't have permission.
 	 */
-	public static boolean checkPerms(EpicRenameCommands erc, String unformattedString, Player p) {
-		
-		// ISSUE #155 Remove efficient wildcard check.
+	public static boolean checkPerms(EpicRenameCommands erc, String unformattedString, Player p) {		
+		if (Main.getBooleanFromConfig("block_&x_color_codes") && (unformattedString.contains("&x") || unformattedString.contains("&X"))) {
+			Messager.msgPlayer(Main.getMsgFromConfig("format_code_permission.&x_color_code_blocked").replace("{code}", "&x"), p);
+			return false;
+		}		
 				
 		for (String code : FORMAT_CODES) {
 			String perm = FORMAT_PERM.replace("{CMD}", EpicRenameCommands.getStringName(erc)).replace("{CODE}", code);

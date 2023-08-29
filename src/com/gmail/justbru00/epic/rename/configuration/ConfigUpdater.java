@@ -73,7 +73,7 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("formatting_code_limit.setloreline.min", 0);
 		updateConfigYmlInteger("formatting_code_limit.setloreline.max", 30);
 		updateConfigYmlInteger("formatting_code_limit.insertloreline.min", 0);
-		updateConfigYmlInteger("formatting_code_limit.insertloreline.max", 30);
+		updateConfigYmlInteger("formatting_code_limit.insertloreline.max", 30);		
 
 		updateConfigYmlBoolean("replace_underscores", false);
 		updateConfigYmlBoolean("add_trailing_space_to_rename", false);
@@ -89,6 +89,8 @@ public class ConfigUpdater {
 		
 		updateConfigYmlString("command_argument.prefixes.rename", "");
 		updateConfigYmlString("command_argument.suffixes.rename", "");
+		
+		updateConfigYmlBoolean("block_&x_color_codes", true);
 	}
 
 	public static void updateMessagesYml() {
@@ -334,6 +336,7 @@ public class ConfigUpdater {
 		// format_code_permission
 		updateMessagesYmlString("format_code_permission.no_permission",
 				"&cYou don't have permission for the format code \"{code}\".");
+		updateMessagesYmlString("format_code_permission.&x_color_code_blocked", "&cYou cannot use the {code} color code.");
 
 		// format_code_limit
 		updateMessagesYmlString("format_code_limit.min_not_reached",
