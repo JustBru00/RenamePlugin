@@ -38,6 +38,7 @@ public class FormattingPermManager {
 	 * @return True if the player has permission. False if the player doesn't have permission.
 	 */
 	public static boolean checkPerms(EpicRenameCommands erc, String unformattedString, Player p) {		
+		// ISSUE #174
 		if (Main.getBooleanFromConfig("block_&x_color_codes") && (unformattedString.contains("&x") || unformattedString.contains("&X"))) {
 			Messager.msgPlayer(Main.getMsgFromConfig("format_code_permission.&x_color_code_blocked").replace("{code}", "&x"), p);
 			return false;
