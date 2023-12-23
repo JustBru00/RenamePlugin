@@ -30,6 +30,7 @@ import com.gmail.justbru00.epic.rename.commands.v3.RemoveLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.RemoveName;
 import com.gmail.justbru00.epic.rename.commands.v3.Rename;
 import com.gmail.justbru00.epic.rename.commands.v3.SetLoreLine;
+import com.gmail.justbru00.epic.rename.commands.v3.UnHideEnchantments;
 import com.gmail.justbru00.epic.rename.configuration.ConfigurationManager;
 import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.exploit_prevention.ExploitPreventionListener;
@@ -148,6 +149,7 @@ public class Main extends JavaPlugin {
 		getCommand("removename").setExecutor(new RemoveName());
 		getCommand("removelore").setExecutor(new RemoveLore());
 		getCommand("hideenchantments").setExecutor(new HideEnchantments());
+		getCommand("unhideenchantments").setExecutor(new UnHideEnchantments());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);

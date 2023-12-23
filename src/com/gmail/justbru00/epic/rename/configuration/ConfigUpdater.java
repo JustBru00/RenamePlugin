@@ -327,6 +327,17 @@ public class ConfigUpdater {
 		updateMessagesYmlString("hideenchantments.no_permission_for_material", "&cSorry you don't have permission for that material.");
 		updateMessagesYmlString("hideenchantments.success", "&aEnchantments on this item have been hidden.");
 		
+		// /unhideenchantments
+		updateMessagesYmlString("unhideenchantments.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("unhideenchantments.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("unhideenchantments.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("unhideenchantments.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("unhideenchantments.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("unhideenchantments.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("unhideenchantments.cannot_edit_air", "&cSorry you can't edit nothing.");
+		updateMessagesYmlString("unhideenchantments.no_permission_for_material", "&cSorry you don't have permission for that material.");
+		updateMessagesYmlString("unhideenchantments.success", "&aEnchantments on this item have been hidden.");		
+				
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",
 				"&cSorry that name is too long. The character limit is {char}.");

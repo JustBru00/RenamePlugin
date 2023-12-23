@@ -46,6 +46,9 @@ commands:
   hideenchantments:
     description: Hides enchantments on an item.
     aliases: [ephideenchantments,hideenchants]  
+  unhideenchantments:
+    description: Unhides enchantments on an item.
+    aliases: [epunhideenchantments, unhideenchants]  
     
 permissions:
   epicrename.epicrename:
@@ -331,6 +334,13 @@ permissions:
     description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.hideenchantments.material.STONE
   epicrename.hideenchantments.material.*:
     description: Allows all materials for the /hideenchantments command.  
+    
+  epicrename.unhideenchantments:
+    description: Allows the user to use the /unhideenchantments command.
+  epicrename.unhideenchantments.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.unhideenchantments.material.STONE
+  epicrename.unhideenchantments.material.*:
+    description: Allows all materials for the /unhideenchantments command.      
   
   epicrename.rename.format.*:
     description: Allows all formatting codes for the /rename command.
@@ -454,6 +464,7 @@ permissions:
       epicrename.removename.*: true
       epicrename.removelore.*: true
       epicrename.hideenchantments.*: true
+      epicrename.unhideenchantements.*: true
       
   epicrename.poweruser:
     description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -470,6 +481,7 @@ permissions:
       epicrename.removename.*: true
       epicrename.removelore.*: true
       epicrename.hideenchantments.*: true
+      epicrename.unhideenchantments.*: true
       
   epicrename.rename.*:
     description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
@@ -522,6 +534,12 @@ permissions:
     children:
       epicrename.hideenchantments: true
       epicrename.hideenchantments.material.*: true
+
+  epicrename.unhideenchantments.*:
+    description: Provides the user permission for all materials for /unhideenchantments. Also provides basic permission epicrename.unhideenchantments.
+    children:
+      epicrename.unhideenchantments: true
+      epicrename.unhideenchantments.material.*: true      
             
   epicrename.glow.*:
     description: Provides the user permission for all materials for /glow. Also provides basic permission epicrename.glow.       
