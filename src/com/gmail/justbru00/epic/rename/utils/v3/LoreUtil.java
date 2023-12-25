@@ -186,7 +186,7 @@ public class LoreUtil {
 							boolean firstLine = true;
 							
 							// Issue #32
-							for (String line : LoreUtil.buildLoreFromArgs(args)) {
+							for (String line : LoreUtil.buildLoreFromArgs(args, false)) {
 							
 								if (!FormattingCodeCounter.checkMinColorCodes(player, line, EpicRenameCommands.LORE, firstLine)) {
 									FormattingCodeCounter.sendMinNotReachedMsg(player, EpicRenameCommands.LORE);
@@ -224,7 +224,7 @@ public class LoreUtil {
 
 									ItemStack toLore = inHand;
 									ItemMeta toLoreMeta = toLore.getItemMeta();
-									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
+									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args, true));
 									toLore.setItemMeta(toLoreMeta);
 
 									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
