@@ -88,7 +88,9 @@ public class ConfigUpdater {
 		updateConfigYmlBoolean("disable_grindstone_for_glowing_items", false);
 		
 		updateConfigYmlString("command_argument.prefixes.rename", "");
+		updateConfigYmlString("command_argument.prefixes.lore.each_line", "");
 		updateConfigYmlString("command_argument.suffixes.rename", "");
+		updateConfigYmlString("command_argument.suffixes.lore.each_line", "");
 		
 		updateConfigYmlBoolean("block_&x_color_codes", true);
 	}

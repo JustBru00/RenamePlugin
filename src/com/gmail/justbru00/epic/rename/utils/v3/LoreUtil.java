@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -317,6 +318,23 @@ public class LoreUtil {
 				loreToReturn.add(item.replace("|", ""));
 			}
 		}
+		
+		// ISSUE #185
+		FileConfiguration config = Main.getInstance().getConfig();
+		String eachLinePrefix = config.getString("command_argument.prefixes.lore.each_line");
+		String eachLineSuffix = config.getString("command_argument.suffixes.lore.each_line");
+		if (eachLinePrefix != null && !eachLinePrefix.equalsIgnoreCase("")) {
+			// Lore Line Prefix
+			loreToReturn.add(0, Messager.color(eachLinePrefix));
+			Debug.send("Added Lore Line Prefix " + eachLinePrefix);
+		}
+		
+		if (eachLineSuffix != null && !eachLineSuffix.equalsIgnoreCase("")) {
+			// Lore Line Suffix
+			loreToReturn.add(Messager.color(eachLineSuffix));
+			Debug.send("Added Lore Line Suffix " + eachLineSuffix);
+		}		
+		// END ISSUE #185
 
 		return loreToReturn;
 	}

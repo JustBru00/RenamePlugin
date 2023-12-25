@@ -92,7 +92,11 @@ disable_grindstone_for_glowing_items: true
 command_argument:
   prefixes:
     rename: ''
+    lore:
+      each_line: ''
   suffixes:
     rename: ''
+    lore:
+      each_line: ''
     
 'block_&x_color_codes': true    
