@@ -186,7 +186,7 @@ public class LoreUtil {
 							boolean firstLine = true;
 							
 							// Issue #32
-							for (String line : LoreUtil.buildLoreFromArgs(args, false)) {
+							for (String line : LoreUtil.buildLoreFromArgs(args)) {
 							
 								if (!FormattingCodeCounter.checkMinColorCodes(player, line, EpicRenameCommands.LORE, firstLine)) {
 									FormattingCodeCounter.sendMinNotReachedMsg(player, EpicRenameCommands.LORE);
@@ -224,7 +224,7 @@ public class LoreUtil {
 
 									ItemStack toLore = inHand;
 									ItemMeta toLoreMeta = toLore.getItemMeta();
-									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args, true));
+									toLoreMeta.setLore(LoreUtil.buildLoreFromArgs(args));
 									toLore.setItemMeta(toLoreMeta);
 
 									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
@@ -278,7 +278,7 @@ public class LoreUtil {
 	 *            The args you want to change.
 	 * @return An ArrayList with line breaks at every '|'
 	 */
-	public static List<String> buildLoreFromArgs(String[] args, boolean colorOutput) {
+	public static List<String> buildLoreFromArgs(String[] args, boolean enablePrefixSuffix) {
 		List<String> toBeLore = new ArrayList<String>();
 
 		StringBuilder builder = new StringBuilder("");
@@ -310,31 +310,28 @@ public class LoreUtil {
 		toBeLore.add(completeArgs.substring(lastBreak, completeArgs.length()));
 
 		List<String> loreToReturn = new ArrayList<String>();
-
-		for (String item : toBeLore) {
-			if (colorOutput) {
-				loreToReturn.add(Messager.color(item.replace("|", "")));
-			} else {
-				loreToReturn.add(item.replace("|", ""));
-			}
-		}
 		
 		// ISSUE #185
-		FileConfiguration config = Main.getInstance().getConfig();
-		String eachLinePrefix = config.getString("command_argument.prefixes.lore.each_line");
-		String eachLineSuffix = config.getString("command_argument.suffixes.lore.each_line");
-		if (eachLinePrefix != null && !eachLinePrefix.equalsIgnoreCase("")) {
-			// Lore Line Prefix
-			loreToReturn.add(0, Messager.color(eachLinePrefix));
-			Debug.send("Added Lore Line Prefix " + eachLinePrefix);
+		String eachLinePrefix = "";
+		String eachLineSuffix = "";
+		if (enablePrefixSuffix) {
+			FileConfiguration config = Main.getInstance().getConfig();
+			eachLinePrefix = config.getString("command_argument.prefixes.lore.each_line", "");
+			eachLineSuffix = config.getString("command_argument.suffixes.lore.each_line", "");
+		} 
+		
+		if (!eachLinePrefix.equalsIgnoreCase("")) {
+			eachLinePrefix = Messager.color(eachLinePrefix);
 		}
 		
-		if (eachLineSuffix != null && !eachLineSuffix.equalsIgnoreCase("")) {
-			// Lore Line Suffix
-			loreToReturn.add(Messager.color(eachLineSuffix));
-			Debug.send("Added Lore Line Suffix " + eachLineSuffix);
-		}		
+		if (!eachLineSuffix.equalsIgnoreCase("")) {
+			eachLineSuffix = Messager.color(eachLineSuffix);
+		}
 		// END ISSUE #185
+
+		for (String item : toBeLore) {			
+			loreToReturn.add(eachLinePrefix + Messager.color(item.replace("|", "")) + eachLineSuffix);			
+		}		
 
 		return loreToReturn;
 	}
