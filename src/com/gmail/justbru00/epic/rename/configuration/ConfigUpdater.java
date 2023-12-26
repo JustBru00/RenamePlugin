@@ -74,6 +74,8 @@ public class ConfigUpdater {
 		updateConfigYmlInteger("formatting_code_limit.setloreline.max", 30);
 		updateConfigYmlInteger("formatting_code_limit.insertloreline.min", 0);
 		updateConfigYmlInteger("formatting_code_limit.insertloreline.max", 30);		
+		updateConfigYmlInteger("formatting_code_limit.addloreline.min", 0);
+		updateConfigYmlInteger("formatting_code_limit.addloreline.max", 30);
 
 		updateConfigYmlBoolean("replace_underscores", false);
 		updateConfigYmlBoolean("add_trailing_space_to_rename", false);
@@ -339,7 +341,20 @@ public class ConfigUpdater {
 		updateMessagesYmlString("unhideenchantments.cannot_edit_air", "&cSorry you can't edit nothing.");
 		updateMessagesYmlString("unhideenchantments.no_permission_for_material", "&cSorry you don't have permission for that material.");
 		updateMessagesYmlString("unhideenchantments.success", "&aEnchantments on this item have been hidden.");		
-				
+		
+		// /addloreline
+		updateMessagesYmlString("addloreline.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("addloreline.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("addloreline.wrong_args", "&cYou need to place some arguments after /addloreline. /addloreline <text>");
+		updateMessagesYmlString("addloreline.blacklisted_word_found", "&cSorry that lore contains a blacklisted word.");
+		updateMessagesYmlString("addloreline.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("addloreline.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("addloreline.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("addloreline.cannot_edit_air", "&cSorry you can't relore nothing.");
+		updateMessagesYmlString("addloreline.no_permission_for_material", "&cSorry you don''t have permission for that material.");
+		updateMessagesYmlString("addloreline.success", "&aAdded lore to the item successfully.");
+		updateMessagesYmlString("addloreline.disabled_world", "&cYou are in a disabled world.");
+		
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",
 				"&cSorry that name is too long. The character limit is {char}.");

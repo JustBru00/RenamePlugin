@@ -49,6 +49,9 @@ commands:
   unhideenchantments:
     description: Unhides enchantments on an item.
     aliases: [epunhideenchantments, unhideenchants]  
+  addloreline:
+    description: Adds a single line of lore to an item.
+    aliases: [epaddloreline, addll]  
     
 permissions:
   epicrename.epicrename:
@@ -341,6 +344,57 @@ permissions:
     description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.unhideenchantments.material.STONE
   epicrename.unhideenchantments.material.*:
     description: Allows all materials for the /unhideenchantments command.      
+
+  epicrename.setloreline:
+    description: Basic permission for the /setloreline command.  
+  epicrename.addloreline.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.addloreline.material.STONE
+  epicrename.addloreline.material.*:
+    description: Allows all materials for the /setloreline command.
+  epicrename.addloreline.format.a:
+    description: Permission for the color code a. 
+  epicrename.addloreline.format.b:
+    description: Permission for the color code b.  
+  epicrename.addloreline.format.c:
+    description: Permission for the color code c.    
+  epicrename.addloreline.format.d:
+    description: Permission for the color code d.   
+  epicrename.addloreline.format.e:
+    description: Permission for the color code e.   
+  epicrename.addloreline.format.f:
+    description: Permission for the color code f.   
+  epicrename.addloreline.format.0:
+    description: Permission for the color code 0.
+  epicrename.addloreline.format.1:
+    description: Permission for the color code 1.  
+  epicrename.addloreline.format.2:
+    description: Permission for the color code 2.  
+  epicrename.addloreline.format.3:
+    description: Permission for the color code 3.  
+  epicrename.addloreline.format.4:
+    description: Permission for the color code 4.  
+  epicrename.addloreline.format.5:
+    description: Permission for the color code 5.  
+  epicrename.addloreline.format.6:
+    description: Permission for the color code 6.  
+  epicrename.addloreline.format.7:
+    description: Permission for the color code 7.  
+  epicrename.addloreline.format.8:
+    description: Permission for the color code 8.  
+  epicrename.addloreline.format.9:
+    description: Permission for the color code 9. 
+  epicrename.addloreline.format.m:
+    description: Permission for the format code m.
+  epicrename.addloreline.format.n:
+   description: Permission for the format code n.
+  epicrename.addloreline.format.l:
+   description: Permission for the format code l.
+  epicrename.addloreline.format.k:
+   description: Permission for the format code k.
+  epicrename.addloreline.format.o:
+   description: Permission for the format code o.    
+  epicrename.addloreline.format.hex:
+    description: Permission for any hex color code.    
   
   epicrename.rename.format.*:
     description: Allows all formatting codes for the /rename command.
@@ -445,6 +499,32 @@ permissions:
       epicrename.insertloreline.format.k: true
       epicrename.insertloreline.format.o: true      
       epicrename.insertloreline.format.hex: true
+
+  epicrename.addloreline.format.*:
+    description: Allows all formatting codes for the /addloreline command.
+    children:
+      epicrename.addloreline.format.a: true
+      epicrename.addloreline.format.b: true
+      epicrename.addloreline.format.c: true
+      epicrename.addloreline.format.d: true
+      epicrename.addloreline.format.e: true
+      epicrename.addloreline.format.f: true
+      epicrename.addloreline.format.0: true
+      epicrename.addloreline.format.1: true
+      epicrename.addloreline.format.2: true
+      epicrename.addloreline.format.3: true
+      epicrename.addloreline.format.4: true
+      epicrename.addloreline.format.5: true
+      epicrename.addloreline.format.6: true
+      epicrename.addloreline.format.7: true
+      epicrename.addloreline.format.8: true
+      epicrename.addloreline.format.9: true
+      epicrename.addloreline.format.m: true
+      epicrename.addloreline.format.n: true
+      epicrename.addloreline.format.l: true
+      epicrename.addloreline.format.k: true
+      epicrename.addloreline.format.o: true
+      epicrename.addloreline.format.hex: true       
     
   epicrename.administrator:
     description: Provides the user permission for all materials and all formatting codes for all commands. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -465,6 +545,7 @@ permissions:
       epicrename.removelore.*: true
       epicrename.hideenchantments.*: true
       epicrename.unhideenchantements.*: true
+      epicrename.addloreline.*: true
       
   epicrename.poweruser:
     description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -482,6 +563,7 @@ permissions:
       epicrename.removelore.*: true
       epicrename.hideenchantments.*: true
       epicrename.unhideenchantments.*: true
+      epicrename.addloreline.*: true
       
   epicrename.rename.*:
     description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
@@ -552,6 +634,13 @@ permissions:
     children:
       epicrename.removeglow: true
       epicrename.removeglow.material.*: true
+      
+  epicrename.addloreline.*:
+    description: Provides the user permission for all materials and all formatting codes for /addloreline. Also provides basic permission epicrename.addloreline.           
+    children:
+      epicrename.addloreline: true
+      epicrename.addloreline.material.*: true
+      epicrename.addloreline.format.*: true      
       
   epicrename.bypass.*:
     description: Provides the user permission to bypass all the things. Bypasses character limit, material blacklist, text blacklist, existing name blacklist, existing lore blacklist, all economy or experience costs, formatting code minimum, formatting code maximum.

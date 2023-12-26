@@ -17,6 +17,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.gmail.justbru00.epic.rename.commands.v3.AddLoreLine;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Export;
 import com.gmail.justbru00.epic.rename.commands.v3.Glow;
@@ -150,6 +151,7 @@ public class Main extends JavaPlugin {
 		getCommand("removelore").setExecutor(new RemoveLore());
 		getCommand("hideenchantments").setExecutor(new HideEnchantments());
 		getCommand("unhideenchantments").setExecutor(new UnHideEnchantments());
+		getCommand("addloreline").setExecutor(new AddLoreLine());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
@@ -326,7 +328,7 @@ public class Main extends JavaPlugin {
 	 */
 	public static boolean isEpicRenameOnlineFeaturesUsedBefore() {
 		if (statsFile == null) {
-			Debug.send("[Main#isEpicRenameOnlineFeaturesUsedBefore] stats.yml file is null. Are you sure it was able to be saved duriong onEnable?");
+			Debug.send("[Main#isEpicRenameOnlineFeaturesUsedBefore] stats.yml file is null. Are you sure it was able to be saved during onEnable?");
 			return false;
 		}
 		

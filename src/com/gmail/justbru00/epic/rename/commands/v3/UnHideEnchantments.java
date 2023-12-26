@@ -20,7 +20,7 @@ import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 /**
  * ISSUE #176
  * @author Justin Brubaker
- *
+ * This is licensed under the MPL Version 2.0. See license info in LICENSE.txt
  */
 public class UnHideEnchantments implements CommandExecutor {
 
