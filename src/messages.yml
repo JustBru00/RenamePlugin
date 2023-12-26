@@ -16,6 +16,11 @@ epicrename:
     - '&6/export <hand,inventory>'
     - '&6/import <hand,inventory> <webLink>'
     - '&6/import raw <rawYAML>'
+    - "&6/removename"
+    - "&6/removelore"
+    - "&6/hideenchantments"
+    - "&6/unhideenchantments"
+    - "&6/addloreline <text>"
     - '&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/'
     - '&6/epicrename <help, license, reload, debug, version>'
   reload_success: '&aReloaded the plugin successfully!'
@@ -190,7 +195,7 @@ unhideenchantments:
   blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'
   cannot_edit_air: '&cSorry you can''t edit nothing.'
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
-  success: '&aEnchantments on this item have been hidden.'       
+  success: '&aEnchantments on this item have been unhidden.'       
 
 addloreline:
   no_permission: '&cSorry you don''t have permission to perform that command.'

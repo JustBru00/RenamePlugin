@@ -123,9 +123,20 @@ public class ConfigUpdater {
 				"&cSorry you don't have permission to perform that command.");
 		updateMessagesYmlString("epicrename.no_args", "&cType /epicrename help for commands. (No Arguments)");
 		updateMessagesYmlString("epicrename.license", "&6View license information at: http://bit.ly/2eMknxx");
-		updateMessagesYmlStringList("epicrename.help", "&6/rename <name>", "&6/lore <lore>",
-				"&6/setloreline <linenum> <text>", "&6/removeloreline <linenum>", "&6/insertloreline <beforeLineNum> <text>", "&6/glow", "&6/removeglow",
-				"&6/export <hand,inventory>", "&6/import <hand,inventory> <webLink>", "&6/import raw <rawYAML>",
+		updateMessagesYmlStringList("epicrename.help",
+				"&6/rename <name>", "&6/lore <lore>",
+				"&6/setloreline <linenum> <text>",
+				"&6/removeloreline <linenum>",
+				"&6/insertloreline <beforeLineNum> <text>",
+				"&6/glow", "&6/removeglow",
+				"&6/export <hand,inventory>",
+				"&6/import <hand,inventory> <webLink>",
+				"&6/import raw <rawYAML>",
+				"&6/removename",
+				"&6/removelore",
+				"&6/hideenchantments",
+				"&6/unhideenchantments",
+				"&6/addloreline <text>",
 				"&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/",
 				"&6/epicrename <help, license, reload, debug, version>");
 		updateMessagesYmlString("epicrename.reload_success", "&aReloaded the plugin successfully!");
@@ -340,7 +351,7 @@ public class ConfigUpdater {
 		updateMessagesYmlString("unhideenchantments.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
 		updateMessagesYmlString("unhideenchantments.cannot_edit_air", "&cSorry you can't edit nothing.");
 		updateMessagesYmlString("unhideenchantments.no_permission_for_material", "&cSorry you don't have permission for that material.");
-		updateMessagesYmlString("unhideenchantments.success", "&aEnchantments on this item have been hidden.");		
+		updateMessagesYmlString("unhideenchantments.success", "&aEnchantments on this item have been unhidden.");		
 		
 		// /addloreline
 		updateMessagesYmlString("addloreline.no_permission", "&cSorry you don't have permission to perform that command.");

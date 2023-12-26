@@ -32,10 +32,12 @@ public class UnHideEnchantments implements CommandExecutor {
 		
 		if (!sender.hasPermission("epicrename.unhideenchantments")) {
 			Messager.msgSenderWithConfigMsg("unhideenchantments.no_permission", sender);
+			return true;
 		}
 		
 		if (!(sender instanceof Player)) {
 			Messager.msgSenderWithConfigMsg("unhideenchantments.wrong_sender", sender);
+			return true;
 		}
 		
 		Player player = (Player) sender;

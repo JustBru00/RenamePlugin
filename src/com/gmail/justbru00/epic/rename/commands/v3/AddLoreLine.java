@@ -37,10 +37,12 @@ public class AddLoreLine implements CommandExecutor {
 		
 		if (!sender.hasPermission("epicrename.addloreline")) {
 			Messager.msgSenderWithConfigMsg("addloreline.no_permission", sender);
+			return true;
 		}
 		
 		if (!(sender instanceof Player)) {
 			Messager.msgSenderWithConfigMsg("addloreline.wrong_sender", sender);
+			return true;
 		}
 		
 		Player player = (Player) sender;
