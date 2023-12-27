@@ -137,6 +137,8 @@ public class ConfigUpdater {
 				"&6/hideenchantments",
 				"&6/unhideenchantments",
 				"&6/addloreline <text>",
+				"&6/editname",
+				"&6/editlore",
 				"&6See more command help at https://www.spigotmc.org/resources/epicrename.4341/",
 				"&6/epicrename <help, license, reload, debug, version>");
 		updateMessagesYmlString("epicrename.reload_success", "&aReloaded the plugin successfully!");
@@ -378,6 +380,20 @@ public class ConfigUpdater {
 		updateMessagesYmlString("editname.no_permission", "&cSorry you don't have permission to perform that command.");
 		updateMessagesYmlString("editname.no_displayname", "&cSorry that item doesn't have a display name set.");
 		updateMessagesYmlString("editname.click_to_edit", "&a&nClick on this message to start editing the name of this item.");
+		
+		// /editlore
+		updateMessagesYmlString("editlore.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("editlore.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("editlore.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("editlore.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("editlore.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("editlore.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("editlore.cannot_edit_air", "&cSorry you can't edit nothing.");
+		updateMessagesYmlString("editlore.no_permission_for_material", "&cSorry you don't have permission for that material.");
+		updateMessagesYmlString("editlore.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("editlore.no_lore", "&cSorry that item doesn't have any lore set.");
+		updateMessagesYmlString("editlore.lore_content_empty", "&cSorry the lore on this item appears to have no content.");
+		updateMessagesYmlString("editlore.click_to_edit", "&a&nClick on this message to start editing the lore of this item.");
 		
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",

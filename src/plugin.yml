@@ -55,6 +55,9 @@ commands:
   editname:
     description: Takes the current name from an item and suggests a /rename command that would give the same output. This allows the player to easily edit the name.
     aliases: [epeditname]  
+  editlore:
+    description: Takes the current lore from an item and suggests a /lore command that would give the same output. This allows the player to easily edit the lore.
+    aliases: [epeditlore]  
     
 permissions:
   epicrename.epicrename:

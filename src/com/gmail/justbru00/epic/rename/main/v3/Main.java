@@ -18,6 +18,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.justbru00.epic.rename.commands.v3.AddLoreLine;
+import com.gmail.justbru00.epic.rename.commands.v3.EditLore;
 import com.gmail.justbru00.epic.rename.commands.v3.EditName;
 import com.gmail.justbru00.epic.rename.commands.v3.EpicRename;
 import com.gmail.justbru00.epic.rename.commands.v3.Export;
@@ -154,6 +155,7 @@ public class Main extends JavaPlugin {
 		getCommand("unhideenchantments").setExecutor(new UnHideEnchantments());
 		getCommand("addloreline").setExecutor(new AddLoreLine());
 		getCommand("editname").setExecutor(new EditName());
+		getCommand("editlore").setExecutor(new EditLore());
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
