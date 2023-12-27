@@ -15,4 +15,10 @@ public class Debug {
 		Bukkit.broadcastMessage(Messager.color(Main.prefix + "&8[&cDebug&8] &c" + msg));
 		}
 	}
+	
+	public static void sendPlain(String msg) {
+		if (Main.debug) {
+			Bukkit.broadcastMessage(Messager.color(Main.prefix + "&8[&cDebug&8] &f") + msg);
+		}
+	}
 }

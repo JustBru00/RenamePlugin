@@ -209,6 +209,18 @@ addloreline:
   no_permission_for_material: '&cSorry you don''t have permission for that material.'
   success: '&aAdded lore to the item successfully.'  
   disabled_world: '&cYou are in a disabled world.'  
+  
+editname:
+  no_permission: '&cSorry you don''t have permission to perform that command.'
+  wrong_sender: '&cSorry only a player can use that command.'
+  disabled_world: '&cYou are in a disabled world.'
+  blacklisted_material_found: '&cSorry that material is blacklisted.'
+  blacklisted_existing_name_found: '&cSorry that item has an existing name that is blacklisted.'
+  blacklisted_existing_lore_found: '&cSorry that item has an existing line of lore that is blacklisted.'
+  cannot_edit_air: '&cSorry you can''t edit nothing.'
+  no_permission_for_material: '&cSorry you don''t have permission for that material.'
+  no_displayname: '&cSorry that item doesn''t have a display name set.'
+  click_to_edit: '&a&nClick on this message to start editing the name of this item.'    
     
 rename_character_limit:
   name_too_long: '&cSorry that name is too long. The character limit is {char}.'

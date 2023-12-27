@@ -49,7 +49,7 @@ public class UnHideEnchantments implements CommandExecutor {
 		ItemStack inHand = RenameUtil.getInHand(player);
 		Material m = inHand.getType();
 		
-		if (!Blacklists.checkMaterialBlacklist(RenameUtil.getInHand(player).getType(), player)) {
+		if (!Blacklists.checkMaterialBlacklist(m, player)) {
 			Messager.msgPlayer(Main.getMsgFromConfig("unhideenchantments.blacklisted_material_found"), player);
 			return true;
 		}

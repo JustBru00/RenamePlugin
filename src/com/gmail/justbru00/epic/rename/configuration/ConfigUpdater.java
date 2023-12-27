@@ -366,6 +366,19 @@ public class ConfigUpdater {
 		updateMessagesYmlString("addloreline.success", "&aAdded lore to the item successfully.");
 		updateMessagesYmlString("addloreline.disabled_world", "&cYou are in a disabled world.");
 		
+		// /editname
+		updateMessagesYmlString("editname.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("editname.wrong_sender", "&cSorry only a player can use that command.");
+		updateMessagesYmlString("editname.disabled_world", "&cYou are in a disabled world.");
+		updateMessagesYmlString("editname.blacklisted_material_found", "&cSorry that material is blacklisted.");
+		updateMessagesYmlString("editname.blacklisted_existing_name_found", "&cSorry that item has an existing name that is blacklisted.");
+		updateMessagesYmlString("editname.blacklisted_existing_lore_found", "&cSorry that item has an existing line of lore that is blacklisted.");
+		updateMessagesYmlString("editname.cannot_edit_air", "&cSorry you can't edit nothing.");
+		updateMessagesYmlString("editname.no_permission_for_material", "&cSorry you don't have permission for that material.");
+		updateMessagesYmlString("editname.no_permission", "&cSorry you don't have permission to perform that command.");
+		updateMessagesYmlString("editname.no_displayname", "&cSorry that item doesn't have a display name set.");
+		updateMessagesYmlString("editname.click_to_edit", "&a&nClick on this message to start editing the name of this item.");
+		
 		// rename_character_limit
 		updateMessagesYmlString("rename_character_limit.name_too_long",
 				"&cSorry that name is too long. The character limit is {char}.");

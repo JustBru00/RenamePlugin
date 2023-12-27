@@ -52,6 +52,9 @@ commands:
   addloreline:
     description: Adds a single line of lore to an item.
     aliases: [epaddloreline, addll]  
+  editname:
+    description: Takes the current name from an item and suggests a /rename command that would give the same output. This allows the player to easily edit the name.
+    aliases: [epeditname]  
     
 permissions:
   epicrename.epicrename:
