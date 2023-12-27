@@ -398,6 +398,20 @@ permissions:
    description: Permission for the format code o.    
   epicrename.addloreline.format.hex:
     description: Permission for any hex color code.    
+
+  epicrename.editname:
+    description: Allows the user to use the /editname command.
+  epicrename.editname.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.editname.material.STONE
+  epicrename.editname.material.*:
+    description: Allows all materials for the /editname command.  
+
+  epicrename.editlore:
+    description: Allows the user to use the /editlore command.
+  epicrename.editlore.material.MATERIAL_HERE:
+    description: Placeholder permission. Use an actual bukkit material for this permission to work. Ex. epicrename.editlore.material.STONE
+  epicrename.editlore.material.*:
+    description: Allows all materials for the /editlore command.                 
   
   epicrename.rename.format.*:
     description: Allows all formatting codes for the /rename command.
@@ -549,6 +563,8 @@ permissions:
       epicrename.hideenchantments.*: true
       epicrename.unhideenchantements.*: true
       epicrename.addloreline.*: true
+      epicrename.editname.*: true
+      epicrename.editlore.*: true
       
   epicrename.poweruser:
     description: Provides the user permission for all materials and all formatting codes for all commands except for /import, /epicrename reload, or /epicrename debug. Does not provide bypass permissions. Use epicrename.bypass.* for that.
@@ -567,6 +583,8 @@ permissions:
       epicrename.hideenchantments.*: true
       epicrename.unhideenchantments.*: true
       epicrename.addloreline.*: true
+      epicrename.editname.*: true
+      epicrename.editlore.*: true
       
   epicrename.rename.*:
     description: Provides the user permission for all materials and all formatting codes for /rename. Also provides basic permission epicrename.rename.        
@@ -644,6 +662,18 @@ permissions:
       epicrename.addloreline: true
       epicrename.addloreline.material.*: true
       epicrename.addloreline.format.*: true      
+      
+  epicrename.editname.*:
+    description: Provides the user permission for all materials for /editname. Also provides basic permission epicrename.editname.
+    children:
+      epicrename.editname: true
+      epicrename.editname.material.*: true     
+
+  epicrename.editlore.*:
+    description: Provides the user permission for all materials for /editlore. Also provides basic permission epicrename.editlore.
+    children:
+      epicrename.editlore: true
+      epicrename.editlore.material.*: true            
       
   epicrename.bypass.*:
     description: Provides the user permission to bypass all the things. Bypasses character limit, material blacklist, text blacklist, existing name blacklist, existing lore blacklist, all economy or experience costs, formatting code minimum, formatting code maximum.
