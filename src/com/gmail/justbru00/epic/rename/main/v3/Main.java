@@ -39,6 +39,12 @@ import com.gmail.justbru00.epic.rename.enums.v3.MCVersion;
 import com.gmail.justbru00.epic.rename.exploit_prevention.ExploitPreventionListener;
 import com.gmail.justbru00.epic.rename.listeners.v3.OnJoin;
 import com.gmail.justbru00.epic.rename.main.v3.bstats.BStats;
+import com.gmail.justbru00.epic.rename.tabcompleters.EpicRenameTabCompleter;
+import com.gmail.justbru00.epic.rename.tabcompleters.ExportTabCompleter;
+import com.gmail.justbru00.epic.rename.tabcompleters.GenericNoArgsTabCompleter;
+import com.gmail.justbru00.epic.rename.tabcompleters.GenericOneArgTabCompleter;
+import com.gmail.justbru00.epic.rename.tabcompleters.GenericTwoArgTabCompleter;
+import com.gmail.justbru00.epic.rename.tabcompleters.ImportTabCompleter;
 import com.gmail.justbru00.epic.rename.utils.v3.Debug;
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
 import com.gmail.justbru00.epic.rename.utils.v3.PluginFile;
@@ -138,24 +144,57 @@ public class Main extends JavaPlugin {
 		pm.registerEvents(new OnJoin(), this);
 		pm.registerEvents(new ExploitPreventionListener(), this);
 
-		// Command Executors
+		// Command Executors and Tab Completers
 		getCommand("rename").setExecutor(new Rename());
+		getCommand("rename").setTabCompleter(new GenericOneArgTabCompleter("rename", "<name>"));
+		
 		getCommand("epicrename").setExecutor(new EpicRename());
+		getCommand("epicrename").setTabCompleter(new EpicRenameTabCompleter());
+		
 		getCommand("lore").setExecutor(new Lore());		
+		getCommand("lore").setTabCompleter(new GenericOneArgTabCompleter("lore", "<loreText>"));
+		
 		getCommand("setloreline").setExecutor(new SetLoreLine());
+		getCommand("setloreline").setTabCompleter(new GenericTwoArgTabCompleter("setloreline", "<lineNumber>", "<loreText>"));
+		
 		getCommand("removeloreline").setExecutor(new RemoveLoreLine());
+		getCommand("removeloreline").setTabCompleter(new GenericOneArgTabCompleter("removeloreline", "<lineNumber>"));
+		
 		getCommand("insertloreline").setExecutor(new InsertLoreLine());
+		getCommand("insertloreline").setTabCompleter(new GenericTwoArgTabCompleter("insertloreline", "<beforeLineNumber>", "<loreText>"));
+		
 		getCommand("glow").setExecutor(new Glow());
+		getCommand("glow").setTabCompleter(new GenericNoArgsTabCompleter("glow"));
+		
 		getCommand("removeglow").setExecutor(new RemoveGlow());
-		getCommand("import").setExecutor(new Import());;
+		getCommand("removeglow").setTabCompleter(new GenericNoArgsTabCompleter("removeglow"));
+		
+		getCommand("import").setExecutor(new Import());
+		getCommand("import").setTabCompleter(new ImportTabCompleter());
+		
 		getCommand("export").setExecutor(new Export());
+		getCommand("export").setTabCompleter(new ExportTabCompleter());
+		
 		getCommand("removename").setExecutor(new RemoveName());
+		getCommand("removename").setTabCompleter(new GenericNoArgsTabCompleter("removename"));
+		
 		getCommand("removelore").setExecutor(new RemoveLore());
+		getCommand("removelore").setTabCompleter(new GenericNoArgsTabCompleter("removelore"));
+		
 		getCommand("hideenchantments").setExecutor(new HideEnchantments());
+		getCommand("hideenchantments").setTabCompleter(new GenericNoArgsTabCompleter("hideenchantments"));
+		
 		getCommand("unhideenchantments").setExecutor(new UnHideEnchantments());
+		getCommand("unhideenchantments").setTabCompleter(new GenericNoArgsTabCompleter("unhideenchantments"));
+		
 		getCommand("addloreline").setExecutor(new AddLoreLine());
+		getCommand("addloreline").setTabCompleter(new GenericOneArgTabCompleter("addloreline", "<loreText>"));
+		
 		getCommand("editname").setExecutor(new EditName());
+		getCommand("editname").setTabCompleter(new GenericNoArgsTabCompleter("editname"));
+		
 		getCommand("editlore").setExecutor(new EditLore());
+		getCommand("editlore").setTabCompleter(new GenericNoArgsTabCompleter("editlore"));
 		
 		// Start bstats
 		BStats bstats = new BStats(this, BSTATS_PLUGIN_ID);
