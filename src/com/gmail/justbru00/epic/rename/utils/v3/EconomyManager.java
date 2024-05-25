@@ -95,16 +95,23 @@ public class EconomyManager {
 	}
 	
 	/**
-	 * Formats the message with the {cost} and {error} varibles.
-	 * @param msg The message you want to replace the varibles in.
-	 * @param r The {@link EconomyResponse} that you want the varibles replace with.
-	 * @return The formated string with the variibles replaced.
+	 * Formats the message with the {cost} and {error} variables.
+	 * @param msg The message you want to replace the variables in.
+	 * @param r The {@link EconomyResponse} that you want the variables replace with.
+	 * @return The formated string with the variables replaced.
 	 */
 	public static String formatMsg(String msg, EconomyResponse r) {		
 		
 		msg = msg.replace("{cost}", String.valueOf(r.amount));	
 		
-		if (!r.transactionSuccess()) msg = msg.replace("{error}", r.errorMessage);
+		if (!r.transactionSuccess()) {
+			if (r.errorMessage != null) {
+				msg = msg.replace("{error}", r.errorMessage); 
+			} else {
+				msg = msg.replace("{error}", "Economy error message was null. Maybe try checking your balance?");
+			}
+		}
+		
 		return msg;
 	}
 	
