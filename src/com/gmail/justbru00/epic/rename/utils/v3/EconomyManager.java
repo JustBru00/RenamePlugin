@@ -28,7 +28,9 @@ public class EconomyManager {
 		}
 		
 		if (player.hasPermission("epicrename.bypass.costs.*")) {
-			Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+			if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #195
+				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+			}
 			return EcoMessage.ECO_BYPASS;
 		}
 		
