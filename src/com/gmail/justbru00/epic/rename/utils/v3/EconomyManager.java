@@ -35,7 +35,9 @@ public class EconomyManager {
 		if (erc == EpicRenameCommands.RENAME) {
 			
 			if (player.hasPermission("epicrename.bypass.costs.rename")) {
-				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #195
+					Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				}
 				return EcoMessage.ECO_BYPASS;
 			}
 			
@@ -54,7 +56,9 @@ public class EconomyManager {
 		} else if (erc == EpicRenameCommands.LORE) {
 			
 			if (player.hasPermission("epicrename.bypass.costs.lore")) {
-				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #195
+					Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				}
 				return EcoMessage.ECO_BYPASS;
 			}
 			
@@ -70,7 +74,9 @@ public class EconomyManager {
 		} else if (erc == EpicRenameCommands.GLOW) { // ISSUE #101
 			
 			if (player.hasPermission("epicrename.bypass.costs.glow")) {
-				Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				if (!Main.getBooleanFromConfig("disable_bypass_messages")) { // Issue #195
+					Messager.msgPlayer(Main.getMsgFromConfig("economy.bypass"), player);
+				}
 				return EcoMessage.ECO_BYPASS;
 			}
 			
