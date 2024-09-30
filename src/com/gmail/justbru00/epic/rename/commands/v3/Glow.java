@@ -1,5 +1,6 @@
 package com.gmail.justbru00.epic.rename.commands.v3;
 
+import com.gmail.justbru00.epic.rename.utils.v3.*;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,14 +15,6 @@ import com.gmail.justbru00.epic.rename.enums.v3.EcoMessage;
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.enums.v3.XpMessage;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
-import com.gmail.justbru00.epic.rename.utils.v3.Debug;
-import com.gmail.justbru00.epic.rename.utils.v3.EconomyManager;
-import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
-import com.gmail.justbru00.epic.rename.utils.v3.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
-import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
-import com.gmail.justbru00.epic.rename.utils.v3.XpCostManager;
 
 public class Glow implements CommandExecutor {
 
@@ -63,63 +56,34 @@ public class Glow implements CommandExecutor {
 							return true;
 						}						
 
-						if (!(m == Material.AIR || m == null)) {
-							if (inHand.getEnchantments().size() == 0) {								
-								if (m == Material.FISHING_ROD) {
-									Debug.send("Item is a fishing rod");
-									
-									// Add economy cost option #101
-									EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
+						if (!(m == null || m == Material.AIR)) {
+							// ISSUE #198 - Convert legacy glowing to modern glowing
+							if (GlowingUtil.isLegacyToModernConversionEnabled()) {
+								ItemStack converted = GlowingUtil.convertLegacyGlowingToModern(inHand);
+								if (converted != null) {
+									player.getInventory().setItemInMainHand(converted);
+									inHand = converted;
+								}
+							} // END ISSUE #198
 
-									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
-										return true;
-									}
-									
-									// Add experience cost option #121
-									XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.GLOW);
-									
-									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
-										return true;
-									}									
-									
-									inHand.addUnsafeEnchantment(Enchantment.ARROW_INFINITE, 4341);									
-									ItemMeta im = inHand.getItemMeta();				
-									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-									inHand.setItemMeta(im);
+							if (inHand.getEnchantments().size() == 0) {
+								// Add economy cost option #101
+								EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
 
-									player.getInventory().setItemInMainHand(inHand);
-									Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
-									return true;
-								} else {
-									Debug.send("Item is not a fishing rod.");
-									
-									// Add economy cost option #101
-									EcoMessage ecoStatus = EconomyManager.takeMoney(player,	EpicRenameCommands.GLOW);
-
-									if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
-										return true;
-									}
-									
-									// Add experience cost option #121
-									XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.GLOW);
-									
-									if (xpStatus == XpMessage.TRANSACTION_ERROR) {
-										return true;
-									}									
-									
-									inHand.addUnsafeEnchantment(Enchantment.LURE, 4341);									
-									ItemMeta im = inHand.getItemMeta();
-									im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-									inHand.setItemMeta(im);
-
-									if (Main.USE_NEW_GET_HAND) { // Use 1.9+ method
-										player.getInventory().setItemInMainHand(inHand);
-									} else { // Use older method.
-										player.setItemInHand(inHand);
-									}
-									Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
+								if (ecoStatus == EcoMessage.TRANSACTION_ERROR) {
 									return true;
 								}
+									
+								// Add experience cost option #121
+								XpMessage xpStatus = XpCostManager.takeXp(player, EpicRenameCommands.GLOW);
+									
+								if (xpStatus == XpMessage.TRANSACTION_ERROR) {
+									return true;
+								}
+
+								player.getInventory().setItemInMainHand(GlowingUtil.addGlowingToItemModern(inHand));
+								Messager.msgSender(Main.getMsgFromConfig("glow.success"), sender);
+								return true;
 							} else {
 								Messager.msgSender(Main.getMsgFromConfig("glow.has_enchants"), sender);
 								return true;

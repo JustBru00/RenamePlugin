@@ -95,6 +95,7 @@ public class ConfigUpdater {
 		updateConfigYmlString("command_argument.suffixes.lore.each_line", "");
 		
 		updateConfigYmlBoolean("block_&x_color_codes", true);
+		updateConfigYmlBoolean("convert_legacy_glowing_to_modern_glowing", true);
 	}
 
 	public static void updateMessagesYml() {

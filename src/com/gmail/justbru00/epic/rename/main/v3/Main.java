@@ -55,7 +55,7 @@ public class Main extends JavaPlugin {
 
 	public static boolean debug = false;
 	public static String PLUGIN_VERSION = null;
-	private static int BSTATS_PLUGIN_ID = 548;
+	private static final int BSTATS_PLUGIN_ID = 548;
 	
 	/**
 	 * Default to the method for getting items in hand for MC version 1.9.x+
@@ -99,7 +99,7 @@ public class Main extends JavaPlugin {
 		
 		PLUGIN_VERSION = Main.getInstance().getDescription().getVersion();
 		
-		checkServerVerison();
+		checkServerVersion();
 
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERSION + " &bMC Version: &c" + MC_VERSION.toString());
 		Messager.msgConsole("&cThis plugin is Copyright (c) 2022 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
@@ -282,7 +282,7 @@ public class Main extends JavaPlugin {
 		// END ISSUE #125
 	}
 
-	public static void checkServerVerison() {
+	public static void checkServerVersion() {
 		String version = Bukkit.getVersion();
 		// Check Server Version
 		if ((version.contains("1.7")) || (version.contains("1.8"))) {
@@ -298,13 +298,19 @@ public class Main extends JavaPlugin {
 		} else if (version.contains("1.13") || version.contains("1.14") || version.contains("1.15")) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_NINE_OR_NEWER;
-			Messager.msgConsole("&c[CheckServerVersion] Server running 1.13-1.15. EpicRename may stop supporting these versions in the future.");
-		} else {
-			// Version 1.16 or newer
-			// ISSUE #150 HEX COLOR CODES
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.13-1.15. EpicRename will stop supporting these versions in the future.");
+		} else if (version.contains("1.16") || version.contains("1.17") || version.contains("1.18") || version.contains("1.19")
+		|| version.contains("1.20.0") || version.contains("1.20.1") || version.contains("1.20.2") || version.contains("1.20.3")
+		|| version.contains("1.20.4")){
+			// Version 1.16-1.20.4
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_SIXTEEN_OR_NEWER;
-			Messager.msgConsole("&a[CheckServerVersion] Server running 1.16 or newer. Hex color code support has been enabled.");
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.16-1.20.4. EpicRename will stop supporting these versions in the future. Hex color code support has been enabled.");
+		} else {
+			// Version 1.20.5 or newer
+			USE_NEW_GET_HAND = true;
+			MC_VERSION = MCVersion.ONE_DOT_TWENTY_DOT_FIVE_OR_NEWER;
+			Messager.msgConsole("&a[CheckServerVersion] Server running 1.20.5 or newer. Hex color code support has been enabled.");
 		} // End of Server Version Check
 	}
 
@@ -349,7 +355,7 @@ public class Main extends JavaPlugin {
 	 * Saves the given value to the stats.yml file.
 	 * Will only actually save the value to the file if it is different than the value already set in the file.
 	 * This is to prevent any extra IO calls.
-	 * @param The boolean value of EpicRenameOnline feature use.
+	 * @param value The boolean value of EpicRenameOnline feature use.
 	 */
 	public static void setEpicRenameOnlineFeaturesUsedBefore(boolean value) {
 		if (statsFile != null) {

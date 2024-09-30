@@ -2,6 +2,7 @@ package com.gmail.justbru00.epic.rename.commands.v3;
 
 import java.util.Map;
 
+import com.gmail.justbru00.epic.rename.utils.v3.*;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,12 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.gmail.justbru00.epic.rename.enums.v3.EpicRenameCommands;
 import com.gmail.justbru00.epic.rename.main.v3.Main;
-import com.gmail.justbru00.epic.rename.utils.v3.Blacklists;
-import com.gmail.justbru00.epic.rename.utils.v3.Debug;
-import com.gmail.justbru00.epic.rename.utils.v3.MaterialPermManager;
-import com.gmail.justbru00.epic.rename.utils.v3.Messager;
-import com.gmail.justbru00.epic.rename.utils.v3.RenameUtil;
-import com.gmail.justbru00.epic.rename.utils.v3.WorldChecker;
 
 public class RemoveGlow implements CommandExecutor {
 
@@ -60,53 +55,32 @@ public class RemoveGlow implements CommandExecutor {
 							return true;
 						}
 
-						if (!(m == Material.AIR || m == null)) {
-							Debug.send("[RemoveGlow] Enchantment List: " + inHand.getEnchantments().toString());
-							
-							Map<Enchantment, Integer> enchantments = inHand.getEnchantments();
-							
-							if (inHand.getType() == Material.FISHING_ROD) {
-								Debug.send("[RemoveGlow] Fishing Rod has ARROW_INFINITE enchantment level of: " + inHand.getEnchantmentLevel(Enchantment.ARROW_INFINITE));
-								Object arrowInfinite = enchantments.get(Enchantment.ARROW_INFINITE);
-								
-								if (arrowInfinite != null && (Integer) arrowInfinite == 4341) { // Has glowing
-									inHand.removeEnchantment(Enchantment.ARROW_INFINITE);
-									ItemMeta im = inHand.getItemMeta();
-									im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-									inHand.setItemMeta(im);
+						if (!(m == null || m == Material.AIR)) {
+							// ISSUE #198 - Convert legacy glowing to modern glowing
+							if (GlowingUtil.isLegacyToModernConversionEnabled()) {
+								ItemStack converted = GlowingUtil.convertLegacyGlowingToModern(inHand);
+								if (converted != null) {
+									player.getInventory().setItemInMainHand(converted);
+									inHand = converted;
+								}
+							} // END ISSUE #198
 
-									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
-																	// method
-										player.getInventory().setItemInMainHand(inHand);
-									} else { // Use older method.
-										player.setItemInHand(inHand);
-									}
+							Debug.send("[RemoveGlow] Enchantment List: " + inHand.getEnchantments().toString());
+
+							if (GlowingUtil.isGlowingItem(inHand)) {
+								ItemStack removed = GlowingUtil.removeGlowingFromItemModern(inHand);
+								Debug.send("[RemoveGlow] After Removal Enchantment List: " + removed.getEnchantments().toString());
+								if (removed != null) {
+									player.getInventory().setItemInMainHand(removed);
 									Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
+									return true;
 								} else {
 									Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
 									return true;
 								}
 							} else {
-								Debug.send("[RemoveGlow] Item has LURE enchantment level of: " + inHand.getEnchantmentLevel(Enchantment.LURE));
-								Object lure = enchantments.get(Enchantment.LURE);
-								
-								if (lure != null && (Integer) lure == 4341) { // Has glowing	
-									inHand.removeEnchantment(Enchantment.LURE);
-									ItemMeta im = inHand.getItemMeta();
-									im.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-									inHand.setItemMeta(im);
-
-									if (Main.USE_NEW_GET_HAND) { // Use 1.9+
-																	// method
-										player.getInventory().setItemInMainHand(inHand);
-									} else { // Use older method.
-										player.setItemInHand(inHand);
-									}
-									Messager.msgSender(Main.getMsgFromConfig("removeglow.success"), sender);
-								} else {
-									Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
-									return true;
-								}
+								Messager.msgSender(Main.getMsgFromConfig("removeglow.not_glowing"), sender);
+								return true;
 							}
 						} else {
 							Messager.msgSender(Main.getMsgFromConfig("removeglow.cannot_edit_air"), sender);
