@@ -121,19 +121,19 @@ public class GlowingUtil {
 
     private static boolean isGlowingItemLegacy(ItemStack itemStack) {
         if (itemStack.getType() == Material.FISHING_ROD) {
-            Object arrowInfinite = itemStack.getEnchantments().get(Enchantment.ARROW_INFINITE);
+            Integer arrowInfinite = itemStack.getEnchantments().get(Enchantment.ARROW_INFINITE);
 
-            if (arrowInfinite != null && (Integer) arrowInfinite == 4341) {
-                Debug.send("[GlowingUtil#isGlowingItemLegacy] Fishing rod is glowing item with ARROW_INFINITE 4341");
+            if (arrowInfinite != null && (arrowInfinite == 4341 || arrowInfinite == 255)) {
+                Debug.send("[GlowingUtil#isGlowingItemLegacy] Fishing rod is glowing item with ARROW_INFINITE 4341 OR 255");
                 return true;
             } else {
                 return false;
             }
         } else {
-            Object lure = itemStack.getEnchantments().get(Enchantment.LURE);
+            Integer lure = itemStack.getEnchantments().get(Enchantment.LURE);
 
-            if (lure != null && (Integer) lure == 4341) {
-                Debug.send("[GlowingUtil#isGlowingItemLegacy] Not fishing rod is glowing item with LURE 4341");
+            if (lure != null && (lure == 4341 || lure == 255)) {
+                Debug.send("[GlowingUtil#isGlowingItemLegacy] Not fishing rod is glowing item with LURE 4341 OR 255");
                 return true;
             } else {
                 return false;
