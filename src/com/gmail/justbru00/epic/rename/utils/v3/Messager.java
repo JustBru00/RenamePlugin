@@ -34,7 +34,7 @@ public class Messager {
 			return ChatColor.translateAlternateColorCodes('&', uncolored);	
 		}
 		
-		if (Main.MC_VERSION.equals(MCVersion.ONE_DOT_SIXTEEN_OR_NEWER)) {
+		if (Main.MC_VERSION.equals(MCVersion.ONE_DOT_SIXTEEN_OR_NEWER) || Main.MC_VERSION.equals(MCVersion.ONE_DOT_TWENTY_DOT_FIVE_OR_NEWER)) {
 			return ChatColor.translateAlternateColorCodes('&', convertHexColorCodes(uncolored));		
 		}
 		
@@ -67,7 +67,7 @@ public class Messager {
 			matcher.appendReplacement(builder, "&#$2");
 		}
 		matcher.appendTail(builder);
-		
+
 		return builder.toString();
 	}
 	
@@ -75,7 +75,7 @@ public class Messager {
      * @throws NumberFormatException If the provided hex color code is incorrect or if the version less than 1.16.
      */
     public static String parseHexColor(String hexColor) throws NumberFormatException {
-        if (Main.MC_VERSION != MCVersion.ONE_DOT_SIXTEEN_OR_NEWER) {
+        if (Main.MC_VERSION != MCVersion.ONE_DOT_SIXTEEN_OR_NEWER && Main.MC_VERSION != MCVersion.ONE_DOT_TWENTY_DOT_FIVE_OR_NEWER) {
             throw new NumberFormatException("RGB Colors only supported in 1.16 or newer");
         }
 
