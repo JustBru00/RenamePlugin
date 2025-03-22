@@ -22,12 +22,9 @@ public class RenameUtil {
 
 	/**
 	 * 
-	 * @param sender
-	 *            The {@link Player} who sent the command.
-	 * @param args
-	 *            The arguments of the command sent to the {@link CommandExecutor}
-	 * @param erc
-	 *            The command that called this method.
+	 * @param player The {@link Player} who sent the command.
+	 * @param args The arguments of the command sent to the {@link CommandExecutor}
+	 * @param erc The command that called this method.
 	 */
 	@SuppressWarnings("deprecation")
 	public static void renameHandle(Player player, String[] args, EpicRenameCommands erc) {
