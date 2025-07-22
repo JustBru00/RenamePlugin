@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 
+import com.gmail.justbru00.epic.rename.multiversion.ServerVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.PluginManager;
@@ -98,11 +99,13 @@ public class Main extends JavaPlugin {
 		statsFile = new PluginFile(this, "stats.yml"); // Issue #162
 		
 		PLUGIN_VERSION = Main.getInstance().getDescription().getVersion();
+
+		Main.debug = getConfig().getBoolean("debug", false);
 		
 		checkServerVersion();
 
 		Messager.msgConsole("&bVersion: &c" + PLUGIN_VERSION + " &bMC Version: &c" + MC_VERSION.toString());
-		Messager.msgConsole("&cThis plugin is Copyright (c) 2022 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
+		Messager.msgConsole("&cThis plugin is Copyright (c) 2025 Justin \"JustBru00\" Brubaker. This plugin is licensed under the MPL v2.0. "
 				+ "You can view a copy of the MPL v2.0 license at: http://bit.ly/2eMknxx");
 
 		Messager.msgConsole("&aStarting to enable plugin...");
@@ -283,25 +286,28 @@ public class Main extends JavaPlugin {
 	}
 
 	public static void checkServerVersion() {
-		String version = Bukkit.getVersion();
+		String bukkitVersion = Bukkit.getBukkitVersion();
+		Debug.send("[Main#checkServerVersion()] bukkitVersion=" + bukkitVersion);
+		String mcVersion = bukkitVersion.split("-")[0];
+		Debug.send("[Main#checkServerVersion()] mcVersion=" + mcVersion);
+
+		ServerVersion version = ServerVersion.parseVersion(mcVersion);
+
 		// Check Server Version
-		if ((version.contains("1.7")) || (version.contains("1.8"))) {
+		if (version.isAtLeast(1, 7, 2) && version.isLessThanOrEqualTo(1,8,9)) {
 			USE_NEW_GET_HAND = false;
 			MC_VERSION = MCVersion.ONE_DOT_SEVEN_OR_NEWER;
 			Debug.send("[Main#checkServerVersion()] Using methods for version 1.7 or 1.8");
 			Messager.msgConsole("&c[CheckServerVersion] Server running 1.7 or 1.8. EpicRename will stop supporting these versions in the near future.");
-		} else if ((version.contains("1.9")) || (version.contains("1.10"))
-				|| (version.contains("1.11")) || version.contains("1.12")) {
+		} else if (version.isAtLeast(1,9,0) && version.isLessThanOrEqualTo(1,12, 2)) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_NINE_OR_NEWER;
-			Messager.msgConsole("&c[CheckServerVersion] Server running 1.9-1.12. EpicRename will stop supporting these versions in the future.");
-		} else if (version.contains("1.13") || version.contains("1.14") || version.contains("1.15")) {
+			Messager.msgConsole("&c[CheckServerVersion] Server running 1.9-1.12. EpicRename will stop supporting these versions in the near future.");
+		} else if (version.isAtLeast(1,13,0) && version.isLessThanOrEqualTo(1,15,2)) {
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_NINE_OR_NEWER;
 			Messager.msgConsole("&c[CheckServerVersion] Server running 1.13-1.15. EpicRename will stop supporting these versions in the future.");
-		} else if (version.contains("1.16") || version.contains("1.17") || version.contains("1.18") || version.contains("1.19")
-		|| version.contains("1.20.0") || version.contains("1.20.1") || version.contains("1.20.2") || version.contains("1.20.3")
-		|| version.contains("1.20.4")){
+		} else if (version.isAtLeast(1,16,0) && version.isLessThanOrEqualTo(1,20,4)){
 			// Version 1.16-1.20.4
 			USE_NEW_GET_HAND = true;
 			MC_VERSION = MCVersion.ONE_DOT_SIXTEEN_OR_NEWER;
