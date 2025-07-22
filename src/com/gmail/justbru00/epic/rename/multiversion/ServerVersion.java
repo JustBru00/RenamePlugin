@@ -6,7 +6,6 @@
 package com.gmail.justbru00.epic.rename.multiversion;
 
 import com.gmail.justbru00.epic.rename.utils.v3.Messager;
-import org.bukkit.Server;
 
 public class ServerVersion {
 
